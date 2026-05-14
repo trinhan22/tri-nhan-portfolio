@@ -35,8 +35,8 @@ body {
   position: fixed; 
   top: 0; 
   left: 0; 
-  width: 16px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
-  height: 16px; 
+  width: 18px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
+  height: 18px; 
   border-radius: 50%; 
   background-color: var(--primary-color);
   pointer-events: none; 
@@ -51,8 +51,8 @@ body {
 }
 
 .custom-cursor.hovering { 
-  width: 40px; /* Giảm độ phóng to lại (trước đây là 60px đang bị quá to) */
-  height: 40px; 
+  width: 30px; /* Giảm độ phóng to lại (trước đây là 60px đang bị quá to) */
+  height: 30px; 
   background-color: white; 
   
   /* Chuyển sang ánh sáng trắng chói loá khi rê chuột vào Menu/Link */
