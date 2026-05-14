@@ -275,7 +275,8 @@ function App() {
       category: 'DỰ ÁN',
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'FPC NEWS - Trang thông tin điện tử CLB F-Photography',
-      desc: 'Địa chỉ trang web: https://fphotography.club',
+      desc: 'Trang thông tin điện tử của CLB F-Photography',
+      link: 'https://fphotography.club',
       logo: '/images/dev-2/1.png',
       mainImg: '/images/dev-2/1.png',
       images: [
@@ -290,7 +291,8 @@ function App() {
       category: 'DỰ ÁN',
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Wibu Pagoda - Nền tảng viếng chùa online',
-      desc: 'Địa chỉ trang web: https://wibupagoda.netlify.app',
+      desc: 'Nền tảng viếng chùa online',
+      link: 'https://wibupagoda.netlify.app',
       logo: '/images/dev-1/1.png',
       mainImg: '/images/dev-1/1.png',
       images: [
