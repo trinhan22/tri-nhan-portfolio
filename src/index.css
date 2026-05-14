@@ -46,8 +46,8 @@ body {
   transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
   
   /* Hiệu ứng ánh sáng đỏ tỏa ra xung quanh lúc bình thường */
-  box-shadow: 0 0 10px 2px var(--primary-color), 
-              0 0 20px 6px rgba(229, 57, 53, 0.4);
+  box-shadow: 0 0 20px 4px var(--primary-color), 
+              0 0 40px 12px rgba(229, 57, 53, 0.4);
 }
 
 .custom-cursor.hovering { 
@@ -139,7 +139,8 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 .hero-media { 
   flex: 1; 
   display: flex; 
-  justify-content: flex-end; 
+  justify-content: center;
+  align-items: center;
 }
 
 /* Tăng nhẹ size ảnh bên phải để cân đối với chữ to */
@@ -371,6 +372,7 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 .footer-nav { display: flex; flex-direction: column; gap: 15px; }
 .footer-nav a { color: white; text-decoration: none; font-weight: 700; letter-spacing: 1px; transition: 0.3s; }
 .footer-nav a:hover { color: var(--primary-color); }
+
 /* =========================================
    CUSTOM SCROLLBAR (THANH CUỘN)
 ========================================== */
@@ -705,4 +707,68 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   border-color: var(--primary-color);
   transform: translateY(-3px) scale(1.1) rotate(5deg);
   box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4);
+}
+
+
+/* =========================================
+   THẺ LƠ LỬNG LẤP KHOẢNG TRỐNG (HERO BADGES)
+========================================== */
+.floating-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(15, 15, 15, 0.65); /* Kính mờ xuyên thấu */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--primary-color); /* Vạch sáng đỏ bên trái */
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  animation: float-up-down 4s ease-in-out infinite alternate;
+  pointer-events: none; /* Để chuột xuyên qua không bị vướng */
+}
+
+/* Thẻ 1: Cắn vào viền dưới bên TRÁI */
+.badge-1 {
+  bottom: 15%;
+  left: -90px; 
+  padding: 15px 25px;
+}
+
+/* Thẻ 2: Cắn vào viền trên bên PHẢI (Đối xứng) */
+.badge-2 {
+  top: 15%;
+  right: -90px; 
+  left: auto; /* 👈 Hủy lệnh left cũ để nó bám vào lề phải */
+  animation-delay: -2s; 
+}
+
+/* Icon phát sáng */
+.badge-icon {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.6));
+}
+
+/* Định dạng chữ */
+.badge-text { display: flex; flex-direction: column; }
+.badge-num { font-size: 1.4rem; font-weight: 900; color: white; line-height: 1.1; letter-spacing: 1px; }
+.badge-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;}
+
+/* Animation nhấp nhô mượt mà */
+@keyframes float-up-down {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-20px); }
+}
+
+/* Responsive cho mobile tự rụt vào để không tràn màn hình */
+@media (max-width: 900px) {
+  .badge-1 { left: -15px; bottom: 10%; padding: 10px 15px; }
+  .badge-2 { right: -15px; top: 10%; left: auto; padding: 10px 15px; }
+  .badge-num { font-size: 1.1rem; }
+  .badge-label { font-size: 0.55rem; }
+  .badge-icon { font-size: 1.4rem; }
 }

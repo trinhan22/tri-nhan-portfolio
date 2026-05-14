@@ -136,8 +136,9 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: 'Social Media Post - "Mấy cái post vặt"',
+      title: 'Design lộn xộn',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.',
+      link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
       logo: '/images/design-7/1.png',
       mainImg: '/images/design-7/1.png',
       images: [
@@ -153,6 +154,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'ID Card Design - "ID Card CLB F-Photo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
+      link: 'https://www.behance.net/gallery/240268505/ID-CARD-F-PHOTO',
       logo: '/images/design-6/1.png',
       mainImg: '/images/design-6/1.png',
       images: [
@@ -168,6 +170,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
+      link: 'https://www.behance.net/gallery/239999329/KEY-VISUAL-CHIU-PHIM-MIN-PHI-DA-DO',
       logo: '/images/design-5/1.png',
       mainImg: '/images/design-5/2.png',
       images: [
@@ -183,6 +186,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Tứ Trụ F-Photography"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
+      link: 'https://www.behance.net/gallery/238147195/SOCIAL-MEDIA-POST-T-TR-F-PHOTO',
       logo: '/images/design-4/1.png',
       mainImg: '/images/design-4/2.png',
       images: [
@@ -198,6 +202,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Chiêu mộ thành viên F-Photo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
+      link: 'https://www.behance.net/gallery/236224381/SOCIAL-MEDIA-POST-F-PHOTO-CHIEU-M-THANH-VIEN',
       logo: '/images/design-3/1.png',
       mainImg: '/images/design-3/2.png',
       images: [
@@ -213,6 +218,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "F-Photo Thay Áo Mới"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
+      link: 'https://www.behance.net/gallery/236223287/SOCIAL-MEDIA-POST-F-PHOTO-THAY-AO-MI',
       logo: '/images/design-2/1.png',
       mainImg: '/images/design-2/2.png',
       images: [
@@ -228,6 +234,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Magazine - "Tạp chí F-Star Phương Nghi"',
       desc: 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc.',
+      link: 'https://www.behance.net/gallery/236216401/MAGAZINE-F-STAR-PHUONG-NGHI',
       logo: '/images/design-1/1.png',
       mainImg: '/images/design-1/1.png',
       images: [
@@ -308,6 +315,7 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026',
       desc: 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart lần đầu tiên "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.',
+      link: 'https://www.facebook.com/share/p/1NFeGFSmao/',
       logo: '/images/project-4/1.png',
       mainImg: '/images/project-4/1.png',
       images: [
@@ -323,6 +331,7 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Sự kiện giao lưu CLB F-Photography & CLB Nhiếp ảnh THPT BHN',
       desc: 'Buổi giao lưu cùng CLB Nhiếp Ảnh THPT Bùi Hữu Nghĩa – một dịp đặc biệt để các bạn trẻ yêu nhiếp ảnh được gặp gỡ, học hỏi và cùng nhau chia sẻ những câu chuyện sau ống kính.',
+      link: 'https://www.facebook.com/share/p/18sa5xu2Aa/',
       logo: '/images/project-3/1.png',
       mainImg: '/images/project-3/2.png',
       images: [
@@ -339,6 +348,7 @@ function App() {
       title: 'Sự kiện "Photobooth cùng FSchoolers"',
       desc: 'Dự án Chạy Photoboth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam',
       logo: '/images/project-2/1.png',
+      link: 'https://www.facebook.com/share/p/1KUKEKgU6v/',
       mainImg: '/images/project-2/1.png',
       images: [
         '/images/project-2/2.png',
@@ -354,6 +364,7 @@ function App() {
       title: 'Cuộc thi ảnh Catch The Moment: Summer 2025',
       desc: '“Catch the moment: Summer 2025” là sân chơi dành riêng cho cán bộ nhân viên, giáo viên và học sinh trường THPT FPT Cần Thơ.',
       logo: '/images/project-1/1.png',
+      link: 'https://www.facebook.com/share/p/1KNRQsYXUC/',
       mainImg: '/images/project-1/1.png',
       images: [
         '/images/project-1/2.png',
@@ -410,63 +421,122 @@ function App() {
                   <a href="#contact" className="btn btn-outline">KẾT NỐI NGAY</a>
                 </div>
               </div>
+              {/* BỎ style position relative ở đây */}
               <div className="hero-media">
-                <div className="media-card" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                  <img src="/images/hero.jpg" alt="Profile Hero" />
+                
+                {/* 👉 THÊM THẺ NÀY: Khóa tọa độ ôm sát đúng 450px của bức ảnh */}
+                <div style={{ position: 'relative', width: '100%', maxWidth: '450px' }}>
+                  
+                  <div className="media-card" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <img src="/images/hero.jpg" alt="Profile Hero" />
+                  </div>
+
+                  <div className="floating-badge badge-1">
+                    <div className="badge-icon"><i className="fas fa-bolt"></i></div>
+                    <div className="badge-text">
+                      <span className="badge-num">20+</span>
+                      <span className="badge-label">DỰ ÁN & SỰ KIỆN</span>
+                    </div>
+                  </div>
+
+                  <div className="floating-badge badge-2">
+                    <div className="badge-icon"><i className="fas fa-award"></i></div>
+                    <div className="badge-text">
+                      <span className="badge-num">30+</span>
+                      <span className="badge-label">THÀNH TÍCH</span>
+                    </div>
+                  </div>
+
                 </div>
+                {/* 👉 ĐÓNG THẺ KHÓA TỌA ĐỘ */}
+
               </div>
             </section>
 
-            {/* 2. TIMELINE SECTION (Học vấn & Kinh nghiệm - Cấu trúc Ảnh 1) */}
+            {/* 2. TIMELINE SECTION (Học vấn & Kinh nghiệm - Có link) */}
             <section id="timeline">
               <div className="grid-2">
+                
+                {/* --- CỘT HỌC VẤN --- */}
                 <div className="timeline-col fade-in-section">
                   <h3 className="col-title">HỌC VẤN</h3>
+                  
                   <div className="timeline-item">
                     <div className="timeline-num">1</div>
                     <div className="timeline-content">
-                      <h4>Trung học Cơ sở</h4>
+                      <h4>
+                        {/* THAY LINK TRƯỜNG VIỆT MỸ VÀO href */}
+                        <a href="https://vietmycantho.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Trung học Cơ sở <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
                       <span className="timeline-meta">Trường Phổ thông Việt Mỹ • 2019 - 2023</span>
                       <p className="text-desc">Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.</p>
                     </div>
                   </div>
+
                   <div className="timeline-item">
                     <div className="timeline-num">2</div>
                     <div className="timeline-content">
-                      <h4>Trung học Phổ thông</h4>
+                      <h4>
+                        {/* THAY LINK TRƯỜNG FPT VÀO href */}
+                        <a href="https://cantho-school.fpt.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Trung học Phổ thông <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
                       <span className="timeline-meta">Trường THPT FPT Cần Thơ • 2023 - 2026</span>
                       <p className="text-desc">Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.</p>
                     </div>
                   </div>
                 </div>
 
+                {/* --- CỘT KINH NGHIỆM --- */}
                 <div className="timeline-col fade-in-section">
                   <h3 className="col-title">KINH NGHIỆM / HOẠT ĐỘNG</h3>
+                  
                   <div className="timeline-item">
                     <div className="timeline-num">1</div>
                     <div className="timeline-content">
-                      <h4>Đồng sáng lập và phát triển</h4>
+                      <h4>
+                        {/* THAY LINK FANPAGE KN PRODUCTION VÀO href */}
+                        <a href="https://www.facebook.com/KNProduction1" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Đồng sáng lập và phát triển <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
                       <span className="timeline-meta">KN Production • 2024 - Nay</span>
                       <p className="text-desc">Quản lý truyền thông và nội dung Fanpage, thiết kế ấn phẩm và lên kịch bản cho các dự án truyền thông.</p>
                     </div>
                   </div>
+
                   <div className="timeline-item">
                     <div className="timeline-num">2</div>
                     <div className="timeline-content">
-                      <h4>Chủ nhiệm / Co-founder</h4>
+                      <h4>
+                        {/* THAY LINK CLB F-PHOTO VÀO href */}
+                        <a href="https://fphotography.club" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Chủ nhiệm / Co-founder <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
                       <span className="timeline-meta">CLB Nhiếp ảnh F-Photography • 2024 - 2026</span>
                       <p className="text-desc">Tham gia quản lý CLB. Tổ chức thiết kế ấn phẩm truyền thông và lên kế hoạch cho các dự án thuộc Câu lạc bộ.</p>
                     </div>
                   </div>
+
                   <div className="timeline-item">
                     <div className="timeline-num">3</div>
                     <div className="timeline-content">
-                      <h4>Visual & Web Developer</h4>
+                      <h4>
+                        {/* THAY LINK HOPVAN VÀO href */}
+                        <a href="https://hopvan.info.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Visual & Web Developer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
                       <span className="timeline-meta">Dự án HopVan • 2026 - Nay</span>
                       <p className="text-desc">Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.</p>
                     </div>
                   </div>
                 </div>
+
               </div>
             </section>
 
@@ -484,7 +554,7 @@ function App() {
                   <div className="achieve-info">
                     <h4>Giải Công nhận Kỳ thi Học sinh giỏi</h4>
                     <span>Quận Cái Răng • 2023</span>
-                    <p className="text-desc">Đoạt giải Công nhận kỳ thi HSG môn Địa cấp Quận lớp 9.</p>
+                    <p className="text-desc">Đoạt giải Công nhận Kỳ thi HSG môn Địa cấp Quận lớp 9.</p>
                   </div>
                 </div>
 
@@ -494,7 +564,7 @@ function App() {
                   <div className="achieve-info">
                     <h4>Giải Ba Cuộc thi Khoa học Kỹ thuật</h4>
                     <span>Quận Cái Răng • 2023</span>
-                    <p className="text-desc">Đoạt giải Ba cuộc thi KHKT cấp Quận lớp 9.</p>
+                    <p className="text-desc">Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.</p>
                   </div>
                 </div>
 
@@ -502,9 +572,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Giải Nhì cuộc thi Steampetition 2023-2024</h4>
+                    <h4>Giải Nhì Cuộc thi Stempetition 2023-2024</h4>
                     <span>THPT FPT Cần Thơ • 2023</span>
-                    <p className="text-desc">Đoạt giải Nhì cuộc thi Stempetition Cấp trường.</p>
+                    <p className="text-desc">Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.</p>
                   </div>
                 </div>
 
@@ -512,9 +582,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Đội thi ấn tượng tại Phiên toà giả định 2023</h4>
+                    <h4>Đội thi Ấn tượng tại Phiên toà giả định 2023</h4>
                     <span>THPT FPT Cần Thơ • 2023</span>
-                    <p className="text-desc">Đoạt giải ấn tượng Phiên toà giả định Cấp trường.</p>
+                    <p className="text-desc">Đoạt giải Ấn tượng Phiên toà giả định Cấp trường.</p>
                   </div>
                 </div>
 
@@ -522,9 +592,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Top 5 Dự án xuất sắc nhất Infinity 2023-2024</h4>
+                    <h4>Top 5 Dự án Xuất sắc nhất Infinity 2023-2024</h4>
                     <span>THPT FPT Cần Thơ • 2024</span>
-                    <p className="text-desc">Lọt Top 5 dự án xuất sắc nhất tại Infinity 2023-2024.</p>
+                    <p className="text-desc">Lọt Top 5 Dự án Xuất sắc nhất tại Infinity 2023-2024.</p>
                   </div>
                 </div>
 
@@ -532,9 +602,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Giải Nhì cuộc thi Steampetition 2024-2025</h4>
+                    <h4>Giải Nhì Cuộc thi Stempetition 2024-2025</h4>
                     <span>THPT FPT Cần Thơ • 2024</span>
-                    <p className="text-desc">Đoạt giải Nhì cuộc thi Stempetition Cấp trường.</p>
+                    <p className="text-desc">Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.</p>
                   </div>
                 </div>
 
@@ -542,9 +612,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Giải Ba cuộc thi FSchooler's Tips 2024</h4>
+                    <h4>Giải Ba Cuộc thi FSchooler's Tips 2024</h4>
                     <span>THPT FPT Cần Thơ • 2024</span>
-                    <p className="text-desc">Đoạt giải Ba cuộc thi FSchooler's Tips Cấp trường.</p>
+                    <p className="text-desc">Đoạt giải Ba Cuộc thi FSchooler's Tips Cấp trường.</p>
                   </div>
                 </div>
 
@@ -554,7 +624,7 @@ function App() {
                   <div className="achieve-info">
                     <h4>Giải Tiềm năng Cuộc thi Sáng tạo Robot FPT</h4>
                     <span>THPT FPT Cần Thơ • 2024</span>
-                    <p className="text-desc">Đoạt giải Tiềm năng Cuộc thi sáng tạo robot Cấp trường.</p>
+                    <p className="text-desc">Đoạt giải Tiềm năng Cuộc thi Sáng tạo Robot Cấp trường.</p>
                   </div>
                 </div>
 
@@ -574,7 +644,7 @@ function App() {
                   <div className="achieve-info">
                     <h4>Giải Nhì Cuộc thi Khoa học Kỹ thuật</h4>
                     <span>Thành phố Cần Thơ • 2024</span>
-                    <p className="text-desc">Đoạt giải Nhì cuộc thi KHKT cấp Thành phố.</p>
+                    <p className="text-desc">Đoạt giải Nhì Cuộc thi KHKT cấp Thành phố.</p>
                   </div>
                 </div>
 
@@ -582,9 +652,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Ngày Hội Địa Lí Đa Quốc Gia Mùa 2</h4>
+                    <h4>Ngày hội Địa lí Đa quốc gia mùa 2</h4>
                     <span>THPT FPT Cần Thơ • 2024</span>
-                    <p className="text-desc">Đoạt Giải Infographic Ấn Tượng.</p>
+                    <p className="text-desc">Đoạt Giải Infographic Ấn tượng.</p>
                   </div>
                 </div>
 
@@ -634,7 +704,7 @@ function App() {
                   <div className="achieve-info">
                     <h4>Top 1 Địa lý - Tiếp sức mùa thi 2025</h4>
                     <span>THPT FPT Cần Thơ • 2025</span>
-                    <p className="text-desc">Đoạt Top 1 Môn Địa Lý tại Tiếp sức mùa thi 2025.</p>
+                    <p className="text-desc">Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.</p>
                   </div>
                 </div>
 
@@ -712,9 +782,9 @@ function App() {
                 <div className="glow-card achieve-card fade-in-section">
                   <div className="achieve-icon"><i className="fas fa-award"></i></div>
                   <div className="achieve-info">
-                    <h4>Top 63 dự án được đăng trên báo Thanh Niên</h4>
+                    <h4>Top 63 Dự án được đăng trên báo Thanh Niên</h4>
                     <span>Cấp Quốc gia • 2025</span>
-                    <p className="text-desc">Top 63 dự án tại cuộc thi phim ngắn Vietnamese 2025.</p>
+                    <p className="text-desc">Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.</p>
                   </div>
                 </div>
 
@@ -973,8 +1043,8 @@ function App() {
                 <div className="footer-nav" style={{ flexDirection: 'row', gap: '20px' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                   <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer">FACEBOOK</a>
                   <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer">INSTAGRAM</a>
+                  <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer">TIKTOK</a>
                   <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer">BEHANCE</a>
-                  <a href="#" target="_blank" rel="noreferrer">GITHUB</a>
                 </div>
               </div>
             </div>
