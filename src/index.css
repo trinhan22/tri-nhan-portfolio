@@ -669,3 +669,12 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   max-width: 90vw;
   max-height: 85vh;
 }
+
+/* =========================================
+   9. TRIỆT TIÊU TRỎ CHUỘT MẶC ĐỊNH KHẮP NƠI (CHỈ TRÊN MÁY TÍNH)
+========================================== */
+@media (hover: hover) and (pointer: fine) {
+  *, a, button, input, textarea, select, img, .nav-btn, .close-modal, .image-modal {
+    cursor: none !important; /* Ép buộc tàng hình con trỏ mặc định */
+  }
+}
