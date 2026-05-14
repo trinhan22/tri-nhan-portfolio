@@ -795,13 +795,16 @@ function App() {
 
                     {/* Gallery ảnh */}
                     <div className="project-gallery" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                      
                       {/* Ảnh lớn */}
                       <img 
                         src={proj.mainImg} 
                         alt="Main Visual" 
                         className="gallery-main" 
                         onClick={() => openPopup(proj, proj.mainImg)} 
+                        loading="lazy" /* 👉 THÊM DÒNG NÀY */
                       />
+                      
                       {/* Các ảnh nhỏ */}
                       {proj.images.map((img, i) => (
                         <img 
@@ -809,8 +812,10 @@ function App() {
                           src={img} 
                           alt="Mini Gallery" 
                           onClick={() => openPopup(proj, img)} 
+                          loading="lazy" /* 👉 THÊM DÒNG NÀY */
                         />
                       ))}
+
                     </div>
 
                   </div>
