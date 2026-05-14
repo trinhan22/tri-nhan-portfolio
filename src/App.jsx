@@ -63,6 +63,7 @@ function App() {
   // Logic Fade-in/out Scroll 2 chiều
   useEffect(() => {
     if (loading) return;
+    
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -73,14 +74,20 @@ function App() {
       });
     }, { threshold: 0.1 }); 
 
-    const elements = document.querySelectorAll('.fade-in-section');
-    elements.forEach((el, index) => {
-      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-      observerRef.current.observe(el);
-    });
+    // Dùng setTimeout siêu nhỏ để đảm bảo React đã kịp vẽ các thẻ mới ra DOM
+    const timer = setTimeout(() => {
+      const elements = document.querySelectorAll('.fade-in-section');
+      elements.forEach((el, index) => {
+        el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+        observerRef.current.observe(el);
+      });
+    }, 50);
 
-    return () => observerRef.current.disconnect();
-  }, [loading]);
+    return () => {
+      clearTimeout(timer);
+      if (observerRef.current) observerRef.current.disconnect();
+    };
+  }, [loading, activeFilter]); // 👉 BÍ QUYẾT LÀ Ở ĐÂY: Thêm activeFilter vào để quét lại mỗi khi đổi danh mục
 
   // 1. STATE LƯU TRỮ MENU ĐANG ACTIVE
   const [activeSection, setActiveSection] = useState('home');
