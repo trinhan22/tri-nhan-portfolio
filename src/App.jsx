@@ -242,7 +242,8 @@ function App() {
       category: 'DỰ ÁN',
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Wibey - Nền tảng xem phim trực tuyến',
-      desc: 'Địa chỉ trang web: https://wibey.netlify.app',
+      desc: 'Nền tảng xem phim trực tuyến với giao diện hiện đại.',
+      link: 'https://wibey.netlify.app',
       logo: '/images/dev-4/1.png',
       mainImg: '/images/dev-4/1.png',
       images: [
@@ -258,7 +259,8 @@ function App() {
       category: 'DỰ ÁN',
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Dự Án HopVan - Nền tảng học và luyện thi môn Ngữ Văn',
-      desc: 'Địa chỉ trang web: https://hopvan.info.vn',
+      desc: 'Nền tảng học và luyện thi môn Ngữ Văn.',
+      link: 'https://hopvan.info.vn',
       logo: '/images/dev-3/1.png',
       mainImg: '/images/dev-3/1.png',
       images: [
@@ -791,7 +793,27 @@ function App() {
                       <img src={proj.logo} alt="Project Logo" className="project-logo" />
                       <div className="project-title-group">
                         <span className="project-role">{proj.role}</span>
-                        <h3>{proj.title}</h3>
+                        
+                        {/* Nhóm Tiêu đề & Nút Link */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
+                          <h3 style={{ margin: 0 }}>{proj.title}</h3>
+                          
+                          {/* Kiểm tra nếu dự án có link thì mới hiện Nút Icon */}
+                          {proj.link && (
+                            <a 
+                              href={proj.link} 
+                              target="_blank" 
+                              rel="noreferrer" 
+                              className="project-link-icon"
+                              onMouseEnter={() => setIsHoveringBtn(true)} 
+                              onMouseLeave={() => setIsHoveringBtn(false)}
+                              title="Xem dự án thực tế"
+                            >
+                              <i className="fas fa-external-link-alt"></i>
+                            </a>
+                          )}
+                        </div>
+
                         <p className="text-desc">{proj.desc}</p>
                         <div className="project-tags">
                           <span className="tag">TRUYỀN THÔNG</span>
