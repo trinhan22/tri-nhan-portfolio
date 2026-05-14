@@ -471,7 +471,7 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   cursor: pointer;
   backdrop-filter: blur(10px);
   transition: 0.3s ease;
-  z-index: 100002; /* Đảm bảo nổi lên trên ảnh */
+  z-index: 999999 !important; /* Đẩy nút lên trên cùng, không bị ảnh đè */
 }
 
 .nav-btn:hover {
@@ -484,7 +484,7 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 .prev-btn { left: 40px; }
 .next-btn { right: 40px; }
 
-/* Thu nhỏ nút trên điện thoại */
+/* Responsive cho nút bấm trên điện thoại */
 @media (max-width: 768px) {
   .nav-btn { width: 45px; height: 45px; font-size: 1.2rem; }
   .prev-btn { left: 15px; }

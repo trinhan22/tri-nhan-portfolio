@@ -776,8 +776,8 @@ function App() {
               </div>
 
               <div className="project-grid">
-                {filteredProjects.map((proj, index) => (
-                  <div key={index} className="glow-card project-showcase-card fade-in-section">
+                {filteredProjects.map((proj) => (
+                  <div key={proj.title} className="glow-card project-showcase-card fade-in-section">
                     
                     {/* Header dự án (Logo + Text) */}
                     <div className="project-header">
