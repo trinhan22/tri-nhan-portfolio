@@ -35,8 +35,8 @@ body {
   position: fixed; 
   top: 0; 
   left: 0; 
-  width: 18px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
-  height: 18px; 
+  width: 16px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
+  height: 16px; 
   border-radius: 50%; 
   background-color: var(--primary-color);
   pointer-events: none; 
