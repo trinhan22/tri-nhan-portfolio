@@ -116,13 +116,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Giới thiệu BCN Gen 2.0"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-8/1.png',
-      mainImg: '/public/images/design-8/1.png',
+      logo: '/images/design-8/1.png',
+      mainImg: '/images/design-8/1.png',
       images: [
-        '/public/images/design-8/2.png',
-        '/public/images/design-8/3.png',
-        '/public/images/design-8/4.png',
-        '/public/images/design-8/5.png'
+        '/images/design-8/2.png',
+        '/images/design-8/3.png',
+        '/images/design-8/4.png',
+        '/images/design-8/5.png'
       ]
     },
 
@@ -131,13 +131,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Mấy cái post vặt"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.',
-      logo: '/public/images/design-7/1.png',
-      mainImg: '/public/images/design-7/1.png',
+      logo: '/images/design-7/1.png',
+      mainImg: '/images/design-7/1.png',
       images: [
-        '/public/images/design-7/2.png',
-        '/public/images/design-7/3.png',
-        '/public/images/design-7/4.png',
-        '/public/images/design-7/5.png'
+        '/images/design-7/2.png',
+        '/images/design-7/3.png',
+        '/images/design-7/4.png',
+        '/images/design-7/5.png'
       ]
     },
 
@@ -146,13 +146,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'ID Card Design - "ID Card CLB F-Photo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-6/1.png',
-      mainImg: '/public/images/design-6/1.png',
+      logo: '/images/design-6/1.png',
+      mainImg: '/images/design-6/1.png',
       images: [
-        '/public/images/design-6/2.png',
-        '/public/images/design-6/3.png',
-        '/public/images/design-6/4.png',
-        '/public/images/design-6/5.png'
+        '/images/design-6/2.png',
+        '/images/design-6/3.png',
+        '/images/design-6/4.png',
+        '/images/design-6/5.png'
       ]
     },
 
@@ -161,13 +161,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-5/1.png',
-      mainImg: '/public/images/design-5/2.png',
+      logo: '/images/design-5/1.png',
+      mainImg: '/images/design-5/2.png',
       images: [
-        '/public/images/design-5/1.png',
-        '/public/images/design-5/3.png',
-        '/public/images/design-5/4.png',
-        '/public/images/design-5/5.png'
+        '/images/design-5/1.png',
+        '/images/design-5/3.png',
+        '/images/design-5/4.png',
+        '/images/design-5/5.png'
       ]
     },
 
@@ -176,13 +176,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Tứ Trụ F-Photography"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-4/1.png',
-      mainImg: '/public/images/design-4/2.png',
+      logo: '/images/design-4/1.png',
+      mainImg: '/images/design-4/2.png',
       images: [
-        '/public/images/design-4/3.png',
-        '/public/images/design-4/4.png',
-        '/public/images/design-4/5.png',
-        '/public/images/design-4/6.png'
+        '/images/design-4/3.png',
+        '/images/design-4/4.png',
+        '/images/design-4/5.png',
+        '/images/design-4/6.png'
       ]
     },
 
@@ -191,13 +191,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "Chiêu mộ thành viên F-Photo"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-3/1.png',
-      mainImg: '/public/images/design-3/2.png',
+      logo: '/images/design-3/1.png',
+      mainImg: '/images/design-3/2.png',
       images: [
-        '/public/images/design-3/1.png',
-        '/public/images/design-3/3.png',
-        '/public/images/design-3/4.png',
-        '/public/images/design-3/5.png'
+        '/images/design-3/1.png',
+        '/images/design-3/3.png',
+        '/images/design-3/4.png',
+        '/images/design-3/5.png'
       ]
     },
 
@@ -206,13 +206,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Social Media Post - "F-Photo Thay Áo Mới"',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.',
-      logo: '/public/images/design-2/1.png',
-      mainImg: '/public/images/design-2/2.png',
+      logo: '/images/design-2/1.png',
+      mainImg: '/images/design-2/2.png',
       images: [
-        '/public/images/design-2/1.png',
-        '/public/images/design-2/3.png',
-        '/public/images/design-2/4.png',
-        '/public/images/design-2/5.png'
+        '/images/design-2/1.png',
+        '/images/design-2/3.png',
+        '/images/design-2/4.png',
+        '/images/design-2/5.png'
       ]
     },
 
@@ -221,13 +221,13 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: 'Magazine - "Tạp chí F-Star Phương Nghi"',
       desc: 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc.',
-      logo: '/public/images/design-1/1.png',
-      mainImg: '/public/images/design-1/1.png',
+      logo: '/images/design-1/1.png',
+      mainImg: '/images/design-1/1.png',
       images: [
-        '/public/images/design-1/2.png',
-        '/public/images/design-1/3.png',
-        '/public/images/design-1/4.png',
-        '/public/images/design-1/5.png'
+        '/images/design-1/2.png',
+        '/images/design-1/3.png',
+        '/images/design-1/4.png',
+        '/images/design-1/5.png'
       ]
     },
 
@@ -236,13 +236,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Wibey - Nền tảng xem phim trực tuyến',
       desc: 'Địa chỉ trang web: https://wibey.netlify.app',
-      logo: '/public/images/dev-4/1.png',
-      mainImg: '/public/images/dev-4/1.png',
+      logo: '/images/dev-4/1.png',
+      mainImg: '/images/dev-4/1.png',
       images: [
-        '/public/images/dev-4/2.png',
-        '/public/images/dev-4/3.png',
-        '/public/images/dev-4/4.png',
-        '/public/images/dev-4/5.png'
+        '/images/dev-4/2.png',
+        '/images/dev-4/3.png',
+        '/images/dev-4/4.png',
+        '/images/dev-4/5.png'
       ]
     },
 
@@ -252,13 +252,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Dự Án HopVan - Nền tảng học và luyện thi môn Ngữ Văn',
       desc: 'Địa chỉ trang web: https://hopvan.info.vn',
-      logo: '/public/images/dev-3/1.png',
-      mainImg: '/public/images/dev-3/1.png',
+      logo: '/images/dev-3/1.png',
+      mainImg: '/images/dev-3/1.png',
       images: [
-        '/public/images/dev-3/2.png',
-        '/public/images/dev-3/3.png',
-        '/public/images/dev-3/4.png',
-        '/public/images/dev-3/5.png'
+        '/images/dev-3/2.png',
+        '/images/dev-3/3.png',
+        '/images/dev-3/4.png',
+        '/images/dev-3/5.png'
       ]
     },
 
@@ -267,13 +267,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'FPC NEWS - Trang thông tin điện tử CLB F-Photography',
       desc: 'Địa chỉ trang web: https://fphotography.club',
-      logo: '/public/images/dev-2/1.png',
-      mainImg: '/public/images/dev-2/1.png',
+      logo: '/images/dev-2/1.png',
+      mainImg: '/images/dev-2/1.png',
       images: [
-        '/public/images/dev-2/2.png',
-        '/public/images/dev-2/3.png',
-        '/public/images/dev-2/4.png',
-        '/public/images/dev-2/5.png'
+        '/images/dev-2/2.png',
+        '/images/dev-2/3.png',
+        '/images/dev-2/4.png',
+        '/images/dev-2/5.png'
       ]
     },
 
@@ -282,13 +282,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Wibu Pagoda - Nền tảng viếng chùa online',
       desc: 'Địa chỉ trang web: https://wibupagoda.netlify.app',
-      logo: '/public/images/dev-1/1.png',
-      mainImg: '/public/images/dev-1/1.png',
+      logo: '/images/dev-1/1.png',
+      mainImg: '/images/dev-1/1.png',
       images: [
-        '/public/images/dev-1/2.png',
-        '/public/images/dev-1/3.png',
-        '/public/images/dev-1/4.png',
-        '/public/images/dev-1/5.png'
+        '/images/dev-1/2.png',
+        '/images/dev-1/3.png',
+        '/images/dev-1/4.png',
+        '/images/dev-1/5.png'
       ]
     },
 
@@ -297,13 +297,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026',
       desc: 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart lần đầu tiên "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.',
-      logo: '/public/images/project-4/1.png',
-      mainImg: '/public/images/project-4/1.png',
+      logo: '/images/project-4/1.png',
+      mainImg: '/images/project-4/1.png',
       images: [
-        '/public/images/project-4/2.png',
-        '/public/images/project-4/3.jpg',
-        '/public/images/project-4/4.jpg',
-        '/public/images/project-4/5.jpg'
+        '/images/project-4/2.png',
+        '/images/project-4/3.jpg',
+        '/images/project-4/4.jpg',
+        '/images/project-4/5.jpg'
       ]
     },
 
@@ -312,13 +312,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Sự kiện giao lưu CLB F-Photography & CLB Nhiếp ảnh THPT BHN',
       desc: 'Buổi giao lưu cùng CLB Nhiếp Ảnh THPT Bùi Hữu Nghĩa – một dịp đặc biệt để các bạn trẻ yêu nhiếp ảnh được gặp gỡ, học hỏi và cùng nhau chia sẻ những câu chuyện sau ống kính.',
-      logo: '/public/images/project-3/1.png',
-      mainImg: '/public/images/project-3/2.png',
+      logo: '/images/project-3/1.png',
+      mainImg: '/images/project-3/2.png',
       images: [
-        '/public/images/project-3/1.png',
-        '/public/images/project-3/3.png',
-        '/public/images/project-3/4.jpg',
-        '/public/images/project-3/5.jpg'
+        '/images/project-3/1.png',
+        '/images/project-3/3.png',
+        '/images/project-3/4.jpg',
+        '/images/project-3/5.jpg'
       ]
     },
 
@@ -327,13 +327,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Sự kiện "Photobooth cùng FSchoolers"',
       desc: 'Dự án Chạy Photoboth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam',
-      logo: '/public/images/project-2/1.png',
-      mainImg: '/public/images/project-2/1.png',
+      logo: '/images/project-2/1.png',
+      mainImg: '/images/project-2/1.png',
       images: [
-        '/public/images/project-2/2.png',
-        '/public/images/project-2/3.png',
-        '/public/images/project-2/4.png',
-        '/public/images/project-2/5.png'
+        '/images/project-2/2.png',
+        '/images/project-2/3.png',
+        '/images/project-2/4.png',
+        '/images/project-2/5.png'
       ]
     },
 
@@ -342,13 +342,13 @@ function App() {
       role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
       title: 'Cuộc thi ảnh Catch The Moment: Summer 2025',
       desc: '“Catch the moment: Summer 2025” là sân chơi dành riêng cho cán bộ nhân viên, giáo viên và học sinh trường THPT FPT Cần Thơ.',
-      logo: '/public/images/project-1/1.png',
-      mainImg: '/public/images/project-1/1.png',
+      logo: '/images/project-1/1.png',
+      mainImg: '/images/project-1/1.png',
       images: [
-        '/public/images/project-1/2.png',
-        '/public/images/project-1/3.png',
-        '/public/images/project-1/4.png',
-        '/public/images/project-1/5.png'
+        '/images/project-1/2.png',
+        '/images/project-1/3.png',
+        '/images/project-1/4.png',
+        '/images/project-1/5.png'
       ]
     }
   ];
@@ -401,7 +401,7 @@ function App() {
               </div>
               <div className="hero-media">
                 <div className="media-card" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                  <img src="/public/images/hero.jpg" alt="Profile Hero" />
+                  <img src="/images/hero.jpg" alt="Profile Hero" />
                 </div>
               </div>
             </section>
