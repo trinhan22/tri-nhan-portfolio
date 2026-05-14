@@ -32,10 +32,33 @@ body {
 @keyframes float-blob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 80px) scale(1.1); } }
 
 .custom-cursor {
-  position: fixed; top: 0; left: 0; width: 20px; height: 20px; border-radius: 50%; background-color: var(--primary-color);
-  pointer-events: none; z-index: 9999; mix-blend-mode: difference; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 16px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
+  height: 16px; 
+  border-radius: 50%; 
+  background-color: var(--primary-color);
+  pointer-events: none; 
+  z-index: 100001 !important; /* Đảm bảo không bị popup đè */
+  mix-blend-mode: difference; 
+  transform: translate(-50%, -50%); 
+  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
+  
+  /* Hiệu ứng ánh sáng đỏ tỏa ra xung quanh lúc bình thường */
+  box-shadow: 0 0 10px 2px var(--primary-color), 
+              0 0 20px 6px rgba(229, 57, 53, 0.4);
 }
-.custom-cursor.hovering { width: 60px; height: 60px; background-color: white; }
+
+.custom-cursor.hovering { 
+  width: 40px; /* Giảm độ phóng to lại (trước đây là 60px đang bị quá to) */
+  height: 40px; 
+  background-color: white; 
+  
+  /* Chuyển sang ánh sáng trắng chói loá khi rê chuột vào Menu/Link */
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.8), 
+              0 0 30px 10px rgba(255, 255, 255, 0.3);
+}
 
 .loader-wrapper { position: fixed; inset: 0; background: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 0.8s ease, visibility 0.8s; }
 .loader-wrapper.hidden { opacity: 0; visibility: hidden; }
