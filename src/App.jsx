@@ -91,6 +91,7 @@ function App() {
 
   // 1. STATE LƯU TRỮ MENU ĐANG ACTIVE
   const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // 2. LOGIC SCROLLSPY (BẮT VỊ TRÍ CUỘN CHUỘT)
   useEffect(() => {
@@ -393,15 +394,28 @@ function App() {
       {!loading && (
         <>
           <header>
-            <div className="logo">TRÍ NHÂN<span>.</span></div>
-            <nav className="nav-links" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-              <a href="#home" className={activeSection === 'home' ? 'active' : ''}>TRANG CHỦ</a>
-              <a href="#timeline" className={activeSection === 'timeline' ? 'active' : ''}>HỌC VẤN</a>
-              <a href="#achievements" className={activeSection === 'achievements' ? 'active' : ''}>THÀNH TÍCH</a>
-              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>DỰ ÁN</a>
-              <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>LIÊN HỆ</a>
+            <div className="logo" style={{ position: 'relative', zIndex: 1001 }}>TRÍ NHÂN<span>.</span></div>
+            
+            {/* 👉 NÚT HAMBURGER (Chỉ hiện trên Mobile) */}
+            <button 
+              className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+
+            {/* 👉 DANH MỤC MENU (Bị ẩn trên Mobile, chỉ hiện khi click Hamburger) */}
+            <nav className={`nav-links menu-center ${isMobileMenuOpen ? 'open' : ''}`} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+              <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>TRANG CHỦ</a>
+              <a href="#timeline" className={activeSection === 'timeline' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>HỌC VẤN</a>
+              <a href="#achievements" className={activeSection === 'achievements' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>THÀNH TÍCH</a>
+              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>DỰ ÁN</a>
+              <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>LIÊN HỆ</a>
             </nav>
-            <div className="nav-links"><a href="#">VN</a> <a href="#">EN</a></div>
+            
+            <div className="nav-links lang-switch" style={{ position: 'relative', zIndex: 1001 }}><a href="#">VN</a> <a href="#">EN</a></div>
           </header>
 
           <main>
