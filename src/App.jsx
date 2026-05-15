@@ -140,12 +140,12 @@ function App() {
       title: 'Design lộn xộn',
       desc: 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.',
       link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
-      logo: '/images/design-7/1.png',
+      logo: '/images/design-7/4.png',
       mainImg: '/images/design-7/1.png',
       images: [
+        '/images/design-7/4.png',
         '/images/design-7/2.png',
         '/images/design-7/3.png',
-        '/images/design-7/4.png',
         '/images/design-7/5.png'
       ]
     },
@@ -247,6 +247,72 @@ function App() {
     },
 
     {
+      category: 'SỰ KIỆN',
+      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
+      title: 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026',
+      desc: 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart lần đầu tiên "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.',
+      link: 'https://www.facebook.com/share/p/1NFeGFSmao/',
+      logo: '/images/project-4/2.png',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/project-4/1.png',
+      images: [
+        '/images/project-4/1.png',
+        '/images/project-4/3.jpg',
+        '/images/project-4/4.jpg',
+        '/images/project-4/5.jpg'
+      ]
+    },
+
+    {
+      category: 'SỰ KIỆN',
+      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
+      title: 'Sự kiện giao lưu CLB F-Photography & CLB Nhiếp ảnh THPT BHN',
+      desc: 'Buổi giao lưu cùng CLB Nhiếp Ảnh THPT Bùi Hữu Nghĩa – một dịp đặc biệt để các bạn trẻ yêu nhiếp ảnh được gặp gỡ, học hỏi và cùng nhau chia sẻ những câu chuyện sau ống kính.',
+      link: 'https://www.facebook.com/share/p/18sa5xu2Aa/',
+      logo: '/images/project-3/1.png',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/project-3/2.png',
+      images: [
+        '/images/project-3/2.png',
+        '/images/project-3/1.png',
+        '/images/project-3/4.jpg',
+        '/images/project-3/5.jpg'
+      ]
+    },
+
+    {
+      category: 'SỰ KIỆN',
+      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
+      title: 'Sự kiện "Photobooth cùng FSchoolers"',
+      desc: 'Dự án Chạy Photoboth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam',
+      logo: '/images/project-2/1.png',
+      link: 'https://www.facebook.com/share/p/1KUKEKgU6v/',
+      mainImg: '/images/project-2/1.png',
+      images: [
+        '/images/project-2/2.png',
+        '/images/project-2/3.png',
+        '/images/project-2/4.png',
+        '/images/project-2/5.png'
+      ]
+    },
+
+    {
+      category: 'SỰ KIỆN',
+      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
+      title: 'Cuộc thi ảnh Catch The Moment: Summer 2025',
+      desc: '“Catch the moment: Summer 2025” là sân chơi dành riêng cho cán bộ nhân viên, giáo viên và học sinh trường THPT FPT Cần Thơ.',
+      logo: '/images/project-1/2.png',
+      link: 'https://www.facebook.com/share/p/1KNRQsYXUC/',
+      mainImg: '/images/project-1/1.png',
+      images: [
+        '/images/project-1/2.png',
+        '/images/project-1/3.png',
+        '/images/project-1/4.png',
+        '/images/project-1/5.png'
+      ]
+    },
+
+    {
       category: 'DỰ ÁN',
       role: '/ QUẢN LÝ DỰ ÁN / DEVELOPER',
       title: 'Wibey - Nền tảng xem phim trực tuyến',
@@ -308,70 +374,6 @@ function App() {
         '/images/dev-1/3.png',
         '/images/dev-1/4.png',
         '/images/dev-1/5.png'
-      ]
-    },
-
-    {
-      category: 'SỰ KIỆN',
-      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
-      title: 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026',
-      desc: 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart lần đầu tiên "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.',
-      link: 'https://www.facebook.com/share/p/1NFeGFSmao/',
-      logo: '/images/project-4/1.png',
-      mainImg: '/images/project-4/1.png',
-      images: [
-        '/images/project-4/2.png',
-        '/images/project-4/3.jpg',
-        '/images/project-4/4.jpg',
-        '/images/project-4/5.jpg'
-      ]
-    },
-
-    {
-      category: 'SỰ KIỆN',
-      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
-      title: 'Sự kiện giao lưu CLB F-Photography & CLB Nhiếp ảnh THPT BHN',
-      desc: 'Buổi giao lưu cùng CLB Nhiếp Ảnh THPT Bùi Hữu Nghĩa – một dịp đặc biệt để các bạn trẻ yêu nhiếp ảnh được gặp gỡ, học hỏi và cùng nhau chia sẻ những câu chuyện sau ống kính.',
-      link: 'https://www.facebook.com/share/p/18sa5xu2Aa/',
-      logo: '/images/project-3/1.png',
-      mainImg: '/images/project-3/2.png',
-      images: [
-        '/images/project-3/1.png',
-        '/images/project-3/3.png',
-        '/images/project-3/4.jpg',
-        '/images/project-3/5.jpg'
-      ]
-    },
-
-    {
-      category: 'SỰ KIỆN',
-      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
-      title: 'Sự kiện "Photobooth cùng FSchoolers"',
-      desc: 'Dự án Chạy Photoboth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam',
-      logo: '/images/project-2/1.png',
-      link: 'https://www.facebook.com/share/p/1KUKEKgU6v/',
-      mainImg: '/images/project-2/1.png',
-      images: [
-        '/images/project-2/2.png',
-        '/images/project-2/3.png',
-        '/images/project-2/4.png',
-        '/images/project-2/5.png'
-      ]
-    },
-
-    {
-      category: 'SỰ KIỆN',
-      role: '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC',
-      title: 'Cuộc thi ảnh Catch The Moment: Summer 2025',
-      desc: '“Catch the moment: Summer 2025” là sân chơi dành riêng cho cán bộ nhân viên, giáo viên và học sinh trường THPT FPT Cần Thơ.',
-      logo: '/images/project-1/1.png',
-      link: 'https://www.facebook.com/share/p/1KNRQsYXUC/',
-      mainImg: '/images/project-1/1.png',
-      images: [
-        '/images/project-1/2.png',
-        '/images/project-1/3.png',
-        '/images/project-1/4.png',
-        '/images/project-1/5.png'
       ]
     }
   ];
@@ -865,8 +867,8 @@ function App() {
                  <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                    <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>TẤT CẢ</button>
                    <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>THIẾT KẾ</button>
-                   <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>DỰ ÁN</button>
                    <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>SỰ KIỆN</button>
+                   <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>DỰ ÁN</button>
                  </div>
               </div>
 
@@ -911,14 +913,29 @@ function App() {
                     {/* Gallery ảnh */}
                     <div className="project-gallery" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                       
-                      {/* Ảnh lớn */}
-                      <img 
-                        src={proj.mainImg} 
-                        alt="Main Visual" 
-                        className="gallery-main" 
-                        onClick={() => openPopup(proj, proj.mainImg)} 
-                        loading="lazy" /* 👉 THÊM DÒNG NÀY */
-                      />
+                      {/* ========================================= */}
+                      {/* ẢNH CHÍNH HOẶC VIDEO CHÍNH (TỰ ĐỘNG CHUYỂN ĐỔI) */}
+                      {proj.mainVideo ? (
+                        <div className="gallery-main fb-video-wrapper">
+                          <iframe 
+                            src={proj.mainVideo} 
+                            style={{ border: 'none', overflow: 'hidden' }} 
+                            scrolling="no" 
+                            frameBorder="0" 
+                            allowFullScreen={true} 
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                          ></iframe>
+                        </div>
+                      ) : (
+                        <img 
+                          src={proj.mainImg} 
+                          alt="Main Visual" 
+                          className="gallery-main" 
+                          onClick={() => openPopup(proj, proj.mainImg)} 
+                          loading="lazy" 
+                        />
+                      )}
+                      {/* ========================================= */}
                       
                       {/* Các ảnh nhỏ */}
                       {proj.images.map((img, i) => (

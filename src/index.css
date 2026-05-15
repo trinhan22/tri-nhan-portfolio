@@ -60,10 +60,59 @@ body {
               0 0 30px 10px rgba(255, 255, 255, 0.3);
 }
 
-.loader-wrapper { position: fixed; inset: 0; background: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 0.8s ease, visibility 0.8s; }
+/* =========================================
+   LOADING KIỂU 1: CINEMATIC SLAM (TỐI ƯU MOBILE 100%)
+========================================== */
+.loader-wrapper { 
+  position: fixed; inset: 0; background: #050505; display: flex; 
+  justify-content: center; align-items: center; z-index: 10000; 
+  transition: opacity 0.8s ease, visibility 0.8s; 
+}
 .loader-wrapper.hidden { opacity: 0; visibility: hidden; }
-.loader-text { font-size: 3rem; font-weight: 900; letter-spacing: 5px; color: transparent; -webkit-text-stroke: 1px var(--primary-color); animation: fillText 2s ease forwards; }
-@keyframes fillText { 0% { color: transparent; } 100% { color: var(--primary-color); } }
+
+.loader-text { 
+  font-size: 4rem; 
+  font-weight: 900; 
+  text-transform: uppercase; 
+  color: white; 
+  text-align: center;
+  /* Chuyển động mặc định cho PC */
+  animation: cinematic-slam-pc 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* --- 1. KỊCH BẢN CHUYỂN ĐỘNG CHO MÁY TÍNH --- */
+@keyframes cinematic-slam-pc {
+  0% { letter-spacing: 50px; filter: blur(25px); opacity: 0; transform: scale(1.5); }
+  35% { letter-spacing: 12px; filter: blur(0px); opacity: 1; transform: scale(1); text-shadow: 0 0 0px transparent; }
+  /* Cú bùng nổ ánh sáng ngay lúc va chạm */
+  45% { text-shadow: 0 0 40px white, 0 0 100px var(--primary-color); transform: scale(1.05); } 
+  100% { letter-spacing: 12px; transform: scale(1); text-shadow: 0 0 15px rgba(229, 57, 53, 0.6); }
+}
+
+/* --- 2. KỊCH BẢN CHUYỂN ĐỘNG CHO ĐIỆN THOẠI --- */
+@keyframes cinematic-slam-mobile {
+  0% { letter-spacing: 20px; filter: blur(15px); opacity: 0; transform: scale(1.3); } /* Thu hẹp khoảng cách rơi */
+  35% { letter-spacing: 6px; filter: blur(0px); opacity: 1; transform: scale(1); text-shadow: 0 0 0px transparent; }
+  45% { text-shadow: 0 0 30px white, 0 0 70px var(--primary-color); transform: scale(1.05); } 
+  100% { letter-spacing: 6px; transform: scale(1); text-shadow: 0 0 10px rgba(229, 57, 53, 0.6); }
+}
+
+/* 👉 TỐI ƯU RESPONSIVE KÍCH THƯỚC TRÊN MOBILE */
+@media (max-width: 768px) {
+  .loader-text { 
+    font-size: 2.8rem; 
+    /* Kích hoạt kịch bản Mobile khi màn hình nhỏ */
+    animation-name: cinematic-slam-mobile; 
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-text { 
+    font-size: 2.2rem; 
+    /* Bù trừ khoảng cách chữ để canh giữa tuyệt đối */
+    padding-left: 6px; 
+  }
+}
 
 /* NAVBAR */
 header {
@@ -235,6 +284,22 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   filter: brightness(0.65); 
   cursor: pointer;
   border: 1px solid transparent;
+}
+
+/* Ép khung Iframe Video Facebook chuẩn 16:9, bo góc mượt mà như ảnh */
+.fb-video-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: #000; /* Lót nền đen nếu video tỉ lệ dọc */
+  border: 1px solid var(--border-color);
+}
+
+.fb-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Ảnh chính to rõ, bo góc to hơn */
