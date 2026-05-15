@@ -286,20 +286,30 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   border: 1px solid transparent;
 }
 
-/* Ép khung Iframe Video Facebook chuẩn 16:9, bo góc mượt mà như ảnh */
+/* =========================================
+   ÉP KHUNG VIDEO FACEBOOK (TỐI ƯU MỌI THIẾT BỊ)
+========================================== */
 .fb-video-wrapper {
   position: relative;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 16 / 9; /* Ép chết tỷ lệ chuẩn điện ảnh */
   overflow: hidden;
-  background: #000; /* Lót nền đen nếu video tỉ lệ dọc */
+  background: #050505; /* Nền đen sâu che viền */
   border: 1px solid var(--border-color);
+  border-radius: 16px !important; /* Bo góc mượt mà ăn khớp với Card */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8); /* Đổ bóng chìm bên trong cho có chiều sâu */
 }
 
 .fb-video-wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  /* Phóng to Iframe lên 1 xíu (1.02) để giấu đi mấy cái viền đen rác của Facebook */
+  transform: scale(1.02); 
 }
 
 /* Ảnh chính to rõ, bo góc to hơn */
@@ -627,8 +637,29 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .hero-text .main-title { font-size: 3.2rem; }
   .section-title { font-size: 2.2rem; margin-bottom: 30px; }
 
-  /* 👉 1. TỐI ƯU MENU: DẠNG OVERLAY HAMBURGER KÍNH MỜ */
-  header { background: transparent !important; backdrop-filter: none; padding: 20px 5%; align-items: center;}
+  /* 👉 1. TỐI ƯU MENU: TRONG SUỐT VÀ HIỆN KÍNH MỜ KHI CUỘN */
+  header { 
+    background: transparent; 
+    backdrop-filter: none; 
+    padding: 25px 5%; 
+    align-items: center;
+    transition: all 0.4s ease-in-out !important; /* Mượt lúc vuốt ngược lên */
+    border-bottom: 1px solid transparent; 
+  }
+
+  /* 👉 TỐI ƯU SHADOW MOBILE: ĐƠN GIẢN, NHẸ NHÀNG VÀ CHUYỂN MƯỢT */
+  header.scrolled {
+    background: rgba(18, 18, 18, 0.75) !important; /* Lót nền đen mờ */
+    backdrop-filter: blur(15px) !important; /* Hiệu ứng kính mờ xịn xò */
+    -webkit-backdrop-filter: blur(15px) !important;
+    
+    /* SHADOW TẠO KHỐI NHẸ NHÀNG */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4) !important; 
+    
+    /* 👇 THÊM DÒNG NÀY: Hiệu ứng chuyển đổi mượt mà 0.4 giây */
+    transition: all 0.4s ease-in-out !important; 
+  }
+
   .hamburger { display: flex; } /* Bật nút 3 gạch */
   .lang-switch { display: none !important; } /* Tạm ẩn VN/EN trên điện thoại cho gọn */
   
@@ -649,6 +680,18 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   }
   .menu-center.open { opacity: 1; visibility: visible; transform: translateY(0); }
   .menu-center a { font-size: 1.4rem !important; letter-spacing: 3px; }
+
+  /* 👉 TĂNG MẠNH SIZE CHỮ HERO CHO MOBILE */
+  .hero-text .sub-title { 
+    font-size: 1rem; /* Chữ "PORTFOLIO" to rõ hơn */
+    letter-spacing: 4px; 
+    margin-bottom: 15px; 
+  }
+  .hero-text .main-title { 
+    font-size: 4.3rem; /* Chữ "NGUYỄN TRÍ NHÂN" to chà bá */
+    line-height: 1.1; 
+    margin-bottom: 25px; 
+  }
 
   /* 👉 2. TỐI ƯU HERO: CHỮ FULLSCREEN, ẢNH TO RỘNG BÊN DƯỚI */
   .hero-split {
@@ -697,7 +740,11 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .project-header { flex-direction: column; align-items: center; text-align: center; }
   .project-tags { justify-content: center; }
   .project-gallery { grid-template-columns: repeat(2, 1fr); }
-  .gallery-main { grid-column: span 2; height: 200px !important; }
+  .gallery-main { 
+    grid-column: span 2; 
+    height: auto !important; 
+    aspect-ratio: 16 / 9; 
+  }
   .contact-form .grid-2 { grid-template-columns: 1fr; gap: 0px; }
   .contact-links-group { width: 100%; }
   .contact-btn { width: 100%; box-sizing: border-box; padding: 15px 20px; }
@@ -712,7 +759,9 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 
 /* ================= BỘ CỤC ĐIỆN THOẠI SIÊU NHỎ (Màn hình < 480px) ================= */
 @media (max-width: 480px) {
-  .hero-text .main-title { font-size: 2.6rem; margin-bottom: 10px; }
+  /* Chữ Hero cho màn hình cực nhỏ */
+  .hero-text .sub-title { font-size: 0.85rem; letter-spacing: 3px; }
+  .hero-text .main-title { font-size: 3.6rem; margin-bottom: 20px; }
   .hero-text .text-desc { margin-bottom: 20px !important; }
   .btn-group { flex-direction: column; width: 100%; gap: 15px; margin-top: 10px;}
   .btn { width: 100%; text-align: center; }
