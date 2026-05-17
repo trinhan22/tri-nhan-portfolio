@@ -451,88 +451,89 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 }
 
 /* =========================================
-   NÚT LIÊN HỆ TÙY CHỈNH (CONTACT BUTTONS)
+   NÚT LIÊN HỆ TÙY CHỈNH (CONTACT BUTTONS GRID) - GIAO DIỆN SANG TRỌNG
 ========================================== */
 .contact-links-group {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Trải dài làm 3 cột trên PC */
+  gap: 15px;
+  width: 100%;
 }
 
 .contact-btn {
   display: flex;
   align-items: center;
-  padding: 18px 25px;
+  padding: 18px 20px; 
   text-decoration: none;
   color: white;
   border-radius: 16px;
-  gap: 20px;
-  transition: 0.4s ease;
-  border: 1px solid var(--border-color);
-  background: var(--surface-color);
-  backdrop-filter: blur(10px);
+  gap: 15px; 
+  transition: all 0.3s ease;
+  /* Đổi sang màu xám đen cực kỳ tinh tế giống hình */
+  background: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.05); 
+  overflow: hidden; 
 }
 
+/* Đổi hiệu ứng rê chuột: Nhấc nhẹ lên thay vì trượt ngang */
 .contact-btn:hover {
-  border-color: rgba(229, 57, 53, 0.5);
-  transform: translateX(10px); /* Nút trượt nhẹ sang phải khi hover */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  border-color: rgba(229, 57, 53, 0.3);
   background: rgba(229, 57, 53, 0.05);
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .contact-btn-icon {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.05);
+  width: 45px;
+  height: 45px;
+  /* Nền icon tối sâu thẳm làm nổi bật màu đỏ */
+  background: rgba(0, 0, 0, 0.4); 
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--primary-color);
-  font-size: 1.3rem;
-  transition: 0.4s;
+  font-size: 1.1rem;
+  transition: 0.3s;
   flex-shrink: 0;
 }
 
 .contact-btn:hover .contact-btn-icon {
   background: var(--primary-color);
   color: white;
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1);
 }
 
 .contact-btn-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
 }
 
 .contact-btn-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--text-muted);
-  letter-spacing: 1px;
-  margin-bottom: 5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .contact-btn-value {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Cắt chữ nếu quá dài */
+  text-overflow: ellipsis; 
+  max-width: 100%;
 }
 
-.contact-btn-arrow {
-  color: var(--text-muted);
-  font-size: 1.2rem;
-  opacity: 0;
-  transform: translateX(-15px);
-  transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.contact-btn:hover .contact-btn-arrow {
-  opacity: 1;
-  transform: translateX(0);
-  color: var(--primary-color);
+/* Ép về 1 cột khi màn hình nhỏ */
+@media (max-width: 1024px) {
+  .contact-links-group {
+    grid-template-columns: repeat(2, 1fr); 
+  }
 }
 
 footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.85rem; color: var(--text-muted); position: relative; margin-top: 50px; max-width: 1400px; margin-left: auto; margin-right: auto;}
@@ -821,8 +822,18 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .badge-label { font-size: 0.5rem; letter-spacing: 1px; margin-top: 0;}
 
   /* 👉 4. CÁC GIAO DIỆN KHÁC GIỮ NGUYÊN (NHƯ ĐÃ FIX) */
-  #contact .grid-2 > div:first-child { text-align: center; display: flex; flex-direction: column; align-items: center; }
-  #contact .text-desc { text-align: center; }
+  #contact > div > div:first-child { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  #contact .text-desc { 
+    text-align: center; 
+    margin-left: auto; 
+    margin-right: auto; 
+  }
   #projects > div.fade-in-section:first-child,
   #achievements > div.fade-in-section:first-child { 
     flex-direction: column !important; 
@@ -846,7 +857,9 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
     aspect-ratio: 16 / 9; 
   }
   .contact-form .grid-2 { grid-template-columns: 1fr; gap: 0px; }
-  .contact-links-group { width: 100%; }
+  .contact-links-group {
+    grid-template-columns: 1fr; 
+  }
   .contact-btn { width: 100%; box-sizing: border-box; padding: 15px 20px; }
   .contact-btn-value { font-size: 0.95rem; }
   footer { flex-direction: column; align-items: center; text-align: center; gap: 40px; padding-top: 40px; padding-bottom: 40px; }
@@ -872,6 +885,27 @@ html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important; posit
 section, header, footer { width: 100%; max-width: 100%; box-sizing: border-box; }
 footer { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) { *, a, button, input, textarea, select, img, .nav-btn, .close-modal, .image-modal { cursor: none !important; } }
+
+/* =========================================
+   FIX LỖI NÚT LỌC (FILTER) BỊ LẺ LOI TRÊN MOBILE
+========================================== */
+@media (max-width: 480px) {
+  .filter-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ép giãn đều 2 bên */
+    gap: 10px;
+  }
+  
+  .filter-btn {
+    /* Ép mỗi nút chiếm 50% chiều ngang (trừ hao 5px tiền gap) */
+    flex: 1 1 calc(50% - 5px); 
+    text-align: center;
+    padding: 10px 5px !important; /* Thu nhỏ lề ngang để chữ không bị tràn */
+    white-space: nowrap; /* Chống rớt chữ bên trong nút */
+  }
+}
 
 /* =========================================
    8. TỐI ƯU HÓA TRIỆT ĐỂ LỖI CHÊNH GIAO DIỆN & TRÀN SCROLLBAR

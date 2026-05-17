@@ -27,12 +27,11 @@ function App() {
       btnView: "XEM DỰ ÁN", btnConnect: "KẾT NỐI NGAY",
       timelineEdu: "HỌC VẤN", timelineExp: "KINH NGHIỆM / HOẠT ĐỘNG",
       achieveSub: "DẤU ẤN CÁ NHÂN", achieveTitle1: "THÀNH TÍCH", achieveTitle2: "NỔI BẬT",
-      projTitle: "GÓC DỰ ÁN", projSub: "DANH MỤC SÁNG TẠO",
+      projSub: "DANH MỤC SÁNG TẠO", projTitle1: "GÓC ", projTitle2: "DỰ ÁN",
       filterAll: "TẤT CẢ", filterDesign: "THIẾT KẾ", filterEvent: "SỰ KIỆN",
       filterSchool: "CẤP TRƯỜNG", filterDistrict: "CẤP QUẬN", filterCity: "CẤP THÀNH PHỐ", filterNational: "CẤP QUỐC GIA",
       contactSub: "LIÊN HỆ", contactTitle1: "HÀNH TRÌNH", contactTitle2: "BẮT ĐẦU", contactTitle3: "TỪ ĐÂY",
       contactDesc: "Nếu bạn có chung sở thích, muốn giao lưu học hỏi hay rủ mình tham gia dự án nào đó, đừng ngại liên hệ nhé!",
-      formName: "Họ Tên", formEmail: "Email", formSubject: "Chủ đề liên hệ", formMess: "Lời nhắn", btnSend: "GỬI THÔNG TIN ↗",
       footerNav: "ĐIỀU HƯỚNG", footerConnect: "KẾT NỐI", footerPhone: "ĐIỆN THOẠI", footerSocial: "MẠNG XÃ HỘI", goTop: "Cuộn lên trên"
     },
     en: {
@@ -42,12 +41,11 @@ function App() {
       btnView: "VIEW WORK", btnConnect: "LET'S TALK",
       timelineEdu: "EDUCATION", timelineExp: "EXPERIENCE / ACTIVITIES",
       achieveSub: "PERSONAL MARKS", achieveTitle1: "OUTSTANDING", achieveTitle2: "ACHIEVEMENTS",
-      projTitle: "PROJECT HUB", projSub: "CREATIVE FOLDER",
+      projSub: "CREATIVE FOLDER", projTitle1: "PROJECT ", projTitle2: "HUB",
       filterAll: "ALL", filterDesign: "DESIGN", filterEvent: "EVENTS",
       filterSchool: "SCHOOL LEVEL", filterDistrict: "DISTRICT LEVEL", filterCity: "CITY LEVEL", filterNational: "NATIONAL LEVEL",
       contactSub: "CONTACT", contactTitle1: "LET'S START", contactTitle2: "THE JOURNEY", contactTitle3: "HERE",
       contactDesc: "If you share the same interests, want to learn together, or collaborate on a project, feel free to reach out!",
-      formName: "Full Name", formEmail: "Email", formSubject: "Subject", formMess: "Message", btnSend: "SEND MESSAGE ↗",
       footerNav: "NAVIGATION", footerConnect: "CONNECT", footerPhone: "PHONE", footerSocial: "SOCIAL MEDIA", goTop: "Scroll to top"
     }
   };
@@ -278,7 +276,7 @@ function App() {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
       title: lang === 'vi' ? 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026' : 'Special Movie Screening Event - Lunar New Year 2026',
-      desc: lang === 'vi' ? 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart lần đầu tiên "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.' : 'To celebrate the Year of the Horse 2026, F-Photography Club, F-Chef Cooking Club, and F-Heart Psychology Club collaborated for the first time to host a special Lunar New Year movie screening: "NHA BA NU".',
+      desc: lang === 'vi' ? 'Chào đón xuân Bính Ngọ 2026, CLB Nhiếp ảnh F-Photography, CLB Nấu ăn F-Chef và CLB Tâm lý F-Heart "bắt tay" tổ chức buổi công chiếu phim Tết đặc biệt: “NHÀ BÀ NỮ”.' : 'To celebrate the Year of the Horse 2026, F-Photography Club, F-Chef Cooking Club, and F-Heart Psychology Club collaborated for the first time to host a special Lunar New Year movie screening: "NHA BA NU".',
       link: 'https://www.facebook.com/share/p/1NFeGFSmao/',
       logo: '/images/project-4/2.png',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
@@ -295,7 +293,7 @@ function App() {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
       title: lang === 'vi' ? 'Sự kiện giao lưu CLB F-Photography & CLB Nhiếp ảnh THPT BHN' : 'Exchange Event: F-Photography Club & BHN High School Photography Club',
-      desc: lang === 'vi' ? 'Buổi giao lưu cùng CLB Nhiếp Ảnh THPT Bùi Hữu Nghĩa – một dịp đặc biệt để các bạn trẻ yêu nhiếp ảnh được gặp gỡ, học hỏi và cùng nhau chia sẻ những câu chuyện sau ống kính.' : 'An exchange session with Bui Huu Nghia High School Photography Club - a special occasion for young photography enthusiasts to meet, learn, and share stories behind the lens.',
+      desc: lang === 'vi' ? 'Buổi giao lưu nhiếp ảnh cùng CLB Nhiếp Ảnh Trường THPT Bùi Hữu Nghĩa.' : 'An exchange session with Bui Huu Nghia High School Photography Club.',
       link: 'https://www.facebook.com/share/p/18sa5xu2Aa/',
       logo: '/images/project-3/1.png',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
@@ -312,7 +310,7 @@ function App() {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
       title: lang === 'vi' ? 'Sự kiện "Photobooth cùng FSchoolers"' : 'Event: "Photobooth with FSchoolers"',
-      desc: lang === 'vi' ? 'Dự án Chạy Photoboth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam' : 'A special Photobooth project dedicated to FPT Can Tho High School students, in collaboration between F-Photography Club and Photogenic Vietnam.',
+      desc: lang === 'vi' ? 'Dự án Photobooth với sự kết hợp đặc biệt dành riêng cho các bạn học sinh THPT FPT Cần Thơ, cuộc hợp tác giữa CLB nhiếp ảnh F-Photography và Photogenic Vietnam' : 'A special Photobooth project dedicated to FPT Can Tho High School students, in collaboration between F-Photography Club and Photogenic Vietnam.',
       logo: '/images/project-2/1.png',
       link: 'https://www.facebook.com/share/p/1KUKEKgU6v/',
       mainImg: '/images/project-2/1.png',
@@ -540,7 +538,7 @@ function App() {
                         {lang === 'vi' ? 'Trường Phổ thông Việt Mỹ • 2019 - 2023' : 'Viet My Secondary School • 2019 - 2023'}
                       </span>
                       <p className="text-desc">
-                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 4 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
+                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS xếp loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 4 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
                       </p>
                     </div>
                   </div>
@@ -558,7 +556,7 @@ function App() {
                         {lang === 'vi' ? 'Trường THPT FPT Cần Thơ • 2023 - 2026' : 'FPT High School Can Tho • 2023 - 2026'}
                       </span>
                       <p className="text-desc">
-                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 3 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
+                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT xếp loại Tốt, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 3 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
                       </p>
                     </div>
                   </div>
@@ -626,10 +624,11 @@ function App() {
               </div>
             </section>
 
-            {/* 3. ACHIEVEMENTS SECTION (Đã thêm Bộ Lọc) */}
+            {/* 3. ACHIEVEMENTS SECTION */}
             <section id="achievements">
               
-              <div className="fade-in-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
+              {/* Ép xếp dọc và bám lề trái */}
+              <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
                  <div>
                    <span className="sub-title">{t.achieveSub}</span>
                    <h2 className="section-title" style={{ marginBottom: 0 }}>
@@ -637,8 +636,8 @@ function App() {
                    </h2>
                  </div>
                  
-                 {/* BỘ LỌC THÀNH TÍCH */}
-                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                 {/* Thêm marginBottom: 0 để bộ lọc không bị đẩy khoảng trống thừa */}
+                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
                    <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
                    <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
                    <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
@@ -665,18 +664,20 @@ function App() {
               </div>
             </section>
 
-            {/* 4. PROJECTS SECTION (Cấu trúc thẻ có Filter & Mini Gallery - Ảnh 3,4,5,6) */}
+            {/* 4. PROJECTS SECTION */}
             <section id="projects">
-              <div className="fade-in-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px' }}>
+              
+              {/* Ép xếp dọc và bám lề trái */}
+              <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
                  <div>
                    <span className="sub-title">{t.projSub}</span>
                    <h2 className="section-title" style={{ marginBottom: 0 }}>
-                     {/* Dùng toán tử ba ngôi để tách chữ đỏ cho đẹp */}
-                     {lang === 'vi' ? 'GÓC ' : 'PROJECT '}
-                     <span className="italic-red">{lang === 'vi' ? 'DỰ ÁN' : 'HUB'}</span>
+                     {t.projTitle1}<span className="italic-red">{t.projTitle2}</span>
                    </h2>
                  </div>
-                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                 
+                 {/* Thêm marginBottom: 0 */}
+                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
                    <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
                    <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
                    <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
@@ -810,85 +811,75 @@ function App() {
 
             {/* 5. CONTACT SECTION */}
             <section id="contact" className="fade-in-section">
-              <div className="grid-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+                
+                {/* PHẦN TITLE Ở TRÊN CÙNG (Căn trái) */}
                 <div>
                   <span className="sub-title">{t.contactSub}</span>
-                  <h2 className="section-title">{t.contactTitle1} <br/><span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}</h2>
-                  <p className="text-desc" style={{ marginBottom: '40px' }}>{t.contactDesc}</p>
-                  
-                  {/* CỤM NÚT LIÊN HỆ MỚI */}
-                  <div className="contact-links-group">
-                    
-                    {/* Nút Facebook */}
-                    <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                      <div className="contact-btn-icon"><i className="fab fa-facebook-f"></i></div>
-                      <div className="contact-btn-content">
-                        <span className="contact-btn-label">FACEBOOK</span>
-                        <span className="contact-btn-value">Nguyễn Trí Nhân</span>
-                      </div>
-                      <i className="fas fa-arrow-right contact-btn-arrow"></i>
-                    </a>
-
-                    {/* Nút Email */}
-                    <a href="mailto:ntrinhan712@gmail.com" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                      <div className="contact-btn-icon"><i className="fas fa-envelope"></i></div>
-                      <div className="contact-btn-content">
-                        <span className="contact-btn-label">EMAIL</span>
-                        <span className="contact-btn-value">ntrinhan712@gmail.com</span>
-                      </div>
-                      <i className="fas fa-arrow-right contact-btn-arrow"></i>
-                    </a>
-
-                  </div>
+                  {/* Tui bỏ thẻ <br/> đi để chữ trải ngang đẹp hơn trên PC */}
+                  <h2 className="section-title" style={{ marginBottom: '15px' }}>
+                    {t.contactTitle1} <span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}
+                  </h2>
+                  <p className="text-desc" style={{ maxWidth: '600px' }}>{t.contactDesc}</p>
                 </div>
+                
+                {/* PHẦN CARD Ở DƯỚI (Trải dài Full màn hình) */}
+                <div className="contact-links-group">
+                  
+                  {/* Nút Facebook */}
+                  <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fab fa-facebook-f"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">FACEBOOK</span>
+                      <span className="contact-btn-value">Nguyễn Trí Nhân</span>
+                    </div>
+                  </a>
 
-                {/* Phần Form */}
-                <div className="glow-card contact-form">
-                  <form 
-                    action="https://formspree.io/f/xdabvwpr"
-                    method="POST"
-                    onMouseEnter={() => setIsHoveringBtn(true)} 
-                    onMouseLeave={() => setIsHoveringBtn(false)}
-                  >
-                    <div className="grid-2" style={{ gap: '20px' }}>
-                      <div className="form-group">
-                        <label>{t.formName}</label>
-                        <input 
-                          type="text" 
-                          name="name" 
-                          placeholder={lang === 'vi' ? 'Nguyễn Văn A' : 'John Doe'} 
-                          required 
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>{t.formEmail}</label>
-                        <input 
-                          type="email" 
-                          name="email" 
-                          placeholder="example@gmail.com" 
-                          required 
-                        />
-                      </div>
+                  {/* Nút Instagram */}
+                  <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fab fa-instagram"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">INSTAGRAM</span>
+                      <span className="contact-btn-value">@n.trisnhaan</span>
                     </div>
-                    <div className="form-group">
-                      <label>{t.formSubject}</label>
-                      <select name="subject">
-                        <option value="Tán gẫu / làm quen">{lang === 'vi' ? 'Tán gẫu / làm quen' : 'Just saying Hi'}</option>
-                        <option value="Thảo luận dự án">{lang === 'vi' ? 'Thảo luận dự án' : 'Project Discussion'}</option>
-                        <option value="Giao lưu học hỏi">{lang === 'vi' ? 'Giao lưu học hỏi' : 'Networking & Learning'}</option>
-                        <option value="Khác">{lang === 'vi' ? 'Khác' : 'Other'}</option>
-                      </select>
+                  </a>
+
+                  {/* Nút Tiktok */}
+                  <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fab fa-tiktok"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">TIKTOK</span>
+                      <span className="contact-btn-value">@ng_tri_nhan</span>
                     </div>
-                    <div className="form-group">
-                      <label>{t.formMess}</label>
-                      <textarea 
-                        name="message" 
-                        placeholder={lang === 'vi' ? 'Nhắn lời nhắn của bạn vào đây nhe...' : 'Drop your message here...'} 
-                        required
-                      ></textarea>
+                  </a>
+
+                  {/* Nút Behance */}
+                  <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fab fa-behance"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">BEHANCE</span>
+                      <span className="contact-btn-value">Nguyễn Trí Nhân</span>
                     </div>
-                    <button type="submit" className="btn-submit">{t.btnSend}</button>
-                  </form>
+                  </a>
+
+                  {/* Nút Số điện thoại */}
+                  <a href="tel:+84335810259" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fas fa-phone"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">{t.footerPhone}</span>
+                      <span className="contact-btn-value">+84 33 581 0259</span>
+                    </div>
+                  </a>
+
+                  {/* Nút Email */}
+                  <a href="mailto:ntrinhan712@gmail.com" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                    <div className="contact-btn-icon"><i className="fas fa-envelope"></i></div>
+                    <div className="contact-btn-content">
+                      <span className="contact-btn-label">EMAIL</span>
+                      <span className="contact-btn-value">ntrinhan712@gmail.com</span>
+                    </div>
+                  </a>
+
                 </div>
               </div>
             </section>
