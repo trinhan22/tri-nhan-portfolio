@@ -8,11 +8,13 @@ function App() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHoveringBtn, setIsHoveringBtn] = useState(false);
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [activeAchieveFilter, setActiveAchieveFilter] = useState('ALL');
   const [popupData, setPopupData] = useState({ isOpen: false, gallery: [], currentIndex: 0 });
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lang, setLang] = useState('vi');
+  const [activeVideos, setActiveVideos] = useState({});
 
   // =========================================================================
   // 2. BỘ TỪ ĐIỂN SONG NGỮ
@@ -27,6 +29,7 @@ function App() {
       achieveSub: "DẤU ẤN CÁ NHÂN", achieveTitle1: "THÀNH TÍCH", achieveTitle2: "NỔI BẬT",
       projTitle: "GÓC DỰ ÁN", projSub: "DANH MỤC SÁNG TẠO",
       filterAll: "TẤT CẢ", filterDesign: "THIẾT KẾ", filterEvent: "SỰ KIỆN",
+      filterSchool: "CẤP TRƯỜNG", filterDistrict: "CẤP QUẬN", filterCity: "CẤP THÀNH PHỐ", filterNational: "CẤP QUỐC GIA",
       contactSub: "LIÊN HỆ", contactTitle1: "HÀNH TRÌNH", contactTitle2: "BẮT ĐẦU", contactTitle3: "TỪ ĐÂY",
       contactDesc: "Nếu bạn có chung sở thích, muốn giao lưu học hỏi hay rủ mình tham gia dự án nào đó, đừng ngại liên hệ nhé!",
       formName: "Họ Tên", formEmail: "Email", formSubject: "Chủ đề liên hệ", formMess: "Lời nhắn", btnSend: "GỬI THÔNG TIN ↗",
@@ -41,6 +44,7 @@ function App() {
       achieveSub: "PERSONAL MARKS", achieveTitle1: "OUTSTANDING", achieveTitle2: "ACHIEVEMENTS",
       projTitle: "PROJECT HUB", projSub: "CREATIVE FOLDER",
       filterAll: "ALL", filterDesign: "DESIGN", filterEvent: "EVENTS",
+      filterSchool: "SCHOOL LEVEL", filterDistrict: "DISTRICT LEVEL", filterCity: "CITY LEVEL", filterNational: "NATIONAL LEVEL",
       contactSub: "CONTACT", contactTitle1: "LET'S START", contactTitle2: "THE JOURNEY", contactTitle3: "HERE",
       contactDesc: "If you share the same interests, want to learn together, or collaborate on a project, feel free to reach out!",
       formName: "Full Name", formEmail: "Email", formSubject: "Subject", formMess: "Message", btnSend: "SEND MESSAGE ↗",
@@ -121,7 +125,8 @@ function App() {
       clearTimeout(timer);
       if (observerRef.current) observerRef.current.disconnect();
     };
-  }, [loading, activeFilter, lang]); // Đã có biến lang ở đây để đổi ngôn ngữ không bị mất dự án
+  
+  }, [loading, activeFilter, lang, activeAchieveFilter]); // Đã có biến lang ở đây để đổi ngôn ngữ không bị mất dự án
 
   useEffect(() => {
     const handleScroll = () => {
@@ -154,22 +159,6 @@ function App() {
         '/images/design-8/3.png',
         '/images/design-8/4.png',
         '/images/design-8/5.png'
-      ]
-    },
-
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Design lộn xộn' : 'Messy Design',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
-      link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
-      logo: '/images/design-7/4.png',
-      mainImg: '/images/design-7/1.png',
-      images: [
-        '/images/design-7/4.png',
-        '/images/design-7/2.png',
-        '/images/design-7/3.png',
-        '/images/design-7/5.png'
       ]
     },
 
@@ -270,6 +259,22 @@ function App() {
     },
 
     {
+      category: 'THIẾT KẾ',
+      role: '/ GRAPHIC DESIGNER / CONTENT',
+      title: lang === 'vi' ? 'Design lộn xộn' : 'Messy Design',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
+      link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
+      logo: '/images/design-7/4.png',
+      mainImg: '/images/design-7/1.png',
+      images: [
+        '/images/design-7/4.png',
+        '/images/design-7/2.png',
+        '/images/design-7/3.png',
+        '/images/design-7/5.png'
+      ]
+    },
+
+    {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
       title: lang === 'vi' ? 'Sự kiện chiếu phim đặc biệt - Chào mừng tết Nguyên đán 2026' : 'Special Movie Screening Event - Lunar New Year 2026',
@@ -338,41 +343,10 @@ function App() {
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
-      title: lang === 'vi' ? 'Wibey - Nền tảng xem phim trực tuyến' : 'Wibey - Online Movie Streaming Platform',
-      desc: lang === 'vi' ? 'Nền tảng xem phim trực tuyến với giao diện hiện đại.' : 'Online movie streaming platform with a modern interface.',
-      link: 'https://wibey.netlify.app',
-      logo: '/images/dev-4/1.png',
-      mainImg: '/images/dev-4/1.png',
-      images: [
-        '/images/dev-4/2.png',
-        '/images/dev-4/3.png',
-        '/images/dev-4/4.png',
-        '/images/dev-4/5.png'
-      ]
-    },
-
-    {
-      category: 'DỰ ÁN',
-      role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'Dự Án HopVan - Nền tảng học và luyện thi môn Ngữ Văn' : 'HopVan Project - Literature Learning & Exam Prep Platform',
       desc: lang === 'vi' ? 'Nền tảng học và luyện thi môn Ngữ Văn.' : 'A platform dedicated to Literature learning and exam preparation.',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F971032818719526%2F&show_text=false&width=560&t=0',
       link: 'https://hopvan.info.vn',
-      logo: '/images/dev-3/1.png',
-      mainImg: '/images/dev-3/1.png',
-      images: [
-        '/images/dev-3/2.png',
-        '/images/dev-3/3.png',
-        '/images/dev-3/4.png',
-        '/images/dev-3/5.png'
-      ]
-    },
-
-    {
-      category: 'DỰ ÁN',
-      role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
-      title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
-      desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
-      link: 'https://fphotography.club',
       logo: '/images/dev-2/1.png',
       mainImg: '/images/dev-2/1.png',
       images: [
@@ -386,9 +360,9 @@ function App() {
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
-      title: lang === 'vi' ? 'Wibu Pagoda - Nền tảng viếng chùa online' : 'Wibu Pagoda - Online Temple Visiting Platform',
-      desc: lang === 'vi' ? 'Nền tảng viếng chùa online' : 'A platform for visiting temples online.',
-      link: 'https://wibupagoda.netlify.app',
+      title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
+      desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
+      link: 'https://fphotography.club',
       logo: '/images/dev-1/1.png',
       mainImg: '/images/dev-1/1.png',
       images: [
@@ -400,6 +374,45 @@ function App() {
     }
   ];
   const filteredProjects = activeFilter === 'ALL' ? projects : projects.filter(p => p.category === activeFilter);
+
+  // =========================================================================
+  // DỮ LIỆU THÀNH TÍCH (Đã phân loại Cấp độ)
+  // =========================================================================
+  const achievementsData = [
+    { level: 'Cấp Quận', titleVi: 'Giải Công nhận Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Công nhận Kỳ thi HSG môn Địa cấp Quận lớp 9.', descEn: 'Won the Consolation Prize in the District-level Geography Excellent Student Competition for 9th Grade.' },
+    { level: 'Cấp Quận', titleVi: 'Giải Ba Cuộc thi Khoa học Kỹ thuật', titleEn: 'Third Prize in Science & Engineering Fair', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.', descEn: 'Won Third Prize in the District-level Science and Engineering Fair for 9th Grade.' },
+    { level: 'Cấp trường', titleVi: 'Giải Nhì Cuộc thi Stempetition 2023-2024', titleEn: 'Second Prize in Stempetition 2023-2024', metaVi: 'THPT FPT Cần Thơ • 2023', metaEn: 'FPT High School Can Tho • 2023', descVi: 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.', descEn: 'Won Second Prize in the School-level Stempetition.' },
+    { level: 'Cấp trường', titleVi: 'Đội thi Ấn tượng tại Phiên toà giả định 2023', titleEn: 'Impressive Team in Mock Trial 2023', metaVi: 'THPT FPT Cần Thơ • 2023', metaEn: 'FPT High School Can Tho • 2023', descVi: 'Đoạt giải Ấn tượng Phiên toà giả định Cấp trường.', descEn: 'Won the Impressive Team Award in the School-level Mock Trial.' },
+    { level: 'Cấp trường', titleVi: 'Top 5 Dự án Xuất sắc nhất Infinity 2023-2024', titleEn: 'Top 5 Best Projects in Infinity 2023-2024', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Lọt Top 5 Dự án Xuất sắc nhất tại Infinity 2023-2024.', descEn: 'Reached the Top 5 Best Projects at Infinity 2023-2024.' },
+    { level: 'Cấp trường', titleVi: 'Giải Nhì Cuộc thi Stempetition 2024-2025', titleEn: 'Second Prize in Stempetition 2024-2025', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.', descEn: 'Won Second Prize in the School-level Stempetition.' },
+    { level: 'Cấp trường', titleVi: 'Giải Ba Cuộc thi FSchooler\'s Tips 2024', titleEn: 'Third Prize in FSchooler\'s Tips 2024', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Ba Cuộc thi FSchooler\'s Tips Cấp trường.', descEn: 'Won Third Prize in the School-level FSchooler\'s Tips Competition.' },
+    { level: 'Cấp trường', titleVi: 'Giải Tiềm năng Cuộc thi Sáng tạo Robot FPT', titleEn: 'Potential Prize in FPT Robot Creation', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Tiềm năng Cuộc thi Sáng tạo Robot Cấp trường.', descEn: 'Won the Potential Prize in the School-level Robot Creation Competition.' },
+    { level: 'Cấp trường', titleVi: 'Dự án có thành tích Xuất sắc tại KHKT', titleEn: 'Excellent Project at Science & Engineering Fair', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Dự án có thành tích Xuất sắc tại KHKT Cấp trường.', descEn: 'Achieved Excellent Project status at the School-level Science and Engineering Fair.' },
+    { level: 'Cấp Thành phố', titleVi: 'Giải Nhì Cuộc thi Khoa học Kỹ thuật', titleEn: 'Second Prize in Science & Engineering Fair', metaVi: 'Thành phố Cần Thơ • 2024', metaEn: 'Can Tho City • 2024', descVi: 'Đoạt giải Nhì Cuộc thi KHKT cấp Thành phố.', descEn: 'Won Second Prize in the City-level Science and Engineering Fair.' },
+    { level: 'Cấp trường', titleVi: 'Ngày hội Địa lí Đa quốc gia mùa 2', titleEn: 'Multinational Geography Festival Season 2', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt Giải Infographic Ấn tượng.', descEn: 'Won the Impressive Infographic Award.' },
+    { level: 'Cấp trường', titleVi: 'Bài viết được đăng tải trên Tập san kiến đọc', titleEn: 'Article published in "Kien Doc" Journal', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Bài viết được đăng tải trên Tập san kiến đọc 2024.', descEn: 'Article selected and published in the 2024 "Kien Doc" Journal.' },
+    { level: 'Cấp trường', titleVi: 'Đoạt giải Nhất kỳ thi HSG Cấp trường', titleEn: 'First Prize in School-level Excellent Student Exam', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Nhất kỳ thi chọn HSG môn Địa lý Cấp trường.', descEn: 'Won First Prize in the School-level Geography Excellent Student Competition.' },
+    { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi Chọn HSG Cấp Thành phố', titleEn: 'Participated in City-level Excellent Student Exam', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi Chọn HSG môn Địa lý cấp Thành phố.', descEn: 'Competed in the City-level Geography Excellent Student Competition.' },
+    { level: 'Cấp Quốc gia', titleVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.' },
+    { level: 'Cấp trường', titleVi: 'Top 1 Địa lý - Tiếp sức mùa thi 2025', titleEn: 'Top 1 in Geography - Exam Season Relay 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.', descEn: 'Achieved Top 1 in Geography at the Exam Season Relay 2025.' },
+    { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB nổi bật HK2', titleEn: 'Outstanding Club Member of Semester 2', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).', descEn: 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Thanh niên khoẻ Cấp trường', titleEn: 'Achieved School-level "Healthy Youth" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Thanh niên khoẻ Cấp trường 2025.', descEn: 'Awarded the School-level "Healthy Youth" Title in 2025.' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh Ba tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Học sinh Ba tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.' },
+    { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'Câu lạc bộ • 2025', metaEn: 'Club Level • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.' },
+    { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.' },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.' },
+    { level: 'Cấp Quốc gia', titleVi: 'Top 63 Dự án được đăng trên báo Thanh Niên', titleEn: 'Top 63 Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.' },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.' },
+    { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.' },
+    { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.' },
+    { level: 'Cấp Quốc gia', titleVi: 'Giải Triển vọng Cuộc thi AI Young Guru', titleEn: 'Promising Award in AI Young Guru Competition', metaVi: 'Cấp Quốc gia • 2026', metaEn: 'National Level • 2026', descVi: 'Đoạt giải Triển vọng (Top 30 Quốc gia) AI Young Guru.', descEn: 'Won the Promising Award (Top 30 Nationwide) in AI Young Guru.' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Thanh niên khoẻ Cấp trường', titleEn: 'Achieved School-level "Healthy Youth" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Thanh niên khoẻ Cấp trường 2026.', descEn: 'Awarded the School-level "Healthy Youth" Title in 2026.' }
+  ];
+
+  const filteredAchievements = activeAchieveFilter === 'ALL' 
+    ? achievementsData 
+    : achievementsData.filter(a => a.level === activeAchieveFilter);
 
   return (
     <>
@@ -613,304 +626,42 @@ function App() {
               </div>
             </section>
 
-            {/* 3. ACHIEVEMENTS SECTION (Thành tích - Cấu trúc lưới Thẻ - Ảnh 2) */}
+            {/* 3. ACHIEVEMENTS SECTION (Đã thêm Bộ Lọc) */}
             <section id="achievements">
-              <div className="fade-in-section" style={{ textAlign: 'center', marginBottom: '60px' }}>
-                <span className="sub-title">{t.achieveSub}</span>
-                <h2 className="section-title">{t.achieveTitle1} <span className="italic-red">{t.achieveTitle2}</span></h2>
+              
+              <div className="fade-in-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
+                 <div>
+                   <span className="sub-title">{t.achieveSub}</span>
+                   <h2 className="section-title" style={{ marginBottom: 0 }}>
+                     {t.achieveTitle1} <span className="italic-red">{t.achieveTitle2}</span>
+                   </h2>
+                 </div>
+                 
+                 {/* BỘ LỌC THÀNH TÍCH */}
+                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                   <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
+                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
+                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
+                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
+                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
+                 </div>
               </div>
+
+              {/* LƯỚI THÀNH TÍCH (Tự động Render từ Mảng Dữ Liệu) */}
               <div className="grid-2">
-                
-                {/* Thành tích 1 */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Công nhận Kỳ thi Học sinh giỏi' : 'Consolation Prize in Excellent Student Competition'}</h4>
-                    <span>{lang === 'vi' ? 'Quận Cái Răng • 2023' : 'Cai Rang District • 2023'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Công nhận Kỳ thi HSG môn Địa cấp Quận lớp 9.' : 'Won the Consolation Prize in the District-level Geography Excellent Student Competition for 9th Grade.'}</p>
+                {filteredAchievements.map((achieve, index) => (
+                  <div key={index} className="glow-card achieve-card fade-in-section">
+                    <div className="achieve-icon">
+                      {/* Có thể đổi icon tuỳ vào cấp độ nếu thích */}
+                      <i className={achieve.level === 'Cấp Quốc gia' ? 'fas fa-trophy' : 'fas fa-award'}></i>
+                    </div>
+                    <div className="achieve-info">
+                      <h4>{lang === 'vi' ? achieve.titleVi : achieve.titleEn}</h4>
+                      <span>{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                      <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+                    </div>
                   </div>
-                </div>
-
-                {/* Thành tích 2 */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Ba Cuộc thi Khoa học Kỹ thuật' : 'Third Prize in Science & Engineering Fair'}</h4>
-                    <span>{lang === 'vi' ? 'Quận Cái Răng • 2023' : 'Cai Rang District • 2023'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.' : 'Won Third Prize in the District-level Science and Engineering Fair for 9th Grade.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 3 */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Nhì Cuộc thi Stempetition 2023-2024' : 'Second Prize in Stempetition 2023-2024'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2023' : 'FPT High School Can Tho • 2023'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.' : 'Won Second Prize in the School-level Stempetition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 4 */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đội thi Ấn tượng tại Phiên toà giả định 2023' : 'Impressive Team in Mock Trial 2023'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2023' : 'FPT High School Can Tho • 2023'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Ấn tượng Phiên toà giả định Cấp trường.' : 'Won the Impressive Team Award in the School-level Mock Trial.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 5 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Top 5 Dự án Xuất sắc nhất Infinity 2023-2024' : 'Top 5 Best Projects in Infinity 2023-2024'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Lọt Top 5 Dự án Xuất sắc nhất tại Infinity 2023-2024.' : 'Reached the Top 5 Best Projects at Infinity 2023-2024.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 6 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Nhì Cuộc thi Stempetition 2024-2025' : 'Second Prize in Stempetition 2024-2025'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.' : 'Won Second Prize in the School-level Stempetition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 7 */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Ba Cuộc thi FSchooler\'s Tips 2024' : 'Third Prize in FSchooler\'s Tips 2024'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Ba Cuộc thi FSchooler\'s Tips Cấp trường.' : 'Won Third Prize in the School-level FSchooler\'s Tips Competition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 8 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Tiềm năng Cuộc thi Sáng tạo Robot FPT' : 'Potential Prize in FPT Robot Creation'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Tiềm năng Cuộc thi Sáng tạo Robot Cấp trường.' : 'Won the Potential Prize in the School-level Robot Creation Competition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 9 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Dự án có thành tích Xuất sắc tại KHKT' : 'Excellent Project at Science & Engineering Fair'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Dự án có thành tích Xuất sắc tại KHKT Cấp trường.' : 'Achieved Excellent Project status at the School-level Science and Engineering Fair.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 10 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Nhì Cuộc thi Khoa học Kỹ thuật' : 'Second Prize in Science & Engineering Fair'}</h4>
-                    <span>{lang === 'vi' ? 'Thành phố Cần Thơ • 2024' : 'Can Tho City • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Nhì Cuộc thi KHKT cấp Thành phố.' : 'Won Second Prize in the City-level Science and Engineering Fair.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 11 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Ngày hội Địa lí Đa quốc gia mùa 2' : 'Multinational Geography Festival Season 2'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt Giải Infographic Ấn tượng.' : 'Won the Impressive Infographic Award.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 12 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Bài viết được đăng tải trên Tập san kiến đọc' : 'Article published in "Kien Doc" Journal'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2024' : 'FPT High School Can Tho • 2024'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Bài viết được đăng tải trên Tập san kiến đọc 2024.' : 'Article selected and published in the 2024 "Kien Doc" Journal.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 13 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đoạt giải Nhất kỳ thi HSG Cấp trường' : 'First Prize in School-level Excellent Student Exam'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Nhất kỳ thi chọn HSG môn Địa lý Cấp trường.' : 'Won First Prize in the School-level Geography Excellent Student Competition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 14 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Tham gia kỳ thi Chọn HSG Cấp Thành phố' : 'Participated in City-level Excellent Student Exam'}</h4>
-                    <span>{lang === 'vi' ? 'Thành phố Cần Thơ • 2025' : 'Can Tho City • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Tham gia kỳ thi Chọn HSG môn Địa lý cấp Thành phố.' : 'Competed in the City-level Geography Excellent Student Competition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 15 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Tham gia kỳ thi Olympic Truyền thống 30/04' : 'Participated in Traditional 30/04 Olympic'}</h4>
-                    <span>{lang === 'vi' ? 'Khu vực Miền Nam • 2025' : 'Southern Region • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.' : 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 16 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Top 1 Địa lý - Tiếp sức mùa thi 2025' : 'Top 1 in Geography - Exam Season Relay 2025'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.' : 'Achieved Top 1 in Geography at the Exam Season Relay 2025.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 17 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Cá nhân hoạt động CLB nổi bật HK2' : 'Outstanding Club Member of Semester 2'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).' : 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 18 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đạt danh hiệu Thanh niên khoẻ Cấp trường' : 'Achieved School-level "Healthy Youth" Title'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đạt danh hiệu Thanh niên khoẻ Cấp trường 2025.' : 'Awarded the School-level "Healthy Youth" Title in 2025.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 19 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đạt danh hiệu Học sinh Ba tốt Cấp trường' : 'Achieved "Student of 3 Merits" Title'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đạt danh hiệu Học sinh Ba tốt Cấp trường 2025.' : 'Awarded the School-level "Student of 3 Merits" Title in 2025.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 20 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đạt danh hiệu Talented Student Cấp trường' : 'Achieved "Talented Student" Title'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đạt danh hiệu Talented Student Cấp trường 2025.' : 'Awarded the School-level "Talented Student" Title in 2025.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 21 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đoạt giải Ba Cuộc thi ảnh CTM 2025' : 'Third Prize in CTM Photo Contest 2025'}</h4>
-                    <span>{lang === 'vi' ? 'Câu lạc bộ • 2025' : 'Club Level • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.' : 'Won Third Prize in the Catch The Moment 2025 Photo Contest.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 22 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia' : 'Participated in National Excellent Student Team Selection'}</h4>
-                    <span>{lang === 'vi' ? 'Thành phố Cần Thơ • 2025' : 'Can Tho City • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.' : 'Participated in the selection exam for the National Excellent Student Team.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 23 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Câu lạc bộ hoạt động Xuất sắc Tháng 7' : 'Outstanding Club of July'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2025' : 'FPT High School Can Tho • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.' : 'Awarded the Outstanding Club Title for July.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 24 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Top 63 Dự án được đăng trên báo Thanh Niên' : 'Top 63 Projects featured on Thanh Nien Newspaper'}</h4>
-                    <span>{lang === 'vi' ? 'Cấp Quốc gia • 2025' : 'National Level • 2025'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.' : 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 25 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Câu lạc bộ hoạt động Xuất sắc HK 1' : 'Outstanding Club of Semester 1'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2026' : 'FPT High School Can Tho • 2026'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.' : 'Awarded the Outstanding Club Title for Semester 1.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 26 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Nhì Phiên toà giả định 2025-2026' : 'Second Prize in Mock Trial 2025-2026'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2026' : 'FPT High School Can Tho • 2026'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.' : 'Won Second Prize in the Mock Trial 2025-2026.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 27 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Khuyến khích Kỳ thi Học sinh giỏi' : 'Consolation Prize in Excellent Student Competition'}</h4>
-                    <span>{lang === 'vi' ? 'Thành phố Cần Thơ • 2026' : 'Can Tho City • 2026'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.' : 'Won Consolation Prize in the City-level Geography Excellent Student Competition.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 28 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Giải Triển vọng Cuộc thi AI Young Guru' : 'Promising Award in AI Young Guru Competition'}</h4>
-                    <span>{lang === 'vi' ? 'Cấp Quốc gia • 2026' : 'National Level • 2026'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đoạt giải Triển vọng (Top 30 Quốc gia) AI Young Guru.' : 'Won the Promising Award (Top 30 Nationwide) in AI Young Guru.'}</p>
-                  </div>
-                </div>
-
-                {/* Thành tích 29 (Thêm mới) */}
-                <div className="glow-card achieve-card fade-in-section">
-                  <div className="achieve-icon"><i className="fas fa-award"></i></div>
-                  <div className="achieve-info">
-                    <h4>{lang === 'vi' ? 'Đạt danh hiệu Thanh niên khoẻ Cấp trường' : 'Achieved School-level "Healthy Youth" Title'}</h4>
-                    <span>{lang === 'vi' ? 'THPT FPT Cần Thơ • 2026' : 'FPT High School Can Tho • 2026'}</span>
-                    <p className="text-desc">{lang === 'vi' ? 'Đạt danh hiệu Thanh niên khoẻ Cấp trường 2026.' : 'Awarded the School-level "Healthy Youth" Title in 2026.'}</p>
-                  </div>
-                </div>
-
+                ))}
               </div>
             </section>
 
@@ -963,10 +714,32 @@ function App() {
                           )}
                         </div>
 
-                        <p className="text-desc">{proj.desc}</p>
+                      <p className="text-desc">{proj.desc}</p>
                         <div className="project-tags">
-                          <span className="tag">{lang === 'vi' ? 'TRUYỀN THÔNG' : 'MEDIA'}</span>
-                          <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
+                          {/* Nếu là mục THIẾT KẾ */}
+                          {proj.category === 'THIẾT KẾ' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
+                              <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
+                            </>
+                          )}
+                          
+                          {/* Nếu là mục SỰ KIỆN */}
+                          {proj.category === 'SỰ KIỆN' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
+                              <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
+                            </>
+                          )}
+
+                          {/* Nếu là mục DỰ ÁN (Code/Web) */}
+                          {proj.category === 'DỰ ÁN' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
+                              <span className="tag">{lang === 'vi' ? 'LẬP TRÌNH' : 'CODING'}</span>
+                              <span className="tag">WEBSITE</span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -975,17 +748,36 @@ function App() {
                     <div className="project-gallery" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                       
                       {/* ========================================= */}
-                      {/* ẢNH CHÍNH HOẶC VIDEO CHÍNH (TỰ ĐỘNG CHUYỂN ĐỔI) */}
+                      {/* ẢNH CHÍNH HOẶC VIDEO CHÍNH (TỐI ƯU THUMBNAIL) */}
                       {proj.mainVideo ? (
                         <div className="gallery-main fb-video-wrapper">
-                          <iframe 
-                            src={proj.mainVideo} 
-                            style={{ border: 'none', overflow: 'hidden' }} 
-                            scrolling="no" 
-                            frameBorder="0" 
-                            allowFullScreen={true} 
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                          ></iframe>
+                          {/* Nếu video chưa được bấm Play -> Hiện Ảnh Bìa + Nút Play */}
+                          {!activeVideos[proj.title] ? (
+                            <div 
+                              className="custom-video-thumbnail"
+                              onClick={(e) => {
+                                e.stopPropagation(); // Chặn lan click
+                                setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
+                              }}
+                              onMouseEnter={() => setIsHoveringBtn(true)} 
+                              onMouseLeave={() => setIsHoveringBtn(false)}
+                            >
+                              <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
+                              <div className="play-button-overlay">
+                                <i className="fas fa-play"></i>
+                              </div>
+                            </div>
+                          ) : (
+                            /* Khi đã bấm Play -> Hiện Iframe Facebook thực sự */
+                            <iframe 
+                              src={`${proj.mainVideo}&autoplay=1`} /* Thêm &autoplay=1 để tự động chạy khi lật thẻ */
+                              style={{ border: 'none', overflow: 'hidden' }} 
+                              scrolling="no" 
+                              frameBorder="0" 
+                              allowFullScreen={true} 
+                              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                            ></iframe>
+                          )}
                         </div>
                       ) : (
                         <img 

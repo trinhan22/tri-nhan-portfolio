@@ -326,7 +326,7 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 
 /* Hiệu ứng rê chuột vào từng ảnh: Bay lên nhẹ, sáng viền đỏ */
 .project-gallery img:hover { 
-  transform: translateY(-5px) scale(1.05); 
+  transform: scale(1.005); 
   filter: brightness(1.1) !important; 
   z-index: 10; 
   position: relative; 
@@ -338,6 +338,67 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 @media (max-width: 900px) {
   .project-grid { grid-template-columns: 1fr; }
   .project-showcase-card { padding: 20px; }
+}
+
+/* =========================================
+   GIAO DIỆN ẢNH BÌA VIDEO (THUMBNAIL YOUTUBE/FB STYLE)
+========================================== */
+.custom-video-thumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 10;
+  overflow: hidden;
+  border-radius: 16px !important;
+}
+
+.custom-video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65); /* Làm tối ảnh xíu để nổi bật nút Play */
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.custom-video-thumbnail:hover img {
+  filter: brightness(0.4); /* Rê chuột vào thì tối thêm */
+  transform: scale(1.005); /* Phóng to ảnh nhẹ nhàng */
+}
+
+/* Nút Play siêu ngầu nằm giữa ảnh */
+.play-button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background: var(--primary-color); /* Lấy màu đỏ rực của web */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.8rem;
+  padding-left: 5px; /* Canh giữa icon play giác quan */
+  box-shadow: 0 0 20px rgba(229, 57, 53, 0.6), inset 0 0 10px rgba(255,255,255,0.3);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 11;
+}
+
+/* Hiệu ứng khi rê chuột vào Thumbnail thì nút Play nảy lên */
+.custom-video-thumbnail:hover .play-button-overlay {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 40px rgba(229, 57, 53, 0.9), inset 0 0 15px rgba(255,255,255,0.5);
+}
+
+/* Tinh chỉnh nút Play nhỏ lại trên Mobile */
+@media (max-width: 768px) {
+  .play-button-overlay {
+    width: 55px; height: 55px; font-size: 1.4rem; padding-left: 4px;
+  }
 }
 
 /* =========================================
@@ -355,6 +416,39 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 .contact-form textarea { height: 120px; resize: none; }
 .btn-submit { width: 100%; background: var(--primary-color); color: white; border: none; padding: 18px; font-weight: 700; letter-spacing: 2px; border-radius: 8px; transition: 0.3s; text-transform: uppercase; }
 .btn-submit:hover { background: #b71c1c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4); }
+
+/* =========================================
+   FIX LỖI CANH GIỮA FORM & NÚT LINK (CHỈ DÀNH CHO MOBILE)
+========================================== */
+@media (max-width: 768px) {
+  /* 1. Trả lại sự ngay ngắn cho Form Liên hệ (Bám lề trái 100%) */
+  .contact-form label { 
+    text-align: left !important; 
+    display: block; 
+    width: 100%; 
+  }
+  .contact-form input, 
+  .contact-form select, 
+  .contact-form textarea { 
+    text-align: left !important; 
+  }
+  .contact-form .form-group {
+    align-items: flex-start !important;
+  }
+
+  /* 2. Thu nhỏ nút Link ngoài (Mũi tên) cho tinh tế và cân đối */
+  .project-link-icon {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  /* 3. Canh giữa tuyệt đối cụm "Tiêu đề + Nút Link" để không bị lệch */
+  .project-title-group div[style*="display: flex"] {
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+}
 
 /* =========================================
    NÚT LIÊN HỆ TÙY CHỈNH (CONTACT BUTTONS)
@@ -729,7 +823,13 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   /* 👉 4. CÁC GIAO DIỆN KHÁC GIỮ NGUYÊN (NHƯ ĐÃ FIX) */
   #contact .grid-2 > div:first-child { text-align: center; display: flex; flex-direction: column; align-items: center; }
   #contact .text-desc { text-align: center; }
-  #projects > div.fade-in-section:first-child { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 20px; }
+  #projects > div.fade-in-section:first-child,
+  #achievements > div.fade-in-section:first-child { 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    text-align: center !important; 
+    gap: 20px; 
+  }
   .grid-2, .grid-3, .project-grid { grid-template-columns: 1fr; gap: 30px; }
   .timeline-col h3.col-title { text-align: center; }
   .timeline-item { gap: 15px; }
