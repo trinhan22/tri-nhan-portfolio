@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&display=swap');
 
 :root {
-  --bg-color: #070707; /* Đen sâu cinematic */
+  /* 👇 UPDATE: Trả về màu đen sâu cinematic nguyên bản (Sáng hơn tuyệt đối 1 tẹo thôi) 👇 */
+  --bg-color: #070707; 
   --surface-color: rgba(18, 18, 18, 0.75); 
-  --primary-color: #E53935; /* Đỏ rực */
+  --primary-color: #E53935; /* Đỏ rực giữ nguyên để làm điểm nhấn */
   --text-main: #ffffff;
   --text-muted: #888888;
   --border-color: rgba(255, 255, 255, 0.08);
@@ -17,7 +18,9 @@ body {
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-image: radial-gradient(circle at 50% 0%, #151515 0%, transparent 70%);
+  
+  /* 👇 UPDATE: Chuyển sang luồng sáng trắng/xám cực kỳ mờ tỏa từ đỉnh, làm nền dịu nhẹ 👇 */
+  background-image: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.04) 0%, transparent 80%);
 }
 
 /* =========================================
@@ -327,11 +330,16 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 /* Hiệu ứng rê chuột vào từng ảnh: Bay lên nhẹ, sáng viền đỏ */
 .project-gallery img:hover { 
   transform: scale(1.005); 
-  filter: brightness(1.1) !important; 
+  
+  /* 👇 CHỈNH SỬA CHÍNH TẠI ĐÂY 👇 */
+  /* Thay vì brightness(1.1) (tăng sáng), tui đổi thành brightness(0.75) (giảm sáng 25%) */
+  /* Việc này làm ảnh tối đi một chút, giúp ảnh trắng không bị chói loà và nổi bật viền đỏ */
+  filter: brightness(0.75) !important; 
+  
   z-index: 10; 
   position: relative; 
   box-shadow: 0 15px 25px rgba(0,0,0,0.6);
-  border-color: var(--primary-color);
+  border-color: var(--primary-color); /* Giữ lại viền đỏ rực */
 }
 
 /* Responsive cho dự án */
@@ -363,7 +371,10 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 }
 
 .custom-video-thumbnail:hover img {
-  filter: brightness(0.4); /* Rê chuột vào thì tối thêm */
+  /* Trước đây là 0.55 (quá tối) */
+  /* 👇 UPDATE: Đồng bộ về 0.75 y hệt như thẻ Hình ảnh để tạo sự nhất quán 👇 */
+  filter: brightness(0.75); 
+  
   transform: scale(1.005); /* Phóng to ảnh nhẹ nhàng */
 }
 
@@ -388,10 +399,13 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   z-index: 11;
 }
 
-/* Hiệu ứng khi rê chuột vào Thumbnail thì nút Play nảy lên */
+/* Nút Play khi rê chuột vào: Giảm độ bóng đổ mạnh để không bị chói loà */
 .custom-video-thumbnail:hover .play-button-overlay {
   transform: translate(-50%, -50%) scale(1.15);
-  box-shadow: 0 0 40px rgba(229, 57, 53, 0.9), inset 0 0 15px rgba(255,255,255,0.5);
+  
+  /* 👇 CHỈNH SỬA TRỌNG TÂM Ở ĐÂY: 👇 */
+  /* Chỉnh bóng đổ: Giảm bán kính từ 40px xuống 25px, giảm độ mờ (alpha) từ 0.9 xuống 0.6 */
+  box-shadow: 0 0 25px rgba(229, 57, 53, 0.6), inset 0 0 15px rgba(255,255,255,0.5);
 }
 
 /* Tinh chỉnh nút Play nhỏ lại trên Mobile */
