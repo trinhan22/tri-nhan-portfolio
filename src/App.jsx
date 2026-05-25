@@ -122,7 +122,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (loading) return;
+    // Không cần check if (loading) return; nữa vì DOM đã có sẵn từ đầu
     
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -134,20 +134,21 @@ function App() {
       });
     }, { threshold: 0.1 }); 
 
+    // Tăng thời gian chờ lên 100ms để trình duyệt rảnh tay dựng khung trước khi quét hiệu ứng
     const timer = setTimeout(() => {
       const elements = document.querySelectorAll('.fade-in-section');
       elements.forEach((el, index) => {
         el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-        observerRef.current.observe(el);
+        if (observerRef.current) observerRef.current.observe(el); // Thêm check an toàn
       });
-    }, 50);
+    }, 100);
 
     return () => {
       clearTimeout(timer);
       if (observerRef.current) observerRef.current.disconnect();
     };
   
-  }, [loading, activeFilter, lang, activeAchieveFilter]); // Đã có biến lang ở đây để đổi ngôn ngữ không bị mất dự án
+  }, [activeFilter, lang, activeAchieveFilter]); // 👈 XÓA BỎ biến 'loading' ở đây đi nhé!
 
   useEffect(() => {
     const handleScroll = () => {
@@ -728,7 +729,7 @@ function App() {
                     
                     {/* Header dự án (Logo + Text) */}
                     <div className="project-header">
-                      <img src={proj.logo} alt="Project Logo" className="project-logo" />
+                      <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
                       <div className="project-title-group">
                         <span className="project-role">{proj.role}</span>
                         
@@ -824,7 +825,7 @@ function App() {
                           alt="Main Visual" 
                           className="gallery-main" 
                           onClick={() => openPopup(proj, proj.mainImg)} 
-                          loading="lazy" 
+                          loading="lazy"
                         />
                       )}
                       {/* ========================================= */}
