@@ -81,8 +81,31 @@ function App() {
   const observerRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2200);
-  }, []);
+  // Hàm tắt loading
+  const handlePageLoad = () => {
+    // Thêm độ trễ nhỏ (500ms) để màn hình loading hoàn thiện mượt mà trước khi ẩn
+    setTimeout(() => setLoading(false), 500);
+  };
+
+  // Kiểm tra nếu trang web đã tải xong tài nguyên (images, scripts, CSS)
+  if (document.readyState === 'complete') {
+    handlePageLoad();
+  } else {
+    // Nếu chưa, lắng nghe sự kiện 'load' của trình duyệt
+    window.addEventListener('load', handlePageLoad);
+  }
+
+  // Đặt một Fallback Timeout (VD: 8 giây) để an toàn
+  // Tránh trường hợp mạng quá kém làm người dùng kẹt ở màn hình Loading vĩnh viễn
+  const fallbackTimer = setTimeout(() => {
+    setLoading(false);
+  }, 8000);
+
+  return () => {
+    window.removeEventListener('load', handlePageLoad);
+    clearTimeout(fallbackTimer);
+  };
+}, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -425,8 +448,6 @@ function App() {
 
       <div className={`custom-cursor ${isHoveringBtn ? 'hovering' : ''}`} style={{ left: `${cursorPos.x}px`, top: `${cursorPos.y}px` }}></div>
 
-      {!loading && (
-        <>
           {/* Khi isScrolled = true (đang cuộn), nó sẽ tự động thêm chữ 'scrolled' vào */}
           <header className={isScrolled ? 'scrolled' : ''}>
             <div className="logo" style={{ position: 'relative', zIndex: 1001 }}>TRÍ NHÂN<span>.</span></div>
@@ -791,6 +812,7 @@ function App() {
                               style={{ border: 'none', overflow: 'hidden' }} 
                               scrolling="no" 
                               frameBorder="0" 
+                              loading="lazy"
                               allowFullScreen={true} 
                               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                             ></iframe>
@@ -991,9 +1013,7 @@ function App() {
               />
             )}
           </div>
-
-        </>
-      )}
+ 
     </>
   );
 }
