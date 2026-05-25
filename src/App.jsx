@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
   // =========================================================================
-  // 1. GOM TẤT CẢ STATE LÊN ĐÂY (Khai báo 1 lần duy nhất, không trùng lặp)
+  // 1. GOM TẤT CẢ STATE LÊN ĐÂY
   // =========================================================================
   const [loading, setLoading] = useState(true);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -70,6 +70,7 @@ function App() {
     setPopupData(prev => ({ ...prev, currentIndex: prev.currentIndex === 0 ? prev.gallery.length - 1 : prev.currentIndex - 1 }));
   };
 
+  // Lắng nghe sự kiện scroll để đổi trạng thái Header
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -80,33 +81,31 @@ function App() {
 
   const observerRef = useRef(null);
 
+  // LOGIC LOADING HOÀN CHỈNH: Chờ toàn bộ ảnh và dữ liệu tải xuống hoàn tất
   useEffect(() => {
-  // Hàm tắt loading
-  const handlePageLoad = () => {
-    // Thêm độ trễ nhỏ (500ms) để màn hình loading hoàn thiện mượt mà trước khi ẩn
-    setTimeout(() => setLoading(false), 500);
-  };
+    const handleFullyLoaded = () => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 600); // Trễ 600ms giúp hiệu ứng đóng mở mượt mà
+    };
 
-  // Kiểm tra nếu trang web đã tải xong tài nguyên (images, scripts, CSS)
-  if (document.readyState === 'complete') {
-    handlePageLoad();
-  } else {
-    // Nếu chưa, lắng nghe sự kiện 'load' của trình duyệt
-    window.addEventListener('load', handlePageLoad);
-  }
+    if (document.readyState === 'complete') {
+      handleFullyLoaded();
+    } else {
+      window.addEventListener('load', handleFullyLoaded);
+    }
 
-  // Đặt một Fallback Timeout (VD: 8 giây) để an toàn
-  // Tránh trường hợp mạng quá kém làm người dùng kẹt ở màn hình Loading vĩnh viễn
-  const fallbackTimer = setTimeout(() => {
-    setLoading(false);
-  }, 8000);
+    const emergencyTimer = setTimeout(() => {
+      setLoading(false);
+    }, 12000); // Hạn định tối đa 12s tránh đứng máy nếu mạng lỗi
 
-  return () => {
-    window.removeEventListener('load', handlePageLoad);
-    clearTimeout(fallbackTimer);
-  };
-}, []);
+    return () => {
+      window.removeEventListener('load', handleFullyLoaded);
+      clearTimeout(emergencyTimer);
+    };
+  }, []);
 
+  // Di chuyển chuột cập nhật tọa độ cursor và hiệu ứng card sáng (glow)
   useEffect(() => {
     const handleMouseMove = (e) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
@@ -121,9 +120,8 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // LOGIC HIỆU ỨNG CUỘN (Khôi phục lại chức năng thêm class .is-visible giúp hiện nội dung)
   useEffect(() => {
-    // Không cần check if (loading) return; nữa vì DOM đã có sẵn từ đầu
-    
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -132,24 +130,23 @@ function App() {
           entry.target.classList.remove('is-visible'); 
         }
       });
-    }, { threshold: 0.1 }); 
+    }, { threshold: 0.05 });
 
-    // Tăng thời gian chờ lên 100ms để trình duyệt rảnh tay dựng khung trước khi quét hiệu ứng
     const timer = setTimeout(() => {
       const elements = document.querySelectorAll('.fade-in-section');
       elements.forEach((el, index) => {
         el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-        if (observerRef.current) observerRef.current.observe(el); // Thêm check an toàn
+        if (observerRef.current) observerRef.current.observe(el);
       });
-    }, 100);
+    }, 600); // Chờ 600ms khớp với thời gian nhả Loading để DOM được render đầy đủ
 
     return () => {
       clearTimeout(timer);
       if (observerRef.current) observerRef.current.disconnect();
     };
-  
-  }, [activeFilter, lang, activeAchieveFilter]); // 👈 XÓA BỎ biến 'loading' ở đây đi nhé!
+  }, [activeFilter, lang, activeAchieveFilter]);
 
+  // Quét vị trí cuộn trang đổi trạng thái Active trên Menu
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section');
@@ -184,7 +181,6 @@ function App() {
         '/images/design-8/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -200,7 +196,6 @@ function App() {
         '/images/design-6/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -216,7 +211,6 @@ function App() {
         '/images/design-5/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -232,7 +226,6 @@ function App() {
         '/images/design-4/6.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -248,7 +241,6 @@ function App() {
         '/images/design-3/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -264,7 +256,6 @@ function App() {
         '/images/design-2/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -280,7 +271,6 @@ function App() {
         '/images/design-1/5.png'
       ]
     },
-
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
@@ -296,7 +286,6 @@ function App() {
         '/images/design-7/5.png'
       ]
     },
-
     {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
@@ -313,7 +302,6 @@ function App() {
         '/images/project-4/5.jpg'
       ]
     },
-
     {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
@@ -330,7 +318,6 @@ function App() {
         '/images/project-3/5.jpg'
       ]
     },
-
     {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
@@ -346,7 +333,6 @@ function App() {
         '/images/project-2/5.png'
       ]
     },
-
     {
       category: 'SỰ KIỆN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / BAN TỔ CHỨC' : '/ PROJECT MANAGER / ORGANIZING COMMITTEE',
@@ -362,7 +348,6 @@ function App() {
         '/images/project-1/5.png'
       ]
     },
-
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
@@ -379,7 +364,6 @@ function App() {
         '/images/dev-2/5.png'
       ]
     },
-
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
@@ -398,9 +382,7 @@ function App() {
   ];
   const filteredProjects = activeFilter === 'ALL' ? projects : projects.filter(p => p.category === activeFilter);
 
-  // =========================================================================
-  // DỮ LIỆU THÀNH TÍCH (Đã phân loại Cấp độ)
-  // =========================================================================
+  // Dữ liệu thành tích
   const achievementsData = [
     { level: 'Cấp Quận', titleVi: 'Giải Công nhận Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Công nhận Kỳ thi HSG môn Địa cấp Quận lớp 9.', descEn: 'Won the Consolation Prize in the District-level Geography Excellent Student Competition for 9th Grade.', link:'https://www.facebook.com/photo.php?fbid=632210875573463&set=a.632214185573132&type=3'   },
     { level: 'Cấp Quận', titleVi: 'Giải Ba Cuộc thi Khoa học Kỹ thuật', titleEn: 'Third Prize in Science & Engineering Fair', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.', descEn: 'Won Third Prize in the District-level Science and Engineering Fair for 9th Grade.', link:'https://www.facebook.com/photo.php?fbid=632210875573463&set=a.632214185573132&type=3'   },
@@ -419,7 +401,7 @@ function App() {
     { level: 'Cấp Quốc gia', titleVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.', link:'https://www.facebook.com/share/p/1R8jvFcg6R/'   },
     { level: 'Cấp trường', titleVi: 'Top 1 Địa lý - Tiếp sức mùa thi 2025', titleEn: 'Top 1 in Geography - Exam Season Relay 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.', descEn: 'Achieved Top 1 in Geography at the Exam Season Relay 2025.', link:'https://www.facebook.com/share/1HB41kAzXK/'   },
     { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB nổi bật HK2', titleEn: 'Outstanding Club Member of Semester 2', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).', descEn: 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).', link:'https://www.facebook.com/photo.php?fbid=696463473030289&set=a.165200976156544&type=3'   },
-    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đach danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.', link:'https://www.facebook.com/share/1CpppKyDrZ/'  },
     { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'Câu lạc bộ • 2025', metaEn: 'Club Level • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://www.facebook.com/share/p/1PKQqWkeRW/'  },
     { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.', link:'https://giaoducthoidai.vn/hon-650-thi-sinh-can-tho-tranh-tai-chon-doi-tuyen-hs-gioi-thpt-du-thi-quoc-gia-post745159.html'  },
@@ -449,11 +431,9 @@ function App() {
 
       <div className={`custom-cursor ${isHoveringBtn ? 'hovering' : ''}`} style={{ left: `${cursorPos.x}px`, top: `${cursorPos.y}px` }}></div>
 
-          {/* Khi isScrolled = true (đang cuộn), nó sẽ tự động thêm chữ 'scrolled' vào */}
           <header className={isScrolled ? 'scrolled' : ''}>
             <div className="logo" style={{ position: 'relative', zIndex: 1001 }}>TRÍ NHÂN<span>.</span></div>
             
-            {/* 👉 NÚT HAMBURGER (Chỉ hiện trên Mobile) */}
             <button 
               className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -463,7 +443,6 @@ function App() {
               <span></span>
             </button>
 
-            {/* 👉 DANH MỤC MENU */}
             <nav className={`nav-links menu-center ${isMobileMenuOpen ? 'open' : ''}`} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
               <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navHome}</a>
               <a href="#timeline" className={activeSection === 'timeline' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navEdu}</a>
@@ -472,7 +451,6 @@ function App() {
               <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navContact}</a>
             </nav>
             
-            {/* Nút VN/EN trên PC */}
             <div className="nav-links lang-switch" style={{ position: 'relative', zIndex: 1001 }}>
               <a href="#vi" 
                  className={lang === 'vi' ? 'active' : ''} 
@@ -500,17 +478,12 @@ function App() {
                   <a href="#contact" className="btn btn-outline">{t.btnConnect}</a>
                 </div>
               </div>
-              {/* BỎ style position relative ở đây */}
               <div className="hero-media">
-                
-                {/* 👉 THÊM THẺ NÀY: Khóa tọa độ ôm sát đúng 450px của bức ảnh */}
                 <div style={{ position: 'relative', width: '100%', maxWidth: '450px' }}>
-                  
                   <div className="media-card" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <img src="/images/hero.jpg" alt="Profile Hero" />
                   </div>
 
-                  {/* Badge 1 */}
                   <div className="floating-badge badge-1">
                     <div className="badge-icon"><i className="fas fa-bolt"></i></div>
                     <div className="badge-text">
@@ -521,7 +494,6 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Badge 2 */}
                   <div className="floating-badge badge-2">
                     <div className="badge-icon"><i className="fas fa-award"></i></div>
                     <div className="badge-text">
@@ -531,26 +503,19 @@ function App() {
                       </span>
                     </div>
                   </div>
-
                 </div>
-                {/* 👉 ĐÓNG THẺ KHÓA TỌA ĐỘ */}
-
               </div>
             </section>
 
-            {/* 2. TIMELINE SECTION (Học vấn & Kinh nghiệm - Có link) */}
+            {/* 2. TIMELINE SECTION */}
             <section id="timeline">
               <div className="grid-2">
-                
-                {/* --- CỘT HỌC VẤN --- */}
                 <div className="timeline-col fade-in-section">
                   <h3 className="col-title">{t.timelineEdu}</h3>
-                  
                   <div className="timeline-item">
                     <div className="timeline-num">1</div>
                     <div className="timeline-content">
                       <h4>
-                        {/* THAY LINK TRƯỜNG VIỆT MỸ VÀO href */}
                         <a href="https://vietmycantho.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           {lang === 'vi' ? 'Trung học Cơ sở' : 'Middle School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
@@ -568,7 +533,6 @@ function App() {
                     <div className="timeline-num">2</div>
                     <div className="timeline-content">
                       <h4>
-                        {/* THAY LINK TRƯỜNG FPT VÀO href */}
                         <a href="https://cantho-school.fpt.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
@@ -583,15 +547,12 @@ function App() {
                   </div>
                 </div>
 
-                {/* --- CỘT KINH NGHIỆM --- */}
                 <div className="timeline-col fade-in-section">
                   <h3 className="col-title">{t.timelineExp}</h3>
-                  
                   <div className="timeline-item">
                     <div className="timeline-num">1</div>
                     <div className="timeline-content">
                       <h4>
-                        {/* THAY LINK FANPAGE KN PRODUCTION VÀO href */}
                         <a href="https://www.facebook.com/KNProduction1" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           {lang === 'vi' ? 'Đồng sáng lập và phát triển' : 'Co-founder & Developer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
@@ -609,7 +570,6 @@ function App() {
                     <div className="timeline-num">2</div>
                     <div className="timeline-content">
                       <h4>
-                        {/* THAY LINK CLB F-PHOTO VÀO href */}
                         <a href="https://fphotography.club" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           {lang === 'vi' ? 'Phó Chủ nhiệm / Co-founder' : 'Vice President / Co-founder'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
@@ -627,7 +587,6 @@ function App() {
                     <div className="timeline-num">3</div>
                     <div className="timeline-content">
                       <h4>
-                        {/* THAY LINK HOPVAN VÀO href */}
                         <a href="https://hopvan.info.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           Visual & Web Developer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
@@ -641,14 +600,11 @@ function App() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </section>
 
             {/* 3. ACHIEVEMENTS SECTION */}
             <section id="achievements">
-              
-              {/* Ép xếp dọc và bám lề trái */}
               <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
                  <div>
                    <span className="sub-title">{t.achieveSub}</span>
@@ -657,7 +613,6 @@ function App() {
                    </h2>
                  </div>
                  
-                 {/* Thêm marginBottom: 0 để bộ lọc không bị đẩy khoảng trống thừa */}
                  <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
                    <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
                    <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
@@ -667,20 +622,14 @@ function App() {
                  </div>
               </div>
 
-              {/* LƯỚI THÀNH TÍCH */}
               <div className="grid-2">
                 {filteredAchievements.map((achieve, index) => {
-                  
-                  // Kiểm tra xem thành tích này có link hay không
                   const hasLink = !!achieve.link;
-
                   return (
                     <div 
                       key={index} 
                       className="glow-card achieve-card fade-in-section"
-                      // 👇 1. Nếu có link -> Click vào sẽ mở tab mới
                       onClick={() => hasLink && window.open(achieve.link, '_blank')}
-                      // 👇 2. Nếu có link -> Rê chuột vào vòng tròn đỏ sẽ to lên (hiệu ứng Custom Cursor)
                       onMouseEnter={() => hasLink && setIsHoveringBtn(true)} 
                       onMouseLeave={() => hasLink && setIsHoveringBtn(false)}
                     >
@@ -688,7 +637,6 @@ function App() {
                         <i className={achieve.level === 'Cấp Quốc gia' ? 'fas fa-trophy' : 'fas fa-award'}></i>
                       </div>
                       <div className="achieve-info">
-                        {/* Thêm một icon nhỏ gọn xíu xiu nếu có link cho người ta biết để bấm (Tùy chọn) */}
                         <h4>
                           {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
                           {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
@@ -704,8 +652,6 @@ function App() {
 
             {/* 4. PROJECTS SECTION */}
             <section id="projects">
-              
-              {/* Ép xếp dọc và bám lề trái */}
               <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
                  <div>
                    <span className="sub-title">{t.projSub}</span>
@@ -714,7 +660,6 @@ function App() {
                    </h2>
                  </div>
                  
-                 {/* Thêm marginBottom: 0 */}
                  <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
                    <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
                    <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
@@ -726,18 +671,13 @@ function App() {
               <div className="project-grid">
                 {filteredProjects.map((proj) => (
                   <div key={proj.title} className="glow-card project-showcase-card fade-in-section">
-                    
-                    {/* Header dự án (Logo + Text) */}
                     <div className="project-header">
                       <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
                       <div className="project-title-group">
                         <span className="project-role">{proj.role}</span>
                         
-                        {/* Nhóm Tiêu đề & Nút Link */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
                           <h3 style={{ margin: 0 }}>{proj.title}</h3>
-                          
-                          {/* Kiểm tra nếu dự án có link thì mới hiện Nút Icon */}
                           {proj.link && (
                             <a 
                               href={proj.link} 
@@ -753,25 +693,20 @@ function App() {
                           )}
                         </div>
 
-                      <p className="text-desc">{proj.desc}</p>
+                        <p className="text-desc">{proj.desc}</p>
                         <div className="project-tags">
-                          {/* Nếu là mục THIẾT KẾ */}
                           {proj.category === 'THIẾT KẾ' && (
                             <>
                               <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
                               <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
                             </>
                           )}
-                          
-                          {/* Nếu là mục SỰ KIỆN */}
                           {proj.category === 'SỰ KIỆN' && (
                             <>
                               <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
                               <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
                             </>
                           )}
-
-                          {/* Nếu là mục DỰ ÁN (Code/Web) */}
                           {proj.category === 'DỰ ÁN' && (
                             <>
                               <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
@@ -783,19 +718,14 @@ function App() {
                       </div>
                     </div>
 
-                    {/* Gallery ảnh */}
                     <div className="project-gallery" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                      
-                      {/* ========================================= */}
-                      {/* ẢNH CHÍNH HOẶC VIDEO CHÍNH (TỐI ƯU THUMBNAIL) */}
                       {proj.mainVideo ? (
                         <div className="gallery-main fb-video-wrapper">
-                          {/* Nếu video chưa được bấm Play -> Hiện Ảnh Bìa + Nút Play */}
                           {!activeVideos[proj.title] ? (
                             <div 
                               className="custom-video-thumbnail"
                               onClick={(e) => {
-                                e.stopPropagation(); // Chặn lan click
+                                e.stopPropagation();
                                 setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
                               }}
                               onMouseEnter={() => setIsHoveringBtn(true)} 
@@ -807,9 +737,8 @@ function App() {
                               </div>
                             </div>
                           ) : (
-                            /* Khi đã bấm Play -> Hiện Iframe Facebook thực sự */
                             <iframe 
-                              src={`${proj.mainVideo}&autoplay=1`} /* Thêm &autoplay=1 để tự động chạy khi lật thẻ */
+                              src={`${proj.mainVideo}&autoplay=1`}
                               style={{ border: 'none', overflow: 'hidden' }} 
                               scrolling="no" 
                               frameBorder="0" 
@@ -828,21 +757,17 @@ function App() {
                           loading="lazy"
                         />
                       )}
-                      {/* ========================================= */}
                       
-                      {/* Các ảnh nhỏ */}
                       {proj.images.map((img, i) => (
                         <img 
                           key={i} 
                           src={img} 
                           alt="Mini Gallery" 
                           onClick={() => openPopup(proj, img)} 
-                          loading="lazy" /* 👉 THÊM DÒNG NÀY */
+                          loading="lazy"
                         />
                       ))}
-
                     </div>
-
                   </div>
                 ))}
               </div>
@@ -851,21 +776,15 @@ function App() {
             {/* 5. CONTACT SECTION */}
             <section id="contact" className="fade-in-section">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-                
-                {/* PHẦN TITLE Ở TRÊN CÙNG (Căn trái) */}
                 <div>
                   <span className="sub-title">{t.contactSub}</span>
-                  {/* Tui bỏ thẻ <br/> đi để chữ trải ngang đẹp hơn trên PC */}
                   <h2 className="section-title" style={{ marginBottom: '15px' }}>
                     {t.contactTitle1} <span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}
                   </h2>
                   <p className="text-desc" style={{ maxWidth: '600px' }}>{t.contactDesc}</p>
                 </div>
                 
-                {/* PHẦN CARD Ở DƯỚI (Trải dài Full màn hình) */}
                 <div className="contact-links-group">
-                  
-                  {/* Nút Facebook */}
                   <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fab fa-facebook-f"></i></div>
                     <div className="contact-btn-content">
@@ -874,7 +793,6 @@ function App() {
                     </div>
                   </a>
 
-                  {/* Nút Instagram */}
                   <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fab fa-instagram"></i></div>
                     <div className="contact-btn-content">
@@ -883,7 +801,6 @@ function App() {
                     </div>
                   </a>
 
-                  {/* Nút Tiktok */}
                   <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fab fa-tiktok"></i></div>
                     <div className="contact-btn-content">
@@ -892,7 +809,6 @@ function App() {
                     </div>
                   </a>
 
-                  {/* Nút Behance */}
                   <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fab fa-behance"></i></div>
                     <div className="contact-btn-content">
@@ -901,7 +817,6 @@ function App() {
                     </div>
                   </a>
 
-                  {/* Nút Số điện thoại */}
                   <a href="tel:+84335810259" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fas fa-phone"></i></div>
                     <div className="contact-btn-content">
@@ -910,7 +825,6 @@ function App() {
                     </div>
                   </a>
 
-                  {/* Nút Email */}
                   <a href="mailto:ntrinhan712@gmail.com" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                     <div className="contact-btn-icon"><i className="fas fa-envelope"></i></div>
                     <div className="contact-btn-content">
@@ -918,13 +832,12 @@ function App() {
                       <span className="contact-btn-value">ntrinhan712@gmail.com</span>
                     </div>
                   </a>
-
                 </div>
               </div>
             </section>
           </main>
 
-          {/* 6. FOOTER (Đã fix lỗi dấu ngoặc kép ở link Instagram) */}
+          {/* 6. FOOTER */}
           <footer style={{ 
             display: 'flex', 
             justifyContent: 'space-between', 
@@ -938,18 +851,15 @@ function App() {
             marginLeft: 'auto', 
             marginRight: 'auto' 
           }}>
-            {/* Cột 1: Logo */}
             <div style={{ flex: '1 1 250px' }}>
               <div className="footer-logo">TRÍ NHÂN<span>.</span></div>
               <p>© 2026 TRÍ NHÂN PORTFOLIO.</p>
             </div>
             
-            {/* Cột 2: Điều hướng & Kết nối */}
             <div style={{ flex: '2 1 500px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '30px' }}>
               <div>
                 <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerNav}</p>
                 <div className="footer-nav">
-                  {/* Tận dụng lại biến từ điển của Menu */}
                   <a href="#timeline">{t.navEdu}</a>
                   <a href="#achievements">{t.navAward}</a>
                   <a href="#projects">{t.navProj}</a>
@@ -964,7 +874,6 @@ function App() {
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '5px' }}>{t.footerPhone}</p>
                 <p style={{ fontWeight: 700, marginBottom: '20px', color: 'white' }}>0335 810 259</p>
                 
-                {/* Thay chữ cứng bằng biến mạng xã hội */}
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '10px' }}>{t.footerSocial}</p>
                 <div className="footer-nav" style={{ flexDirection: 'row', gap: '20px' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                   <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer">FACEBOOK</a>
@@ -975,7 +884,6 @@ function App() {
               </div>
             </div>
 
-            {/* Cột 3: Nút cuộn lên trên */}
             <div className="go-top-wrapper" style={{ flex: '1 1 150px', display: 'flex', alignItems: 'flex-end' }}>
                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: 'auto' }}>
                  <button className="go-top" onClick={scrollToTop} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>↑</button>
@@ -984,7 +892,7 @@ function App() {
             </div>
           </footer>
 
-          {/* 👉 POPUP HÌNH ẢNH (CÓ NÚT NEXT/PREV) */}
+          {/* POPUP HÌNH ẢNH */}
           <div 
             className={`image-modal ${popupData.isOpen ? 'active' : ''}`} 
             onClick={closePopup} 
@@ -993,7 +901,6 @@ function App() {
           >
             <button className="close-modal" onClick={closePopup}>&times;</button>
             
-            {/* Nếu dự án có nhiều hơn 1 ảnh thì mới hiện 2 nút mũi tên */}
             {popupData.isOpen && popupData.gallery.length > 1 && (
               <>
                 <button className="nav-btn prev-btn" onClick={prevImage}>
@@ -1005,7 +912,6 @@ function App() {
               </>
             )}
 
-            {/* Hiển thị hình ảnh theo Index hiện tại */}
             {popupData.isOpen && (
               <img 
                 src={popupData.gallery[popupData.currentIndex]} 
@@ -1014,7 +920,6 @@ function App() {
               />
             )}
           </div>
- 
     </>
   );
 }
