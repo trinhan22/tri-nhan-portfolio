@@ -356,6 +356,21 @@ function App() {
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F971032818719526%2F&show_text=false&width=560&t=0',
       link: 'https://hopvan.info.vn',
       logo: 'https://hopvan.info.vn/logo.webp',
+      mainImg: '/images/dev-3/1.png',
+      images: [
+        '/images/dev-3/2.png',
+        '/images/dev-3/3.png',
+        '/images/dev-3/4.png',
+        '/images/dev-3/5.png'
+      ]
+    },
+    {
+      category: 'DỰ ÁN',
+      role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
+      title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
+      desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
+      link: 'https://fphotography.club/fpcnews',
+      logo: 'https://www.fphotography.club/fpcnews/logo-fn.webp',
       mainImg: '/images/dev-2/1.png',
       images: [
         '/images/dev-2/2.png',
@@ -367,10 +382,10 @@ function App() {
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
-      title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
-      desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
+      title: lang === 'vi' ? 'FPC ADMIN - Trang quản trị trực tuyến CLB F-Photography' : 'FPC ADMIN - Online administration page of F-Photography Club',
+      desc: lang === 'vi' ? 'Trang quản trị trực tuyến của CLB F-Photography' : 'Online administration page of the F-Photography Club.',
       link: 'https://fphotography.club',
-      logo: 'https://www.fphotography.club/fpcnews/logo-fn.webp',
+      logo: 'https://www.fphotography.club/logo-black.webp',
       mainImg: '/images/dev-1/1.png',
       images: [
         '/images/dev-1/2.png',
@@ -401,7 +416,7 @@ function App() {
     { level: 'Cấp Quốc gia', titleVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.', link:'https://www.facebook.com/share/p/1R8jvFcg6R/'   },
     { level: 'Cấp trường', titleVi: 'Top 1 Địa lý - Tiếp sức mùa thi 2025', titleEn: 'Top 1 in Geography - Exam Season Relay 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.', descEn: 'Achieved Top 1 in Geography at the Exam Season Relay 2025.', link:'https://www.facebook.com/share/1HB41kAzXK/'   },
     { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB nổi bật HK2', titleEn: 'Outstanding Club Member of Semester 2', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).', descEn: 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).', link:'https://www.facebook.com/photo.php?fbid=696463473030289&set=a.165200976156544&type=3'   },
-    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đach danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.', link:'https://www.facebook.com/share/1CpppKyDrZ/'  },
     { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'Câu lạc bộ • 2025', metaEn: 'Club Level • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://www.facebook.com/share/p/1PKQqWkeRW/'  },
     { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.', link:'https://giaoducthoidai.vn/hon-650-thi-sinh-can-tho-tranh-tai-chon-doi-tuyen-hs-gioi-thpt-du-thi-quoc-gia-post745159.html'  },
@@ -409,8 +424,14 @@ function App() {
     { level: 'Cấp Quốc gia', titleVi: 'Top 63 Dự án được đăng trên báo Thanh Niên', titleEn: 'Top 63 Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://www.facebook.com/share/p/1bCm9g118k/'  },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.', link:'https://mientay.giadinhonline.vn/phien-toa-gia-dinh-mua-4-hoc-tro-thpt-fpt-can-tho-lon-len-cung-phap-luat-d16979.html'  },
-    { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/1B7uLPRzms/'  },
+    { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/1B7uLPRzms/' },
     { level: 'Cấp Quốc gia', titleVi: 'Giải Triển vọng Cuộc thi AI Young Guru', titleEn: 'Promising Award in AI Young Guru Competition', metaVi: 'Cấp Quốc gia • 2026', metaEn: 'National Level • 2026', descVi: 'Đoạt giải Triển vọng (Top 30 Quốc gia) AI Young Guru.', descEn: 'Won the Promising Award (Top 30 Nationwide) in AI Young Guru.', link:'https://www.facebook.com/share/1JGwAJnA86/' },
+    { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB Xuất sắc', titleEn: 'Outstanding Club Member', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Cá nhân hoạt động CLB Xuất sắc năm học 2025-2026.', descEn: 'Recognized as an Outstanding Club Member for the 2025-2026 academic year.', link: 'https://www.facebook.com/share/14aX8NjkZgi/' },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ Truyền thông Xuất sắc', titleEn: 'Outstanding Media Club', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu CLB Truyền thông Xuất sắc 2025-2026.', descEn: 'Awarded the Outstanding Media Club Title for the 2025-2026 academic year.', link: 'https://www.facebook.com/share/17PE1aFHop/' },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ Xuất sắc năm học 2025-2026', titleEn: 'Outstanding Club of the 2025-2026 Academic Year', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu CLB Xuất sắc năm học 2025-2026.', descEn: 'Awarded the Outstanding Club Title for the 2025-2026 academic year.', link: '' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2026.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2026.', link: 'https://www.facebook.com/share/1CkreparF1/' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2026.', descEn: 'Awarded the School-level "Talented Student" Title in 2026.', link: '' },
+    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: '' },
   ];
 
   const filteredAchievements = activeAchieveFilter === 'ALL' 
