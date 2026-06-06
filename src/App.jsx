@@ -172,13 +172,13 @@ function App() {
       title: lang === 'vi' ? 'Social Media Post - "Giới thiệu BCN Gen 2.0"' : 'Social Media Post - "Introducing BoD Gen 2.0"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.facebook.com/share/p/14e6gstVdFK/',
-      logo: '/images/design-8/1.png',
-      mainImg: '/images/design-8/1.png',
+      logo: '/images/design-9/1.png',
+      mainImg: '/images/design-9/1.png',
       images: [
-        '/images/design-8/2.png',
-        '/images/design-8/3.png',
-        '/images/design-8/4.png',
-        '/images/design-8/5.png'
+        '/images/design-9/2.png',
+        '/images/design-9/3.png',
+        '/images/design-9/4.png',
+        '/images/design-9/5.png'
       ]
     },
     {
@@ -187,13 +187,13 @@ function App() {
       title: lang === 'vi' ? 'ID Card Design - "ID Card CLB F-Photo"' : 'ID Card Design - "F-Photo Club ID Card"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.behance.net/gallery/240268505/ID-CARD-F-PHOTO',
-      logo: '/images/design-6/1.png',
-      mainImg: '/images/design-6/1.png',
+      logo: '/images/design-7/1.png',
+      mainImg: '/images/design-7/1.png',
       images: [
-        '/images/design-6/2.png',
-        '/images/design-6/3.png',
-        '/images/design-6/4.png',
-        '/images/design-6/5.png'
+        '/images/design-7/2.png',
+        '/images/design-7/3.png',
+        '/images/design-7/4.png',
+        '/images/design-7/5.png'
       ]
     },
     {
@@ -202,13 +202,13 @@ function App() {
       title: lang === 'vi' ? 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"' : 'Key Visual - "Dia Dao Movie Screening Event"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.behance.net/gallery/239999329/KEY-VISUAL-CHIU-PHIM-MIN-PHI-DA-DO',
-      logo: '/images/design-5/1.png',
-      mainImg: '/images/design-5/2.png',
+      logo: '/images/design-6/1.png',
+      mainImg: '/images/design-6/2.png',
       images: [
-        '/images/design-5/1.png',
-        '/images/design-5/3.png',
-        '/images/design-5/4.png',
-        '/images/design-5/5.png'
+        '/images/design-6/1.png',
+        '/images/design-6/3.png',
+        '/images/design-6/4.png',
+        '/images/design-6/5.png'
       ]
     },
     {
@@ -217,13 +217,13 @@ function App() {
       title: lang === 'vi' ? 'Social Media Post - "Tứ Trụ F-Photography"' : 'Social Media Post - "The Four Pillars of F-Photography"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.facebook.com/share/p/1Da7hQkz8E/',
-      logo: '/images/design-4/1.png',
-      mainImg: '/images/design-4/2.png',
+      logo: '/images/design-5/1.png',
+      mainImg: '/images/design-5/2.png',
       images: [
-        '/images/design-4/3.png',
-        '/images/design-4/4.png',
-        '/images/design-4/5.png',
-        '/images/design-4/6.png'
+        '/images/design-5/3.png',
+        '/images/design-5/4.png',
+        '/images/design-5/5.png',
+        '/images/design-5/6.png'
       ]
     },
     {
@@ -232,10 +232,25 @@ function App() {
       title: lang === 'vi' ? 'Social Media Post - "Chiêu mộ thành viên F-Photo"' : 'Social Media Post - "F-Photo Member Recruitment"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.behance.net/gallery/236224381/SOCIAL-MEDIA-POST-F-PHOTO-CHIEU-M-THANH-VIEN',
-      logo: '/images/design-3/1.png',
-      mainImg: '/images/design-3/2.png',
+      logo: '/images/design-4/1.png',
+      mainImg: '/images/design-4/2.png',
       images: [
-        '/images/design-3/1.png',
+        '/images/design-4/1.png',
+        '/images/design-4/3.png',
+        '/images/design-4/4.png',
+        '/images/design-4/5.png'
+      ]
+    },
+    {
+      category: 'THIẾT KẾ',
+      role: '/ GRAPHIC DESIGNER / CONTENT',
+      title: lang === 'vi' ? 'Key Visual - "Club Day 2025-2026"' : 'Key Visual - "Club Day 2025-2026"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của FSchool Cần Thơ.' : 'Media publication for FSchool Cantho.',
+      link: 'https://www.behance.net/gallery/236223807/KEY-VISUAL-CLUB-DAY-2025',
+      logo: '/images/design-3/1.png',
+      mainImg: '/images/design-3/1.png',
+      images: [
+        '/images/design-3/2.png',
         '/images/design-3/3.png',
         '/images/design-3/4.png',
         '/images/design-3/5.png'
@@ -277,13 +292,13 @@ function App() {
       title: lang === 'vi' ? 'Design lộn xộn' : 'Messy Design',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
       link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
-      logo: '/images/design-7/4.png',
-      mainImg: '/images/design-7/1.png',
+      logo: '/images/design-8/4.png',
+      mainImg: '/images/design-8/1.png',
       images: [
-        '/images/design-7/4.png',
-        '/images/design-7/2.png',
-        '/images/design-7/3.png',
-        '/images/design-7/5.png'
+        '/images/design-8/4.png',
+        '/images/design-8/2.png',
+        '/images/design-8/3.png',
+        '/images/design-8/5.png'
       ]
     },
     {
