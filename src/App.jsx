@@ -366,6 +366,21 @@ function App() {
     {
       category: 'DỰ ÁN',
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
+      title: lang === 'vi' ? 'Dự Án AIGEO - Nền tảng học tập Địa Lý thông minh' : 'AIGEO Project - A Smart Geography Learning Platform',
+      desc: lang === 'vi' ? 'Nền tảng học tập Địa Lý thông minh.' : 'A Smart Geography Learning Platform.',
+      link: 'https://aigeo-test.netlify.app',
+      logo: '/images/dev-4/6.png',
+      mainImg: '/images/dev-4/1.png',
+      images: [
+        '/images/dev-4/2.png',
+        '/images/dev-4/3.png',
+        '/images/dev-4/4.png',
+        '/images/dev-4/5.png'
+      ]
+    },
+    {
+      category: 'DỰ ÁN',
+      role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'Dự Án HopVan - Nền tảng học và luyện thi môn Ngữ Văn' : 'HopVan Project - Literature Learning & Exam Prep Platform',
       desc: lang === 'vi' ? 'Nền tảng học và luyện thi môn Ngữ Văn.' : 'A platform dedicated to Literature learning and exam preparation.',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F971032818719526%2F&show_text=false&width=560&t=0',
