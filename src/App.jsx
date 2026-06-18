@@ -289,7 +289,7 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Design lộn xộn' : 'Messy Design',
+      title: lang === 'vi' ? 'Một số dự án design khác' : 'Other design projects',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
       link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
       logo: '/images/design-8/4.png',
