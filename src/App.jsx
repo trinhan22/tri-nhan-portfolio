@@ -650,6 +650,23 @@ function App() {
                       </p>
                     </div>
                   </div>
+
+                  <div className="timeline-item">
+                    <div className="timeline-num">4</div>
+                    <div className="timeline-content">
+                      <h4>
+                        <a href="https://aigeo-test.netlify.app" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                          Front-end Engineer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                        </a>
+                      </h4>
+                      <span className="timeline-meta">
+                        {lang === 'vi' ? 'Dự án AIGEO • 2026 - Nay' : 'AIGEO Project • 2026 - Present'}
+                      </span>
+                      <p className="text-desc">
+                        {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Responsible for designing, conceptualizing communication strategies, developing interfaces, and optimizing the technical aspects of the system.'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
