@@ -368,7 +368,7 @@ function App() {
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'Dự Án AIGEO - Nền tảng học tập Địa Lý thông minh' : 'AIGEO Project - A Smart Geography Learning Platform',
       desc: lang === 'vi' ? 'Nền tảng học tập Địa Lý thông minh.' : 'A Smart Geography Learning Platform.',
-      link: 'https://aigeo-test.netlify.app',
+      link: 'https://aigeo.info.vn',
       logo: '/images/dev-4/6.png',
       mainImg: '/images/dev-4/1.png',
       images: [
@@ -655,7 +655,7 @@ function App() {
                     <div className="timeline-num">4</div>
                     <div className="timeline-content">
                       <h4>
-                        <a href="https://aigeo-test.netlify.app" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
+                        <a href="https://aigeo.info.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
                           Front-end Engineer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
                       </h4>
