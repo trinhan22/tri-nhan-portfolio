@@ -605,7 +605,7 @@ function App() {
                     <div className="timeline-content">
                       <h4>
                         <a href="https://www.facebook.com/KNProduction1" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Đồng sáng lập và phát triển' : 'Co-founder & Developer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                          {lang === 'vi' ? 'Sáng lập và phát triển' : 'Founder & Developer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
                       </h4>
                       <span className="timeline-meta">
@@ -622,7 +622,7 @@ function App() {
                     <div className="timeline-content">
                       <h4>
                         <a href="https://fphotography.club" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Phó Chủ nhiệm / Co-founder' : 'Vice President / Co-founder'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                          {lang === 'vi' ? 'Phó Chủ nhiệm và Đồng sáng lập' : 'Vice President & Co-founder'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                         </a>
                       </h4>
                       <span className="timeline-meta">
