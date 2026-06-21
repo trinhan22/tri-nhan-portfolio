@@ -1,16 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&display=swap');
 
+/* ==========================================================================
+   0. CORE VARIABLES & DESIGN TOKENS
+   ========================================================================== */
 :root {
-  /* 👇 UPDATE: Trả về màu đen sâu cinematic nguyên bản (Sáng hơn tuyệt đối 1 tẹo thôi) 👇 */
+  /* Original Cinematic Colors (Optimized for Deep Contrast) */
   --bg-color: #070707; 
   --surface-color: rgba(18, 18, 18, 0.75); 
-  --primary-color: #E53935; /* Đỏ rực giữ nguyên để làm điểm nhấn */
+  --primary-color: #E53935; /* Cinematic Vibrant Red */
   --text-main: #ffffff;
   --text-muted: #888888;
   --border-color: rgba(255, 255, 255, 0.08);
+
+  /* Premium Motion Curvatures */
+  --transition-cinematic: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  cursor: none; /* Hide default cursor on desktops for custom spring cursor */
+}
 
 body {
   background-color: var(--bg-color);
@@ -18,72 +30,200 @@ body {
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  
-  /* 👇 UPDATE: Chuyển sang luồng sáng trắng/xám cực kỳ mờ tỏa từ đỉnh, làm nền dịu nhẹ 👇 */
+  position: relative;
+  /* Top lighting background glow */
   background-image: radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.04) 0%, transparent 80%);
 }
 
-/* =========================================
-   1. BACKGROUND BLOBS & CURSOR & LOADING
-========================================== */
-.blob-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; pointer-events: none; }
-.blob { position: absolute; filter: blur(120px); opacity: 0.35; border-radius: 50%; animation: float-blob 12s infinite ease-in-out alternate; }
-.blob-1 { width: 500px; height: 500px; background: rgba(229, 57, 53, 0.15); top: -10%; left: -10%; }
-.blob-2 { width: 450px; height: 450px; background: rgba(183, 28, 28, 0.15); bottom: -10%; right: -5%; animation-delay: -5s; }
-.blob-3 { width: 400px; height: 400px; background: rgba(255, 82, 82, 0.1); top: 30%; left: 40%; animation-duration: 15s; }
+/* ==========================================================================
+   1. UNCONVENTIONAL FX: CINEMATIC NOISE & MORPHING MESH GRADIENTS
+   ========================================================================== */
 
-@keyframes float-blob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 80px) scale(1.1); } }
+/* Dynamic Cinema Grain Overlay (Creates constant organic movement) */
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  z-index: 99999;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.8s steps(8) infinite;
+  will-change: transform;
+}
 
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -2%); }
+  20% { transform: translate(-3%, 1%); }
+  30% { transform: translate(1%, -3%); }
+  40% { transform: translate(-2%, 3%); }
+  50% { transform: translate(-1%, 1%); }
+  60% { transform: translate(2%, -1%); }
+  70% { transform: translate(3%, 2%); }
+  80% { transform: translate(-2%, -3%); }
+  90% { transform: translate(1%, 2%); }
+}
+
+/* Morphing Biological Mesh Blobs */
+.blob-container { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  overflow: hidden; 
+  z-index: -1; 
+  pointer-events: none; 
+}
+
+.blob { 
+  position: absolute; 
+  filter: blur(120px); 
+  opacity: 0.28; 
+  border-radius: 50%; 
+  mix-blend-mode: screen;
+  will-change: transform, border-radius;
+}
+
+.blob-1 { 
+  width: 600px; 
+  height: 600px; 
+  background: radial-gradient(circle, rgba(229, 57, 53, 0.25) 0%, rgba(183, 28, 28, 0.05) 70%, transparent 100%); 
+  top: -10%; 
+  left: -10%; 
+  animation: float-blob-1 18s infinite ease-in-out alternate;
+}
+
+.blob-2 { 
+  width: 550px; 
+  height: 550px; 
+  background: radial-gradient(circle, rgba(183, 28, 28, 0.25) 0%, rgba(229, 57, 53, 0.05) 70%, transparent 100%); 
+  bottom: -10%; 
+  right: -5%; 
+  animation: float-blob-2 15s infinite ease-in-out alternate;
+  animation-delay: -5s; 
+}
+
+.blob-3 { 
+  width: 500px; 
+  height: 500px; 
+  background: radial-gradient(circle, rgba(255, 82, 82, 0.18) 0%, rgba(229, 57, 53, 0.02) 70%, transparent 100%); 
+  top: 30%; 
+  left: 40%; 
+  animation: float-blob-3 22s infinite ease-in-out alternate;
+}
+
+@keyframes float-blob-1 {
+  0% { 
+    transform: translate(0, 0) scale(1) rotate(0deg); 
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  }
+  50% { 
+    transform: translate(80px, 120px) scale(1.15) rotate(180deg);
+    border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%;
+  }
+  100% { 
+    transform: translate(0, 0) scale(1) rotate(360deg); 
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  } 
+}
+
+@keyframes float-blob-2 {
+  0% { 
+    transform: translate(0, 0) scale(1) rotate(0deg); 
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+  }
+  50% { 
+    transform: translate(-90px, 60px) scale(1.1) rotate(-180deg);
+    border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%;
+  }
+  100% { 
+    transform: translate(0, 0) scale(1) rotate(-360deg); 
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+  } 
+}
+
+@keyframes float-blob-3 {
+  0% { 
+    transform: translate(0, 0) scale(1) rotate(0deg); 
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  }
+  50% { 
+    transform: translate(110px, -50px) scale(1.2) rotate(120deg);
+    border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  }
+  100% { 
+    transform: translate(0, 0) scale(1) rotate(360deg); 
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  } 
+}
+
+/* ==========================================================================
+   2. CUSTOM INTERACTIVE BLEND-MODE CURSOR
+   ========================================================================== */
 .custom-cursor {
   position: fixed; 
   top: 0; 
   left: 0; 
-  width: 16px; /* Kích thước mặc định nhỏ gọn, tinh tế hơn */
-  height: 16px; 
-  border-radius: 50%; 
-  background-color: var(--primary-color);
   pointer-events: none; 
-  z-index: 100001 !important; /* Đảm bảo không bị popup đè */
+  z-index: 100001 !important; 
   mix-blend-mode: difference; 
-  transform: translate(-50%, -50%); 
-  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
-  
-  /* Hiệu ứng ánh sáng đỏ tỏa ra xung quanh lúc bình thường */
-  box-shadow: 0 0 20px 4px var(--primary-color), 
-              0 0 40px 12px rgba(229, 57, 53, 0.4);
+  /* Left/top coordinates are handled by Framer Motion Springs! */
+  /* Transition sizes and borders only to avoid conflict and keep it smooth */
+  transition: 
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    height 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 15px 3px rgba(229, 57, 53, 0.6), 
+              0 0 30px 8px rgba(229, 57, 53, 0.3);
+  will-change: width, height, border-radius;
 }
 
-.custom-cursor.hovering { 
-  width: 30px; /* Giảm độ phóng to lại (trước đây là 60px đang bị quá to) */
-  height: 30px; 
-  background-color: white; 
-  
-  /* Chuyển sang ánh sáng trắng chói loá khi rê chuột vào Menu/Link */
-  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.8), 
-              0 0 30px 10px rgba(255, 255, 255, 0.3);
-}
-
-/* =========================================
-   LOADING KIỂU 1: CINEMATIC SLAM (TỐI ƯU MOBILE 100%)
-========================================== */
+/* ==========================================================================
+   3. THE LOADER: GLITCH-REVEAL & SCANNING LIGHT STREAK
+   ========================================================================== */
 .loader-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000000; /* Hoặc màu nền loading của bạn */
-  z-index: 99999; /* Đảm bảo luôn nằm trên cùng */
+  background-color: #030303; 
+  background-image: radial-gradient(circle at center, rgba(229, 57, 53, 0.12) 0%, transparent 75%);
+  z-index: 99999; 
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
 }
 
-.loader-wrapper.hidden {
-  opacity: 0;
-  visibility: hidden;
+/* Dynamic sweep overlay of white-red light inside loader */
+.loader-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.05) 45%, 
+    rgba(229, 57, 53, 0.25) 50%, 
+    rgba(255, 255, 255, 0.05) 55%, 
+    transparent 100%
+  );
+  transform: translateX(-100%) skewX(-30deg);
+  animation: loader-sweep 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   pointer-events: none;
+}
+
+@keyframes loader-sweep {
+  0% { transform: translateX(-100%) skewX(-30deg); }
+  100% { transform: translateX(100%) skewX(-30deg); }
 }
 
 .loader-text { 
@@ -92,92 +232,257 @@ body {
   text-transform: uppercase; 
   color: white; 
   text-align: center;
-  /* Chuyển động mặc định cho PC */
-  animation: cinematic-slam-pc 2.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  position: relative;
 }
 
-/* --- 1. KỊCH BẢN CHUYỂN ĐỘNG CHO MÁY TÍNH --- */
-@keyframes cinematic-slam-pc {
-  0% { letter-spacing: 50px; filter: blur(25px); opacity: 0; transform: scale(1.5); }
-  35% { letter-spacing: 12px; filter: blur(0px); opacity: 1; transform: scale(1); text-shadow: 0 0 0px transparent; }
-  /* Cú bùng nổ ánh sáng ngay lúc va chạm */
-  45% { text-shadow: 0 0 40px white, 0 0 100px var(--primary-color); transform: scale(1.05); } 
-  100% { letter-spacing: 12px; transform: scale(1); text-shadow: 0 0 15px rgba(229, 57, 53, 0.6); }
-}
-
-/* --- 2. KỊCH BẢN CHUYỂN ĐỘNG CHO ĐIỆN THOẠI --- */
-@keyframes cinematic-slam-mobile {
-  0% { letter-spacing: 20px; filter: blur(15px); opacity: 0; transform: scale(1.3); } /* Thu hẹp khoảng cách rơi */
-  35% { letter-spacing: 6px; filter: blur(0px); opacity: 1; transform: scale(1); text-shadow: 0 0 0px transparent; }
-  45% { text-shadow: 0 0 30px white, 0 0 70px var(--primary-color); transform: scale(1.05); } 
-  100% { letter-spacing: 6px; transform: scale(1); text-shadow: 0 0 10px rgba(229, 57, 53, 0.6); }
-}
-
-/* 👉 TỐI ƯU RESPONSIVE KÍCH THƯỚC TRÊN MOBILE */
-@media (max-width: 768px) {
-  .loader-text { 
-    font-size: 2.8rem; 
-    /* Kích hoạt kịch bản Mobile khi màn hình nhỏ */
-    animation-name: cinematic-slam-mobile; 
-  }
-}
-
-@media (max-width: 480px) {
-  .loader-text { 
-    font-size: 2.2rem; 
-    /* Bù trừ khoảng cách chữ để canh giữa tuyệt đối */
-    padding-left: 6px; 
-  }
-}
-
-/* NAVBAR */
+/* ==========================================================================
+   4. NAVIGATION BAR (KINETIC SPLIT LINES)
+   ========================================================================== */
 header {
-  position: fixed; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100;
-  background: linear-gradient(to bottom, rgba(7,7,7,0.95) 0%, rgba(7,7,7,0) 100%); backdrop-filter: blur(8px);
+  position: fixed; 
+  width: 100%; 
+  padding: 20px 5%; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(7,7,7,0.95) 0%, rgba(7,7,7,0) 100%); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: var(--transition-cinematic);
 }
+
 .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px;}
 .logo span { color: var(--primary-color); }
-.nav-links { display: flex; gap: 30px; }
-.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; position: relative; transition: color 0.3s; }
-.nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 5px; right: 0; background: var(--primary-color); transition: width 0.4s ease, right 0.4s ease; }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; left: 0; background: var(--primary-color); }
-.nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
-/* LAYOUT & UTILS */
-section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 auto; }
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { 
+  color: var(--text-muted); 
+  text-decoration: none; 
+  font-size: 0.85rem; 
+  font-weight: 700; 
+  letter-spacing: 1px; 
+  text-transform: uppercase; 
+  position: relative; 
+  padding: 5px 0;
+  transition: color 0.3s ease; 
+}
+
+/* Center expanding navigation line */
+.nav-links a::after { 
+  content: ''; 
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; 
+  background: var(--primary-color); 
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a:hover::after, 
+.nav-links a.active::after { 
+  transform: scaleX(1);
+}
+
+.nav-links a:hover, 
+.nav-links a.active { 
+  color: var(--text-main); 
+  text-shadow: 0 0 10px rgba(255,255,255,0.25);
+}
+
+/* ==========================================================================
+   5. LAYOUTS & KINETIC TYPOGRAPHY SYSTEM
+   ========================================================================== */
+section { 
+  padding: 100px 5%; 
+  position: relative; 
+  max-width: 1400px; 
+  margin: 0 auto; 
+}
+
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-.sub-title { color: var(--primary-color); font-weight: 700; letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
+
+.sub-title { 
+  color: var(--primary-color); 
+  font-weight: 700; 
+  letter-spacing: 3px; 
+  font-size: 0.85rem; 
+  text-transform: uppercase; 
+  margin-bottom: 20px; 
+  display: inline-block; 
+}
 .sub-title::before { content: "— "; color: var(--primary-color); }
-.section-title { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; line-height: 1.2; margin-bottom: 40px; }
-.italic-red { color: var(--primary-color); font-style: italic; font-weight: 700; }
+
+/* Shimmering kinetic heading clipping system */
+.section-title { 
+  font-size: 3.5rem; 
+  font-weight: 900; 
+  text-transform: uppercase; 
+  line-height: 1.2; 
+  margin-bottom: 40px; 
+  color: var(--text-main);
+  -webkit-text-fill-color: var(--text-main);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+  transition: letter-spacing 0.5s var(--transition-cinematic);
+}
+
+.section-title:hover {
+  letter-spacing: 2px;
+  -webkit-text-stroke: 1px rgba(229, 57, 53, 0.35);
+}
+
+.italic-red { 
+  color: var(--primary-color); 
+  -webkit-text-fill-color: var(--primary-color);
+  font-style: italic; 
+  font-weight: 700; 
+  position: relative;
+  display: inline-block;
+}
+
+.italic-red::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.italic-red:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .text-desc { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
 
-/* BUTTONS */
+/* ==========================================================================
+   6. BUTTONS: KINETIC VERTICAL SLIDE REVEAL
+   ========================================================================== */
 .btn-group { margin-top: 40px; display: flex; gap: 20px; }
-.btn { padding: 15px 35px; border: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; border-radius: 6px; transition: all 0.4s ease; text-decoration: none; display: inline-block;}
-.btn-primary { background-color: var(--primary-color); color: white; box-shadow: 0 0 15px rgba(229, 57, 53, 0.2); }
-.btn-primary:hover { background-color: #b71c1c; box-shadow: 0 0 30px rgba(229, 57, 53, 0.6); transform: translateY(-3px); }
-.btn-outline { background-color: transparent; border: 1px solid var(--border-color); color: white; }
-.btn-outline:hover { border-color: var(--primary-color); background: rgba(229, 57, 53, 0.1); transform: translateY(-3px); }
 
-/* =========================================
-   2. GLOW HOVER CHUỘT DÀNH CHO CARDS
-========================================== */
+.btn { 
+  padding: 15px 35px; 
+  border: none; 
+  font-weight: 700; 
+  font-size: 0.9rem; 
+  text-transform: uppercase; 
+  letter-spacing: 1.5px; 
+  border-radius: 6px; 
+  text-decoration: none; 
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.btn-primary { 
+  background-color: var(--primary-color); 
+  color: white; 
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 15px rgba(229, 57, 53, 0.2); 
+}
+
+.btn-primary::before {
+  background-color: white;
+}
+
+.btn-primary:hover { 
+  color: #070707 !important; 
+  border-color: white;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 15px rgba(229, 57, 53, 0.3); 
+  transform: translateY(-3px); 
+}
+
+.btn-outline { 
+  background-color: transparent; 
+  border: 1px solid var(--border-color); 
+  color: white; 
+}
+
+.btn-outline::before {
+  background-color: rgba(229, 57, 53, 0.15);
+}
+
+.btn-outline:hover { 
+  border-color: var(--primary-color); 
+  box-shadow: 0 0 30px rgba(229, 57, 53, 0.35); 
+  transform: translateY(-3px); 
+}
+
+/* ==========================================================================
+   7. 3D GLOW CARDS (DYNAMIC REACT-DRIVEN PERSPECTIVE TILT)
+   ========================================================================== */
 .glow-card {
-  background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 16px;
-  position: relative; overflow: hidden; transition: 0.4s ease; backdrop-filter: blur(12px);
+  background: var(--surface-color); 
+  border: 1px solid var(--border-color); 
+  border-radius: 16px;
+  position: relative; 
+  overflow: hidden; 
+  transition: border-color 0.5s ease, box-shadow 0.5s ease; /* Exclude transform to let JS control it! */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform, box-shadow;
 }
-.glow-card::before {
-  content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s;
-  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(229, 57, 53, 0.15), transparent 40%);
-  z-index: -1; pointer-events: none;
-}
-.glow-card:hover::before { opacity: 1; }
-.glow-card:hover { border-color: rgba(229, 57, 53, 0.5); transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
 
-/* =========================================
-   HERO SECTION (Cập nhật kích thước)
-========================================== */
+.glow-card::before {
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  opacity: 0; 
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(229, 57, 53, 0.18), transparent 40%);
+  z-index: -1; 
+  pointer-events: none;
+}
+
+.glow-card:hover::before { opacity: 1; }
+
+.glow-card:hover { 
+  border-color: rgba(229, 57, 53, 0.45); 
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.65), 
+    0 0 35px rgba(229, 57, 53, 0.15); 
+}
+
+/* Children push outwards in 3D space */
+.glow-card > * {
+  transform: translateZ(20px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   8. HERO SPLIT SECTION
+   ========================================================================== */
 .hero-split { 
   min-height: 100vh; 
   display: flex; 
@@ -186,19 +491,20 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   gap: 50px; 
 }
 
-/* Tăng max-width từ 600px lên 800px để cụm chữ vươn ra giữa nhiều hơn */
 .hero-text { 
   flex: 1; 
   max-width: 800px; 
 }
 
-/* Tăng size chữ chính to lên hẳn */
 .hero-text .main-title { 
-  font-size: 5.5rem; /* Tăng font-size lên 5.5rem cho hoành tráng */
+  font-size: 5.5rem; 
   line-height: 1.15; 
   margin-bottom: 25px; 
   font-weight: 900; 
   text-transform: uppercase; 
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  letter-spacing: -1px;
 }
 
 .hero-media { 
@@ -208,7 +514,6 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   align-items: center;
 }
 
-/* Tăng nhẹ size ảnh bên phải để cân đối với chữ to */
 .media-card { 
   width: 100%; 
   max-width: 450px; 
@@ -217,13 +522,31 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   overflow: hidden; 
   border: 1px solid var(--border-color); 
   position: relative; 
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
-.media-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: 0.5s; }
-.media-card:hover img { filter: brightness(1); transform: scale(1.05); }
 
-/* =========================================
-   3. TIMELINE (HỌC VẤN & KINH NGHIỆM)
-========================================== */
+/* Liquid Distortion image hover implementation */
+.media-card img, 
+.project-gallery img,
+.custom-video-thumbnail img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  filter: brightness(0.8); 
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter;
+}
+
+.media-card:hover img { 
+  filter: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22liquid-wave%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.025%22 numOctaves=%223%22 result=%22noise%22%3E%3Canimate attributeName=%22baseFrequency%22 values=%220.025;0.045;0.025%22 dur=%225s%22 repeatCount=%22indefinite%22/%3E%3C/feTurbulence%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%2215%22 xChannelSelector=%22R%22 yChannelSelector=%22G%22/%3E%3C/filter%3E%3C/svg%3E%23liquid-wave') brightness(1.05) !important;
+  transform: scale(1.06) translateZ(10px); 
+}
+
+/* ==========================================================================
+   9. TIMELINE SECTION
+   ========================================================================== */
 .timeline-col h3.col-title { font-size: 1.2rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; font-weight: 700; }
 .timeline-item { display: flex; gap: 25px; margin-bottom: 50px; position: relative; }
 .timeline-item::before { content: ""; position: absolute; left: 24px; top: 50px; bottom: -50px; width: 1px; background: var(--border-color); z-index: -1; }
@@ -231,51 +554,48 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 
 .timeline-num {
   width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-color);
-  display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; transition: 0.4s;
+  display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; transition: var(--transition-bounce);
 }
-.timeline-item:hover .timeline-num { border-color: var(--primary-color); color: var(--primary-color); box-shadow: 0 0 20px rgba(229, 57, 53, 0.3); background: rgba(229, 57, 53, 0.1); transform: scale(1.1); }
+.timeline-item:hover .timeline-num { border-color: var(--primary-color); color: var(--primary-color); box-shadow: 0 0 20px rgba(229, 57, 53, 0.3); background: rgba(229, 57, 53, 0.1); transform: scale(1.15); }
 
 .timeline-content h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: white; transition: 0.3s; }
 .timeline-item:hover .timeline-content h4 { color: var(--primary-color); }
 .timeline-meta { display: block; font-size: 0.8rem; color: var(--primary-color); font-weight: 700; letter-spacing: 1.5px; margin-bottom: 15px; text-transform: uppercase; }
 
-/* =========================================
-   4. THÀNH TÍCH (LƯỚI CARD CÓ ICON)
-========================================== */
+/* ==========================================================================
+   10. ACHIEVEMENTS SECTION (ICON GLOW)
+   ========================================================================== */
 .achieve-card { padding: 30px; display: flex; align-items: center; gap: 25px; border-radius: 20px; }
-.achieve-icon { width: 55px; height: 55px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--primary-color); flex-shrink: 0; font-size: 1.2rem; transition: 0.4s; }
-.achieve-card:hover .achieve-icon { background: var(--primary-color); color: white; transform: rotate(10deg) scale(1.1); }
+.achieve-icon { width: 55px; height: 55px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--primary-color); flex-shrink: 0; font-size: 1.2rem; transition: var(--transition-bounce); }
+.achieve-card:hover .achieve-icon { background: var(--primary-color); color: white; transform: rotate(15deg) scale(1.15); box-shadow: 0 0 20px rgba(229, 57, 53, 0.4); }
 .achieve-info h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
 .achieve-info span { font-size: 0.75rem; color: var(--primary-color); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 8px;}
 
-/* =========================================
-   5. DỰ ÁN (PROJECT GALLERY CARDS) - GIAO DIỆN TỐI ƯU 16:9
-========================================== */
+/* ==========================================================================
+   11. PROJECTS GRID (Liquid distortion gallery details)
+   ========================================================================== */
 .filter-container { display: flex; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
 .filter-btn {
   background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px 25px;
-  border-radius: 30px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s;
+  border-radius: 30px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: var(--transition-cinematic);
 }
 .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); box-shadow: 0 5px 15px rgba(229, 57, 53, 0.3); }
 
-/* Khung lưới 2 cột */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 35px;
 }
 
-/* Giao diện Thẻ Card */
 .project-showcase-card { 
   padding: 30px; 
-  border-radius: 24px; /* Bo góc mềm mại hơn */
+  border-radius: 24px; 
   display: flex; 
   flex-direction: column; 
   justify-content: space-between;
   gap: 25px; 
 }
 
-/* Phần Tiêu đề & Logo */
 .project-header { display: flex; gap: 18px; align-items: flex-start; }
 .project-logo { width: 75px; height: 75px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border-color); flex-shrink: 0; background: #fff; padding: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .project-title-group { flex: 1; }
@@ -283,38 +603,55 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 .project-header h3 { font-size: 1.45rem; font-weight: 900; margin-bottom: 10px; line-height: 1.3;}
 .project-header .text-desc { font-size: 0.95rem; line-height: 1.6; }
 
-/* Các Tag nhãn */
 .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
 .tag { font-size: 0.65rem; padding: 6px 14px; border: 1px solid var(--border-color); border-radius: 20px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; background: rgba(255,255,255,0.03); }
 
-/* ================== THƯ VIỆN ẢNH BÊN TRONG CARD ================== */
+/* Gallery layout 16:9 cinematic rules */
 .project-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 
 .project-gallery img { 
   width: 100%; 
-  aspect-ratio: 16 / 9; /* Kỹ thuật mới: Ép tỷ lệ 16:9 chuẩn điện ảnh, không cần px */
+  aspect-ratio: 16 / 9; 
   height: auto;
   object-fit: cover; 
   border-radius: 8px; 
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
   filter: brightness(0.65); 
   cursor: pointer;
   border: 1px solid transparent;
 }
 
-/* =========================================
-   ÉP KHUNG VIDEO FACEBOOK (TỐI ƯU MỌI THIẾT BỊ)
-========================================== */
+/* Hover Liquid-wave adjustments on images */
+.project-gallery img:hover { 
+  transform: scale(1.01) translateY(-2px); 
+  filter: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22liquid-wave%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.025%22 numOctaves=%223%22 result=%22noise%22%3E%3Canimate attributeName=%22baseFrequency%22 values=%220.025;0.045;0.025%22 dur=%225s%22 repeatCount=%22indefinite%22/%3E%3C/feTurbulence%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%2215%22 xChannelSelector=%22R%22 yChannelSelector=%22G%22/%3E%3C/filter%3E%3C/svg%3E%23liquid-wave') brightness(0.75) !important; 
+  z-index: 10; 
+  position: relative; 
+  box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+  border-color: var(--primary-color) !important; 
+}
+
+.gallery-main { 
+  grid-column: span 4; 
+  aspect-ratio: 16 / 9; 
+  height: auto !important; 
+  filter: brightness(0.9) !important; 
+  border-radius: 16px !important; 
+}
+
+.project-gallery:hover .gallery-main { filter: brightness(1) !important; }
+
+/* Facebook / YouTube Video Wrappers */
 .fb-video-wrapper {
   position: relative;
   width: 100%;
   height: auto !important;
-  aspect-ratio: 16 / 9; /* Ép chết tỷ lệ chuẩn điện ảnh */
+  aspect-ratio: 16 / 9; 
   overflow: hidden;
-  background: #050505; /* Nền đen sâu che viền */
+  background: #050505; 
   border: 1px solid var(--border-color);
-  border-radius: 16px !important; /* Bo góc mượt mà ăn khớp với Card */
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.8); /* Đổ bóng chìm bên trong cho có chiều sâu */
+  border-radius: 16px !important; 
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8); 
 }
 
 .fb-video-wrapper iframe {
@@ -324,46 +661,10 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   width: 100% !important;
   height: 100% !important;
   border: none;
-  /* Phóng to Iframe lên 1 xíu (1.02) để giấu đi mấy cái viền đen rác của Facebook */
   transform: scale(1.02); 
 }
 
-/* Ảnh chính to rõ, bo góc to hơn */
-.gallery-main { 
-  grid-column: span 4; 
-  aspect-ratio: 16 / 9; 
-  height: auto !important; 
-  filter: brightness(0.9) !important; 
-  border-radius: 16px !important; 
-}
-
-/* Hiệu ứng khi lướt qua cả thư viện thì ảnh chính sáng lên */
-.project-gallery:hover .gallery-main { filter: brightness(1) !important; }
-
-/* Hiệu ứng rê chuột vào từng ảnh: Bay lên nhẹ, sáng viền đỏ */
-.project-gallery img:hover { 
-  transform: scale(1.005); 
-  
-  /* 👇 CHỈNH SỬA CHÍNH TẠI ĐÂY 👇 */
-  /* Thay vì brightness(1.1) (tăng sáng), tui đổi thành brightness(0.75) (giảm sáng 25%) */
-  /* Việc này làm ảnh tối đi một chút, giúp ảnh trắng không bị chói loà và nổi bật viền đỏ */
-  filter: brightness(0.75) !important; 
-  
-  z-index: 10; 
-  position: relative; 
-  box-shadow: 0 15px 25px rgba(0,0,0,0.6);
-  border-color: var(--primary-color); /* Giữ lại viền đỏ rực */
-}
-
-/* Responsive cho dự án */
-@media (max-width: 900px) {
-  .project-grid { grid-template-columns: 1fr; }
-  .project-showcase-card { padding: 20px; }
-}
-
-/* =========================================
-   GIAO DIỆN ẢNH BÌA VIDEO (THUMBNAIL YOUTUBE/FB STYLE)
-========================================== */
+/* YouTube Thumbnail Play Overlay System */
 .custom-video-thumbnail {
   position: absolute;
   inset: 0;
@@ -375,23 +676,11 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   border-radius: 16px !important;
 }
 
-.custom-video-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.65); /* Làm tối ảnh xíu để nổi bật nút Play */
-  transition: transform 0.5s ease, filter 0.5s ease;
-}
-
 .custom-video-thumbnail:hover img {
-  /* Trước đây là 0.55 (quá tối) */
-  /* 👇 UPDATE: Đồng bộ về 0.75 y hệt như thẻ Hình ảnh để tạo sự nhất quán 👇 */
-  filter: brightness(0.75); 
-  
-  transform: scale(1.005); /* Phóng to ảnh nhẹ nhàng */
+  filter: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22liquid-wave%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.025%22 numOctaves=%223%22 result=%22noise%22%3E%3Canimate attributeName=%22baseFrequency%22 values=%220.025;0.045;0.025%22 dur=%225s%22 repeatCount=%22indefinite%22/%3E%3C/feTurbulence%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%2215%22 xChannelSelector=%22R%22 yChannelSelector=%22G%22/%3E%3C/filter%3E%3C/svg%3E%23liquid-wave') brightness(0.75) !important; 
+  transform: scale(1.01); 
 }
 
-/* Nút Play siêu ngầu nằm giữa ảnh */
 .play-button-overlay {
   position: absolute;
   top: 50%;
@@ -399,90 +688,67 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   transform: translate(-50%, -50%);
   width: 70px;
   height: 70px;
-  background: var(--primary-color); /* Lấy màu đỏ rực của web */
+  background: var(--primary-color); 
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 1.8rem;
-  padding-left: 5px; /* Canh giữa icon play giác quan */
+  padding-left: 5px; 
   box-shadow: 0 0 20px rgba(229, 57, 53, 0.6), inset 0 0 10px rgba(255,255,255,0.3);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 11;
 }
 
-/* Nút Play khi rê chuột vào: Giảm độ bóng đổ mạnh để không bị chói loà */
 .custom-video-thumbnail:hover .play-button-overlay {
   transform: translate(-50%, -50%) scale(1.15);
-  
-  /* 👇 CHỈNH SỬA TRỌNG TÂM Ở ĐÂY: 👇 */
-  /* Chỉnh bóng đổ: Giảm bán kính từ 40px xuống 25px, giảm độ mờ (alpha) từ 0.9 xuống 0.6 */
   box-shadow: 0 0 25px rgba(229, 57, 53, 0.6), inset 0 0 15px rgba(255,255,255,0.5);
 }
 
-/* Tinh chỉnh nút Play nhỏ lại trên Mobile */
 @media (max-width: 768px) {
   .play-button-overlay {
     width: 55px; height: 55px; font-size: 1.4rem; padding-left: 4px;
   }
 }
 
-/* =========================================
-   6. CONTACT FORM & FOOTER
-========================================== */
+/* ==========================================================================
+   12. CONTACT FORM
+   ========================================================================== */
 .contact-info-item { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
 .icon-box { width: 50px; height: 50px; background: rgba(229, 57, 53, 0.1); display: flex; justify-content: center; align-items: center; border-radius: 12px; color: var(--primary-color); font-size: 1.2rem; }
 .contact-form { padding: 40px; }
-.contact-form .form-group { margin-bottom: 25px; }
 .contact-form label { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
 .contact-form input, .contact-form select, .contact-form textarea {
-  width: 100%; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); padding: 15px 20px; color: white; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: 0.3s;
+  width: 100%; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); padding: 15px 20px; color: white; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: var(--transition-cinematic);
 }
 .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 15px rgba(229, 57, 53, 0.2); }
 .contact-form textarea { height: 120px; resize: none; }
-.btn-submit { width: 100%; background: var(--primary-color); color: white; border: none; padding: 18px; font-weight: 700; letter-spacing: 2px; border-radius: 8px; transition: 0.3s; text-transform: uppercase; }
-.btn-submit:hover { background: #b71c1c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4); }
 
-/* =========================================
-   FIX LỖI CANH GIỮA FORM & NÚT LINK (CHỈ DÀNH CHO MOBILE)
-========================================== */
-@media (max-width: 768px) {
-  /* 1. Trả lại sự ngay ngắn cho Form Liên hệ (Bám lề trái 100%) */
-  .contact-form label { 
-    text-align: left !important; 
-    display: block; 
-    width: 100%; 
-  }
-  .contact-form input, 
-  .contact-form select, 
-  .contact-form textarea { 
-    text-align: left !important; 
-  }
-  .contact-form .form-group {
-    align-items: flex-start !important;
-  }
-
-  /* 2. Thu nhỏ nút Link ngoài (Mũi tên) cho tinh tế và cân đối */
-  .project-link-icon {
-    width: 28px !important;
-    height: 28px !important;
-    font-size: 0.7rem !important;
-  }
-  
-  /* 3. Canh giữa tuyệt đối cụm "Tiêu đề + Nút Link" để không bị lệch */
-  .project-title-group div[style*="display: flex"] {
-    justify-content: center !important;
-    gap: 10px !important;
-  }
+.btn-submit { 
+  width: 100%; 
+  background: var(--primary-color); 
+  color: white; 
+  border: none; 
+  padding: 18px; 
+  font-weight: 700; 
+  letter-spacing: 2px; 
+  border-radius: 8px; 
+  transition: var(--transition-cinematic); 
+  text-transform: uppercase; 
+}
+.btn-submit:hover { 
+  background: #b71c1c; 
+  transform: translateY(-2px); 
+  box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4); 
 }
 
-/* =========================================
-   NÚT LIÊN HỆ TÙY CHỈNH (CONTACT BUTTONS GRID) - GIAO DIỆN SANG TRỌNG
-========================================== */
+/* ==========================================================================
+   13. CONTACT LINKS GRID SYSTEM
+   ========================================================================== */
 .contact-links-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Trải dài làm 3 cột trên PC */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 15px;
   width: 100%;
 }
@@ -495,14 +761,29 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   color: white;
   border-radius: 16px;
   gap: 15px; 
-  transition: all 0.3s ease;
-  /* Đổi sang màu xám đen cực kỳ tinh tế giống hình */
+  transition: var(--transition-cinematic);
   background: rgba(255, 255, 255, 0.03); 
   border: 1px solid rgba(255, 255, 255, 0.05); 
   overflow: hidden; 
+  position: relative;
+  z-index: 1;
 }
 
-/* Đổi hiệu ứng rê chuột: Nhấc nhẹ lên thay vì trượt ngang */
+/* Light sweep reflect on hover */
+.contact-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(229, 57, 53, 0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.contact-btn:hover::before {
+  transform: translateX(100%);
+}
+
 .contact-btn:hover {
   border-color: rgba(229, 57, 53, 0.3);
   background: rgba(229, 57, 53, 0.05);
@@ -513,7 +794,6 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
 .contact-btn-icon {
   width: 45px;
   height: 45px;
-  /* Nền icon tối sâu thẳm làm nổi bật màu đỏ */
   background: rgba(0, 0, 0, 0.4); 
   border-radius: 50%;
   display: flex;
@@ -556,13 +836,108 @@ section { padding: 100px 5%; position: relative; max-width: 1400px; margin: 0 au
   max-width: 100%;
 }
 
-/* Ép về 1 cột khi màn hình nhỏ */
-@media (max-width: 1024px) {
-  .contact-links-group {
-    grid-template-columns: repeat(2, 1fr); 
-  }
+/* External outer arrow link */
+.project-link-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-color);
+  flex-shrink: 0; 
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
+.project-link-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--primary-color);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.project-link-icon:hover::before {
+  transform: scale(1);
+}
+
+.project-link-icon:hover {
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-3px) rotate(45deg); 
+  box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4);
+}
+
+/* ==========================================================================
+   14. FLOATING BADGES (HERO PARALLAX INTERSECTIONS)
+   ========================================================================== */
+.floating-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.8) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--primary-color); 
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  animation: float-up-down 4s ease-in-out infinite alternate;
+  pointer-events: none; 
+}
+
+.badge-1 {
+  bottom: 15%;
+  left: -90px; 
+  padding: 15px 25px;
+}
+
+.badge-2 {
+  top: 15%;
+  right: -90px; 
+  left: auto; 
+  animation-delay: -2s; 
+}
+
+.badge-icon {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.6));
+}
+
+.badge-text { display: flex; flex-direction: column; }
+.badge-num { font-size: 1.4rem; font-weight: 900; color: white; line-height: 1.1; letter-spacing: 1px; }
+.badge-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;}
+
+@keyframes float-up-down {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-20px); }
+}
+
+@media (max-width: 900px) {
+  .badge-1 { left: -15px; bottom: 10%; padding: 10px 15px; }
+  .badge-2 { right: -15px; top: 10%; left: auto; padding: 10px 15px; }
+  .badge-num { font-size: 1.1rem; }
+  .badge-label { font-size: 0.55rem; }
+  .badge-icon { font-size: 1.4rem; }
+}
+
+/* ==========================================================================
+   15. FOOTER
+   ========================================================================== */
 footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.85rem; color: var(--text-muted); position: relative; margin-top: 50px; max-width: 1400px; margin-left: auto; margin-right: auto;}
 .footer-logo { font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: 20px; letter-spacing: 2px;}
 .footer-logo span { color: var(--primary-color); }
@@ -570,44 +945,64 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 .footer-nav a { color: white; text-decoration: none; font-weight: 700; letter-spacing: 1px; transition: 0.3s; }
 .footer-nav a:hover { color: var(--primary-color); }
 
-/* =========================================
-   CUSTOM SCROLLBAR (THANH CUỘN)
-========================================== */
+/* ==========================================================================
+   16. CUSTOM SCROLLBAR
+   ========================================================================== */
 ::-webkit-scrollbar {
-  width: 8px; /* Độ rộng thanh cuộn */
+  width: 8px; 
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-color); /* Nền thanh cuộn */
+  background: var(--bg-color); 
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15); /* Màu thanh cuộn lúc bình thường */
+  background: rgba(255, 255, 255, 0.15); 
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color); /* Khi di chuột vào thanh cuộn sẽ chuyển đỏ */
+  background: var(--primary-color); 
 }
 
-/* =========================================
-   FIX NÚT GO TOP
-========================================== */
+/* ==========================================================================
+   17. GO TOP SCROLL SYSTEM
+   ========================================================================== */
 .go-top-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .go-top {
   width: 50px; height: 50px; 
   background: rgba(255,255,255,0.05); 
   color: white; border: 1px solid var(--border-color); 
   border-radius: 50%; display: flex; justify-content: center; 
-  align-items: center; transition: 0.4s; backdrop-filter: blur(5px); 
+  align-items: center; transition: var(--transition-bounce); backdrop-filter: blur(5px); 
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
+
+.go-top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--primary-color);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.go-top:hover::before {
+  transform: scale(1);
+}
+
 .go-top:hover { 
   transform: translateY(-5px); 
-  background: var(--primary-color); 
   border-color: var(--primary-color); 
   box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4); 
 }
+
 .go-top-text {
   font-size: 0.7rem; 
   color: var(--text-muted); 
@@ -616,19 +1011,15 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   letter-spacing: 1px;
 }
 
-/* FADE IN/OUT SCROLL ANIMATION */
-.fade-in-section { opacity: 0; transform: translateY(60px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
-.fade-in-section.is-visible { opacity: 1; transform: translateY(0) scale(1); }
-
-/* =========================================
-   POPUP MODAL CHO HÌNH ẢNH
-========================================== */
+/* ==========================================================================
+   18. LIGHTBOX MODAL
+   ========================================================================== */
 .image-modal {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
-  z-index: 100000; /* Nổi lên trên cùng */
+  z-index: 100000; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -637,13 +1028,15 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   transition: 0.3s ease;
   cursor: pointer;
 }
+
 .image-modal.active {
   opacity: 1;
   visibility: visible;
 }
+
 .image-modal img {
   max-width: 90vw;
-  max-height: 90vh;
+  max-height: 85vh;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
@@ -651,9 +1044,11 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   transition: 0.3s ease;
   cursor: default;
 }
+
 .image-modal.active img {
   transform: scale(1);
 }
+
 .close-modal {
   position: absolute;
   top: 30px;
@@ -665,17 +1060,12 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   cursor: pointer;
   transition: 0.3s;
 }
+
 .close-modal:hover {
   color: var(--primary-color);
   transform: scale(1.1);
 }
 
-/* Nâng z-index của con trỏ chuột tùy chỉnh lên cao nhất để không bị popup đè */
-.custom-cursor { z-index: 100001 !important; }
-
-/* =========================================
-   NÚT ĐIỀU HƯỚNG TRONG POPUP (PREV / NEXT)
-========================================== */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -692,8 +1082,8 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   align-items: center;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  transition: 0.3s ease;
-  z-index: 999999 !important; /* Đẩy nút lên trên cùng, không bị ảnh đè */
+  transition: var(--transition-bounce);
+  z-index: 999999 !important; 
 }
 
 .nav-btn:hover {
@@ -706,7 +1096,6 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 .prev-btn { left: 40px; }
 .next-btn { right: 40px; }
 
-/* Responsive cho nút bấm trên điện thoại */
 @media (max-width: 768px) {
   .nav-btn { width: 45px; height: 45px; font-size: 1.2rem; }
   .prev-btn { left: 15px; }
@@ -714,19 +1103,24 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .close-modal { top: 15px; right: 20px; font-size: 2.5rem; }
 }
 
-/* =========================================
-   7. RESPONSIVE (TỐI ƯU HÓA MOBILE & TABLET)
-========================================== */
+/* ==========================================================================
+   19. RESPONSIVE MEDIA HOVER & TILT OVERRIDES
+   ========================================================================== */
 
-/* Tắt Custom Cursor trên các thiết bị cảm ứng (Điện thoại/Tablet) */
+/* Disable custom cursor on tactile screens */
 @media (hover: none) and (pointer: coarse) {
   * { cursor: auto !important; }
   .custom-cursor { display: none !important; }
 }
 
-/* ================= BỘ CỤC TABLET (Màn hình < 1024px) ================= */
+@media (hover: hover) and (pointer: fine) {
+  *, a, button, input, textarea, select, img, .nav-btn, .close-modal, .image-modal {
+    cursor: none !important; 
+  }
+}
+
+/* Tablet Media Overrides (< 1024px) */
 @media (max-width: 1024px) {
-  /* Hero Section: Đẩy ảnh xuống dưới chữ, canh giữa toàn bộ */
   .hero-split { 
     flex-direction: column; 
     text-align: center; 
@@ -740,69 +1134,60 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .hero-media { width: 100%; justify-content: center; margin-top: 40px; }
   .media-card { height: 450px; }
 
-  /* Lưới 3 cột giảm xuống còn 2 cột (Services) */
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  
+  .contact-links-group {
+    grid-template-columns: repeat(2, 1fr); 
+  }
 }
 
-/* =========================================
-   10. STYLE CHO NÚT HAMBURGER
-========================================== */
+/* Hamburger menu layout */
 .hamburger { display: none; flex-direction: column; gap: 6px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
 .hamburger span { width: 30px; height: 2px; background: white; transition: 0.3s ease; border-radius: 2px; }
 .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--primary-color); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--primary-color); }
 
-/* ================= BỘ CỤC MOBILE (Màn hình < 768px) ================= */
+/* Mobile Media Overrides (< 768px) */
 @media (max-width: 768px) {
   section { padding: 80px 5%; }
   .hero-text .main-title { font-size: 3.2rem; }
   .section-title { font-size: 2.2rem; margin-bottom: 30px; }
 
-  /* 👉 1. TỐI ƯU MENU: TRONG SUỐT VÀ HIỆN KÍNH MỜ KHI CUỘN */
   header { 
     background: transparent; 
     backdrop-filter: none; 
     padding: 25px 5%; 
     align-items: center;
-    transition: all 0.4s ease-in-out !important; /* Mượt lúc vuốt ngược lên */
+    transition: all 0.4s ease-in-out !important; 
     border-bottom: 1px solid transparent; 
   }
 
-  /* 👉 TỐI ƯU SHADOW MOBILE: ĐƠN GIẢN, NHẸ NHÀNG VÀ CHUYỂN MƯỢT */
   header.scrolled {
-    background: rgba(18, 18, 18, 0.75) !important; /* Lót nền đen mờ */
-    backdrop-filter: blur(15px) !important; /* Hiệu ứng kính mờ xịn xò */
+    background: rgba(18, 18, 18, 0.75) !important;
+    backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px) !important;
-    
-    /* SHADOW TẠO KHỐI NHẸ NHÀNG */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4) !important; 
-    
-    /* 👇 THÊM DÒNG NÀY: Hiệu ứng chuyển đổi mượt mà 0.4 giây */
     transition: all 0.4s ease-in-out !important; 
   }
 
-  .hamburger { display: flex; } /* Bật nút 3 gạch */
-/* 👉 ĐỔI BỐ CỤC HEADER TRÊN MOBILE: [VN/EN] TRÁI - LOGO GIỮA - [3 GẠCH] PHẢI */
-  header {
-    /* Trả lại position: fixed mặc định để thanh menu trượt theo màn hình */
-    justify-content: space-between !important; 
-  }
+  .hamburger { display: flex; } 
+  header { justify-content: space-between !important; }
   
   .logo { 
     position: absolute !important;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); /* Canh giữa tuyệt đối 100% cả dọc lẫn ngang */
+    transform: translate(-50%, -50%); 
     margin: 0 !important; 
   } 
   
   .lang-switch { 
     display: flex !important; 
-    position: static !important; /* Hủy bay lơ lửng */
+    position: static !important; 
     transform: scale(0.85); 
     margin: 0 !important; 
-    order: -1; /* Ép nút ngôn ngữ phải luôn luôn đứng đầu tiên bên lề trái */
+    order: -1; 
   }
 
   .menu-center {
@@ -823,25 +1208,23 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .menu-center.open { opacity: 1; visibility: visible; transform: translateY(0); }
   .menu-center a { font-size: 1.4rem !important; letter-spacing: 3px; }
 
-  /* 👉 TĂNG MẠNH SIZE CHỮ HERO CHO MOBILE */
   .hero-text .sub-title { 
-    font-size: 1rem; /* Chữ "PORTFOLIO" to rõ hơn */
+    font-size: 1rem; 
     letter-spacing: 4px; 
     margin-bottom: 15px; 
   }
   .hero-text .main-title { 
-    font-size: 4.3rem; /* Chữ "NGUYỄN TRÍ NHÂN" to chà bá */
+    font-size: 4.3rem; 
     line-height: 1.1; 
     margin-bottom: 25px; 
   }
 
-  /* 👉 2. TỐI ƯU HERO: CHỮ FULLSCREEN, ẢNH TO RỘNG BÊN DƯỚI */
   .hero-split {
-    display: block; /* Bỏ flex để tách 2 phần trên dưới rõ ràng */
+    display: block; 
     padding-top: 0; 
   }
   .hero-text {
-    min-height: 100svh; /* Ép chữ lấp đầy 100% chiều cao màn hình */
+    min-height: 100svh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -850,44 +1233,41 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .hero-media {
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 80px; /* Thêm khoảng trống trước khi tới phần Học Vấn */
+    margin-bottom: 80px; 
   }
   .media-card {
     height: auto;
     aspect-ratio: 4/5;
-    max-width: 100%; /* Phóng to ảnh ra bự bằng màn hình PC */
+    max-width: 100%; 
     margin: 0 auto;
   }
 
-  /* 👉 3. BADGES MINI XINH XẮN */
-  .floating-badge { padding: 6px 12px; gap: 8px; border-radius: 8px; border-left-width: 2px; }
-  .badge-1 { left: -10px; bottom: 8%; }
-  .badge-2 { right: -10px; top: 8%; left: auto; }
-  .badge-icon { font-size: 1.1rem; }
-  .badge-text { gap: 0; }
-  .badge-num { font-size: 0.9rem; }
-  .badge-label { font-size: 0.5rem; letter-spacing: 1px; margin-top: 0;}
+  /* Form and link details alignment fixes on mobile */
+  .contact-form label { 
+    text-align: left !important; 
+    display: block; 
+    width: 100%; 
+  }
+  .contact-form input, 
+  .contact-form select, 
+  .contact-form textarea { 
+    text-align: left !important; 
+  }
+  .contact-form .form-group {
+    align-items: flex-start !important;
+  }
 
-  /* 👉 4. CÁC GIAO DIỆN KHÁC GIỮ NGUYÊN (NHƯ ĐÃ FIX) */
-  #contact > div > div:first-child { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
+  .project-link-icon {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.7rem !important;
   }
   
-  #contact .text-desc { 
-    text-align: center; 
-    margin-left: auto; 
-    margin-right: auto; 
+  .project-title-group div[style*="display: flex"] {
+    justify-content: center !important;
+    gap: 10px !important;
   }
-  #projects > div.fade-in-section:first-child,
-  #achievements > div.fade-in-section:first-child { 
-    flex-direction: column !important; 
-    align-items: center !important; 
-    text-align: center !important; 
-    gap: 20px; 
-  }
+
   .grid-2, .grid-3, .project-grid { grid-template-columns: 1fr; gap: 30px; }
   .timeline-col h3.col-title { text-align: center; }
   .timeline-item { gap: 15px; }
@@ -917,63 +1297,46 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
   .go-top-wrapper div { margin-left: 0 !important; }
 }
 
-/* ================= BỘ CỤC ĐIỆN THOẠI SIÊU NHỎ (Màn hình < 480px) ================= */
+/* Micro-phone Layout adjustments (< 480px) */
 @media (max-width: 480px) {
-  /* Chữ Hero cho màn hình cực nhỏ */
   .hero-text .sub-title { font-size: 0.85rem; letter-spacing: 3px; }
   .hero-text .main-title { font-size: 3.6rem; margin-bottom: 20px; }
   .hero-text .text-desc { margin-bottom: 20px !important; }
   .btn-group { flex-direction: column; width: 100%; gap: 15px; margin-top: 10px;}
   .btn { width: 100%; text-align: center; }
-}
 
-/* Ép lại thanh cuộn và con trỏ chuột cho Mobile */
-html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important; position: relative; }
-section, header, footer { width: 100%; max-width: 100%; box-sizing: border-box; }
-footer { overflow: hidden; }
-@media (hover: hover) and (pointer: fine) { *, a, button, input, textarea, select, img, .nav-btn, .close-modal, .image-modal { cursor: none !important; } }
-
-/* =========================================
-   FIX LỖI NÚT LỌC (FILTER) BỊ LẺ LOI TRÊN MOBILE
-========================================== */
-@media (max-width: 480px) {
   .filter-container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Ép giãn đều 2 bên */
+    justify-content: space-between; 
     gap: 10px;
   }
   
   .filter-btn {
-    /* Ép mỗi nút chiếm 50% chiều ngang (trừ hao 5px tiền gap) */
     flex: 1 1 calc(50% - 5px); 
     text-align: center;
-    padding: 10px 5px !important; /* Thu nhỏ lề ngang để chữ không bị tràn */
-    white-space: nowrap; /* Chống rớt chữ bên trong nút */
+    padding: 10px 5px !important; 
+    white-space: nowrap; 
   }
 }
 
-/* =========================================
-   8. TỐI ƯU HÓA TRIỆT ĐỂ LỖI CHÊNH GIAO DIỆN & TRÀN SCROLLBAR
-========================================== */
-
-/* 1. Ép toàn bộ trang web không được vượt quá chiều ngang màn hình */
+/* ==========================================================================
+   20. SCROLLBAR & OVERFLOW LOCK OVERRIDES
+   ========================================================================== */
 html, body {
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden !important; /* Chặn đứng mọi thứ lòi ra 2 bên */
+  overflow-x: hidden !important; 
   position: relative;
 }
 
-/* 2. Đảm bảo các khung nội dung tự động co bóp thay vì lòi ra ngoài */
 section, header {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
 }
 
-/* 3. Sửa lỗi Footer bị tràn chiều ngang do Flexbox */
 footer {
   width: 100% !important;
   max-width: 100% !important;
@@ -981,118 +1344,15 @@ footer {
   overflow: hidden;
 }
 
-/* 4. Xóa vĩnh viễn thanh cuộn ngang (xấu xí) của Menu trên Mobile */
 header > .nav-links:nth-child(2) {
-  scrollbar-width: none; /* Dành cho Firefox */
-  -ms-overflow-style: none; /* Dành cho IE/Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 header > .nav-links:nth-child(2)::-webkit-scrollbar {
-  display: none !important; /* Dành cho Chrome/Safari/Cốc Cốc */
+  display: none !important; 
 }
 
-/* 5. Đảm bảo ảnh trong Modal (Popup) không bao giờ to hơn màn hình */
 .image-modal img {
   max-width: 90vw;
   max-height: 85vh;
-}
-
-/* =========================================
-   9. TRIỆT TIÊU TRỎ CHUỘT MẶC ĐỊNH KHẮP NƠI (CHỈ TRÊN MÁY TÍNH)
-========================================== */
-@media (hover: hover) and (pointer: fine) {
-  *, a, button, input, textarea, select, img, .nav-btn, .close-modal, .image-modal {
-    cursor: none !important; /* Ép buộc tàng hình con trỏ mặc định */
-  }
-}
-
-
-/* =========================================
-   NÚT LIÊN KẾT NGOÀI (EXTERNAL LINK) TRONG CARD DỰ ÁN
-========================================== */
-.project-link-icon {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid var(--border-color);
-  flex-shrink: 0; /* Tránh bị ép móp méo nếu tiêu đề quá dài */
-}
-
-.project-link-icon:hover {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-  transform: translateY(-3px) scale(1.1) rotate(5deg);
-  box-shadow: 0 5px 15px rgba(229, 57, 53, 0.4);
-}
-
-
-/* =========================================
-   THẺ LƠ LỬNG LẤP KHOẢNG TRỐNG (HERO BADGES)
-========================================== */
-.floating-badge {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: rgba(15, 15, 15, 0.65); /* Kính mờ xuyên thấu */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 3px solid var(--primary-color); /* Vạch sáng đỏ bên trái */
-  padding: 15px 25px;
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  animation: float-up-down 4s ease-in-out infinite alternate;
-  pointer-events: none; /* Để chuột xuyên qua không bị vướng */
-}
-
-/* Thẻ 1: Cắn vào viền dưới bên TRÁI */
-.badge-1 {
-  bottom: 15%;
-  left: -90px; 
-  padding: 15px 25px;
-}
-
-/* Thẻ 2: Cắn vào viền trên bên PHẢI (Đối xứng) */
-.badge-2 {
-  top: 15%;
-  right: -90px; 
-  left: auto; /* 👈 Hủy lệnh left cũ để nó bám vào lề phải */
-  animation-delay: -2s; 
-}
-
-/* Icon phát sáng */
-.badge-icon {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.6));
-}
-
-/* Định dạng chữ */
-.badge-text { display: flex; flex-direction: column; }
-.badge-num { font-size: 1.4rem; font-weight: 900; color: white; line-height: 1.1; letter-spacing: 1px; }
-.badge-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;}
-
-/* Animation nhấp nhô mượt mà */
-@keyframes float-up-down {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-20px); }
-}
-
-/* Responsive cho mobile tự rụt vào để không tràn màn hình */
-@media (max-width: 900px) {
-  .badge-1 { left: -15px; bottom: 10%; padding: 10px 15px; }
-  .badge-2 { right: -15px; top: 10%; left: auto; padding: 10px 15px; }
-  .badge-num { font-size: 1.1rem; }
-  .badge-label { font-size: 0.55rem; }
-  .badge-icon { font-size: 1.4rem; }
 }

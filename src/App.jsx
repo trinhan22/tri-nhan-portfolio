@@ -1,11 +1,256 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+
+// =========================================================================
+// CHARREVEAL: KINETIC TYPOGRAPHY COMPONENT
+// Splits any text string into individually animated characters,
+// staggering their slide-up, skew, and rotation on scroll view.
+// =========================================================================
+const CharReveal = ({ text, className, delay = 0 }) => {
+  const letters = text.split("");
+  
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.02,
+        delayChildren: delay,
+      }
+    }
+  };
+  
+  const childVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
+  return (
+    <motion.span 
+      className={className} 
+      style={{ display: "inline-block", verticalAlign: "bottom" }}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
+      {letters.map((char, index) => (
+        <motion.span
+          key={index}
+          style={{ display: "inline-block", transformOrigin: "left bottom" }}
+          variants={childVariants}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+// =========================================================================
+// DECRYPTEDTEXT: MATRIX/HACKER TEXT GLITCH DECRYPTION REVEAL
+// Scrambles and decrypts letters when scrolled into viewport.
+// =========================================================================
+const DecryptedText = ({ text, delay = 0, triggerOnce = true }) => {
+  const [displayText, setDisplayText] = useState("");
+  const containerRef = useRef(null);
+  
+  useEffect(() => {
+    let intervalId;
+    let timeoutId;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}|:<>?-=[]\\;',./";
+    const originalText = text;
+    
+    const startDecryption = () => {
+      let iteration = 0;
+      clearInterval(intervalId);
+      
+      intervalId = setInterval(() => {
+        setDisplayText(
+          originalText
+            .split("")
+            .map((char, index) => {
+              if (char === " ") return " ";
+              if (index < iteration) return originalText[index];
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("")
+        );
+        
+        if (iteration >= originalText.length) {
+          clearInterval(intervalId);
+        }
+        iteration += 1 / 3;
+      }, 30);
+    };
+    
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        timeoutId = setTimeout(() => {
+          startDecryption();
+        }, delay * 1000);
+        if (triggerOnce && containerRef.current) {
+          observer.unobserve(containerRef.current);
+        }
+      }
+    }, { threshold: 0.1 });
+    
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+      if (containerRef.current) observer.disconnect();
+    };
+  }, [text, delay, triggerOnce]);
+  
+  return <span ref={containerRef}>{displayText || text}</span>;
+};
+
+// =========================================================================
+// PARTICLECANVAS: INTERACTIVE CONSTELLATION MOUSE-REACTIVE BACKGROUND
+// Renders vector-glowing particles reacting to cursor coordinates.
+// =========================================================================
+const ParticleCanvas = () => {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    const particles = [];
+    const particleCount = 70;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedX = Math.random() * 0.4 - 0.2;
+        this.speedY = Math.random() * 0.4 - 0.2;
+        this.alpha = Math.random() * 0.5 + 0.1;
+      }
+      
+      update(mouseX, mouseY) {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+        
+        if (mouseX !== null && mouseY !== null) {
+          const dx = mouseX - this.x;
+          const dy = mouseY - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 150) {
+            const force = (150 - distance) / 150;
+            this.x -= (dx / distance) * force * 0.8;
+            this.y -= (dy / distance) * force * 0.8;
+          }
+        }
+      }
+      
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = '#E53935'; 
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    let mouse = { x: null, y: null };
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+    
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(mouse.x, mouse.y);
+        particles[i].draw();
+        
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(229, 57, 53, 0.08)';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100%', 
+        pointerEvents: 'none', 
+        zIndex: 0 
+      }} 
+    />
+  );
+};
 
 function App() {
   // =========================================================================
-  // 1. GOM TẤT CẢ STATE LÊN ĐÂY
+  // 1. GOM TẤT CẢ STATE LÊN ĐÂY (Giữ nguyên toàn bộ logic)
   // =========================================================================
   const [loading, setLoading] = useState(true);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHoveringBtn, setIsHoveringBtn] = useState(false);
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [activeAchieveFilter, setActiveAchieveFilter] = useState('ALL');
@@ -17,7 +262,7 @@ function App() {
   const [activeVideos, setActiveVideos] = useState({});
 
   // =========================================================================
-  // 2. BỘ TỪ ĐIỂN SONG NGỮ
+  // 2. BỘ TỪ ĐIỂN SONG NGỮ (Giữ nguyên gốc)
   // =========================================================================
   const translations = {
     vi: {
@@ -52,7 +297,74 @@ function App() {
   const t = translations[lang];
 
   // =========================================================================
-  // 3. CÁC HÀM XỬ LÝ GIAO DIỆN (Popup, Scroll, Mouse Tracking...)
+  // 3. SPRING CURSOR PHYSICS
+  // =========================================================================
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 40, stiffness: 450, mass: 0.45 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [cursorX, cursorY]);
+
+  // Cursor hover state helpers
+  const handleMouseEnterInteractive = () => {
+    setIsHoveringBtn(true);
+  };
+
+  const handleMouseLeaveInteractive = () => {
+    setIsHoveringBtn(false);
+  };
+
+  // =========================================================================
+  // 4. PARALLAX EFFECTS (SCROLL-LINKED)
+  // =========================================================================
+  const { scrollY } = useScroll();
+  const blobScrollY1 = useTransform(scrollY, [0, 3000], [0, 200]);
+  const blobScrollY2 = useTransform(scrollY, [0, 3000], [0, -200]);
+  const blobScrollY3 = useTransform(scrollY, [0, 3000], [0, 80]);
+  const heroImageParallax = useTransform(scrollY, [0, 1000], [0, 60]);
+
+  // Reacts to cursor movement slightly
+  const blobX = useTransform(cursorX, [0, typeof window !== 'undefined' ? window.innerWidth : 1920], [-40, 40]);
+  const blobY = useTransform(cursorY, [0, typeof window !== 'undefined' ? window.innerHeight : 1080], [-40, 40]);
+
+  // =========================================================================
+  // 5. 3D CARD TILT ON MOUSE MOVE (React-driven bounding box calculation)
+  // =========================================================================
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -12; 
+    const rotateY = ((x - centerX) / centerX) * 12;  
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+    card.style.setProperty('--rx', rotateX);
+    card.style.setProperty('--ry', rotateY);
+  };
+
+  const handleCardMouseLeave = (e) => {
+    const card = e.currentTarget;
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)`;
+    card.style.setProperty('--rx', '0');
+    card.style.setProperty('--ry', '0');
+  };
+
+  // =========================================================================
+  // 6. POPUP, SCROLL & LOADING LOGICS
   // =========================================================================
   const openPopup = (project, clickedImgUrl) => {
     const fullGallery = [project.mainImg, ...project.images];
@@ -70,7 +382,6 @@ function App() {
     setPopupData(prev => ({ ...prev, currentIndex: prev.currentIndex === 0 ? prev.gallery.length - 1 : prev.currentIndex - 1 }));
   };
 
-  // Lắng nghe sự kiện scroll để đổi trạng thái Header
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -79,14 +390,11 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const observerRef = useRef(null);
-
-  // LOGIC LOADING HOÀN CHỈNH: Chờ toàn bộ ảnh và dữ liệu tải xuống hoàn tất
   useEffect(() => {
     const handleFullyLoaded = () => {
       setTimeout(() => {
         setLoading(false);
-      }, 600); // Trễ 600ms giúp hiệu ứng đóng mở mượt mà
+      }, 800); 
     };
 
     if (document.readyState === 'complete') {
@@ -97,7 +405,7 @@ function App() {
 
     const emergencyTimer = setTimeout(() => {
       setLoading(false);
-    }, 12000); // Hạn định tối đa 12s tránh đứng máy nếu mạng lỗi
+    }, 12000); 
 
     return () => {
       window.removeEventListener('load', handleFullyLoaded);
@@ -105,50 +413,8 @@ function App() {
     };
   }, []);
 
-  // Di chuyển chuột cập nhật tọa độ cursor và hiệu ứng card sáng (glow)
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
-      const glowingCards = document.querySelectorAll('.glow-card');
-      glowingCards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // LOGIC HIỆU ỨNG CUỘN (Khôi phục lại chức năng thêm class .is-visible giúp hiện nội dung)
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        } else {
-          entry.target.classList.remove('is-visible'); 
-        }
-      });
-    }, { threshold: 0.05 });
-
-    const timer = setTimeout(() => {
-      const elements = document.querySelectorAll('.fade-in-section');
-      elements.forEach((el, index) => {
-        el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-        if (observerRef.current) observerRef.current.observe(el);
-      });
-    }, 600); // Chờ 600ms khớp với thời gian nhả Loading để DOM được render đầy đủ
-
-    return () => {
-      clearTimeout(timer);
-      if (observerRef.current) observerRef.current.disconnect();
-    };
-  }, [activeFilter, lang, activeAchieveFilter]);
-
-  // Quét vị trí cuộn trang đổi trạng thái Active trên Menu
-  useEffect(() => {
-    const handleScroll = () => {
+    const handleScrollActiveSection = () => {
       const sections = document.querySelectorAll('section');
       let currentSection = 'home';
       sections.forEach(section => {
@@ -158,13 +424,15 @@ function App() {
       });
       setActiveSection(currentSection);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrollActiveSection);
+    return () => window.removeEventListener('scroll', handleScrollActiveSection);
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Dữ liệu dự án
+  // =========================================================================
+  // 7. DATA STRUCTS (Giữ nguyên toàn bộ)
+  // =========================================================================
   const projects = [
     {
       category: 'THIẾT KẾ',
@@ -427,7 +695,7 @@ function App() {
   ];
   const filteredProjects = activeFilter === 'ALL' ? projects : projects.filter(p => p.category === activeFilter);
 
-  // Dữ liệu thành tích
+  // Dữ liệu thành tích (Giữ nguyên gốc)
   const achievementsData = [
     { level: 'Cấp Quận', titleVi: 'Giải Công nhận Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Công nhận Kỳ thi HSG môn Địa cấp Quận lớp 9.', descEn: 'Won the Consolation Prize in the District-level Geography Excellent Student Competition for 9th Grade.', link:'https://www.facebook.com/photo.php?fbid=632210875573463&set=a.632214185573132&type=3'   },
     { level: 'Cấp Quận', titleVi: 'Giải Ba Cuộc thi Khoa học Kỹ thuật', titleEn: 'Third Prize in Science & Engineering Fair', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.', descEn: 'Won Third Prize in the District-level Science and Engineering Fair for 9th Grade.', link:'https://www.facebook.com/photo.php?fbid=632210875573463&set=a.632214185573132&type=3'   },
@@ -461,533 +729,909 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ Xuất sắc năm học 2025-2026', titleEn: 'Outstanding Club of the 2025-2026 Academic Year', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu CLB Xuất sắc năm học 2025-2026.', descEn: 'Awarded the Outstanding Club Title for the 2025-2026 academic year.', link: 'https://www.facebook.com/share/17aWfv4WJC/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2026.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2026.', link: 'https://www.facebook.com/share/1CkreparF1/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2026.', descEn: 'Awarded the School-level "Talented Student" Title in 2026.', link: 'https://www.facebook.com/share/1ENsu2uCbZ/' },
-    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
+    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
   ];
 
   const filteredAchievements = activeAchieveFilter === 'ALL' 
     ? achievementsData 
     : achievementsData.filter(a => a.level === activeAchieveFilter);
 
+  // Framer Motion staggered animations configuration
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.96 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
+  const timelineVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
   return (
     <>
-      <div className="blob-container">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="blob blob-3"></div>
-      </div>
+      {/* 1. MOUSE & SCROLL DYNAMIC MORPH BLOBS */}
+      <motion.div className="blob-container" style={{ x: blobX, y: blobY }}>
+        <motion.div className="blob blob-1" style={{ y: blobScrollY1 }}></motion.div>
+        <motion.div className="blob blob-2" style={{ y: blobScrollY2 }}></motion.div>
+        <motion.div className="blob blob-3" style={{ y: blobScrollY3 }}></motion.div>
+      </motion.div>
 
-      <div className={`loader-wrapper ${!loading ? 'hidden' : ''}`}>
-        <h1 className="loader-text">TRÍ NHÂN</h1>
-      </div>
-
-      <div className={`custom-cursor ${isHoveringBtn ? 'hovering' : ''}`} style={{ left: `${cursorPos.x}px`, top: `${cursorPos.y}px` }}></div>
-
-          <header className={isScrolled ? 'scrolled' : ''}>
-            <div className="logo" style={{ position: 'relative', zIndex: 1001 }}>TRÍ NHÂN<span>.</span></div>
-            
-            <button 
-              className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      {/* 2. DYNAMIC SHUTTER GSAP-LIKE LOADER */}
+      <AnimatePresence mode="wait">
+        {loading && (
+          <motion.div 
+            className="loader-wrapper"
+            key="loader"
+            initial={{ opacity: 1 }}
+            exit={{ 
+              y: "-100%", 
+              transition: { duration: 0.8, ease: [0.19, 1, 0.22, 1] } 
+            }}
+          >
+            <motion.h1 
+              className="loader-text"
+              initial={{ letterSpacing: "50px", filter: "blur(20px)", opacity: 0, scale: 1.4 }}
+              animate={{ 
+                letterSpacing: ["50px", "12px", "10px", "12px"],
+                filter: ["blur(20px)", "blur(0px)", "blur(0px)", "blur(0px)"],
+                opacity: [0, 1, 1, 1],
+                scale: [1.4, 1, 1.05, 1],
+                textShadow: [
+                  "0 0 100px rgba(229, 57, 53, 0)",
+                  "0 0 15px rgba(229, 57, 53, 0.6)",
+                  "4px 1px 0px rgba(229, 57, 53, 0.85), -4px -1px 0px rgba(0, 255, 255, 0.85)", // Glitch slam
+                  "0 0 20px rgba(229, 57, 53, 0.6)"
+                ]
+              }}
+              transition={{ duration: 2.2, ease: [0.19, 1, 0.22, 1] }}
             >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+              TRÍ NHÂN
+            </motion.h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-            <nav className={`nav-links menu-center ${isMobileMenuOpen ? 'open' : ''}`} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-              <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navHome}</a>
-              <a href="#timeline" className={activeSection === 'timeline' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navEdu}</a>
-              <a href="#achievements" className={activeSection === 'achievements' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navAward}</a>
-              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navProj}</a>
-              <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMobileMenuOpen(false)}>{t.navContact}</a>
-            </nav>
+      {/* 3. SMOOTH SPRING CUSTOM CURSOR */}
+      <motion.div 
+        className="custom-cursor" 
+        style={{ 
+          x: cursorXSpring, 
+          y: cursorYSpring,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: isHoveringBtn ? "50px" : "12px",
+          height: isHoveringBtn ? "50px" : "12px",
+          borderRadius: "50%",
+          backgroundColor: isHoveringBtn ? "rgba(255, 255, 255, 0.15)" : "#ffffff",
+          borderColor: isHoveringBtn ? "rgba(255, 255, 255, 0.8)" : "transparent",
+          borderWidth: isHoveringBtn ? "1px" : "0px",
+          borderStyle: "solid",
+        }}
+      />
+
+      <header className={isScrolled ? 'scrolled' : ''}>
+        <div 
+          className="logo" 
+          style={{ position: 'relative', zIndex: 1001 }}
+          onMouseEnter={handleMouseEnterInteractive}
+          onMouseLeave={handleMouseLeaveInteractive}
+        >
+          TRÍ NHÂN<span>.</span>
+        </div>
+        
+        <button 
+          className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav className={`nav-links menu-center ${isMobileMenuOpen ? 'open' : ''}`}>
+          <a 
+            href="#home" 
+            className={activeSection === 'home' ? 'active' : ''} 
+            onClick={() => setIsMobileMenuOpen(false)}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            {t.navHome}
+          </a>
+          <a 
+            href="#timeline" 
+            className={activeSection === 'timeline' ? 'active' : ''} 
+            onClick={() => setIsMobileMenuOpen(false)}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            {t.navEdu}
+          </a>
+          <a 
+            href="#achievements" 
+            className={activeSection === 'achievements' ? 'active' : ''} 
+            onClick={() => setIsMobileMenuOpen(false)}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            {t.navAward}
+          </a>
+          <a 
+            href="#projects" 
+            className={activeSection === 'projects' ? 'active' : ''} 
+            onClick={() => setIsMobileMenuOpen(false)}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            {t.navProj}
+          </a>
+          <a 
+            href="#contact" 
+            className={activeSection === 'contact' ? 'active' : ''} 
+            onClick={() => setIsMobileMenuOpen(false)}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            {t.navContact}
+          </a>
+        </nav>
+        
+        <div className="nav-links lang-switch" style={{ position: 'relative', zIndex: 1001 }}>
+          <a 
+            href="#vi" 
+            className={lang === 'vi' ? 'active' : ''} 
+            onClick={(e) => { e.preventDefault(); setLang('vi'); }}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            VN
+          </a> 
+          <a 
+            href="#en" 
+            className={lang === 'en' ? 'active' : ''} 
+            onClick={(e) => { e.preventDefault(); setLang('en'); }}
+            onMouseEnter={handleMouseEnterInteractive}
+            onMouseLeave={handleMouseLeaveInteractive}
+          >
+            EN
+          </a>
+        </div>
+      </header>
+
+      <main>
+        {/* 1. HERO SECTION */}
+        <section id="home" className="hero-split">
+          <div className="hero-text">
+            <motion.span 
+              className="sub-title"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              {t.heroSub}
+            </motion.span>
             
-            <div className="nav-links lang-switch" style={{ position: 'relative', zIndex: 1001 }}>
-              <a href="#vi" 
-                 className={lang === 'vi' ? 'active' : ''} 
-                 onClick={(e) => { e.preventDefault(); setLang('vi'); }}>VN</a> 
-              <a href="#en" 
-                 className={lang === 'en' ? 'active' : ''} 
-                 onClick={(e) => { e.preventDefault(); setLang('en'); }}>EN</a>
+            <h1 className="main-title">
+              <CharReveal key={`line1-${lang}`} text={t.heroTitleLine1} delay={0.9} /> <br />
+              <span className="italic-red">
+                <CharReveal key={`line2-${lang}`} text={t.heroTitleLine2} delay={1.2} />
+              </span>
+            </h1>
+
+            <motion.p 
+              className="text-desc" 
+              style={{ maxWidth: '650px', marginTop: '25px', marginBottom: '35px', fontSize: '1.15rem' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+            >
+              {t.heroDesc}
+            </motion.p>
+
+            <motion.div 
+              className="btn-group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+            >
+              <a 
+                href="#projects" 
+                className="btn btn-primary"
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                {t.btnView}
+              </a>
+              <a 
+                href="#contact" 
+                className="btn btn-outline"
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                {t.btnConnect}
+              </a>
+            </motion.div>
+          </div>
+
+          <div className="hero-media">
+            <div style={{ position: 'relative', width: '100%', maxWidth: '450px' }}>
+              <motion.div 
+                className="media-card"
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+                style={{ y: heroImageParallax }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <img src="/images/hero.jpg" alt="Profile Hero" />
+              </motion.div>
+
+              <motion.div 
+                className="floating-badge badge-1"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.5 }}
+              >
+                <div className="badge-icon"><i className="fas fa-bolt"></i></div>
+                <div className="badge-text">
+                  <span className="badge-num">20+</span>
+                  <span className="badge-label">
+                    {lang === 'vi' ? 'DỰ ÁN & SỰ KIỆN' : 'PROJECTS & EVENTS'}
+                  </span>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="floating-badge badge-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.7 }}
+              >
+                <div className="badge-icon"><i className="fas fa-award"></i></div>
+                <div className="badge-text">
+                  <span className="badge-num">30+</span>
+                  <span className="badge-label">
+                    {lang === 'vi' ? 'THÀNH TÍCH' : 'ACHIEVEMENTS'}
+                  </span>
+                </div>
+              </motion.div>
             </div>
-          </header>
+          </div>
+        </section>
 
-          <main>
-            {/* 1. HERO SECTION */}
-            <section id="home" className="hero-split fade-in-section">
-              <div className="hero-text">
-                <span className="sub-title">{t.heroSub}</span>
-                <h1 className="main-title">
-                  {t.heroTitleLine1} <br />
-                  <span className="italic-red">{t.heroTitleLine2}</span>
-                </h1>
-                <p className="text-desc" style={{ maxWidth: '650px', marginTop: '25px', marginBottom: '35px', fontSize: '1.15rem' }}>
-                  {t.heroDesc}
-                </p>
-                <div className="btn-group" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                  <a href="#projects" className="btn btn-primary">{t.btnView}</a>
-                  <a href="#contact" className="btn btn-outline">{t.btnConnect}</a>
-                </div>
-              </div>
-              <div className="hero-media">
-                <div style={{ position: 'relative', width: '100%', maxWidth: '450px' }}>
-                  <div className="media-card" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <img src="/images/hero.jpg" alt="Profile Hero" />
-                  </div>
-
-                  <div className="floating-badge badge-1">
-                    <div className="badge-icon"><i className="fas fa-bolt"></i></div>
-                    <div className="badge-text">
-                      <span className="badge-num">20+</span>
-                      <span className="badge-label">
-                        {lang === 'vi' ? 'DỰ ÁN & SỰ KIỆN' : 'PROJECTS & EVENTS'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="floating-badge badge-2">
-                    <div className="badge-icon"><i className="fas fa-award"></i></div>
-                    <div className="badge-text">
-                      <span className="badge-num">30+</span>
-                      <span className="badge-label">
-                        {lang === 'vi' ? 'THÀNH TÍCH' : 'ACHIEVEMENTS'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 2. TIMELINE SECTION */}
-            <section id="timeline">
-              <div className="grid-2">
-                <div className="timeline-col fade-in-section">
-                  <h3 className="col-title">{t.timelineEdu}</h3>
-                  <div className="timeline-item">
-                    <div className="timeline-num">1</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://vietmycantho.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Trung học Cơ sở' : 'Middle School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'Trường Phổ thông Việt Mỹ • 2019 - 2023' : 'Viet My Secondary School • 2019 - 2023'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS xếp loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 4 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="timeline-item">
-                    <div className="timeline-num">2</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://cantho-school.fpt.edu.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'Trường THPT FPT Cần Thơ • 2023 - 2026' : 'FPT High School Can Tho • 2023 - 2026'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT xếp loại Tốt, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 3 consecutive years, graduated with High Distinction and Excellent conduct. Won multiple awards in various competitions.'}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="timeline-col fade-in-section">
-                  <h3 className="col-title">{t.timelineExp}</h3>
-                  <div className="timeline-item">
-                    <div className="timeline-num">1</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://www.facebook.com/KNProduction1" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Sáng lập và phát triển' : 'Founder & Developer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'KN Production • 2024 - Nay' : 'KN Production • 2024 - Present'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Quản lý truyền thông và nội dung Fanpage, thiết kế ấn phẩm và lên kịch bản cho các dự án truyền thông.' : 'Manage media and Fanpage content, design publications, and write scripts for media projects.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="timeline-item">
-                    <div className="timeline-num">2</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://fphotography.club" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          {lang === 'vi' ? 'Phó Chủ nhiệm và Đồng sáng lập' : 'Vice President & Co-founder'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'CLB Nhiếp ảnh F-Photography • 2024 - 2026' : 'F-Photography Club • 2024 - 2026'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Tham gia quản lý CLB. Tổ chức thiết kế ấn phẩm truyền thông và lên kế hoạch cho các dự án thuộc Câu lạc bộ.' : 'Manage club operations. Oversee media design and plan projects for the Club.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="timeline-item">
-                    <div className="timeline-num">3</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://hopvan.info.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          Visual & Web Developer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'Dự án HopVan • 2026 - Nay' : 'HopVan Project • 2026 - Present'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.' : 'In charge of design, media ideation, programming, and system development for the HopVan website.'}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="timeline-item">
-                    <div className="timeline-num">4</div>
-                    <div className="timeline-content">
-                      <h4>
-                        <a href="https://aigeo.info.vn" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                          Front-end Engineer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
-                        </a>
-                      </h4>
-                      <span className="timeline-meta">
-                        {lang === 'vi' ? 'Dự án AIGEO • 2026 - Nay' : 'AIGEO Project • 2026 - Present'}
-                      </span>
-                      <p className="text-desc">
-                        {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Responsible for designing, conceptualizing communication strategies, developing interfaces, and optimizing the technical aspects of the system.'}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* 3. ACHIEVEMENTS SECTION */}
-            <section id="achievements">
-              <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
-                 <div>
-                   <span className="sub-title">{t.achieveSub}</span>
-                   <h2 className="section-title" style={{ marginBottom: 0 }}>
-                     {t.achieveTitle1} <span className="italic-red">{t.achieveTitle2}</span>
-                   </h2>
-                 </div>
-                 
-                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
-                   <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
-                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
-                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
-                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
-                   <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
-                 </div>
-              </div>
-
-              <div className="grid-2">
-                {filteredAchievements.map((achieve, index) => {
-                  const hasLink = !!achieve.link;
-                  return (
-                    <div 
-                      key={index} 
-                      className="glow-card achieve-card fade-in-section"
-                      onClick={() => hasLink && window.open(achieve.link, '_blank')}
-                      onMouseEnter={() => hasLink && setIsHoveringBtn(true)} 
-                      onMouseLeave={() => hasLink && setIsHoveringBtn(false)}
+        {/* 2. TIMELINE SECTION */}
+        <section id="timeline">
+          <div className="grid-2">
+            <motion.div 
+              className="timeline-col"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+            >
+              <motion.h3 className="col-title" variants={timelineVariants}>{t.timelineEdu}</motion.h3>
+              
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">1</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://vietmycantho.edu.vn" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
                     >
-                      <div className="achieve-icon">
-                        <i className={achieve.level === 'Cấp Quốc gia' ? 'fas fa-trophy' : 'fas fa-award'}></i>
+                      {lang === 'vi' ? 'Trung học Cơ sở' : 'Middle School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'Trường Phổ thông Việt Mỹ • 2019 - 2023' : 'Viet My Secondary School • 2019 - 2023'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS xếp loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Graduated with High Distinction, achieved Excellent Student title for 4 consecutive years, and maintained Excellent conduct. Won multiple awards in various competitions.'}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">2</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://cantho-school.fpt.edu.vn" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'Trường THPT FPT Cần Thơ • 2023 - 2026' : 'FPT High School Can Tho • 2023 - 2026'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT xếp loại Tốt, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 3 consecutive years, graduated with High Distinction, and maintained Excellent conduct. Won multiple awards in various competitions.'}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              className="timeline-col"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+            >
+              <motion.h3 className="col-title" variants={timelineVariants}>{t.timelineExp}</motion.h3>
+              
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">1</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://www.facebook.com/KNProduction1" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      {lang === 'vi' ? 'Sáng lập và phát triển' : 'Founder & Developer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'KN Production • 2024 - Nay' : 'KN Production • 2024 - Present'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Quản lý truyền thông và nội dung Fanpage, thiết kế ấn phẩm và lên kịch bản cho các dự án truyền thông.' : 'Responsible for content and communication strategy on the Fanpage, creating visuals, and scripting multimedia projects.'}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">2</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://fphotography.club" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      {lang === 'vi' ? 'Phó Chủ nhiệm và Đồng sáng lập' : 'Vice President & Co-founder'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'CLB Nhiếp ảnh F-Photography • 2024 - 2026' : 'F-Photography Club • 2024 - 2026'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Tham gia quản lý CLB. Tổ chức thiết kế ấn phẩm truyền thông và lên kế hoạch cho các dự án thuộc Câu lạc bộ.' : 'Co-managed club operations. Led media content creation and planned various creative club events.'}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">3</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://hopvan.info.vn" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      Visual & Web Developer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'Dự án HopVan • 2026 - Nay' : 'HopVan Project • 2026 - Present'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.' : 'Handled UI/UX designs, media conceptualization, programming, and system architecture for the HopVan website.'}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">4</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://aigeo.info.vn" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      Front-end Engineer <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'Dự án AIGEO • 2026 - Nay' : 'AIGEO Project • 2026 - Present'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Managed UI design, marketing direction, front-end development, and technical optimizations for the platform.'}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 3. ACHIEVEMENTS SECTION */}
+        <section id="achievements">
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
+             <div>
+               <span className="sub-title">{t.achieveSub}</span>
+               <h2 className="section-title" style={{ marginBottom: 0 }}>
+                 <CharReveal key={`ach-title-${lang}`} text={t.achieveTitle1} /> <span className="italic-red">{t.achieveTitle2}</span>
+               </h2>
+             </div>
+             
+             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
+               <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
+             </div>
+          </div>
+
+          <motion.div 
+            key={`${activeAchieveFilter}-${lang}`}
+            className="grid-2"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+          >
+            {filteredAchievements.map((achieve, index) => {
+              const hasLink = !!achieve.link;
+              return (
+                <motion.div 
+                  key={index} 
+                  className="glow-card achieve-card"
+                  onClick={() => hasLink && window.open(achieve.link, '_blank')}
+                  onMouseEnter={(e) => {
+                    handleCardMouseMove(e);
+                    if (hasLink) handleMouseEnterInteractive(e);
+                  }} 
+                  onMouseLeave={(e) => {
+                    handleCardMouseLeave(e);
+                    if (hasLink) handleMouseLeaveInteractive();
+                  }}
+                  onMouseMove={handleCardMouseMove}
+                  variants={cardVariants}
+                  style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+                >
+                  <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
+                    <i className={achieve.level === 'Cấp Quốc gia' ? 'fas fa-trophy' : 'fas fa-award'}></i>
+                  </div>
+                  <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
+                    <h4>
+                      {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
+                      {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
+                    </h4>
+                    <span>{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                    <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        {/* 4. PROJECTS SECTION */}
+        <section id="projects">
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
+             <div>
+               <span className="sub-title">{t.projSub}</span>
+               <h2 className="section-title" style={{ marginBottom: 0 }}>
+                 <CharReveal key={`proj-title-${lang}`} text={t.projTitle1} /><span className="italic-red">{t.projTitle2}</span>
+               </h2>
+             </div>
+             
+             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
+               <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
+               <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
+               <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
+               <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
+             </div>
+          </div>
+
+          <motion.div 
+            key={`${activeFilter}-${lang}`}
+            className="project-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+          >
+            {filteredProjects.map((proj) => (
+              <motion.div 
+                key={proj.title} 
+                className="glow-card project-showcase-card"
+                onMouseEnter={handleCardMouseMove}
+                onMouseLeave={handleCardMouseLeave}
+                onMouseMove={handleCardMouseMove}
+                variants={cardVariants}
+                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+              >
+                <div className="project-card-inner" style={{ transform: "translateZ(20px)" }}>
+                  <div className="project-header">
+                    <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
+                    <div className="project-title-group">
+                      <span className="project-role">{proj.role}</span>
+                      
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
+                        <h3 style={{ margin: 0 }}>{proj.title}</h3>
+                        {proj.link && (
+                          <a 
+                            href={proj.link} 
+                            target="_blank" 
+                            rel="noreferrer" 
+                            className="project-link-icon"
+                            onMouseEnter={handleMouseEnterInteractive} 
+                            onMouseLeave={handleMouseLeaveInteractive}
+                            title="Xem dự án thực tế"
+                          >
+                            <i className="fas fa-external-link-alt"></i>
+                          </a>
+                        )}
                       </div>
-                      <div className="achieve-info">
-                        <h4>
-                          {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
-                          {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
-                        </h4>
-                        <span>{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
-                        <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+
+                      <p className="text-desc">{proj.desc}</p>
+                      <div className="project-tags">
+                        {proj.category === 'THIẾT KẾ' && (
+                          <>
+                            <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
+                            <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
+                          </>
+                        )}
+                        {proj.category === 'SỰ KIỆN' && (
+                          <>
+                            <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
+                            <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
+                          </>
+                        )}
+                        {proj.category === 'DỰ ÁN' && (
+                          <>
+                            <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
+                            <span className="tag">{lang === 'vi' ? 'LẬP TRÌNH' : 'CODING'}</span>
+                            <span className="tag">WEBSITE</span>
+                          </>
+                        )}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </section>
+                  </div>
+                </div>
 
-            {/* 4. PROJECTS SECTION */}
-            <section id="projects">
-              <div className="fade-in-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
-                 <div>
-                   <span className="sub-title">{t.projSub}</span>
-                   <h2 className="section-title" style={{ marginBottom: 0 }}>
-                     {t.projTitle1}<span className="italic-red">{t.projTitle2}</span>
-                   </h2>
-                 </div>
-                 
-                 <div className="filter-container" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)} style={{ marginBottom: 0 }}>
-                   <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
-                   <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
-                   <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
-                   <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
-                 </div>
-              </div>
-
-              <div className="project-grid">
-                {filteredProjects.map((proj) => (
-                  <div key={proj.title} className="glow-card project-showcase-card fade-in-section">
-                    <div className="project-header">
-                      <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
-                      <div className="project-title-group">
-                        <span className="project-role">{proj.role}</span>
-                        
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                          <h3 style={{ margin: 0 }}>{proj.title}</h3>
-                          {proj.link && (
-                            <a 
-                              href={proj.link} 
-                              target="_blank" 
-                              rel="noreferrer" 
-                              className="project-link-icon"
-                              onMouseEnter={() => setIsHoveringBtn(true)} 
-                              onMouseLeave={() => setIsHoveringBtn(false)}
-                              title="Xem dự án thực tế"
-                            >
-                              <i className="fas fa-external-link-alt"></i>
-                            </a>
-                          )}
-                        </div>
-
-                        <p className="text-desc">{proj.desc}</p>
-                        <div className="project-tags">
-                          {proj.category === 'THIẾT KẾ' && (
-                            <>
-                              <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
-                              <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
-                            </>
-                          )}
-                          {proj.category === 'SỰ KIỆN' && (
-                            <>
-                              <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
-                              <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
-                            </>
-                          )}
-                          {proj.category === 'DỰ ÁN' && (
-                            <>
-                              <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
-                              <span className="tag">{lang === 'vi' ? 'LẬP TRÌNH' : 'CODING'}</span>
-                              <span className="tag">WEBSITE</span>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="project-gallery" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                      {proj.mainVideo ? (
-                        <div className="gallery-main fb-video-wrapper">
-                          {!activeVideos[proj.title] ? (
-                            <div 
-                              className="custom-video-thumbnail"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
-                              }}
-                              onMouseEnter={() => setIsHoveringBtn(true)} 
-                              onMouseLeave={() => setIsHoveringBtn(false)}
-                            >
-                              <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
-                              <div className="play-button-overlay">
-                                <i className="fas fa-play"></i>
-                              </div>
-                            </div>
-                          ) : (
-                            <iframe 
-                              src={`${proj.mainVideo}&autoplay=1`}
-                              style={{ border: 'none', overflow: 'hidden' }} 
-                              scrolling="no" 
-                              frameBorder="0" 
-                              loading="lazy"
-                              allowFullScreen={true} 
-                              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                            ></iframe>
-                          )}
+                <div 
+                  className="project-gallery" 
+                  style={{ transform: "translateZ(30px)" }}
+                  onMouseEnter={handleMouseEnterInteractive} 
+                  onMouseLeave={handleMouseLeaveInteractive}
+                >
+                  {proj.mainVideo ? (
+                    <div className="gallery-main fb-video-wrapper">
+                      {!activeVideos[proj.title] ? (
+                        <div 
+                          className="custom-video-thumbnail"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
+                          }}
+                          onMouseEnter={handleMouseEnterInteractive} 
+                          onMouseLeave={handleMouseLeaveInteractive}
+                        >
+                          <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
+                          <div className="play-button-overlay">
+                            <i className="fas fa-play"></i>
+                          </div>
                         </div>
                       ) : (
-                        <img 
-                          src={proj.mainImg} 
-                          alt="Main Visual" 
-                          className="gallery-main" 
-                          onClick={() => openPopup(proj, proj.mainImg)} 
+                        <iframe 
+                          src={`${proj.mainVideo}&autoplay=1`}
+                          style={{ border: 'none', overflow: 'hidden' }} 
+                          scrolling="no" 
+                          frameBorder="0" 
                           loading="lazy"
-                        />
+                          allowFullScreen={true} 
+                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        ></iframe>
                       )}
-                      
-                      {proj.images.map((img, i) => (
-                        <img 
-                          key={i} 
-                          src={img} 
-                          alt="Mini Gallery" 
-                          onClick={() => openPopup(proj, img)} 
-                          loading="lazy"
-                        />
-                      ))}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* 5. CONTACT SECTION */}
-            <section id="contact" className="fade-in-section">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-                <div>
-                  <span className="sub-title">{t.contactSub}</span>
-                  <h2 className="section-title" style={{ marginBottom: '15px' }}>
-                    {t.contactTitle1} <span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}
-                  </h2>
-                  <p className="text-desc" style={{ maxWidth: '600px' }}>{t.contactDesc}</p>
+                  ) : (
+                    <img 
+                      src={proj.mainImg} 
+                      alt="Main Visual" 
+                      className="gallery-main" 
+                      onClick={() => openPopup(proj, proj.mainImg)} 
+                      loading="lazy"
+                    />
+                  )}
+                  
+                  {proj.images.map((img, i) => (
+                    <img 
+                      key={i} 
+                      src={img} 
+                      alt="Mini Gallery" 
+                      onClick={() => openPopup(proj, img)} 
+                      loading="lazy"
+                    />
+                  ))}
                 </div>
-                
-                <div className="contact-links-group">
-                  <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fab fa-facebook-f"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">FACEBOOK</span>
-                      <span className="contact-btn-value">Nguyễn Trí Nhân</span>
-                    </div>
-                  </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
 
-                  <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fab fa-instagram"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">INSTAGRAM</span>
-                      <span className="contact-btn-value">@n.trisnhaan</span>
-                    </div>
-                  </a>
-
-                  <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fab fa-tiktok"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">TIKTOK</span>
-                      <span className="contact-btn-value">@ng_tri_nhan</span>
-                    </div>
-                  </a>
-
-                  <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fab fa-behance"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">BEHANCE</span>
-                      <span className="contact-btn-value">Nguyễn Trí Nhân</span>
-                    </div>
-                  </a>
-
-                  <a href="tel:+84335810259" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fas fa-phone"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">{t.footerPhone}</span>
-                      <span className="contact-btn-value">0335 810 259</span>
-                    </div>
-                  </a>
-
-                  <a href="mailto:ntrinhan712@gmail.com" className="contact-btn fade-in-section" onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                    <div className="contact-btn-icon"><i className="fas fa-envelope"></i></div>
-                    <div className="contact-btn-content">
-                      <span className="contact-btn-label">EMAIL</span>
-                      <span className="contact-btn-value">ntrinhan712@gmail.com</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </section>
-          </main>
-
-          {/* 6. FOOTER */}
-          <footer style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'flex-start', 
-            flexWrap: 'wrap', 
-            gap: '40px',
-            padding: '60px 5%', 
-            borderTop: '1px solid var(--border-color)', 
-            marginTop: '50px', 
-            maxWidth: '1400px', 
-            marginLeft: 'auto', 
-            marginRight: 'auto' 
-          }}>
-            <div style={{ flex: '1 1 250px' }}>
-              <div className="footer-logo">TRÍ NHÂN<span>.</span></div>
-              <p>© 2026 TRÍ NHÂN PORTFOLIO.</p>
+        {/* 5. CONTACT SECTION */}
+        <section id="contact">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+            <div>
+              <span className="sub-title">{t.contactSub}</span>
+              <h2 className="section-title" style={{ marginBottom: '15px' }}>
+                <CharReveal key={`con-title-${lang}`} text={t.contactTitle1} /> <span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}
+              </h2>
+              <p className="text-desc" style={{ maxWidth: '600px' }}>{t.contactDesc}</p>
             </div>
             
-            <div style={{ flex: '2 1 500px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '30px' }}>
-              <div>
-                <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerNav}</p>
-                <div className="footer-nav">
-                  <a href="#timeline">{t.navEdu}</a>
-                  <a href="#achievements">{t.navAward}</a>
-                  <a href="#projects">{t.navProj}</a>
-                  <a href="#contact">{t.navContact}</a>
+            <motion.div 
+              className="contact-links-group"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              <motion.a 
+                href="https://www.facebook.com/tris.nhaan" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fab fa-facebook-f"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">FACEBOOK</span>
+                  <span className="contact-btn-value">Nguyễn Trí Nhân</span>
                 </div>
-              </div>
-              
-              <div>
-                <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerConnect}</p>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '5px' }}>EMAIL</p>
-                <p style={{ fontWeight: 700, marginBottom: '15px', color: 'white' }}>ntrinhan712@gmail.com</p>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '5px' }}>{t.footerPhone}</p>
-                <p style={{ fontWeight: 700, marginBottom: '20px', color: 'white' }}>0335 810 259</p>
-                
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '10px' }}>{t.footerSocial}</p>
-                <div className="footer-nav" style={{ flexDirection: 'row', gap: '20px' }} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>
-                  <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer">FACEBOOK</a>
-                  <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer">INSTAGRAM</a>
-                  <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer">TIKTOK</a>
-                  <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer">BEHANCE</a>
+              </motion.a>
+
+              <motion.a 
+                href="https://www.instagram.com/n.trisnhaan/" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fab fa-instagram"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">INSTAGRAM</span>
+                  <span className="contact-btn-value">@n.trisnhaan</span>
                 </div>
-              </div>
-            </div>
+              </motion.a>
 
-            <div className="go-top-wrapper" style={{ flex: '1 1 150px', display: 'flex', alignItems: 'flex-end' }}>
-               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: 'auto' }}>
-                 <button className="go-top" onClick={scrollToTop} onMouseEnter={() => setIsHoveringBtn(true)} onMouseLeave={() => setIsHoveringBtn(false)}>↑</button>
-                 <span className="go-top-text">{t.goTop}</span>
-               </div>
-            </div>
-          </footer>
+              <motion.a 
+                href="https://www.tiktok.com/@ng_tri_nhan" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fab fa-tiktok"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">TIKTOK</span>
+                  <span className="contact-btn-value">@ng_tri_nhan</span>
+                </div>
+              </motion.a>
 
-          {/* POPUP HÌNH ẢNH */}
-          <div 
-            className={`image-modal ${popupData.isOpen ? 'active' : ''}`} 
-            onClick={closePopup} 
-            onMouseEnter={() => setIsHoveringBtn(true)} 
-            onMouseLeave={() => setIsHoveringBtn(false)}
+              <motion.a 
+                href="https://www.behance.net/trnhnnguyn2" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fab fa-behance"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">BEHANCE</span>
+                  <span className="contact-btn-value">Nguyễn Trí Nhân</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href="tel:+84335810259" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fas fa-phone"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">{t.footerPhone}</span>
+                  <span className="contact-btn-value">0335 810 259</span>
+                </div>
+              </motion.a>
+
+              <motion.a 
+                href="mailto:ntrinhan712@gmail.com" 
+                className="contact-btn" 
+                onMouseEnter={handleMouseEnterInteractive} 
+                onMouseLeave={handleMouseLeaveInteractive}
+                variants={cardVariants}
+              >
+                <div className="contact-btn-icon"><i className="fas fa-envelope"></i></div>
+                <div className="contact-btn-content">
+                  <span className="contact-btn-label">EMAIL</span>
+                  <span className="contact-btn-value">ntrinhan712@gmail.com</span>
+                </div>
+              </motion.a>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+
+      {/* 6. FOOTER */}
+      <footer style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-start', 
+        flexWrap: 'wrap', 
+        gap: '40px',
+        padding: '60px 5%', 
+        borderTop: '1px solid var(--border-color)', 
+        marginTop: '50px', 
+        maxWidth: '1400px', 
+        marginLeft: 'auto', 
+        marginRight: 'auto' 
+      }}>
+        <div style={{ flex: '1 1 250px' }}>
+          <div className="footer-logo">TRÍ NHÂN<span>.</span></div>
+          <p>© 2026 TRÍ NHÂN PORTFOLIO.</p>
+        </div>
+        
+        <div style={{ flex: '2 1 500px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '30px' }}>
+          <div>
+            <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerNav}</p>
+            <div className="footer-nav">
+              <a href="#timeline" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navEdu}</a>
+              <a href="#achievements" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navAward}</a>
+              <a href="#projects" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navProj}</a>
+              <a href="#contact" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navContact}</a>
+            </div>
+          </div>
+          
+          <div>
+            <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerConnect}</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '5px' }}>EMAIL</p>
+            <p style={{ fontWeight: 700, marginBottom: '15px', color: 'white' }}>ntrinhan712@gmail.com</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '5px' }}>{t.footerPhone}</p>
+            <p style={{ fontWeight: 700, marginBottom: '20px', color: 'white' }}>0335 810 259</p>
+            
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '10px' }}>{t.footerSocial}</p>
+            <div className="footer-nav" style={{ flexDirection: 'row', gap: '20px' }}>
+              <a href="https://www.facebook.com/tris.nhaan" target="_blank" rel="noreferrer" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>FACEBOOK</a>
+              <a href="https://www.instagram.com/n.trisnhaan/" target="_blank" rel="noreferrer" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>INSTAGRAM</a>
+              <a href="https://www.tiktok.com/@ng_tri_nhan" target="_blank" rel="noreferrer" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>TIKTOK</a>
+              <a href="https://www.behance.net/trnhnnguyn2" target="_blank" rel="noreferrer" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>BEHANCE</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="go-top-wrapper" style={{ flex: '1 1 150px', display: 'flex', alignItems: 'flex-end' }}>
+           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginLeft: 'auto' }}>
+             <motion.button 
+               className="go-top" 
+               onClick={scrollToTop} 
+               onMouseEnter={handleMouseEnterInteractive} 
+               onMouseLeave={handleMouseLeaveInteractive}
+               whileHover={{ y: -5 }}
+               whileTap={{ scale: 0.9 }}
+             >
+               ↑
+             </motion.button>
+             <span className="go-top-text">{t.goTop}</span>
+           </div>
+        </div>
+      </footer>
+
+      {/* POPUP LIGHTBOX IMAGE WITH FRAMER MOTION TRANSITIONS */}
+      <AnimatePresence>
+        {popupData.isOpen && (
+          <motion.div 
+            className="image-modal active"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closePopup}
           >
-            <button className="close-modal" onClick={closePopup}>&times;</button>
+            <motion.button 
+              className="close-modal" 
+              onClick={closePopup}
+              whileHover={{ scale: 1.15, color: "var(--primary-color)" }}
+              whileTap={{ scale: 0.9 }}
+              onMouseEnter={handleMouseEnterInteractive}
+              onMouseLeave={handleMouseLeaveInteractive}
+            >
+              &times;
+            </motion.button>
             
-            {popupData.isOpen && popupData.gallery.length > 1 && (
+            {popupData.gallery.length > 1 && (
               <>
-                <button className="nav-btn prev-btn" onClick={prevImage}>
+                <motion.button 
+                  className="nav-btn prev-btn" 
+                  onClick={prevImage}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onMouseEnter={handleMouseEnterInteractive}
+                  onMouseLeave={handleMouseLeaveInteractive}
+                >
                   <i className="fas fa-chevron-left"></i>
-                </button>
-                <button className="nav-btn next-btn" onClick={nextImage}>
+                </motion.button>
+                <motion.button 
+                  className="nav-btn next-btn" 
+                  onClick={nextImage}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onMouseEnter={handleMouseEnterInteractive}
+                  onMouseLeave={handleMouseLeaveInteractive}
+                >
                   <i className="fas fa-chevron-right"></i>
-                </button>
+                </motion.button>
               </>
             )}
 
-            {popupData.isOpen && (
-              <img 
-                src={popupData.gallery[popupData.currentIndex]} 
-                alt="Enlarged Visual" 
-                onClick={(e) => e.stopPropagation()} 
-              />
-            )}
-          </div>
+            <motion.img 
+              key={popupData.currentIndex} // forces animate-in when switching images
+              src={popupData.gallery[popupData.currentIndex]} 
+              alt="Enlarged Visual" 
+              onClick={(e) => e.stopPropagation()} 
+              initial={{ scale: 0.92, opacity: 0, rotateZ: -1 }}
+              animate={{ scale: 1, opacity: 1, rotateZ: 0 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
