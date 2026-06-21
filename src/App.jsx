@@ -815,21 +815,23 @@ function App() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.96 },
+    hidden: { opacity: 0, y: 50, rotateX: 6, filter: "blur(8px)" },
     visible: { 
       opacity: 1, 
       y: 0, 
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+      rotateX: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   const timelineVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, x: -40, filter: "blur(6px)" },
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
