@@ -332,6 +332,13 @@ function App() {
   const blobScrollY3 = useTransform(scrollY, [0, 3000], [0, 80]);
   const heroImageParallax = useTransform(scrollY, [0, 1000], [0, 60]);
 
+  // Section Background Monospace Parallax Transforms
+  const bgNumY1 = useTransform(scrollY, [0, 1000], [0, 150]);
+  const bgNumY2 = useTransform(scrollY, [0, 2000], [-50, 150]);
+  const bgNumY3 = useTransform(scrollY, [500, 3000], [-80, 180]);
+  const bgNumY4 = useTransform(scrollY, [1000, 4000], [-100, 200]);
+  const bgNumY5 = useTransform(scrollY, [1500, 5000], [-120, 220]);
+
   // Reacts to cursor movement slightly
   const blobX = useTransform(cursorX, [0, typeof window !== 'undefined' ? window.innerWidth : 1920], [-40, 40]);
   const blobY = useTransform(cursorY, [0, typeof window !== 'undefined' ? window.innerHeight : 1080], [-40, 40]);
@@ -428,7 +435,68 @@ function App() {
     return () => window.removeEventListener('scroll', handleScrollActiveSection);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleNavClick = (e, targetId) => {
+    if (e) e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+    
+    const headerOffset = window.innerWidth <= 768 ? 70 : 80;
+    const targetPosition = targetElement.offsetTop - headerOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 900;
+    let start = null;
+    
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const percentage = Math.min(progress / duration, 1);
+      const ease = easeOutCubic(percentage);
+      window.scrollTo(0, startPosition + distance * ease);
+      
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      } else {
+        window.location.hash = targetId;
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  };
+
+  const scrollToTop = (e) => {
+    if (e) e.preventDefault();
+    const startPosition = window.pageYOffset;
+    const duration = 900;
+    let start = null;
+    
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const percentage = Math.min(progress / duration, 1);
+      const ease = easeOutCubic(percentage);
+      window.scrollTo(0, startPosition - startPosition * ease);
+      
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      } else {
+        // Prevent viewport jump by using history state
+        if (window.history.pushState) {
+          window.history.pushState('', document.title, window.location.pathname);
+        } else {
+          window.location.hash = '';
+        }
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  };
 
   // =========================================================================
   // 7. DATA STRUCTS (Giữ nguyên toàn bộ)
@@ -767,6 +835,9 @@ function App() {
 
   return (
     <>
+      {/* 0. INTERACTIVE CONSTELLATION BACKDROP */}
+      <ParticleCanvas />
+
       {/* 1. MOUSE & SCROLL DYNAMIC MORPH BLOBS */}
       <motion.div className="blob-container" style={{ x: blobX, y: blobY }}>
         <motion.div className="blob blob-1" style={{ y: blobScrollY1 }}></motion.div>
@@ -850,7 +921,7 @@ function App() {
           <a 
             href="#home" 
             className={activeSection === 'home' ? 'active' : ''} 
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, 'home')}
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseLeaveInteractive}
           >
@@ -859,7 +930,7 @@ function App() {
           <a 
             href="#timeline" 
             className={activeSection === 'timeline' ? 'active' : ''} 
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, 'timeline')}
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseLeaveInteractive}
           >
@@ -868,7 +939,7 @@ function App() {
           <a 
             href="#achievements" 
             className={activeSection === 'achievements' ? 'active' : ''} 
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, 'achievements')}
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseLeaveInteractive}
           >
@@ -877,7 +948,7 @@ function App() {
           <a 
             href="#projects" 
             className={activeSection === 'projects' ? 'active' : ''} 
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, 'projects')}
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseLeaveInteractive}
           >
@@ -886,7 +957,7 @@ function App() {
           <a 
             href="#contact" 
             className={activeSection === 'contact' ? 'active' : ''} 
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, 'contact')}
             onMouseEnter={handleMouseEnterInteractive}
             onMouseLeave={handleMouseLeaveInteractive}
           >
@@ -919,6 +990,7 @@ function App() {
       <main>
         {/* 1. HERO SECTION */}
         <section id="home" className="hero-split">
+          <motion.div className="section-bg-num sec-1-num" style={{ y: bgNumY1 }}>01</motion.div>
           <div className="hero-text">
             <motion.span 
               className="sub-title"
@@ -955,6 +1027,7 @@ function App() {
               <a 
                 href="#projects" 
                 className="btn btn-primary"
+                onClick={(e) => handleNavClick(e, 'projects')}
                 onMouseEnter={handleMouseEnterInteractive}
                 onMouseLeave={handleMouseLeaveInteractive}
               >
@@ -963,6 +1036,7 @@ function App() {
               <a 
                 href="#contact" 
                 className="btn btn-outline"
+                onClick={(e) => handleNavClick(e, 'contact')}
                 onMouseEnter={handleMouseEnterInteractive}
                 onMouseLeave={handleMouseLeaveInteractive}
               >
@@ -1020,6 +1094,7 @@ function App() {
 
         {/* 2. TIMELINE SECTION */}
         <section id="timeline">
+          <motion.div className="section-bg-num sec-2-num" style={{ y: bgNumY2 }}>02</motion.div>
           <div className="grid-2">
             <motion.div 
               className="timeline-col"
@@ -1189,6 +1264,7 @@ function App() {
 
         {/* 3. ACHIEVEMENTS SECTION */}
         <section id="achievements">
+          <motion.div className="section-bg-num sec-3-num" style={{ y: bgNumY3 }}>03</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
              <div>
                <span className="sub-title">{t.achieveSub}</span>
@@ -1252,6 +1328,7 @@ function App() {
 
         {/* 4. PROJECTS SECTION */}
         <section id="projects">
+          <motion.div className="section-bg-num sec-4-num" style={{ y: bgNumY4 }}>04</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
              <div>
                <span className="sub-title">{t.projSub}</span>
@@ -1397,6 +1474,7 @@ function App() {
 
         {/* 5. CONTACT SECTION */}
         <section id="contact">
+          <motion.div className="section-bg-num sec-5-num" style={{ y: bgNumY5 }}>05</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
             <div>
               <span className="sub-title">{t.contactSub}</span>
@@ -1532,10 +1610,10 @@ function App() {
           <div>
             <p style={{ color: 'var(--primary-color)', fontWeight: 700, marginBottom: '15px' }}>{t.footerNav}</p>
             <div className="footer-nav">
-              <a href="#timeline" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navEdu}</a>
-              <a href="#achievements" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navAward}</a>
-              <a href="#projects" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navProj}</a>
-              <a href="#contact" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navContact}</a>
+              <a href="#timeline" onClick={(e) => handleNavClick(e, 'timeline')} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navEdu}</a>
+              <a href="#achievements" onClick={(e) => handleNavClick(e, 'achievements')} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navAward}</a>
+              <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navProj}</a>
+              <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>{t.navContact}</a>
             </div>
           </div>
           
