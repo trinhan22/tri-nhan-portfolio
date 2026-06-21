@@ -273,7 +273,7 @@ function App() {
       timelineEdu: "HỌC VẤN", timelineExp: "KINH NGHIỆM / HOẠT ĐỘNG",
       achieveSub: "DẤU ẤN CÁ NHÂN", achieveTitle1: "THÀNH TÍCH", achieveTitle2: "NỔI BẬT",
       projSub: "DANH MỤC SÁNG TẠO", projTitle1: "GÓC ", projTitle2: "DỰ ÁN",
-      filterAll: "TẤT CẢ", filterDesign: "THIẾT KẾ", filterEvent: "SỰ KIỆN",
+      filterAll: "TẤT CẢ", filterVideo:"VIDEO", filterDesign: "THIẾT KẾ", filterEvent: "SỰ KIỆN",
       filterSchool: "CẤP TRƯỜNG", filterDistrict: "CẤP QUẬN", filterCity: "CẤP THÀNH PHỐ", filterNational: "CẤP QUỐC GIA",
       contactSub: "LIÊN HỆ", contactTitle1: "HÀNH TRÌNH", contactTitle2: "BẮT ĐẦU", contactTitle3: "TỪ ĐÂY",
       contactDesc: "Nếu bạn có chung sở thích, muốn giao lưu học hỏi hay rủ mình tham gia dự án nào đó, đừng ngại liên hệ nhé!",
@@ -287,7 +287,7 @@ function App() {
       timelineEdu: "EDUCATION", timelineExp: "EXPERIENCE / ACTIVITIES",
       achieveSub: "PERSONAL MARKS", achieveTitle1: "OUTSTANDING", achieveTitle2: "ACHIEVEMENTS",
       projSub: "CREATIVE FOLDER", projTitle1: "PROJECT ", projTitle2: "HUB",
-      filterAll: "ALL", filterDesign: "DESIGN", filterEvent: "EVENTS",
+      filterAll: "ALL", filterVideo:"VIDEO", filterDesign: "DESIGN", filterEvent: "EVENTS",
       filterSchool: "SCHOOL LEVEL", filterDistrict: "DISTRICT LEVEL", filterCity: "CITY LEVEL", filterNational: "NATIONAL LEVEL",
       contactSub: "CONTACT", contactTitle1: "LET'S START", contactTitle2: "THE JOURNEY", contactTitle3: "HERE",
       contactDesc: "If you share the same interests, want to learn together, or collaborate on a project, feel free to reach out!",
@@ -503,18 +503,108 @@ function App() {
   // =========================================================================
   const projects = [
     {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Phim Ngắn - "Hố Sâu Ảo Vọng"' : 'Short Film - "The Abyss of Delusion"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
+      logo: 'https://www.fphotography.club/logo4.webp',
+      mainVideo: 'https://www.youtube.com/embed/2x40K6FstAU?si=czshFspivRjlkkst',
+      mainImg: '/images/design-1/1.png',
+      images: []
+    },
+    {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Phim Ngắn - "Áp Lực Học Đường"' : 'Short Film - "School Pressure"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
+      logo: 'https://www.fphotography.club/logo4.webp',
+      mainVideo: 'https://www.youtube.com/embed/i4RDEnNLbmw?si=EJ3iOby896wRgZja',
+      mainImg: '/images/thumb/5.png',
+      images: []
+    },
+    {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Recap Video - "Sự Kiện Chiếu Phim Tết 2026"' : 'Recap Video - "Lunar New Year Film Screening Event 2026."',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      logo: 'https://www.fphotography.club/logo-black.webp',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/thumb/4.png',
+      images: []
+    },
+    {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Podcast - "Hãy Yêu Thương Mẹ Khi Còn Có Thể"' : 'Podcast - "Love your mother while you still can."',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      logo: 'https://www.fphotography.club/logo-black.webp',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2044582789446743%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/thumb/3.png',
+      images: []
+    },
+    {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Recap Video - "Giao Lưu Nhiếp Ảnh Cấp CLB"' : 'Recap Video - "Photography Club Exchange"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      logo: 'https://www.fphotography.club/logo-black.webp',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/thumb/2.png',
+      images: []
+    },
+    {
+      category: 'VIDEO',
+      role: '/ VIDEO EDITOR / CONTENT',
+      title: lang === 'vi' ? 'Live Session - "Người Gieo Mầm Xanh"' : 'Live Session - "Người Gieo Mầm Xanh"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      logo: 'https://www.fphotography.club/logo-black.webp',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F681113428169427%2F&show_text=false&width=560&t=0',
+      mainImg: '/images/thumb/1.png',
+      images: []
+    },
+    {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "Giới thiệu BCN Gen 2.0"' : 'Social Media Post - "Introducing BoD Gen 2.0"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.facebook.com/share/p/14e6gstVdFK/',
-      logo: '/images/design-9/1.png',
+      title: lang === 'vi' ? 'Social Media Post - "Giới thiệu AIGEO Team"' : 'Social Media Post - "Introducing the AIGEO Team"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của AIGEO.' : 'Media publication for AIGEO Project.',
+      link: 'https://www.facebook.com/share/p/1Bm7xV9gFm/',
+      logo: '/images/dev-4/6.png',
+      mainImg: '/images/design-10/1.png',
+      images: [
+        '/images/design-10/2.png',
+        '/images/design-10/3.png',
+        '/images/design-10/4.png',
+        '/images/design-10/5.png',
+      ]
+    },
+    {
+      category: 'THIẾT KẾ',
+      role: '/ GRAPHIC DESIGNER / CONTENT',
+      title: lang === 'vi' ? 'Social Media Post - "Giới thiệu Đội ngũ Phát triển HopVan"' : 'Social Media Post - "Introducing the HopVan Development Team"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của HopVan.' : 'Media publication for HopVan Project.',
+      link: 'https://www.facebook.com/share/p/1Bm7xV9gFm/',
+      logo: 'https://hopvan.info.vn/logo.webp',
       mainImg: '/images/design-9/1.png',
       images: [
         '/images/design-9/2.png',
         '/images/design-9/3.png',
         '/images/design-9/4.png',
-        '/images/design-9/5.png'
+        '/images/design-9/5.png',
+      ]
+    },
+    {
+      category: 'THIẾT KẾ',
+      role: '/ GRAPHIC DESIGNER / CONTENT',
+      title: lang === 'vi' ? 'Social Media Post - "Giới thiệu BCN Gen 2.0"' : 'Social Media Post - "Introducing BoD Gen 2.0"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      link: 'https://www.facebook.com/share/p/14e6gstVdFK/',
+      logo: '/images/design-8/1.png',
+      mainImg: '/images/design-8/1.png',
+      images: [
+        '/images/design-8/2.png',
+        '/images/design-8/3.png',
+        '/images/design-8/4.png',
+        '/images/design-8/5.png'
       ]
     },
     {
@@ -565,13 +655,13 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "Chiêu mộ thành viên F-Photo"' : 'Social Media Post - "F-Photo Member Recruitment"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.behance.net/gallery/236224381/SOCIAL-MEDIA-POST-F-PHOTO-CHIEU-M-THANH-VIEN',
+      title: lang === 'vi' ? 'Key Visual - "Club Day 2025-2026"' : 'Key Visual - "Club Day 2025-2026"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của FSchool Cần Thơ.' : 'Media publication for FSchool Cantho.',
+      link: 'https://www.behance.net/gallery/236223807/KEY-VISUAL-CLUB-DAY-2025',
       logo: '/images/design-4/1.png',
-      mainImg: '/images/design-4/2.png',
+      mainImg: '/images/design-4/1.png',
       images: [
-        '/images/design-4/1.png',
+        '/images/design-4/2.png',
         '/images/design-4/3.png',
         '/images/design-4/4.png',
         '/images/design-4/5.png'
@@ -580,13 +670,13 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Key Visual - "Club Day 2025-2026"' : 'Key Visual - "Club Day 2025-2026"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của FSchool Cần Thơ.' : 'Media publication for FSchool Cantho.',
-      link: 'https://www.behance.net/gallery/236223807/KEY-VISUAL-CLUB-DAY-2025',
+      title: lang === 'vi' ? 'Social Media Post - "F-Photo Thay Áo Mới"' : 'Social Media Post - "F-Photo New Look"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      link: 'https://www.behance.net/gallery/236223287/SOCIAL-MEDIA-POST-F-PHOTO-THAY-AO-MI',
       logo: '/images/design-3/1.png',
-      mainImg: '/images/design-3/1.png',
+      mainImg: '/images/design-3/2.png',
       images: [
-        '/images/design-3/2.png',
+        '/images/design-3/1.png',
         '/images/design-3/3.png',
         '/images/design-3/4.png',
         '/images/design-3/5.png'
@@ -595,13 +685,13 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "F-Photo Thay Áo Mới"' : 'Social Media Post - "F-Photo New Look"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.behance.net/gallery/236223287/SOCIAL-MEDIA-POST-F-PHOTO-THAY-AO-MI',
+      title: lang === 'vi' ? 'Magazine - "Tạp chí F-Star Phương Nghi"' : 'Magazine - "F-Star Phuong Nghi Magazine"',
+      desc: lang === 'vi' ? 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc.' : 'Publication selected to be featured in the "Kien Doc" Journal.',
+      link: 'https://www.behance.net/gallery/236216401/MAGAZINE-F-STAR-PHUONG-NGHI',
       logo: '/images/design-2/1.png',
-      mainImg: '/images/design-2/2.png',
+      mainImg: '/images/design-2/1.png',
       images: [
-        '/images/design-2/1.png',
+        '/images/design-2/2.png',
         '/images/design-2/3.png',
         '/images/design-2/4.png',
         '/images/design-2/5.png'
@@ -610,31 +700,16 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Magazine - "Tạp chí F-Star Phương Nghi"' : 'Magazine - "F-Star Phuong Nghi Magazine"',
-      desc: lang === 'vi' ? 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc.' : 'Publication selected to be featured in the "Kien Doc" Journal.',
-      link: 'https://www.behance.net/gallery/236216401/MAGAZINE-F-STAR-PHUONG-NGHI',
-      logo: '/images/design-1/1.png',
-      mainImg: '/images/design-1/1.png',
-      images: [
-        '/images/design-1/2.png',
-        '/images/design-1/3.png',
-        '/images/design-1/4.png',
-        '/images/design-1/5.png'
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
       title: lang === 'vi' ? 'Một số dự án design khác' : 'Other design projects',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
       link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
-      logo: '/images/design-8/4.png',
-      mainImg: '/images/design-8/1.png',
+      logo: '/images/design-1/4.png',
+      mainImg: '/images/design-1/1.png',
       images: [
-        '/images/design-8/4.png',
-        '/images/design-8/2.png',
-        '/images/design-8/3.png',
-        '/images/design-8/5.png'
+        '/images/design-1/4.png',
+        '/images/design-1/2.png',
+        '/images/design-1/3.png',
+        '/images/design-1/5.png'
       ]
     },
     {
@@ -786,9 +861,9 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.', link:'https://www.facebook.com/share/1CpppKyDrZ/'  },
     { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'Câu lạc bộ • 2025', metaEn: 'Club Level • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://www.facebook.com/share/p/1PKQqWkeRW/'  },
     { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.', link:'https://giaoducthoidai.vn/hon-650-thi-sinh-can-tho-tranh-tai-chon-doi-tuyen-hs-gioi-thpt-du-thi-quoc-gia-post745159.html'  },
-    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.', link:'https://www.facebook.com/share/p/1CXb2FbGyF/' },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.', link:'https://www.facebook.com/share/p/1CXb2FbGyF/' },
     { level: 'Cấp Quốc gia', titleVi: 'Top 63 Dự án được đăng trên báo Thanh Niên', titleEn: 'Top 63 Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
-    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://www.facebook.com/share/p/1bCm9g118k/'  },
+    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://www.facebook.com/share/p/1bCm9g118k/'  },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.', link:'https://mientay.giadinhonline.vn/phien-toa-gia-dinh-mua-4-hoc-tro-thpt-fpt-can-tho-lon-len-cung-phap-luat-d16979.html'  },
     { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/1B7uLPRzms/' },
     { level: 'Cấp Quốc gia', titleVi: 'Giải Triển vọng Cuộc thi AI Young Guru', titleEn: 'Promising Award in AI Young Guru Competition', metaVi: 'Cấp Quốc gia • 2026', metaEn: 'National Level • 2026', descVi: 'Đoạt giải Triển vọng (Top 30 Quốc gia) AI Young Guru.', descEn: 'Won the Promising Award (Top 30 Nationwide) in AI Young Guru.', link:'https://www.facebook.com/share/1JGwAJnA86/' },
@@ -797,7 +872,7 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ Xuất sắc năm học 2025-2026', titleEn: 'Outstanding Club of the 2025-2026 Academic Year', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu CLB Xuất sắc năm học 2025-2026.', descEn: 'Awarded the Outstanding Club Title for the 2025-2026 academic year.', link: 'https://www.facebook.com/share/17aWfv4WJC/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2026.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2026.', link: 'https://www.facebook.com/share/1CkreparF1/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2026.', descEn: 'Awarded the School-level "Talented Student" Title in 2026.', link: 'https://www.facebook.com/share/1ENsu2uCbZ/' },
-    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
+    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
   ];
 
   const filteredAchievements = activeAchieveFilter === 'ALL' 
@@ -1341,6 +1416,7 @@ function App() {
              
              <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
                <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
+               <button className={`filter-btn ${activeFilter === 'VIDEO' ? 'active' : ''}`} onClick={() => setActiveFilter('VIDEO')}>{t.filterVideo}</button>
                <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
                <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
                <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
@@ -1390,6 +1466,12 @@ function App() {
 
                       <p className="text-desc">{proj.desc}</p>
                       <div className="project-tags">
+                        {proj.category === 'VIDEO' && (
+                          <>
+                            <span className="tag">{lang === 'vi' ? 'EDIT VIDEO' : 'EDIT VIDEO'}</span>
+                            <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
+                          </>
+                        )}
                         {proj.category === 'THIẾT KẾ' && (
                           <>
                             <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
