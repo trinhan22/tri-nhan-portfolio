@@ -325,13 +325,11 @@ section {
   margin-bottom: 40px; 
   color: var(--text-main);
   -webkit-text-fill-color: var(--text-main);
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
   transition: letter-spacing 0.5s var(--transition-cinematic);
 }
 
 .section-title:hover {
   letter-spacing: 2px;
-  -webkit-text-stroke: 1px rgba(229, 57, 53, 0.35);
 }
 
 .italic-red { 
