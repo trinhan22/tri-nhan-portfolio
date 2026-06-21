@@ -519,7 +519,7 @@ function App() {
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
       logo: 'https://www.fphotography.club/logo4.webp',
       mainVideo: 'https://www.youtube.com/embed/i4RDEnNLbmw?si=EJ3iOby896wRgZja',
-      mainImg: '/images/thumb/5.png',
+      mainImg: '/images/thumb/3.png',
       images: []
     },
     {
@@ -529,7 +529,7 @@ function App() {
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       logo: 'https://www.fphotography.club/logo-black.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
-      mainImg: '/images/thumb/4.png',
+      mainImg: '/images/project-4/1.png',
       images: []
     },
     {
@@ -539,7 +539,7 @@ function App() {
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       logo: 'https://www.fphotography.club/logo-black.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2044582789446743%2F&show_text=false&width=560&t=0',
-      mainImg: '/images/thumb/3.png',
+      mainImg: '/images/thumb/2.png',
       images: []
     },
     {
@@ -549,7 +549,7 @@ function App() {
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       logo: 'https://www.fphotography.club/logo-black.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
-      mainImg: '/images/thumb/2.png',
+      mainImg: '/images/project-3/2.png',
       images: []
     },
     {
