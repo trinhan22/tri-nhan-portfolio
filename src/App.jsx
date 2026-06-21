@@ -567,7 +567,7 @@ function App() {
       role: '/ GRAPHIC DESIGNER / CONTENT',
       title: lang === 'vi' ? 'Social Media Post - "Giới thiệu AIGEO Team"' : 'Social Media Post - "Introducing the AIGEO Team"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của AIGEO.' : 'Media publication for AIGEO Project.',
-      link: 'https://www.facebook.com/share/p/1Bm7xV9gFm/',
+      link: 'https://www.facebook.com/share/p/18yonBX57N/',
       logo: '/images/dev-4/6.png',
       mainImg: '/images/design-10/1.png',
       images: [
