@@ -1034,13 +1034,13 @@ section {
   border: 1px solid transparent;
 }
 
-/* Hover Liquid-wave adjustments on images */
+/* Clean, high-performance hover effect on images */
 .project-gallery img:hover { 
-  transform: scale(1.01) translateY(-2px); 
-  filter: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22liquid-wave%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.025%22 numOctaves=%223%22 result=%22noise%22%3E%3Canimate attributeName=%22baseFrequency%22 values=%220.025;0.045;0.025%22 dur=%225s%22 repeatCount=%22indefinite%22/%3E%3C/feTurbulence%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%2215%22 xChannelSelector=%22R%22 yChannelSelector=%22G%22/%3E%3C/filter%3E%3C/svg%3E%23liquid-wave') brightness(0.75) !important; 
+  transform: scale(1.02) translateY(-2px); 
+  filter: brightness(0.85); 
   z-index: 10; 
   position: relative; 
-  box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(229, 57, 53, 0.3);
   border-color: rgba(var(--card-accent-rgb), 0.8) !important; 
 }
 
@@ -1090,8 +1090,8 @@ section {
 }
 
 .custom-video-thumbnail:hover img {
-  filter: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22liquid-wave%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.025%22 numOctaves=%223%22 result=%22noise%22%3E%3Canimate attributeName=%22baseFrequency%22 values=%220.025;0.045;0.025%22 dur=%225s%22 repeatCount=%22indefinite%22/%3E%3C/feTurbulence%3E%3CfeDisplacementMap in=%22SourceGraphic%22 in2=%22noise%22 scale=%2215%22 xChannelSelector=%22R%22 yChannelSelector=%22G%22/%3E%3C/filter%3E%3C/svg%3E%23liquid-wave') brightness(0.75) !important; 
-  transform: scale(1.01); 
+  filter: brightness(0.8); 
+  transform: scale(1.02); 
 }
 
 .play-button-overlay {
@@ -2014,6 +2014,11 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   border: 1px solid rgba(229, 57, 53, 0.15);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Fix border-radius overflow bug in Chrome/Safari/Blink on hover/transforms */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  isolation: isolate;
 }
 
 .gallery-main-container:hover {
@@ -2522,4 +2527,81 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   .terminal-console {
     width: calc(100% - 50px);
   }
-}
+}
+
+/* Groundbreaking interactive blueprint upgrades */
+@keyframes film-roll-top {
+  0% { background-position: 0px 0; }
+  100% { background-position: -28px 0; }
+}
+
+@keyframes film-roll-bottom {
+  0% { background-position: 0px 0; }
+  100% { background-position: 28px 0; }
+}
+
+.gallery-main-container:hover .film-sprockets-top {
+  animation: film-roll-top 0.8s linear infinite;
+}
+
+.gallery-main-container:hover .film-sprockets-bottom {
+  animation: film-roll-bottom 0.8s linear infinite;
+}
+
+/* Event pass laser scanner and verification logs */
+.barcode-laser-line {
+  position: absolute;
+  left: 25%;
+  bottom: 12px;
+  width: 80px;
+  height: 2px;
+  background: #ff3b30;
+  box-shadow: 0 0 8px #ff3b30, 0 0 15px #ff3b30;
+  z-index: 13;
+  pointer-events: none;
+  animation: barcode-scan-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes barcode-scan-anim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.ticket-status-box {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 12;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  pointer-events: none;
+  background: rgba(12, 12, 12, 0.85);
+  border: 1px solid rgba(229, 57, 53, 0.2);
+  border-radius: 4px;
+  padding: 3px 6px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.4s ease;
+}
+
+.gallery-main-container:hover .ticket-status-box {
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+.status-scanning {
+  color: #ff3b30;
+  animation: status-blink 1s infinite;
+}
+
+.status-verified {
+  color: #27c93f;
+  text-shadow: 0 0 5px rgba(39, 201, 63, 0.4);
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+

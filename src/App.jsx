@@ -272,6 +272,118 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lang, setLang] = useState('vi');
   const [activeVideos, setActiveVideos] = useState({});
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [terminalStep, setTerminalStep] = useState(0);
+
+  const handleCanvasMouseMove = (e, projTitle) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(e.clientX - rect.left);
+    const y = Math.round(e.clientY - rect.top);
+    const cleanTitle = projTitle.replace(/[^a-zA-Z0-9]/g, '-');
+    const coordEl = document.getElementById(`coords-${cleanTitle}`);
+    if (coordEl) {
+      coordEl.textContent = `X: ${x}px Y: ${y}px`;
+    }
+  };
+
+  useEffect(() => {
+    if (!hoveredProject) {
+      setTerminalStep(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setTerminalStep(prev => (prev + 1) % 6);
+    }, 1200);
+    return () => clearInterval(interval);
+  }, [hoveredProject]);
+
+  const renderTerminalLogs = (projTitle) => {
+    const step = hoveredProject === projTitle ? terminalStep : 5;
+    switch (step) {
+      case 0:
+        return (
+          <>
+            <div className="text-muted">$ npm run build</div>
+            <div className="text-red">&gt; local compiler initializing...</div>
+            <div>[INFO] ready for bundle transformation</div>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <div className="text-muted">$ npm run build</div>
+            <div>&gt; bundling modules (48/417)...</div>
+            <div className="text-muted">[░░░░░░░░░░░░░░░░░░░░] 11%</div>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <div className="text-muted">$ npm run build</div>
+            <div>&gt; bundling modules (312/417)...</div>
+            <div className="text-red">[██████████████░░░░░░] 74%</div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <div className="text-muted">$ npm run build</div>
+            <div className="text-green">✓ bundle compiled successfully</div>
+            <div className="text-muted" style={{ fontSize: '0.45rem' }}>dist/assets/index-BP4gylNb.css (50.8kB)</div>
+            <div className="text-muted" style={{ fontSize: '0.45rem' }}>dist/assets/index-CDkrWvSU.js (396.8kB)</div>
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <div className="text-muted">$ npm run test</div>
+            <div>&gt; running unit assertions...</div>
+            <div className="text-green">PASS  src/App.test.jsx (6 tests, 12ms)</div>
+            <div className="text-green">PASS  src/index.css (1 test, 2ms)</div>
+          </>
+        );
+      case 5:
+      default:
+        return (
+          <>
+            <div className="text-muted">$ npm run dev</div>
+            <div className="text-red">&gt; vite dev server ready</div>
+            <div>&gt; local: http://localhost:5173/</div>
+            <div className="text-green">&gt; hmr compiled successfully in 410ms</div>
+          </>
+        );
+    }
+  };
+
+  const renderEventStub = (projTitle) => {
+    const step = hoveredProject === projTitle ? terminalStep : 5;
+    const isScanning = step < 2;
+
+    return (
+      <>
+        <div className="ticket-perforation"></div>
+        <div className="ticket-stamp">{lang === 'vi' ? 'ĐÃ PHÊ DUYỆT' : 'APPROVED'}</div>
+        
+        {hoveredProject === projTitle && isScanning && (
+          <div className="barcode-laser-line"></div>
+        )}
+
+        <div className="ticket-barcode-wrapper">
+          <div className="ticket-barcode"></div>
+          <span className="barcode-text">PASS_NO. 2026-NPN</span>
+        </div>
+
+        <div className="ticket-status-box">
+          {isScanning ? (
+            <span className="status-scanning">SCANNING...</span>
+          ) : (
+            <span className="status-verified">VERIFIED ✓</span>
+          )}
+        </div>
+      </>
+    );
+  };
+
 
   // =========================================================================
   // 2. BỘ TỪ ĐIỂN SONG NGỮ (Giữ nguyên gốc)
@@ -1465,8 +1577,18 @@ function App() {
                 <motion.div 
                   key={proj.title} 
                   className="glow-card project-showcase-card"
-                  onMouseEnter={handleCardMouseMove}
-                  onMouseLeave={handleCardMouseLeave}
+                  onMouseEnter={(e) => {
+                    handleCardMouseMove(e);
+                    if (proj.category === 'DỰ ÁN' || proj.category === 'SỰ KIỆN') {
+                      setHoveredProject(proj.title);
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    handleCardMouseLeave(e);
+                    if (proj.category === 'DỰ ÁN' || proj.category === 'SỰ KIỆN') {
+                      setHoveredProject(null);
+                    }
+                  }}
                   onMouseMove={handleCardMouseMove}
                   variants={cardVariants}
                   style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
@@ -1596,12 +1718,15 @@ function App() {
                     onMouseEnter={handleMouseEnterInteractive} 
                     onMouseLeave={handleMouseLeaveInteractive}
                   >
-                    <div className={`gallery-main-container ${
-                      proj.category === 'VIDEO' ? 'video-blueprint-container' :
-                      proj.category === 'THIẾT KẾ' ? 'design-blueprint-container' :
-                      proj.category === 'SỰ KIỆN' ? 'event-blueprint-container' :
-                      proj.category === 'DỰ ÁN' ? 'code-blueprint-container' : ''
-                    }`}>
+                    <div 
+                      className={`gallery-main-container ${
+                        proj.category === 'VIDEO' ? 'video-blueprint-container' :
+                        proj.category === 'THIẾT KẾ' ? 'design-blueprint-container' :
+                        proj.category === 'SỰ KIỆN' ? 'event-blueprint-container' :
+                        proj.category === 'DỰ ÁN' ? 'code-blueprint-container' : ''
+                      }`}
+                      onMouseMove={proj.category === 'THIẾT KẾ' ? (e) => handleCanvasMouseMove(e, proj.title) : undefined}
+                    >
                       {/* 1. VIDEO Blueprint decoration */}
                       {proj.category === 'VIDEO' && !activeVideos[proj.title] && (
                         <>
@@ -1638,21 +1763,15 @@ function App() {
                             <div>W: 1920px H: 1080px</div>
                             <div>LAYER: VECTOR_PATH</div>
                             <div>OPACITY: 100%</div>
+                            <div style={{ color: '#ffffff', fontWeight: 'bold', marginTop: '2px' }}>
+                              <span id={`coords-${proj.title.replace(/[^a-zA-Z0-9]/g, '-')}`}>X: 0px Y: 0px</span>
+                            </div>
                           </div>
                         </>
                       )}
 
                       {/* 3. EVENT Blueprint decoration */}
-                      {proj.category === 'SỰ KIỆN' && (
-                        <>
-                          <div className="ticket-perforation"></div>
-                          <div className="ticket-stamp">{lang === 'vi' ? 'ĐÃ PHÊ DUYỆT' : 'APPROVED'}</div>
-                          <div className="ticket-barcode-wrapper">
-                            <div className="ticket-barcode"></div>
-                            <span className="barcode-text">PASS_NO. 2026-NPN</span>
-                          </div>
-                        </>
-                      )}
+                      {proj.category === 'SỰ KIỆN' && renderEventStub(proj.title)}
 
                       {/* 4. CODE Blueprint decoration */}
                       {proj.category === 'DỰ ÁN' && (
@@ -1674,10 +1793,7 @@ function App() {
                           <div className="terminal-console">
                             <div className="terminal-header">CONSOLE TERMINAL</div>
                             <div className="terminal-body">
-                              <div>$ npm run dev</div>
-                              <div className="text-red">&gt; vite dev server ready</div>
-                              <div>&gt; local: http://localhost:5173/</div>
-                              <div>&gt; compiled successfully in 410ms</div>
+                              {renderTerminalLogs(proj.title)}
                             </div>
                           </div>
                         </>
