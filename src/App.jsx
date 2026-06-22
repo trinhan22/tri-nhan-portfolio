@@ -1452,128 +1452,169 @@ function App() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {filteredProjects.map((proj) => (
-              <motion.div 
-                key={proj.title} 
-                className="glow-card project-showcase-card"
-                onMouseEnter={handleCardMouseMove}
-                onMouseLeave={handleCardMouseLeave}
-                onMouseMove={handleCardMouseMove}
-                variants={cardVariants}
-                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-              >
-                <div className="project-card-inner" style={{ transform: "translateZ(20px)" }}>
-                  <div className="project-header">
-                    <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
-                    <div className="project-title-group">
-                      <span className="project-role">{proj.role}</span>
-                      
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                        <h3 style={{ margin: 0 }}>{proj.title}</h3>
-                        {proj.link && (
-                          <a 
-                            href={proj.link} 
-                            target="_blank" 
-                            rel="noreferrer" 
-                            className="project-link-icon"
-                            onMouseEnter={handleMouseEnterInteractive} 
-                            onMouseLeave={handleMouseLeaveInteractive}
-                            title="Xem dự án thực tế"
-                          >
-                            <i className="fas fa-external-link-alt"></i>
-                          </a>
-                        )}
-                      </div>
+            {filteredProjects.map((proj) => {
+              const categoryBadges = {
+                'VIDEO': { icon: 'fas fa-video', text: 'VIDEO' },
+                'THIẾT KẾ': { icon: 'fas fa-palette', text: lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN' },
+                'SỰ KIỆN': { icon: 'fas fa-calendar-alt', text: lang === 'vi' ? 'SỰ KIỆN' : 'EVENT' },
+                'DỰ ÁN': { icon: 'fas fa-code', text: lang === 'vi' ? 'DỰ ÁN' : 'CODE' }
+              };
+              const badge = categoryBadges[proj.category] || { icon: 'fas fa-folder', text: proj.category };
 
-                      <p className="text-desc">{proj.desc}</p>
-                      <div className="project-tags">
-                        {proj.category === 'VIDEO' && (
-                          <>
-                            <span className="tag">{lang === 'vi' ? 'EDIT VIDEO' : 'EDIT VIDEO'}</span>
-                            <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
-                          </>
-                        )}
-                        {proj.category === 'THIẾT KẾ' && (
-                          <>
-                            <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
-                            <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
-                          </>
-                        )}
-                        {proj.category === 'SỰ KIỆN' && (
-                          <>
-                            <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
-                            <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
-                          </>
-                        )}
-                        {proj.category === 'DỰ ÁN' && (
-                          <>
-                            <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
-                            <span className="tag">{lang === 'vi' ? 'LẬP TRÌNH' : 'CODING'}</span>
-                            <span className="tag">WEBSITE</span>
-                          </>
-                        )}
+              return (
+                <motion.div 
+                  key={proj.title} 
+                  className="glow-card project-showcase-card"
+                  onMouseEnter={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  onMouseMove={handleCardMouseMove}
+                  variants={cardVariants}
+                  style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+                >
+                  {/* Category Corner Badge */}
+                  <div className="project-category-badge" style={{ transform: "translateZ(25px)" }}>
+                    <i className={badge.icon}></i>
+                    <span>{badge.text}</span>
+                  </div>
+
+                  <div className="project-card-inner" style={{ transform: "translateZ(20px)" }}>
+                    <div className="project-header">
+                      <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
+                      <div className="project-title-group">
+                        <span className="project-role">{proj.role}</span>
+                        
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
+                          <h3 style={{ margin: 0 }}>{proj.title}</h3>
+                          {proj.link && (
+                            <a 
+                              href={proj.link} 
+                              target="_blank" 
+                              rel="noreferrer" 
+                              className="project-link-icon"
+                              onMouseEnter={handleMouseEnterInteractive} 
+                              onMouseLeave={handleMouseLeaveInteractive}
+                              title="Xem dự án thực tế"
+                            >
+                              <i className="fas fa-external-link-alt"></i>
+                            </a>
+                          )}
+                        </div>
+
+                        <p className="text-desc">{proj.desc}</p>
+                        <div className="project-tags">
+                          {proj.category === 'VIDEO' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'EDIT VIDEO' : 'EDIT VIDEO'}</span>
+                              <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
+                            </>
+                          )}
+                          {proj.category === 'THIẾT KẾ' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN'}</span>
+                              <span className="tag">{lang === 'vi' ? 'SÁNG TẠO' : 'CREATIVE'}</span>
+                            </>
+                          )}
+                          {proj.category === 'SỰ KIỆN' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'SỰ KIỆN' : 'EVENT'}</span>
+                              <span className="tag">{lang === 'vi' ? 'HOẠT ĐỘNG' : 'ACTIVITY'}</span>
+                            </>
+                          )}
+                          {proj.category === 'DỰ ÁN' && (
+                            <>
+                              <span className="tag">{lang === 'vi' ? 'DỰ ÁN' : 'PROJECT'}</span>
+                              <span className="tag">{lang === 'vi' ? 'LẬP TRÌNH' : 'CODING'}</span>
+                              <span className="tag">WEBSITE</span>
+                            </>
+                          )}
+                        </div>
+
+                        {/* Instructional Action Link */}
+                        <div className="project-action-link" style={{ transform: "translateZ(25px)" }}>
+                          {proj.category === 'VIDEO' && (
+                            <span><i className="fas fa-play-circle"></i> {lang === 'vi' ? 'Nhấp để xem phim' : 'Click to watch video'}</span>
+                          )}
+                          {proj.category === 'THIẾT KẾ' && (
+                            <span><i className="fas fa-search-plus"></i> {lang === 'vi' ? 'Nhấp để xem ảnh lớn' : 'Click to enlarge graphic'}</span>
+                          )}
+                          {proj.category === 'SỰ KIỆN' && (
+                            <span><i className="fas fa-images"></i> {lang === 'vi' ? 'Nhấp để xem album sự kiện' : 'Click to view event album'}</span>
+                          )}
+                          {proj.category === 'DỰ ÁN' && (
+                            <span>
+                              {proj.link ? (
+                                <a href={proj.link} target="_blank" rel="noreferrer" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive}>
+                                  <i className="fas fa-globe"></i> {lang === 'vi' ? 'Ghé thăm Website trực tuyến' : 'Visit Live Website'} <i className="fas fa-external-link-alt" style={{ fontSize: '0.75rem', marginLeft: '3px' }}></i>
+                                </a>
+                              ) : (
+                                <span><i className="fas fa-laptop-code"></i> {lang === 'vi' ? 'Nhấp để xem chi tiết dự án' : 'Click to view project details'}</span>
+                              )}
+                            </span>
+                          )}
+                        </div>
+
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div 
-                  className="project-gallery" 
-                  style={{ transform: "translateZ(30px)" }}
-                  onMouseEnter={handleMouseEnterInteractive} 
-                  onMouseLeave={handleMouseLeaveInteractive}
-                >
-                  {proj.mainVideo ? (
-                    <div className="gallery-main fb-video-wrapper">
-                      {!activeVideos[proj.title] ? (
-                        <div 
-                          className="custom-video-thumbnail"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
-                          }}
-                          onMouseEnter={handleMouseEnterInteractive} 
-                          onMouseLeave={handleMouseLeaveInteractive}
-                        >
-                          <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
-                          <div className="play-button-overlay">
-                            <i className="fas fa-play"></i>
+                  <div 
+                    className="project-gallery" 
+                    style={{ transform: "translateZ(30px)" }}
+                    onMouseEnter={handleMouseEnterInteractive} 
+                    onMouseLeave={handleMouseLeaveInteractive}
+                  >
+                    {proj.mainVideo ? (
+                      <div className="gallery-main fb-video-wrapper">
+                        {!activeVideos[proj.title] ? (
+                          <div 
+                            className="custom-video-thumbnail"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
+                            }}
+                            onMouseEnter={handleMouseEnterInteractive} 
+                            onMouseLeave={handleMouseLeaveInteractive}
+                          >
+                            <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
+                            <div className="play-button-overlay">
+                              <i className="fas fa-play"></i>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <iframe 
-                          src={`${proj.mainVideo}&autoplay=1`}
-                          style={{ border: 'none', overflow: 'hidden' }} 
-                          scrolling="no" 
-                          frameBorder="0" 
-                          loading="lazy"
-                          allowFullScreen={true} 
-                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                        ></iframe>
-                      )}
-                    </div>
-                  ) : (
-                    <img 
-                      src={proj.mainImg} 
-                      alt="Main Visual" 
-                      className="gallery-main" 
-                      onClick={() => openPopup(proj, proj.mainImg)} 
-                      loading="lazy"
-                    />
-                  )}
-                  
-                  {proj.images.map((img, i) => (
-                    <img 
-                      key={i} 
-                      src={img} 
-                      alt="Mini Gallery" 
-                      onClick={() => openPopup(proj, img)} 
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                        ) : (
+                          <iframe 
+                            src={`${proj.mainVideo}&autoplay=1`}
+                            style={{ border: 'none', overflow: 'hidden' }} 
+                            scrolling="no" 
+                            frameBorder="0" 
+                            loading="lazy"
+                            allowFullScreen={true} 
+                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                          ></iframe>
+                        )}
+                      </div>
+                    ) : (
+                      <img 
+                        src={proj.mainImg} 
+                        alt="Main Visual" 
+                        className="gallery-main" 
+                        onClick={() => openPopup(proj, proj.mainImg)} 
+                        loading="lazy"
+                      />
+                    )}
+                    
+                    {proj.images.map((img, i) => (
+                      <img 
+                        key={i} 
+                        src={img} 
+                        alt="Mini Gallery" 
+                        onClick={() => openPopup(proj, img)} 
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </section>
 
