@@ -874,7 +874,7 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://www.facebook.com/share/p/1PKQqWkeRW/'  },
     { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.', link:'https://giaoducthoidai.vn/hon-650-thi-sinh-can-tho-tranh-tai-chon-doi-tuyen-hs-gioi-thpt-du-thi-quoc-gia-post745159.html'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.', link:'https://www.facebook.com/share/p/1CXb2FbGyF/' },
-    { level: 'Cấp Quốc gia', titleVi: 'Lọt Top Dự án được đăng trên báo Thanh Niên', titleEn: 'Top Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
+    { level: 'Cấp Quốc gia', titleVi: 'Top Dự án được đăng tải trên báo Thanh Niên', titleEn: 'Top Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://www.facebook.com/share/p/1bCm9g118k/'  },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.', link:'https://mientay.giadinhonline.vn/phien-toa-gia-dinh-mua-4-hoc-tro-thpt-fpt-can-tho-lon-len-cung-phap-luat-d16979.html'  },
     { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/1B7uLPRzms/' },
@@ -884,7 +884,7 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ Xuất sắc năm học 2025-2026', titleEn: 'Outstanding Club of the 2025-2026 Academic Year', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu CLB Xuất sắc năm học 2025-2026.', descEn: 'Awarded the Outstanding Club Title for the 2025-2026 academic year.', link: 'https://www.facebook.com/share/17aWfv4WJC/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2026.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2026.', link: 'https://www.facebook.com/share/1CkreparF1/' },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2026.', descEn: 'Awarded the School-level "Talented Student" Title in 2026.', link: 'https://www.facebook.com/share/1ENsu2uCbZ/' },
-    { level: 'Cấp trường', titleVi: 'Student Gaining Excellent Achievement', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
+    { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Student GEA Cấp trường', titleEn: 'Student Gaining Excellent Achievement', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Student Gaining Excellent Achievement 2026.', descEn: 'Awarded the School-level "Student Gaining Excellent Achievement" Title in 2026.', link: 'https://www.facebook.com/share/1EM3f5dwdx/' },
   ];
 
   const filteredAchievements = activeAchieveFilter === 'ALL' 
@@ -1403,7 +1403,12 @@ function App() {
                   style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
                 >
                   <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
-                    <i className={achieve.level === 'Cấp Quốc gia' ? 'fas fa-trophy' : 'fas fa-award'}></i>
+                    <i className={{
+                      'Cấp Quốc gia': 'fas fa-trophy',
+                      'Cấp Thành phố': 'fas fa-medal',
+                      'Cấp Quận': 'fas fa-ribbon',
+                      'Cấp trường': 'fas fa-award'
+                    }[achieve.level] || 'fas fa-award'}></i>
                   </div>
                   <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
                     <h4>
