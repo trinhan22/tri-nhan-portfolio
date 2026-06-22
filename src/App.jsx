@@ -1471,17 +1471,50 @@ function App() {
                   variants={cardVariants}
                   style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
                 >
+                  {/* Category Top Accent */}
+                  <div className="card-top-accent"></div>
+
+                  {/* Category Background Watermark Icon */}
+                  <div className="card-watermark-icon">
+                    <i className={badge.icon}></i>
+                  </div>
+
                   {/* Category Corner Badge */}
                   <div className="project-category-badge" style={{ transform: "translateZ(25px)" }}>
                     <i className={badge.icon}></i>
                     <span>{badge.text}</span>
                   </div>
 
+                  {/* Category Blueprint Decors */}
+                  {proj.category === 'THIẾT KẾ' && (
+                    <div className="design-crop-marks">
+                      <div className="crop-mark crop-top-left"></div>
+                      <div className="crop-mark crop-top-right"></div>
+                      <div className="crop-mark crop-bottom-left"></div>
+                      <div className="crop-mark crop-bottom-right"></div>
+                    </div>
+                  )}
+
+                  {proj.category === 'SỰ KIỆN' && (
+                    <div className="event-crosshairs">
+                      <div className="event-crosshair cross-top-left">+</div>
+                      <div className="event-crosshair cross-top-right">+</div>
+                      <div className="event-crosshair cross-bottom-left">+</div>
+                      <div className="event-crosshair cross-bottom-right">+</div>
+                    </div>
+                  )}
+
                   <div className="project-card-inner" style={{ transform: "translateZ(20px)" }}>
                     <div className="project-header">
                       <img src={proj.logo} alt="Project Logo" className="project-logo" loading="lazy" />
                       <div className="project-title-group">
-                        <span className="project-role">{proj.role}</span>
+                        <span className="project-role">
+                          {proj.role}
+                          {proj.category === 'VIDEO' && <span className="rec-badge">REC</span>}
+                          {proj.category === 'THIẾT KẾ' && <span className="canvas-badge">[2.5D VECTOR]</span>}
+                          {proj.category === 'SỰ KIỆN' && <span className="location-badge">[//LAT_10.25:LNG_105.7]</span>}
+                          {proj.category === 'DỰ ÁN' && <span className="compiler-badge">[//SYS.EXEC_SUCCESS]</span>}
+                        </span>
                         
                         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
                           <h3 style={{ margin: 0 }}>{proj.title}</h3>
@@ -1563,44 +1596,133 @@ function App() {
                     onMouseEnter={handleMouseEnterInteractive} 
                     onMouseLeave={handleMouseLeaveInteractive}
                   >
-                    {proj.mainVideo ? (
-                      <div className="gallery-main fb-video-wrapper">
-                        {!activeVideos[proj.title] ? (
-                          <div 
-                            className="custom-video-thumbnail"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
-                            }}
-                            onMouseEnter={handleMouseEnterInteractive} 
-                            onMouseLeave={handleMouseLeaveInteractive}
-                          >
-                            <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
-                            <div className="play-button-overlay">
-                              <i className="fas fa-play"></i>
+                    <div className={`gallery-main-container ${
+                      proj.category === 'VIDEO' ? 'video-blueprint-container' :
+                      proj.category === 'THIẾT KẾ' ? 'design-blueprint-container' :
+                      proj.category === 'SỰ KIỆN' ? 'event-blueprint-container' :
+                      proj.category === 'DỰ ÁN' ? 'code-blueprint-container' : ''
+                    }`}>
+                      {/* 1. VIDEO Blueprint decoration */}
+                      {proj.category === 'VIDEO' && !activeVideos[proj.title] && (
+                        <>
+                          <div className="film-sprockets film-sprockets-top"></div>
+                          <div className="film-sprockets film-sprockets-bottom"></div>
+                          <div className="scrub-timeline">
+                            <div className="timeline-controls">
+                              <i className="fas fa-backward"></i>
+                              <i className="fas fa-play" style={{ margin: '0 5px' }}></i>
+                              <i className="fas fa-forward"></i>
+                            </div>
+                            <div className="timeline-bar">
+                              <div className="timeline-progress"></div>
+                              <div className="timeline-playhead"></div>
+                            </div>
+                            <div className="timeline-time">00:03:15 / 00:05:00</div>
+                          </div>
+                        </>
+                      )}
+
+                      {/* 2. DESIGN Blueprint decoration */}
+                      {proj.category === 'THIẾT KẾ' && (
+                        <>
+                          <div className="ruler-x"></div>
+                          <div className="ruler-y"></div>
+                          <div className="design-toolbar">
+                            <div className="design-tool-btn active" title="Select (V)"><i className="fas fa-mouse-pointer"></i></div>
+                            <div className="design-tool-btn" title="Hand (H)"><i className="fas fa-hand-paper"></i></div>
+                            <div className="design-tool-btn" title="Pen (P)"><i className="fas fa-pen-nib"></i></div>
+                            <div className="design-tool-btn" title="Slice (C)"><i className="fas fa-crop-alt"></i></div>
+                            <div className="design-tool-btn" title="Paint (B)"><i className="fas fa-paint-brush"></i></div>
+                          </div>
+                          <div className="design-specs-box">
+                            <div>W: 1920px H: 1080px</div>
+                            <div>LAYER: VECTOR_PATH</div>
+                            <div>OPACITY: 100%</div>
+                          </div>
+                        </>
+                      )}
+
+                      {/* 3. EVENT Blueprint decoration */}
+                      {proj.category === 'SỰ KIỆN' && (
+                        <>
+                          <div className="ticket-perforation"></div>
+                          <div className="ticket-stamp">{lang === 'vi' ? 'ĐÃ PHÊ DUYỆT' : 'APPROVED'}</div>
+                          <div className="ticket-barcode-wrapper">
+                            <div className="ticket-barcode"></div>
+                            <span className="barcode-text">PASS_NO. 2026-NPN</span>
+                          </div>
+                        </>
+                      )}
+
+                      {/* 4. CODE Blueprint decoration */}
+                      {proj.category === 'DỰ ÁN' && (
+                        <>
+                          <div className="ide-titlebar">
+                            <div className="window-dots">
+                              <span className="window-dot window-dot-close"></span>
+                              <span className="window-dot window-dot-min"></span>
+                              <span className="window-dot window-dot-max"></span>
+                            </div>
+                            <span className="ide-filename">App.jsx - my-portfolio</span>
+                          </div>
+                          <div className="ide-sidebar">
+                            <div className="sidebar-title">WORKSPACE</div>
+                            <div className="file-item active"><i className="fab fa-react" style={{ color: '#61dafb' }}></i> App.jsx</div>
+                            <div className="file-item"><i className="fab fa-css3-alt" style={{ color: '#264de4' }}></i> App.css</div>
+                            <div className="file-item"><i className="fab fa-js-square" style={{ color: '#f7df1e' }}></i> main.jsx</div>
+                          </div>
+                          <div className="terminal-console">
+                            <div className="terminal-header">CONSOLE TERMINAL</div>
+                            <div className="terminal-body">
+                              <div>$ npm run dev</div>
+                              <div className="text-red">&gt; vite dev server ready</div>
+                              <div>&gt; local: http://localhost:5173/</div>
+                              <div>&gt; compiled successfully in 410ms</div>
                             </div>
                           </div>
-                        ) : (
-                          <iframe 
-                            src={`${proj.mainVideo}&autoplay=1`}
-                            style={{ border: 'none', overflow: 'hidden' }} 
-                            scrolling="no" 
-                            frameBorder="0" 
-                            loading="lazy"
-                            allowFullScreen={true} 
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                          ></iframe>
-                        )}
-                      </div>
-                    ) : (
-                      <img 
-                        src={proj.mainImg} 
-                        alt="Main Visual" 
-                        className="gallery-main" 
-                        onClick={() => openPopup(proj, proj.mainImg)} 
-                        loading="lazy"
-                      />
-                    )}
+                        </>
+                      )}
+
+                      {/* The actual image / video component */}
+                      {proj.mainVideo ? (
+                        <div className="gallery-main fb-video-wrapper">
+                          {!activeVideos[proj.title] ? (
+                            <div 
+                              className="custom-video-thumbnail"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveVideos(prev => ({ ...prev, [proj.title]: true }));
+                              }}
+                              onMouseEnter={handleMouseEnterInteractive} 
+                              onMouseLeave={handleMouseLeaveInteractive}
+                            >
+                              <img src={proj.mainImg} alt="Video Thumbnail" loading="lazy" />
+                              <div className="play-button-overlay">
+                                <i className="fas fa-play"></i>
+                              </div>
+                            </div>
+                          ) : (
+                            <iframe 
+                              src={`${proj.mainVideo}&autoplay=1`}
+                              style={{ border: 'none', overflow: 'hidden' }} 
+                              scrolling="no" 
+                              frameBorder="0" 
+                              loading="lazy"
+                              allowFullScreen={true} 
+                              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                            ></iframe>
+                          )}
+                        </div>
+                      ) : (
+                        <img 
+                          src={proj.mainImg} 
+                          alt="Main Visual" 
+                          className="gallery-main" 
+                          onClick={() => openPopup(proj, proj.mainImg)} 
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
                     
                     {proj.images.map((img, i) => (
                       <img 
