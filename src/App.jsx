@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionV
 // Splits any text string into individually animated characters,
 // staggering their slide-up, skew, and rotation on scroll view.
 // =========================================================================
-const CharReveal = ({ text, className, delay = 0 }) => {
+const CharReveal = ({ text, className, delay = 0, trigger = "view" }) => {
   const letters = text.split("");
   
   const containerVariants = {
@@ -34,8 +34,10 @@ const CharReveal = ({ text, className, delay = 0 }) => {
       style={{ display: "inline-block", verticalAlign: "bottom" }}
       variants={containerVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      {...(trigger === "animate"
+        ? { animate: "visible" }
+        : { whileInView: "visible", viewport: { once: true, amount: 0.1 } }
+      )}
     >
       {letters.map((char, index) => (
         <motion.span
@@ -253,6 +255,16 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isHoveringBtn, setIsHoveringBtn] = useState(false);
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [activeAchieveFilter, setActiveAchieveFilter] = useState('ALL');
   const [popupData, setPopupData] = useState({ isOpen: false, gallery: [], currentIndex: 0 });
   const [isScrolled, setIsScrolled] = useState(false);
@@ -890,23 +902,27 @@ function App() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: 6, filter: "blur(8px)" },
+    hidden: isMobile 
+      ? { opacity: 0, y: 30 } 
+      : { opacity: 0, y: 50, rotateX: 6, filter: "blur(8px)" },
     visible: { 
       opacity: 1, 
       y: 0, 
       rotateX: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: isMobile ? 0.45 : 0.85, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   const timelineVariants = {
-    hidden: { opacity: 0, x: -40, filter: "blur(6px)" },
+    hidden: isMobile 
+      ? { opacity: 0, x: -20 } 
+      : { opacity: 0, x: -40, filter: "blur(6px)" },
     visible: { 
       opacity: 1, 
       x: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: isMobile ? 0.45 : 0.8, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
@@ -1079,9 +1095,9 @@ function App() {
             </motion.span>
             
             <h1 className="main-title">
-              <CharReveal key={`line1-${lang}`} text={t.heroTitleLine1} delay={0.9} /> <br />
+              <CharReveal key={`line1-${lang}`} text={t.heroTitleLine1} delay={0.9} trigger="animate" /> <br />
               <span className="italic-red">
-                <CharReveal key={`line2-${lang}`} text={t.heroTitleLine2} delay={1.2} />
+                <CharReveal key={`line2-${lang}`} text={t.heroTitleLine2} delay={1.2} trigger="animate" />
               </span>
             </h1>
 
@@ -1343,7 +1359,7 @@ function App() {
         <section id="achievements">
           <motion.div className="section-bg-num sec-3-num" style={{ y: bgNumY3 }}>03</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
-             <div>
+             <div className="title-wrapper">
                <span className="sub-title">{t.achieveSub}</span>
                <h2 className="section-title" style={{ marginBottom: 0 }}>
                  <CharReveal key={`ach-title-${lang}`} text={t.achieveTitle1} /> <span className="italic-red">{t.achieveTitle2}</span>
@@ -1365,7 +1381,7 @@ function App() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
+            viewport={{ once: true }}
           >
             {filteredAchievements.map((achieve, index) => {
               const hasLink = !!achieve.link;
@@ -1407,7 +1423,7 @@ function App() {
         <section id="projects">
           <motion.div className="section-bg-num sec-4-num" style={{ y: bgNumY4 }}>04</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', marginBottom: '40px' }}>
-             <div>
+             <div className="title-wrapper">
                <span className="sub-title">{t.projSub}</span>
                <h2 className="section-title" style={{ marginBottom: 0 }}>
                  <CharReveal key={`proj-title-${lang}`} text={t.projTitle1} /><span className="italic-red">{t.projTitle2}</span>
@@ -1429,7 +1445,7 @@ function App() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
+            viewport={{ once: true }}
           >
             {filteredProjects.map((proj) => (
               <motion.div 
@@ -1560,7 +1576,7 @@ function App() {
         <section id="contact">
           <motion.div className="section-bg-num sec-5-num" style={{ y: bgNumY5 }}>05</motion.div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-            <div>
+            <div className="title-wrapper">
               <span className="sub-title">{t.contactSub}</span>
               <h2 className="section-title" style={{ marginBottom: '15px' }}>
                 <CharReveal key={`con-title-${lang}`} text={t.contactTitle1} /> <span className="italic-red">{t.contactTitle2}</span> {t.contactTitle3}
@@ -1573,7 +1589,7 @@ function App() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
+              viewport={{ once: true }}
             >
               <motion.a 
                 href="https://www.facebook.com/tris.nhaan" 

@@ -598,7 +598,7 @@ section {
   content: ""; 
   position: absolute; 
   left: 24px; 
-  top: 50px; 
+  top: 60px; 
   bottom: -40px; 
   width: 1px; 
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)); 
@@ -1736,4 +1736,17 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   .sec-3-num { top: 3%; right: -5vw; }
   .sec-4-num { top: 5%; left: -5vw; }
   .sec-5-num { top: 5%; right: -5vw; }
+
+  /* Center category titles on mobile */
+  .title-wrapper {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .title-wrapper .text-desc {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
