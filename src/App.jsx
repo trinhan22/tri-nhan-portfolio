@@ -1577,6 +1577,8 @@ function App() {
               key={`${activeAchieveFilter}-${lang}`}
               className="grid-2"
               variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
             >
               {filteredAchievements.map((achieve) => {
                 const hasLink = !!achieve.link;
@@ -1668,6 +1670,8 @@ function App() {
               key={`${activeFilter}-${lang}`}
               className="project-grid"
               variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
             >
             {filteredProjects.map((proj) => {
               const categoryBadges = {
