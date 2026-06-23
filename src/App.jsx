@@ -1497,6 +1497,15 @@ function App() {
           >
             {filteredAchievements.map((achieve, index) => {
               const hasLink = !!achieve.link;
+              
+              const levelBadges = {
+                'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
+                'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
+                'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
+                'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
+              };
+              const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
+
               return (
                 <motion.div 
                   key={index} 
@@ -1514,6 +1523,12 @@ function App() {
                   variants={cardVariants}
                   style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
                 >
+                  {/* Card Level Decors - Unified Top Accent */}
+                  <div className="achieve-top-accent"></div>
+                  
+                  {/* Background Watermark Level Indicator */}
+                  <div className="achieve-bg-watermark">{levelBadge.text}</div>
+                  
                   <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
                     <i className={{
                       'Cấp Quốc gia': 'fas fa-trophy',
@@ -1522,12 +1537,13 @@ function App() {
                       'Cấp trường': 'fas fa-award'
                     }[achieve.level] || 'fas fa-award'}></i>
                   </div>
+                  
                   <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
                     <h4>
                       {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
                       {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
                     </h4>
-                    <span>{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                    <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
                     <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
                   </div>
                 </motion.div>

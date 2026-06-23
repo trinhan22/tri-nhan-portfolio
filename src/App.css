@@ -2620,4 +2620,91 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
-
+
+/* ==========================================================================
+   ACHIEVEMENTS TIER UPGRADES & VISUAL DIFFERENTIATION (ALL RED CONSISTENCY)
+   ========================================================================== */
+
+.achieve-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1. Top Accents (All Red - Unified) */
+.achieve-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color);
+  transition: all 0.4s ease;
+  z-index: 5;
+  opacity: 0.4;
+}
+
+.achieve-card:hover .achieve-top-accent {
+  opacity: 1;
+  box-shadow: 0 1px 8px rgba(229, 57, 53, 0.4);
+}
+
+/* Subtle level indicator watermark hidden in the card background */
+.achieve-bg-watermark {
+  position: absolute;
+  bottom: 8px;
+  right: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: var(--primary-color);
+  opacity: 0.08; /* slightly more visible, still hidden in background */
+  user-select: none;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 1;
+  line-height: 1;
+}
+
+.achieve-card:hover .achieve-bg-watermark {
+  opacity: 0.2;
+  transform: scale(1.03);
+}
+
+.achieve-icon,
+.achieve-info {
+  position: relative;
+  z-index: 2;
+}
+
+/* Default state: hide details (metadata and description) inside achievements cards */
+.achieve-info .achieve-meta,
+.achieve-info .text-desc {
+  max-height: 0;
+  opacity: 0;
+  margin: 0 !important;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, margin 0.5s ease;
+}
+
+/* Hover state: reveal details (uses large max-height to prevent clipping of wrapped/longer text) */
+.achieve-card:hover .achieve-info .achieve-meta {
+  max-height: 100px !important;
+  opacity: 1;
+  margin-bottom: 8px !important;
+}
+
+.achieve-card:hover .achieve-info .text-desc {
+  max-height: 350px !important;
+  opacity: 1;
+  margin-top: 5px !important;
+}
+
+/* Hover state: fade out the four corner stars (crosshairs) */
+.event-crosshairs {
+  transition: opacity 0.3s ease;
+}
+.glow-card:hover .event-crosshairs {
+  opacity: 0 !important;
+  pointer-events: none;
+}
