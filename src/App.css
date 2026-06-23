@@ -1032,10 +1032,14 @@ section {
   filter: brightness(0.65); 
   cursor: pointer;
   border: 1px solid transparent;
+  
+  /* GPU layer promotion to prevent losing rounded corners on scale/transform */
+  transform: translateZ(0);
+  will-change: transform, filter;
 }
 
 /* Clean, high-performance hover effect on images */
-.project-gallery img:hover { 
+.project-gallery img:not(.gallery-main):hover { 
   transform: scale(1.02) translateY(-2px); 
   filter: brightness(0.85); 
   z-index: 10; 
@@ -1087,6 +1091,12 @@ section {
   z-index: 10;
   overflow: hidden;
   border-radius: 16px !important;
+}
+
+.custom-video-thumbnail img {
+  border-radius: 16px !important;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .custom-video-thumbnail:hover img {
@@ -2030,20 +2040,26 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   grid-column: auto !important;
   width: 100% !important;
   height: 100% !important;
-  border-radius: 0 !important;
+  border-radius: 16px !important;
   margin: 0 !important;
   border: none !important;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .gallery-main-container .fb-video-wrapper {
   border: none !important;
-  border-radius: 0 !important;
+  border-radius: 16px !important;
   width: 100% !important;
   height: 100% !important;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .gallery-main-container .custom-video-thumbnail {
-  border-radius: 0 !important;
+  border-radius: 16px !important;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* 1. VIDEO BLUEPRINT */
