@@ -2770,4 +2770,19 @@ body::after {
   border-color: rgba(229, 57, 53, 0.85);
 }
 
+/* Mobile viewports: always display achievements details without requiring hover */
+@media (max-width: 768px) {
+  .achieve-info .achieve-meta {
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-bottom: 8px !important;
+  }
+  .achieve-info .text-desc {
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-top: 5px !important;
+  }
+}
+
+
 
