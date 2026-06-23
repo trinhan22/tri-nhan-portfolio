@@ -2708,3 +2708,75 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
   opacity: 0 !important;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   BLUEPRINT CURSOR & BACKGROUND GRID UPGRADES
+   ========================================================================== */
+
+/* 1. Blueprint Grid Background on Body */
+body {
+  background-image: 
+    linear-gradient(rgba(229, 57, 53, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.012) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center center;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(229, 57, 53, 0.005) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.005) 2px, transparent 2px);
+  background-size: 400px 400px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 2. Custom Blueprint Blueprint Cursor Styles */
+@media (min-width: 769px) {
+  body, a, button, .glow-card, input, textarea, [role="button"], .filter-btn {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cursor-crosshair-h {
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  background-color: var(--primary-color);
+}
+.cursor-crosshair-v {
+  position: absolute;
+  width: 1px;
+  height: 12px;
+  background-color: var(--primary-color);
+}
+
+.custom-cursor-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px dashed rgba(229, 57, 53, 0.35);
+  pointer-events: none;
+  z-index: 9998;
+  transition: border-color 0.2s ease, border-style 0.2s ease;
+}

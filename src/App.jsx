@@ -248,6 +248,104 @@ const ParticleCanvas = () => {
   );
 };
 
+// =========================================================================
+// BLUEPRINT CURSOR: DAMPED RETICLE CURSOR COMPONENT
+// Renders a technical crosshair and spring-damped trailing circle
+// that react dynamically when hovering over interactive elements.
+// Bypassed on mobile devices.
+// =========================================================================
+const BlueprintCursor = () => {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+      setIsHovered(false);
+    };
+
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (!target) return;
+      const isInteractive = target.closest('button, a, .glow-card, .timeline-content, input, textarea, [role="button"], .interactive-element');
+      setIsHovered(!!isInteractive);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mouseover', handleMouseOver);
+    };
+  }, [isVisible]);
+
+  // Check if mobile
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileDevice(window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const springConfig = { damping: 30, stiffness: 350, mass: 0.5 };
+  const springX = useSpring(cursorX, springConfig);
+  const springY = useSpring(cursorY, springConfig);
+
+  if (isMobileDevice || !isVisible) return null;
+
+  return (
+    <>
+      {/* 1. Trailing Spring Outer Circle */}
+      <motion.div 
+        className={`custom-cursor-outer ${isHovered ? 'hovered' : ''}`}
+        style={{
+          x: springX,
+          y: springY,
+          translateX: '-50%',
+          translateY: '-50%'
+        }}
+        animate={{
+          scale: isHovered ? 1.8 : 1
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      />
+
+      {/* 2. Snappy Inner Reticle Crosshair */}
+      <motion.div 
+        className="custom-cursor-inner"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%'
+        }}
+        animate={{
+          rotate: isHovered ? 45 : 0,
+          scale: isHovered ? 0.75 : 1
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      >
+        <div className="cursor-crosshair-h"></div>
+        <div className="cursor-crosshair-v"></div>
+      </motion.div>
+    </>
+  );
+};
+
 function App() {
   // =========================================================================
   // 1. GOM TẤT CẢ STATE LÊN ĐÂY (Giữ nguyên toàn bộ logic)
@@ -1014,33 +1112,29 @@ function App() {
   };
 
   const cardVariants = {
-    hidden: isMobile 
-      ? { opacity: 0, y: 30 } 
-      : { opacity: 0, y: 50, rotateX: 6, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
       y: 0, 
-      rotateX: 0,
-      filter: "blur(0px)",
-      transition: { duration: isMobile ? 0.45 : 0.85, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: isMobile ? 0.45 : 0.75, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   const timelineVariants = {
-    hidden: isMobile 
-      ? { opacity: 0, x: -20 } 
-      : { opacity: 0, x: -40, filter: "blur(6px)" },
+    hidden: { opacity: 0, x: isMobile ? -20 : -30 },
     visible: { 
       opacity: 1, 
       x: 0,
-      filter: "blur(0px)",
-      transition: { duration: isMobile ? 0.45 : 0.8, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: isMobile ? 0.45 : 0.7, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   return (
     <>
-      {/* 0. INTERACTIVE CONSTELLATION BACKDROP */}
+      {/* 0. BLUEPRINT CUSTOM CURSOR */}
+      <BlueprintCursor />
+
+      {/* 1. INTERACTIVE CONSTELLATION BACKDROP */}
       <ParticleCanvas />
 
       {/* 1. MOUSE & SCROLL DYNAMIC MORPH BLOBS */}
@@ -1085,23 +1179,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* 3. SMOOTH SPRING CUSTOM CURSOR */}
-      <motion.div 
-        className="custom-cursor" 
-        style={{ 
-          x: cursorXSpring, 
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-          width: isHoveringBtn ? "50px" : "12px",
-          height: isHoveringBtn ? "50px" : "12px",
-          borderRadius: "50%",
-          backgroundColor: isHoveringBtn ? "rgba(255, 255, 255, 0.15)" : "#ffffff",
-          borderColor: isHoveringBtn ? "rgba(255, 255, 255, 0.8)" : "transparent",
-          borderWidth: isHoveringBtn ? "1px" : "0px",
-          borderStyle: "solid",
-        }}
-      />
+
 
       <header className={isScrolled ? 'scrolled' : ''}>
         <div 
@@ -1487,68 +1565,74 @@ function App() {
              </div>
           </div>
 
-          <motion.div 
-            key={`${activeAchieveFilter}-${lang}`}
-            className="grid-2"
+          {/* Scroll-reveal animation container */}
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
           >
-            {filteredAchievements.map((achieve, index) => {
-              const hasLink = !!achieve.link;
-              
-              const levelBadges = {
-                'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
-                'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
-                'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
-                'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
-              };
-              const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
+            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
+            <motion.div 
+              key={`${activeAchieveFilter}-${lang}`}
+              className="grid-2"
+              variants={staggerContainer}
+            >
+              {filteredAchievements.map((achieve) => {
+                const hasLink = !!achieve.link;
+                
+                const levelBadges = {
+                  'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
+                  'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
+                  'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
+                  'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
+                };
+                const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
 
-              return (
-                <motion.div 
-                  key={index} 
-                  className="glow-card achieve-card"
-                  onClick={() => hasLink && window.open(achieve.link, '_blank')}
-                  onMouseEnter={(e) => {
-                    handleCardMouseMove(e);
-                    if (hasLink) handleMouseEnterInteractive(e);
-                  }} 
-                  onMouseLeave={(e) => {
-                    handleCardMouseLeave(e);
-                    if (hasLink) handleMouseLeaveInteractive();
-                  }}
-                  onMouseMove={handleCardMouseMove}
-                  variants={cardVariants}
-                  style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-                >
-                  {/* Card Level Decors - Unified Top Accent */}
-                  <div className="achieve-top-accent"></div>
-                  
-                  {/* Background Watermark Level Indicator */}
-                  <div className="achieve-bg-watermark">{levelBadge.text}</div>
-                  
-                  <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
-                    <i className={{
-                      'Cấp Quốc gia': 'fas fa-trophy',
-                      'Cấp Thành phố': 'fas fa-medal',
-                      'Cấp Quận': 'fas fa-ribbon',
-                      'Cấp trường': 'fas fa-award'
-                    }[achieve.level] || 'fas fa-award'}></i>
-                  </div>
-                  
-                  <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
-                    <h4>
-                      {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
-                      {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
-                    </h4>
-                    <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
-                    <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
+                return (
+                  <motion.div 
+                    key={achieve.titleVi} 
+                    className="glow-card achieve-card"
+                    onClick={() => hasLink && window.open(achieve.link, '_blank')}
+                    onMouseEnter={(e) => {
+                      handleCardMouseMove(e);
+                      if (hasLink) handleMouseEnterInteractive(e);
+                    }} 
+                    onMouseLeave={(e) => {
+                      handleCardMouseLeave(e);
+                      if (hasLink) handleMouseLeaveInteractive();
+                    }}
+                    onMouseMove={handleCardMouseMove}
+                    variants={cardVariants}
+                    style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+                  >
+                    {/* Card Level Decors - Unified Top Accent */}
+                    <div className="achieve-top-accent"></div>
+                    
+                    {/* Background Watermark Level Indicator */}
+                    <div className="achieve-bg-watermark">{levelBadge.text}</div>
+                    
+                    <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
+                      <i className={{
+                        'Cấp Quốc gia': 'fas fa-trophy',
+                        'Cấp Thành phố': 'fas fa-medal',
+                        'Cấp Quận': 'fas fa-ribbon',
+                        'Cấp trường': 'fas fa-award'
+                      }[achieve.level] || 'fas fa-award'}></i>
+                    </div>
+                    
+                    <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
+                      <h4>
+                        {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
+                        {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
+                      </h4>
+                      <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                      <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
           </motion.div>
         </section>
 
@@ -1572,14 +1656,19 @@ function App() {
              </div>
           </div>
 
-          <motion.div 
-            key={`${activeFilter}-${lang}`}
-            className="project-grid"
+          {/* Scroll-reveal animation container */}
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
           >
+            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
+            <motion.div 
+              key={`${activeFilter}-${lang}`}
+              className="project-grid"
+              variants={staggerContainer}
+            >
             {filteredProjects.map((proj) => {
               const categoryBadges = {
                 'VIDEO': { icon: 'fas fa-video', text: 'VIDEO' },
@@ -1869,6 +1958,7 @@ function App() {
                 </motion.div>
               );
             })}
+            </motion.div>
           </motion.div>
         </section>
 

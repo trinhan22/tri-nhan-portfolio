@@ -21,7 +21,6 @@
   margin: 0; 
   padding: 0; 
   box-sizing: border-box; 
-  cursor: none; /* Hide default cursor on desktops for custom spring cursor */
 }
 
 body {
@@ -165,25 +164,7 @@ body::before {
 /* ==========================================================================
    2. CUSTOM INTERACTIVE BLEND-MODE CURSOR
    ========================================================================== */
-.custom-cursor {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  pointer-events: none; 
-  z-index: 100001 !important; 
-  mix-blend-mode: difference; 
-  /* Left/top coordinates are handled by Framer Motion Springs! */
-  /* Transition sizes and borders only to avoid conflict and keep it smooth */
-  transition: 
-    width 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-    height 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-    border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 15px 3px rgba(229, 57, 53, 0.6), 
-              0 0 30px 8px rgba(229, 57, 53, 0.3);
-  will-change: width, height, border-radius;
-}
+
 
 /* ==========================================================================
    3. THE LOADER: GLITCH-REVEAL & SCANNING LIGHT STREAK
@@ -1670,7 +1651,7 @@ footer { padding: 60px 5%; border-top: 1px solid var(--border-color); display: f
 /* Disable custom cursor on tactile screens */
 @media (hover: none) and (pointer: coarse) {
   * { cursor: auto !important; }
-  .custom-cursor { display: none !important; }
+  .custom-cursor, .custom-cursor-outer, .custom-cursor-inner { display: none !important; }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2707,6 +2688,86 @@ header > .nav-links:nth-child(2)::-webkit-scrollbar {
 .glow-card:hover .event-crosshairs {
   opacity: 0 !important;
   pointer-events: none;
+}
+
+/* ==========================================================================
+   BLUEPRINT CURSOR & BACKGROUND GRID UPGRADES
+   ========================================================================== */
+
+/* 1. Blueprint Grid Background on Body (Combined with top lighting background glow) */
+body {
+  background-image: 
+    linear-gradient(rgba(229, 57, 53, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.012) 1px, transparent 1px),
+    radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.04) 0%, transparent 80%);
+  background-size: 80px 80px, 80px 80px, 100% 100%;
+  background-position: center center, center center, center top;
+  background-repeat: repeat, repeat, no-repeat;
+  position: relative;
+}
+
+/* 400px major grid (placed on ::after to preserve the ::before organic noise grain) */
+body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(229, 57, 53, 0.005) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.005) 2px, transparent 2px);
+  background-size: 400px 400px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 2. Custom Blueprint Cursor Styles */
+@media (min-width: 769px) {
+  * {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cursor-crosshair-h {
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  background-color: var(--primary-color);
+}
+.cursor-crosshair-v {
+  position: absolute;
+  width: 1px;
+  height: 12px;
+  background-color: var(--primary-color);
+}
+
+.custom-cursor-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px dashed rgba(229, 57, 53, 0.35);
+  pointer-events: none;
+  z-index: 9998;
+  transition: border-color 0.3s ease, border-style 0.3s ease;
+}
+
+.custom-cursor-outer.hovered {
+  border-style: solid;
+  border-color: rgba(229, 57, 53, 0.85);
 }
 
 
