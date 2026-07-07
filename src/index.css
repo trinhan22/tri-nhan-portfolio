@@ -2770,8 +2770,329 @@ body::after {
   border-color: rgba(229, 57, 53, 0.85);
 }
 
-/* Mobile viewports: always display achievements details without requiring hover */
+/* ==========================================================================
+   BLUEPRINT ACCORDION SYSTEM FOR ACHIEVEMENTS
+   ========================================================================== */
+.achieve-accordion-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Custom Accordion Badge (Attractive Badge) */
+.accordion-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(229, 57, 53, 0.08);
+  border: 1px solid rgba(229, 57, 53, 0.35);
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(229, 57, 53, 0.05);
+}
+
+/* Accordion corner L-bracket marks (Fine detail) */
+.accordion-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(229, 57, 53, 0.35);
+  pointer-events: none;
+  z-index: 3;
+  transition: all 0.3s ease;
+  opacity: 0.4;
+}
+.accordion-corner.tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.accordion-corner.tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+.accordion-corner.bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+.accordion-corner.br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+.accordion-item:hover .accordion-corner {
+  opacity: 0.85;
+  width: 12px;
+  height: 12px;
+}
+
+.accordion-item {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.015);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion-item.expanded {
+  border-color: rgba(229, 57, 53, 0.35);
+  background-color: rgba(229, 57, 53, 0.015);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(229, 57, 53, 0.2),
+    inset 0 0 15px rgba(229, 57, 53, 0.08);
+}
+
+.accordion-item:hover {
+  background-color: rgba(229, 57, 53, 0.03);
+  border-color: rgba(229, 57, 53, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(229, 57, 53, 0.2),
+    inset 0 0 15px rgba(229, 57, 53, 0.08);
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 38px 40px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  cursor: none !important;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.accordion-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.accordion-num {
+  font-family: 'Courier New', Courier, monospace;
+  color: rgba(229, 57, 53, 0.45);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.accordion-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.accordion-status {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.72rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.accordion-arrow {
+  font-size: 0.95rem;
+  color: rgba(229, 57, 53, 0.6);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.accordion-header.expanded .accordion-arrow {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+
+.accordion-content-inner {
+  padding: 30px;
+  border-top: 1px dashed rgba(229, 57, 53, 0.15);
+}
+
+/* Empty state styling */
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  border: 1px dashed rgba(229, 57, 53, 0.15);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.005);
+}
+
+/* Clean Inner Achievements Cards */
+.achieve-card {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background-color: rgba(255, 255, 255, 0.015);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
+  position: relative;
+  overflow: hidden;
+  cursor: none !important;
+  height: 100%;
+}
+
+.achieve-card:hover {
+  background-color: rgba(229, 57, 53, 0.03);
+  border-color: rgba(229, 57, 53, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(229, 57, 53, 0.2),
+    inset 0 0 15px rgba(229, 57, 53, 0.08);
+}
+
+.achieve-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color);
+  transition: all 0.4s ease;
+  z-index: 5;
+  opacity: 0.4;
+}
+
+.achieve-card:hover .achieve-top-accent {
+  opacity: 1;
+  box-shadow: 0 1px 8px rgba(229, 57, 53, 0.4);
+}
+
+.achieve-bg-watermark {
+  position: absolute;
+  bottom: 8px;
+  right: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: var(--primary-color);
+  opacity: 0.08;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.achieve-card:hover .achieve-bg-watermark {
+  opacity: 0.2;
+  transform: scale(1.03);
+}
+
+.achieve-icon {
+  width: 55px;
+  height: 55px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  transition: var(--transition-bounce);
+  z-index: 2;
+}
+
+.achieve-card:hover .achieve-icon {
+  background: var(--primary-color);
+  color: white;
+  transform: rotate(15deg) scale(1.15);
+  box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);
+}
+
+.achieve-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.achieve-info h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 5px;
+  color: white;
+  transition: color 0.4s ease;
+}
+
+.achieve-card:hover .achieve-info h4 {
+  color: var(--primary-color);
+}
+
+/* Original state: hide details inside achievements cards */
+.achieve-info .achieve-meta,
+.achieve-info .text-desc {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover state: reveal details */
+.achieve-card:hover .achieve-info .achieve-meta {
+  max-height: 100px !important;
+  opacity: 1;
+  margin-top: 5px !important;
+  margin-bottom: 8px !important;
+}
+
+.achieve-card:hover .achieve-info .text-desc {
+  max-height: 350px !important;
+  opacity: 1;
+  margin-top: 5px !important;
+}
+
+.achieve-meta {
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+}
+
+.achieve-card .text-desc {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Responsive & Overrides */
 @media (max-width: 768px) {
+  .achieve-accordion-container {
+    gap: 25px;
+  }
+  .accordion-item {
+    border-radius: 16px;
+  }
+  .accordion-header {
+    padding: 18px 20px;
+    font-size: 1rem;
+  }
+  .accordion-header-left {
+    gap: 10px;
+  }
+  .accordion-status {
+    display: none;
+  }
+  .accordion-content-inner {
+    padding: 20px 15px;
+  }
   .achieve-info .achieve-meta {
     max-height: none !important;
     opacity: 1 !important;
@@ -2782,7 +3103,10 @@ body::after {
     opacity: 1 !important;
     margin-top: 5px !important;
   }
+  .achieve-card {
+    flex-direction: column;
+    padding: 24px 15px;
+    align-items: center;
+    text-align: center;
+  }
 }
-
-
-

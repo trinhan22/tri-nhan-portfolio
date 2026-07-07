@@ -364,6 +364,10 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   const [activeAchieveFilter, setActiveAchieveFilter] = useState('ALL');
+  const [isSchoolExpanded, setIsSchoolExpanded] = useState(false);
+  const [isUniversityExpanded, setIsUniversityExpanded] = useState(false);
+  const [isProjSchoolExpanded, setIsProjSchoolExpanded] = useState(false);
+  const [isProjUniversityExpanded, setIsProjUniversityExpanded] = useState(false);
   const [popupData, setPopupData] = useState({ isOpen: false, gallery: [], currentIndex: 0 });
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -1435,6 +1439,30 @@ function App() {
                   </p>
                 </div>
               </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">2</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://www.vlu.edu.vn" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      {lang === 'vi' ? 'Truyền thông Đa phương tiện' : 'Multimedia Communications Major'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'Trường Đại Học Văn Lang • 2026 -  Nay' : 'FPT High School Can Tho • 2026 - Present'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Học bổng Tài Năng 2026' : 'Awarded the 2026 Talent Scholarship'}
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
 
             <motion.div 
@@ -1555,87 +1583,189 @@ function App() {
                  <CharReveal key={`ach-title-${lang}`} text={t.achieveTitle1} /> <span className="italic-red">{t.achieveTitle2}</span>
                </h2>
              </div>
-             
-             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
-               <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
-               <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
-               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
-               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
-               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
-             </div>
           </div>
 
-          {/* Scroll-reveal animation container */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-          >
-            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
-            <motion.div 
-              key={`${activeAchieveFilter}-${lang}`}
-              className="grid-2"
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              {filteredAchievements.map((achieve) => {
-                const hasLink = !!achieve.link;
-                
-                const levelBadges = {
-                  'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
-                  'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
-                  'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
-                  'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
-                };
-                const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
+          <div className="achieve-accordion-container">
+            {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
+            <div className={`accordion-item ${isSchoolExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-corner tl"></div>
+              <div className="accordion-corner tr"></div>
+              <div className="accordion-corner bl"></div>
+              <div className="accordion-corner br"></div>
+              <div className="achieve-top-accent"></div>
 
-                return (
-                  <motion.div 
-                    key={achieve.titleVi} 
-                    className="glow-card achieve-card"
-                    onClick={() => hasLink && window.open(achieve.link, '_blank')}
-                    onMouseEnter={(e) => {
-                      handleCardMouseMove(e);
-                      if (hasLink) handleMouseEnterInteractive(e);
-                    }} 
-                    onMouseLeave={(e) => {
-                      handleCardMouseLeave(e);
-                      if (hasLink) handleMouseLeaveInteractive();
-                    }}
-                    onMouseMove={handleCardMouseMove}
-                    variants={cardVariants}
-                    style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+              <button 
+                className={`accordion-header ${isSchoolExpanded ? 'expanded' : ''}`}
+                onClick={() => setIsSchoolExpanded(!isSchoolExpanded)}
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                <div className="accordion-header-left">
+                  <span className="accordion-num">//01</span>
+                  <span className="accordion-title">
+                    {lang === 'vi' ? 'Trung học Cơ sở & Trung học Phổ thông' : 'Middle & High School'}
+                  </span>
+                </div>
+                <div className="accordion-header-right">
+                  <div className="accordion-badge">
+                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
+                    <span className="badge-text">2019 - 2026</span>
+                  </div>
+                  <span className="accordion-status">
+                    {isSchoolExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
+                  </span>
+                  <i className={`fas fa-chevron-down accordion-arrow ${isSchoolExpanded ? 'rotated' : ''}`}></i>
+                </div>
+              </button>
+              
+              <AnimatePresence initial={false}>
+                {isSchoolExpanded && (
+                  <motion.div
+                    key="school-content"
+                    className="accordion-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ overflow: 'hidden' }}
                   >
-                    {/* Card Level Decors - Unified Top Accent */}
-                    <div className="achieve-top-accent"></div>
-                    
-                    {/* Background Watermark Level Indicator */}
-                    <div className="achieve-bg-watermark">{levelBadge.text}</div>
-                    
-                    <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
-                      <i className={{
-                        'Cấp Quốc gia': 'fas fa-trophy',
-                        'Cấp Thành phố': 'fas fa-medal',
-                        'Cấp Quận': 'fas fa-ribbon',
-                        'Cấp trường': 'fas fa-award'
-                      }[achieve.level] || 'fas fa-award'}></i>
-                    </div>
-                    
-                    <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
-                      <h4>
-                        {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
-                        {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
-                      </h4>
-                      <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
-                      <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+                    <div className="accordion-content-inner">
+                      {/* Filter category buttons inside the school panel */}
+                      <div 
+                        className="filter-container" 
+                        onMouseEnter={handleMouseEnterInteractive} 
+                        onMouseLeave={handleMouseLeaveInteractive} 
+                        style={{ margin: '0 0 30px 0' }}
+                      >
+                        <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
+                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
+                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
+                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
+                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
+                      </div>
+
+                      <motion.div 
+                        key={`${activeAchieveFilter}-${lang}`}
+                        className="grid-2"
+                        variants={staggerContainer}
+                        initial="hidden"
+                        animate="visible"
+                      >
+                        {filteredAchievements.map((achieve) => {
+                          const hasLink = !!achieve.link;
+                          const levelBadges = {
+                            'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
+                            'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
+                            'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
+                            'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
+                          };
+                          const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
+
+                          return (
+                            <motion.div 
+                              key={achieve.titleVi} 
+                              className="glow-card achieve-card"
+                              onClick={() => hasLink && window.open(achieve.link, '_blank')}
+                              onMouseEnter={(e) => {
+                                handleCardMouseMove(e);
+                                if (hasLink) handleMouseEnterInteractive(e);
+                              }} 
+                              onMouseLeave={(e) => {
+                                handleCardMouseLeave(e);
+                                if (hasLink) handleMouseLeaveInteractive();
+                              }}
+                              onMouseMove={handleCardMouseMove}
+                              variants={cardVariants}
+                              style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+                            >
+                              <div className="achieve-top-accent"></div>
+                              <div className="achieve-bg-watermark">{levelBadge.text}</div>
+                              
+                              <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
+                                <i className={{
+                                  'Cấp Quốc gia': 'fas fa-trophy',
+                                  'Cấp Thành phố': 'fas fa-medal',
+                                  'Cấp Quận': 'fas fa-ribbon',
+                                  'Cấp trường': 'fas fa-award'
+                                }[achieve.level] || 'fas fa-award'}></i>
+                              </div>
+                              
+                              <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
+                                <h4>
+                                  {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
+                                  {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
+                                </h4>
+                                <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                                <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </motion.div>
                     </div>
                   </motion.div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* 02. UNIVERSITY SECTION */}
+            <div className={`accordion-item ${isUniversityExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-corner tl"></div>
+              <div className="accordion-corner tr"></div>
+              <div className="accordion-corner bl"></div>
+              <div className="accordion-corner br"></div>
+              <div className="achieve-top-accent"></div>
+
+              <button 
+                className={`accordion-header ${isUniversityExpanded ? 'expanded' : ''}`}
+                onClick={() => setIsUniversityExpanded(!isUniversityExpanded)}
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                <div className="accordion-header-left">
+                  <span className="accordion-num">//02</span>
+                  <span className="accordion-title">
+                    {lang === 'vi' ? 'Đại học' : 'University'}
+                  </span>
+                </div>
+                <div className="accordion-header-right">
+                  <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
+                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
+                    <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
+                  </div>
+                  <span className="accordion-status">
+                    {isUniversityExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
+                  </span>
+                  <i className={`fas fa-chevron-down accordion-arrow ${isUniversityExpanded ? 'rotated' : ''}`}></i>
+                </div>
+              </button>
+              
+              <AnimatePresence initial={false}>
+                {isUniversityExpanded && (
+                  <motion.div
+                    key="university-content"
+                    className="accordion-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="accordion-content-inner">
+                      <div className="empty-state-container">
+                        <i className="fas fa-graduation-cap" style={{ fontSize: '2.2rem', color: 'rgba(229, 57, 53, 0.35)', marginBottom: '15px' }}></i>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: "'Courier New', Courier, monospace", margin: 0 }}>
+                          {lang === 'vi' 
+                            ? '[//SYSTEM.INFO: CHƯA CÓ DỮ LIỆU THÀNH TÍCH BẬC ĐẠI HỌC]' 
+                            : '[//SYSTEM.INFO: NO UNIVERSITY ACHIEVEMENTS RECORDED YET]'}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </section>
 
         {/* 4. PROJECTS SECTION */}
@@ -1648,32 +1778,75 @@ function App() {
                  <CharReveal key={`proj-title-${lang}`} text={t.projTitle1} /><span className="italic-red">{t.projTitle2}</span>
                </h2>
              </div>
-             
-             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
-               <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
-               <button className={`filter-btn ${activeFilter === 'VIDEO' ? 'active' : ''}`} onClick={() => setActiveFilter('VIDEO')}>{t.filterVideo}</button>
-               <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
-               <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
-               <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
-             </div>
           </div>
 
-          {/* Scroll-reveal animation container */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-          >
-            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
-            <motion.div 
-              key={`${activeFilter}-${lang}`}
-              className="project-grid"
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
-            {filteredProjects.map((proj) => {
+          <div className="achieve-accordion-container">
+            {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
+            <div className={`accordion-item ${isProjSchoolExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-corner tl"></div>
+              <div className="accordion-corner tr"></div>
+              <div className="accordion-corner bl"></div>
+              <div className="accordion-corner br"></div>
+              <div className="achieve-top-accent"></div>
+
+              <button 
+                className={`accordion-header ${isProjSchoolExpanded ? 'expanded' : ''}`}
+                onClick={() => setIsProjSchoolExpanded(!isProjSchoolExpanded)}
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                <div className="accordion-header-left">
+                  <span className="accordion-num">//01</span>
+                  <span className="accordion-title">
+                    {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
+                  </span>
+                </div>
+                <div className="accordion-header-right">
+                  <div className="accordion-badge">
+                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
+                    <span className="badge-text">2023 - 2026</span>
+                  </div>
+                  <span className="accordion-status">
+                    {isProjSchoolExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
+                  </span>
+                  <i className={`fas fa-chevron-down accordion-arrow ${isProjSchoolExpanded ? 'rotated' : ''}`}></i>
+                </div>
+              </button>
+              
+              <AnimatePresence initial={false}>
+                {isProjSchoolExpanded && (
+                  <motion.div
+                    key="proj-school-content"
+                    className="accordion-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="accordion-content-inner">
+                      {/* Filter category buttons inside the school panel */}
+                      <div 
+                        className="filter-container" 
+                        onMouseEnter={handleMouseEnterInteractive} 
+                        onMouseLeave={handleMouseLeaveInteractive} 
+                        style={{ margin: '0 0 30px 0' }}
+                      >
+                        <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
+                        <button className={`filter-btn ${activeFilter === 'VIDEO' ? 'active' : ''}`} onClick={() => setActiveFilter('VIDEO')}>{t.filterVideo}</button>
+                        <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
+                        <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
+                        <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
+                      </div>
+
+                      <motion.div 
+                        key={`${activeFilter}-${lang}`}
+                        className="project-grid"
+                        variants={staggerContainer}
+                        initial="hidden"
+                        animate="visible"
+                      >
+                        {filteredProjects.map((proj) => {
               const categoryBadges = {
                 'VIDEO': { icon: 'fas fa-video', text: 'VIDEO' },
                 'THIẾT KẾ': { icon: 'fas fa-palette', text: lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN' },
@@ -1962,8 +2135,71 @@ function App() {
                 </motion.div>
               );
             })}
-            </motion.div>
-          </motion.div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* 02. UNIVERSITY SECTION */}
+            <div className={`accordion-item ${isProjUniversityExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-corner tl"></div>
+              <div className="accordion-corner tr"></div>
+              <div className="accordion-corner bl"></div>
+              <div className="accordion-corner br"></div>
+              <div className="achieve-top-accent"></div>
+
+              <button 
+                className={`accordion-header ${isProjUniversityExpanded ? 'expanded' : ''}`}
+                onClick={() => setIsProjUniversityExpanded(!isProjUniversityExpanded)}
+                onMouseEnter={handleMouseEnterInteractive}
+                onMouseLeave={handleMouseLeaveInteractive}
+              >
+                <div className="accordion-header-left">
+                  <span className="accordion-num">//02</span>
+                  <span className="accordion-title">
+                    {lang === 'vi' ? 'Đại học' : 'University'}
+                  </span>
+                </div>
+                <div className="accordion-header-right">
+                  <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
+                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
+                    <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
+                  </div>
+                  <span className="accordion-status">
+                    {isProjUniversityExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
+                  </span>
+                  <i className={`fas fa-chevron-down accordion-arrow ${isProjUniversityExpanded ? 'rotated' : ''}`}></i>
+                </div>
+              </button>
+              
+              <AnimatePresence initial={false}>
+                {isProjUniversityExpanded && (
+                  <motion.div
+                    key="proj-university-content"
+                    className="accordion-content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div className="accordion-content-inner">
+                      <div className="empty-state-container">
+                        <i className="fas fa-graduation-cap" style={{ fontSize: '2.2rem', color: 'rgba(229, 57, 53, 0.35)', marginBottom: '15px' }}></i>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: "'Courier New', Courier, monospace", margin: 0 }}>
+                          {lang === 'vi' 
+                            ? '[//SYSTEM.INFO: CHƯA CÓ DỮ LIỆU DỰ ÁN BẬC ĐẠI HỌC]' 
+                            : '[//SYSTEM.INFO: NO UNIVERSITY PROJECTS RECORDED YET]'}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </section>
 
         {/* 5. CONTACT SECTION */}
