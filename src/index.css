@@ -2825,32 +2825,111 @@ body::after {
 
 .accordion-item {
   border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.015);
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.01);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow, border-color;
   position: relative;
   overflow: hidden;
 }
 
+/* Side telemetry tag rotated -90deg (Visual flair) */
+.accordion-item::before {
+  content: 'SYS.EXEC_SEQ_00984 // LAT_10.03 // LNG_105.78';
+  position: absolute;
+  bottom: 20px;
+  right: -85px;
+  transform: rotate(-90deg);
+  transform-origin: right bottom;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: rgba(229, 57, 53, 0.12);
+  letter-spacing: 2px;
+  pointer-events: none;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* Radar Diagnostic Compass Watermark (Visual flair) */
+.accordion-item::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 140px;
+  height: 140px;
+  border: 1px dashed rgba(229, 57, 53, 0.03);
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle, transparent 40%, rgba(229, 57, 53, 0.02) 41%, rgba(229, 57, 53, 0.02) 43%, transparent 44%),
+    radial-gradient(circle, transparent 60%, rgba(229, 57, 53, 0.015) 61%, rgba(229, 57, 53, 0.015) 63%, transparent 64%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-item:hover::before {
+  color: rgba(229, 57, 53, 0.45);
+}
+
+.accordion-item:hover::after {
+  transform: rotate(60deg) scale(1.15);
+  opacity: 1;
+  border-color: rgba(229, 57, 53, 0.15);
+}
+
+/* Active Blueprint CAD Grid Backdrop (Visual flair) */
 .accordion-item.expanded {
   border-color: rgba(229, 57, 53, 0.35);
-  background-color: rgba(229, 57, 53, 0.015);
+  background-color: rgba(10, 10, 10, 0.85);
+  background-image: 
+    radial-gradient(rgba(229, 57, 53, 0.1) 1px, transparent 0),
+    linear-gradient(rgba(229, 57, 53, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 24px 24px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    0 0 30px rgba(229, 57, 53, 0.2),
-    inset 0 0 15px rgba(229, 57, 53, 0.08);
+    0 20px 40px rgba(0, 0, 0, 0.65),
+    0 0 30px rgba(229, 57, 53, 0.15),
+    inset 0 0 20px rgba(229, 57, 53, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .accordion-item:hover {
-  background-color: rgba(229, 57, 53, 0.03);
-  border-color: rgba(229, 57, 53, 0.4);
-  transform: translateY(-5px);
+  background-color: rgba(10, 10, 10, 0.5);
+  background-image: 
+    radial-gradient(rgba(229, 57, 53, 0.06) 1px, transparent 0),
+    linear-gradient(rgba(229, 57, 53, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 57, 53, 0.015) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 24px 24px;
+  border-color: rgba(229, 57, 53, 0.3);
+  transform: translateY(-4px);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    0 0 30px rgba(229, 57, 53, 0.2),
-    inset 0 0 15px rgba(229, 57, 53, 0.08);
+    0 15px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(229, 57, 53, 0.1);
 }
+
+/* Sweeping neon laser top accent (Visual flair) */
+.accordion-item .achieve-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  background-size: 200% 100%;
+  animation: sweepAccent 4s infinite linear;
+  z-index: 5;
+  opacity: 0.6;
+}
+
+@keyframes sweepAccent {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 
 .accordion-header {
   display: flex;
@@ -2914,6 +2993,104 @@ body::after {
 .accordion-content-inner {
   padding: 30px;
   border-top: 1px dashed rgba(229, 57, 53, 0.15);
+}
+
+/* Dossier folder style tab */
+.accordion-tab {
+  position: absolute;
+  top: -26px; /* Protrudes upwards above the card border edge */
+  left: 35px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0a0a0a;
+  border: 1px solid rgba(229, 57, 53, 0.25);
+  border-left: 3px solid var(--primary-color) !important; /* Left accent telemetry bar */
+  border-bottom: none; /* Blends seamlessly with the top accent line */
+  padding: 5px 14px 5px 10px;
+  border-radius: 4px 4px 0 0; /* Structural dossier tab corners */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ffffff; /* High contrast text */
+  letter-spacing: 0.8px;
+  z-index: 4;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.accordion-tab i {
+  color: var(--primary-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.accordion-tab::after {
+  content: '_';
+  color: var(--primary-color);
+  font-weight: bold;
+  animation: blinkCursor 1s infinite steps(2, start);
+}
+
+@keyframes blinkCursor {
+  to { visibility: hidden; }
+}
+
+.accordion-item:hover .accordion-tab {
+  border-color: rgba(229, 57, 53, 0.5);
+  background: #111111;
+  box-shadow: 
+    0 -5px 15px rgba(229, 57, 53, 0.12),
+    inset 0 0 8px rgba(229, 57, 53, 0.05);
+  transform: translateY(-2px);
+}
+
+.accordion-item:hover .accordion-tab i {
+  transform: scale(1.15) rotate(-5deg);
+  color: #ff5252;
+}
+
+.tab-meta {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Pulsing LED status indicator */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.status-dot.online {
+  background-color: #00ff66;
+  box-shadow: 0 0 8px #00ff66, 0 0 15px #00ff66;
+  animation: ledPulse 1.8s infinite ease-in-out;
+}
+
+.status-dot.offline {
+  background-color: #ff3333;
+  box-shadow: 0 0 4px #ff3333;
+}
+
+@keyframes ledPulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
 }
 
 /* Empty state styling */

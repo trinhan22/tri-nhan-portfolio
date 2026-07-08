@@ -1408,7 +1408,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Trường Phổ thông Việt Mỹ • 2019 - 2023' : 'Viet My Secondary School • 2019 - 2023'}
+                    {lang === 'vi' ? 'Trường Phổ thông Việt Mỹ • 8/2019 - 6/2023' : 'Viet My Secondary School • 2019 - 2023'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 4 năm liên tiếp, tốt nghiệp THCS xếp loại Giỏi, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Graduated with High Distinction, achieved Excellent Student title for 4 consecutive years, and maintained Excellent conduct. Won multiple awards in various competitions.'}
@@ -1432,7 +1432,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Trường THPT FPT Cần Thơ • 2023 - 2026' : 'FPT High School Can Tho • 2023 - 2026'}
+                    {lang === 'vi' ? 'Trường THPT FPT Cần Thơ • 8/2023 - 6/2026' : 'FPT High School Can Tho • 2023 - 2026'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Đạt danh hiệu học sinh giỏi 3 năm liên tiếp, tốt nghiệp THPT xếp loại Tốt, hạnh kiểm Tốt. Đạt nhiều giải thưởng trong các cuộc thi.' : 'Achieved Excellent Student title for 3 consecutive years, graduated with High Distinction, and maintained Excellent conduct. Won multiple awards in various competitions.'}
@@ -1441,7 +1441,7 @@ function App() {
               </motion.div>
 
               <motion.div className="timeline-item" variants={timelineVariants}>
-                <div className="timeline-num">2</div>
+                <div className="timeline-num">3</div>
                 <div className="timeline-content">
                   <h4>
                     <a 
@@ -1490,7 +1490,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'KN Production • 2024 - Nay' : 'KN Production • 2024 - Present'}
+                    {lang === 'vi' ? 'KN Production • 3/2024 - Nay' : 'KN Production • 3/2024 - Present'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Quản lý truyền thông và nội dung Fanpage, thiết kế ấn phẩm và lên kịch bản cho các dự án truyền thông.' : 'Responsible for content and communication strategy on the Fanpage, creating visuals, and scripting multimedia projects.'}
@@ -1514,7 +1514,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'CLB Nhiếp ảnh F-Photography • 2024 - 2026' : 'F-Photography Club • 2024 - 2026'}
+                    {lang === 'vi' ? 'CLB Nhiếp ảnh F-Photography • 3/2024 - 4/2026' : 'F-Photography Club • 3/2024 - 4/2026'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Tham gia quản lý CLB. Tổ chức thiết kế ấn phẩm truyền thông và lên kế hoạch cho các dự án thuộc Câu lạc bộ.' : 'Co-managed club operations. Led media content creation and planned various creative club events.'}
@@ -1538,7 +1538,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Dự án HopVan • 2026 - Nay' : 'HopVan Project • 2026 - Present'}
+                    {lang === 'vi' ? 'Dự án HopVan • 1/2026 - Nay' : 'HopVan Project • 1/2026 - Present'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.' : 'Handled UI/UX designs, media conceptualization, programming, and system architecture for the HopVan website.'}
@@ -1562,7 +1562,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Dự án AIGEO • 2026 - Nay' : 'AIGEO Project • 2026 - Present'}
+                    {lang === 'vi' ? 'Dự án AIGEO • 6/2026 - Nay' : 'AIGEO Project • 6/2026 - Present'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Managed UI design, marketing direction, front-end development, and technical optimizations for the platform.'}
@@ -1588,6 +1588,10 @@ function App() {
           <div className="achieve-accordion-container">
             {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
             <div className={`accordion-item ${isSchoolExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-tab">
+                <i className="far fa-folder-open" style={{ fontSize: '0.7rem' }}></i>
+                <span className="tab-meta">SYS.ACHV_01</span>
+              </div>
               <div className="accordion-corner tl"></div>
               <div className="accordion-corner tr"></div>
               <div className="accordion-corner bl"></div>
@@ -1607,6 +1611,10 @@ function App() {
                   </span>
                 </div>
                 <div className="accordion-header-right">
+                  <div className="status-indicator">
+                    <span className={`status-dot ${isSchoolExpanded ? 'online' : 'offline'}`}></span>
+                    <span>{isSchoolExpanded ? 'ACTIVE' : 'STANDBY'}</span>
+                  </div>
                   <div className="accordion-badge">
                     <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
                     <span className="badge-text">2019 - 2026</span>
@@ -1710,6 +1718,10 @@ function App() {
 
             {/* 02. UNIVERSITY SECTION */}
             <div className={`accordion-item ${isUniversityExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-tab">
+                <i className="far fa-folder" style={{ fontSize: '0.7rem' }}></i>
+                <span className="tab-meta">SYS.ACHV_02</span>
+              </div>
               <div className="accordion-corner tl"></div>
               <div className="accordion-corner tr"></div>
               <div className="accordion-corner bl"></div>
@@ -1729,6 +1741,10 @@ function App() {
                   </span>
                 </div>
                 <div className="accordion-header-right">
+                  <div className="status-indicator">
+                    <span className={`status-dot ${isUniversityExpanded ? 'online' : 'offline'}`}></span>
+                    <span>{isUniversityExpanded ? 'ACTIVE' : 'STANDBY'}</span>
+                  </div>
                   <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
                     <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
                     <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
@@ -1783,6 +1799,10 @@ function App() {
           <div className="achieve-accordion-container">
             {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
             <div className={`accordion-item ${isProjSchoolExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-tab">
+                <i className="far fa-folder-open" style={{ fontSize: '0.7rem' }}></i>
+                <span className="tab-meta">SYS.PROJ_01</span>
+              </div>
               <div className="accordion-corner tl"></div>
               <div className="accordion-corner tr"></div>
               <div className="accordion-corner bl"></div>
@@ -1802,6 +1822,10 @@ function App() {
                   </span>
                 </div>
                 <div className="accordion-header-right">
+                  <div className="status-indicator">
+                    <span className={`status-dot ${isProjSchoolExpanded ? 'online' : 'offline'}`}></span>
+                    <span>{isProjSchoolExpanded ? 'ACTIVE' : 'STANDBY'}</span>
+                  </div>
                   <div className="accordion-badge">
                     <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
                     <span className="badge-text">2023 - 2026</span>
@@ -2144,6 +2168,10 @@ function App() {
 
             {/* 02. UNIVERSITY SECTION */}
             <div className={`accordion-item ${isProjUniversityExpanded ? 'expanded' : ''}`}>
+              <div className="accordion-tab">
+                <i className="far fa-folder" style={{ fontSize: '0.7rem' }}></i>
+                <span className="tab-meta">SYS.PROJ_02</span>
+              </div>
               <div className="accordion-corner tl"></div>
               <div className="accordion-corner tr"></div>
               <div className="accordion-corner bl"></div>
@@ -2163,6 +2191,10 @@ function App() {
                   </span>
                 </div>
                 <div className="accordion-header-right">
+                  <div className="status-indicator">
+                    <span className={`status-dot ${isProjUniversityExpanded ? 'online' : 'offline'}`}></span>
+                    <span>{isProjUniversityExpanded ? 'ACTIVE' : 'STANDBY'}</span>
+                  </div>
                   <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
                     <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
                     <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
