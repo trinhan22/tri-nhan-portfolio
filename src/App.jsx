@@ -1589,7 +1589,7 @@ function App() {
                     {lang === 'vi' ? 'ĐỊA LÍ THẦY GEO • 7/2026 - Nay' : 'DIA LI THAY GEO • 7/2026 - Present'}
                   </span>
                   <p className="text-desc">
-                    {lang === 'vi' ? 'Phụ trách thiết kế các ấn phẩm, lên ý tưởng truyền thông và quản lý các bài đăng trên Fanpage và kênh Tiktok ĐỊA LÍ THẦY GEO.' : 'Responsible for designing visual materials, developing communication concepts, and managing posts on the "DIA LI THAY GEO" Fanpage and TikTok channel.'}
+                    {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông và quản lý các bài đăng trên Fanpage và kênh Tiktok ĐỊA LÍ THẦY GEO.' : 'Responsible for design, developing communication concepts, and managing posts on the "DIA LI THAY GEO" Fanpage and TikTok channel.'}
                   </p>
                 </div>
               </motion.div>
