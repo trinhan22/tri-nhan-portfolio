@@ -1459,7 +1459,7 @@ function App() {
                     {lang === 'vi' ? 'Trường Đại Học Văn Lang • 2026 -  Nay' : 'FPT High School Can Tho • 2026 - Present'}
                   </span>
                   <p className="text-desc">
-                    {lang === 'vi' ? 'Học bổng Tài Năng 2026' : 'Awarded the 2026 Talent Scholarship'}
+                    {lang === 'vi' ? 'Học bổng Tài Năng VLU 2026' : 'Awarded the VLU Talent Scholarship 2026'}
                   </p>
                 </div>
               </motion.div>
@@ -1566,6 +1566,30 @@ function App() {
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Managed UI design, marketing direction, front-end development, and technical optimizations for the platform.'}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div className="timeline-item" variants={timelineVariants}>
+                <div className="timeline-num">5</div>
+                <div className="timeline-content">
+                  <h4>
+                    <a 
+                      href="https://www.facebook.com/dialithaygeo" 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      style={{ color: 'inherit', textDecoration: 'none' }} 
+                      onMouseEnter={handleMouseEnterInteractive}
+                      onMouseLeave={handleMouseLeaveInteractive}
+                    >
+                      Admin <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                    </a>
+                  </h4>
+                  <span className="timeline-meta">
+                    {lang === 'vi' ? 'ĐỊA LÍ THẦY GEO • 7/2026 - Nay' : 'DIA LI THAY GEO • 7/2026 - Present'}
+                  </span>
+                  <p className="text-desc">
+                    {lang === 'vi' ? 'Phụ trách thiết kế các ấn phẩm, lên ý tưởng truyền thông và quản lý các bài đăng trên Fanpage và kênh Tiktok ĐỊA LÍ THẦY GEO.' : 'Responsible for designing visual materials, developing communication concepts, and managing posts on the "DIA LI THAY GEO" Fanpage and TikTok channel.'}
                   </p>
                 </div>
               </motion.div>
