@@ -3287,3 +3287,75 @@ body::after {
     text-align: center;
   }
 }
+
+/* =========================================================================
+   MOBILE GPU OPTIMIZATION & RESPONSIVE LAYOUT FIXES
+   ========================================================================= */
+@media (max-width: 768px) {
+  /* 1. Remove backdrop filters from sticky elements and heavy UI components */
+  header.scrolled {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(18, 18, 18, 0.98) !important;
+  }
+  
+  .nav-links.active {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(7, 7, 7, 0.98) !important;
+  }
+
+  .accordion-item.expanded {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(15, 15, 15, 0.98) !important;
+  }
+
+  /* 2. Hide decorative telemetry strings to prevent horizontal scrolling/overflow */
+  .accordion-item::before,
+  .accordion-item::after {
+    display: none !important;
+  }
+  
+  /* 3. Adjust padding and layouts for smaller screens */
+  .achieve-card {
+    padding: 20px 15px !important;
+    gap: 15px !important;
+  }
+  
+  .project-card {
+    padding: 20px 15px !important;
+  }
+  
+  .accordion-content-inner {
+    padding: 15px !important;
+  }
+
+  .accordion-header {
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    padding: 20px 15px !important;
+  }
+  
+  .accordion-header-left {
+    flex: 1 1 100% !important;
+  }
+  
+  .accordion-header-right {
+    flex: 1 1 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  .accordion-title {
+    font-size: 1.05rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .accordion-badge {
+    white-space: nowrap !important;
+  }
+
+  .timeline-container {
+    padding-left: 20px !important;
+  }
+}
