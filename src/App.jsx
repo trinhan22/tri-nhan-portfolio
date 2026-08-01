@@ -737,7 +737,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Phim Ngắn - "Hố Sâu Ảo Vọng"' : 'Short Film - "The Abyss of Delusion"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
-      logo: '/public/images/logo-kn.webp',
+      logo: '/images/logo-kn.webp',
       mainVideo: 'https://www.youtube.com/embed/2x40K6FstAU?si=czshFspivRjlkkst',
       mainImg: '/images/design-1/1.png',
       images: []
@@ -747,7 +747,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Phim Ngắn - "Áp Lực Học Đường"' : 'Short Film - "School Pressure"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
-      logo: '/public/images/logo-kn.webp',
+      logo: '/images/logo-kn.webp',
       mainVideo: 'https://www.youtube.com/embed/i4RDEnNLbmw?si=EJ3iOby896wRgZja',
       mainImg: '/images/thumb/3.png',
       images: []
@@ -757,7 +757,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Recap Video - "Sự Kiện Chiếu Phim Tết 2026"' : 'Recap Video - "Lunar New Year Film Screening Event 2026."',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/public/images/logo-fpc.webp',
+      logo: '/images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
       mainImg: '/images/project-4/1.png',
       images: []
@@ -767,7 +767,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Podcast - "Hãy Yêu Thương Mẹ Khi Còn Có Thể"' : 'Podcast - "Love your mother while you still can."',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/public/images/logo-fpc.webp',
+      logo: '/images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2044582789446743%2F&show_text=false&width=560&t=0',
       mainImg: '/images/thumb/2.png',
       images: []
@@ -777,7 +777,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Recap Video - "Giao Lưu Nhiếp Ảnh Cấp CLB"' : 'Recap Video - "Photography Club Exchange"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/public/images/logo-fpc.webp',
+      logo: '/images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
       mainImg: '/images/project-3/2.png',
       images: []
@@ -787,7 +787,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Live Session - "Người Gieo Mầm Xanh"' : 'Live Session - "Người Gieo Mầm Xanh"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/public/images/logo-fpc.webp',
+      logo: '/images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F681113428169427%2F&show_text=false&width=560&t=0',
       mainImg: '/images/thumb/1.png',
       images: []
@@ -1041,7 +1041,7 @@ function App() {
       title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
       desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
       link: 'https://fphotography.club/fpcnews',
-      logo: '/public/images/logo-fn.webp',
+      logo: '/images/logo-fn.webp',
       mainImg: '/images/dev-2/1.png',
       images: [
         '/images/dev-2/2.png',
@@ -1056,7 +1056,7 @@ function App() {
       title: lang === 'vi' ? 'FPC ADMIN - Trang quản trị trực tuyến CLB F-Photography' : 'FPC ADMIN - Online administration page of F-Photography Club',
       desc: lang === 'vi' ? 'Trang quản trị trực tuyến của CLB F-Photography' : 'Online administration page of the F-Photography Club.',
       link: 'https://fphotography.club',
-      logo: '/public/images/logo-fpc.webp',
+      logo: '/images/logo-fpc.webp',
       mainImg: '/images/dev-1/1.png',
       images: [
         '/images/dev-1/2.png',
