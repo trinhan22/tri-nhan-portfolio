@@ -311,9 +311,9 @@ const BlueprintCursor = () => {
 
   return (
     <>
-      {/* 1. Trailing Spring Outer Circle */}
+      {/* Dynamic Morphing Icon Cursor */}
       <motion.div 
-        className={`custom-cursor-outer ${isHovered ? 'hovered' : ''}`}
+        className={`custom-cursor-pill ${isHovered ? 'hovered' : ''}`}
         style={{
           x: springX,
           y: springY,
@@ -321,29 +321,12 @@ const BlueprintCursor = () => {
           translateY: '-50%'
         }}
         animate={{
-          scale: isHovered ? 1.8 : 1
+          width: isHovered ? 28 : 16,
+          height: isHovered ? 28 : 16,
+          borderRadius: isHovered ? 14 : 8
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       />
-
-      {/* 2. Snappy Inner Reticle Crosshair */}
-      <motion.div 
-        className="custom-cursor-inner"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%'
-        }}
-        animate={{
-          rotate: isHovered ? 45 : 0,
-          scale: isHovered ? 0.75 : 1
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      >
-        <div className="cursor-crosshair-h"></div>
-        <div className="cursor-crosshair-v"></div>
-      </motion.div>
     </>
   );
 };
@@ -737,7 +720,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Phim Ngắn - "Hố Sâu Ảo Vọng"' : 'Short Film - "The Abyss of Delusion"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
-      logo: '/images/logo-kn.webp',
+      logo: 'images/logo-kn.webp',
       mainVideo: 'https://www.youtube.com/embed/2x40K6FstAU?si=czshFspivRjlkkst',
       mainImg: '/images/design-1/1.png',
       images: []
@@ -747,7 +730,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Phim Ngắn - "Áp Lực Học Đường"' : 'Short Film - "School Pressure"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của KN Production.' : 'Media publication for KN Production.',
-      logo: '/images/logo-kn.webp',
+      logo: 'images/logo-kn.webp',
       mainVideo: 'https://www.youtube.com/embed/i4RDEnNLbmw?si=EJ3iOby896wRgZja',
       mainImg: '/images/thumb/3.png',
       images: []
@@ -757,7 +740,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Recap Video - "Sự Kiện Chiếu Phim Tết 2026"' : 'Recap Video - "Lunar New Year Film Screening Event 2026."',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/images/logo-fpc.webp',
+      logo: 'images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
       mainImg: '/images/project-4/1.png',
       images: []
@@ -767,7 +750,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Podcast - "Hãy Yêu Thương Mẹ Khi Còn Có Thể"' : 'Podcast - "Love your mother while you still can."',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/images/logo-fpc.webp',
+      logo: 'images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2044582789446743%2F&show_text=false&width=560&t=0',
       mainImg: '/images/thumb/2.png',
       images: []
@@ -777,7 +760,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Recap Video - "Giao Lưu Nhiếp Ảnh Cấp CLB"' : 'Recap Video - "Photography Club Exchange"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/images/logo-fpc.webp',
+      logo: 'images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2420607978395005%2F&show_text=false&width=560&t=0',
       mainImg: '/images/project-3/2.png',
       images: []
@@ -787,7 +770,7 @@ function App() {
       role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Live Session - "Người Gieo Mầm Xanh"' : 'Live Session - "Người Gieo Mầm Xanh"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: '/images/logo-fpc.webp',
+      logo: 'images/logo-fpc.webp',
       mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F681113428169427%2F&show_text=false&width=560&t=0',
       mainImg: '/images/thumb/1.png',
       images: []
@@ -1041,7 +1024,7 @@ function App() {
       title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
       desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
       link: 'https://fphotography.club/fpcnews',
-      logo: '/images/logo-fn.webp',
+      logo: 'images/logo-fn.webp',
       mainImg: '/images/dev-2/1.png',
       images: [
         '/images/dev-2/2.png',
@@ -1056,7 +1039,7 @@ function App() {
       title: lang === 'vi' ? 'FPC ADMIN - Trang quản trị trực tuyến CLB F-Photography' : 'FPC ADMIN - Online administration page of F-Photography Club',
       desc: lang === 'vi' ? 'Trang quản trị trực tuyến của CLB F-Photography' : 'Online administration page of the F-Photography Club.',
       link: 'https://fphotography.club',
-      logo: '/images/logo-fpc.webp',
+      logo: 'images/logo-fpc.webp',
       mainImg: '/images/dev-1/1.png',
       images: [
         '/images/dev-1/2.png',
@@ -1074,7 +1057,7 @@ function App() {
     { level: 'Cấp Quận', titleVi: 'Giải Ba Cuộc thi Khoa học Kỹ thuật', titleEn: 'Third Prize in Science & Engineering Fair', metaVi: 'Quận Cái Răng • 2023', metaEn: 'Cai Rang District • 2023', descVi: 'Đoạt giải Ba Cuộc thi KHKT cấp Quận lớp 9.', descEn: 'Won Third Prize in the District-level Science and Engineering Fair for 9th Grade.', link:'https://www.facebook.com/photo.php?fbid=632210875573463&set=a.632214185573132&type=3'   },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Cuộc thi Stempetition 2023-2024', titleEn: 'Second Prize in Stempetition 2023-2024', metaVi: 'THPT FPT Cần Thơ • 2023', metaEn: 'FPT High School Can Tho • 2023', descVi: 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.', descEn: 'Won Second Prize in the School-level Stempetition.', link:'https://www.facebook.com/share/18owhaRzuX/'   },
     { level: 'Cấp trường', titleVi: 'Đội thi Ấn tượng tại Phiên toà giả định 2023', titleEn: 'Impressive Team in Mock Trial 2023', metaVi: 'THPT FPT Cần Thơ • 2023', metaEn: 'FPT High School Can Tho • 2023', descVi: 'Đoạt giải Ấn tượng Phiên toà giả định Cấp trường.', descEn: 'Won the Impressive Team Award in the School-level Mock Trial.', link:'https://baocantho.com.vn/hoc-sinh-thpt-fpt-mo-phong-nhu-mot-phien-toa-that--a167101.html'   },
-    { level: 'Cấp trường', titleVi: 'Top 5 Dự án Xuất sắc nhất Infinity 2023-2024', titleEn: 'Top 5 Best Projects in Infinity 2023-2024', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Lọt Top 5 Dự án Xuất sắc nhất tại Infinity 2023-2024.', descEn: 'Reached the Top 5 Best Projects at Infinity 2023-2024.', link:'https://www.facebook.com/photo.php?fbid=388413496908109&set=a.380190804397045&type=3'   },
+    { level: 'Cấp trường', titleVi: 'Top 5 Dự án Xuất sắc Infinity 2023-2024', titleEn: 'Top 5 Best Projects in Infinity 2023-2024', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Lọt Top 5 Dự án Xuất sắc nhất tại Infinity 2023-2024.', descEn: 'Reached the Top 5 Best Projects at Infinity 2023-2024.', link:'https://www.facebook.com/photo.php?fbid=388413496908109&set=a.380190804397045&type=3'   },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Cuộc thi Stempetition 2024-2025', titleEn: 'Second Prize in Stempetition 2024-2025', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Nhì Cuộc thi Stempetition Cấp trường.', descEn: 'Won Second Prize in the School-level Stempetition.', link:'https://www.facebook.com/share/18WZ12PeMA/'   },
     { level: 'Cấp trường', titleVi: 'Giải Ba Cuộc thi FSchooler\'s Tips 2024', titleEn: 'Third Prize in FSchooler\'s Tips 2024', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Ba Cuộc thi FSchooler\'s Tips Cấp trường.', descEn: 'Won Third Prize in the School-level FSchooler\'s Tips Competition.', link:'https://www.facebook.com/thpt.fptcantho/posts/pfbid025LqoniJ7NRcqgSTZyMrNNBYNeoSeeyU5BJvCWuh1JGBpCQCZS7zxmE8huKFvTdtml'   },
     { level: 'Cấp trường', titleVi: 'Giải Tiềm năng Cuộc thi Sáng tạo Robot FPT', titleEn: 'Potential Prize in FPT Robot Creation', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Đoạt giải Tiềm năng Cuộc thi Sáng tạo Robot Cấp trường.', descEn: 'Won the Potential Prize in the School-level Robot Creation Competition.', link:'https://www.facebook.com/photo.php?fbid=447055514637754&set=a.165200976156544&type=3'   },
@@ -1084,14 +1067,15 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Bài viết được đăng tải trên Tập san kiến đọc', titleEn: 'Article published in "Kien Doc" Journal', metaVi: 'THPT FPT Cần Thơ • 2024', metaEn: 'FPT High School Can Tho • 2024', descVi: 'Bài viết được đăng tải trên Tập san kiến đọc 2024.', descEn: 'Article selected and published in the 2024 "Kien Doc" Journal.', link:'https://cantho-school.fpt.edu.vn/tu-hoc-quan-trong-nhu-the-nao-voi-f-schoolers'   },
     { level: 'Cấp trường', titleVi: 'Đoạt giải Nhất kỳ thi HSG Cấp trường', titleEn: 'First Prize in School-level Excellent Student Exam', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Nhất kỳ thi chọn HSG môn Địa lý Cấp trường.', descEn: 'Won First Prize in the School-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/18wBod3h2M/'   },
     { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi Chọn HSG Cấp Thành phố', titleEn: 'Participated in City-level Excellent Student Exam', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi Chọn HSG môn Địa lý cấp Thành phố.', descEn: 'Competed in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/p/1H5PPphqJV/'   },
-    { level: 'Cấp Quốc gia', titleVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.', link:'https://www.facebook.com/share/p/1R8jvFcg6R/'   },
+    { level: 'Cấp Quốc gia', titleVi: 'Tham gia Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.', link:'https://www.facebook.com/share/p/1R8jvFcg6R/'   },
     { level: 'Cấp trường', titleVi: 'Top 1 Địa lý - Tiếp sức mùa thi 2025', titleEn: 'Top 1 in Geography - Exam Season Relay 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.', descEn: 'Achieved Top 1 in Geography at the Exam Season Relay 2025.', link:'https://www.facebook.com/share/1HB41kAzXK/'   },
     { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB nổi bật HK2', titleEn: 'Outstanding Club Member of Semester 2', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).', descEn: 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).', link:'https://www.facebook.com/photo.php?fbid=696463473030289&set=a.165200976156544&type=3'   },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.', link:'https://www.facebook.com/share/1CpppKyDrZ/'  },
     { level: 'Cấp trường', titleVi: 'Đoạt giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://www.facebook.com/share/p/1PKQqWkeRW/'  },
+    { level: 'Cấp Thành phố', titleVi: 'Tham gia kỳ thi chọn HSG Dự thi Quốc Gia', titleEn: 'Participated in National Excellent Student Team Selection', metaVi: 'Thành phố Cần Thơ • 2025', metaEn: 'Can Tho City • 2025', descVi: 'Tham gia kỳ thi chọn HSG Dự thi cấp Quốc gia.', descEn: 'Participated in the selection exam for the National Excellent Student Team.', link:'https://giaoducthoidai.vn/hon-650-thi-sinh-can-tho-tranh-tai-chon-doi-tuyen-hs-gioi-thpt-du-thi-quoc-gia-post745159.html'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.', link:'https://www.facebook.com/share/p/1CXb2FbGyF/' },
-    { level: 'Cấp Quốc gia', titleVi: 'Top Dự án được đăng tải trên báo Thanh Niên', titleEn: 'Top Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
+    { level: 'Cấp Quốc gia', titleVi: 'Dự án được đăng tải trên báo Thanh Niên', titleEn: 'Top Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://www.facebook.com/share/p/1bCm9g118k/'  },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.', link:'https://mientay.giadinhonline.vn/phien-toa-gia-dinh-mua-4-hoc-tro-thpt-fpt-can-tho-lon-len-cung-phap-luat-d16979.html'  },
     { level: 'Cấp Thành phố', titleVi: 'Giải Khuyến khích Kỳ thi Học sinh giỏi', titleEn: 'Consolation Prize in Excellent Student Competition', metaVi: 'Thành phố Cần Thơ • 2026', metaEn: 'Can Tho City • 2026', descVi: 'Đoạt giải Khuyến khích kỳ thi HSG Địa lý Cấp thành phố.', descEn: 'Won Consolation Prize in the City-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/1B7uLPRzms/' },
@@ -1459,7 +1443,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Trường Đại Học Văn Lang • 2026 -  Nay' : 'FPT High School Can Tho • 2026 - Present'}
+                    {lang === 'vi' ? 'Trường Đại Học Văn Lang • 9/2026 -  Nay' : 'Van Lang University • 9/2026 - Present'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Học bổng Tài Năng VLU 2026' : 'Awarded the VLU Talent Scholarship 2026'}
@@ -1506,7 +1490,7 @@ function App() {
                 <div className="timeline-content">
                   <h4>
                     <a 
-                      href="https://www.facebook.com/clbnhiepanhfsc" 
+                      href="https://fphotography.club" 
                       target="_blank" 
                       rel="noreferrer" 
                       style={{ color: 'inherit', textDecoration: 'none' }} 
@@ -1541,7 +1525,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Dự án HopVan • 1/2026 - Nay' : 'HopVan Project • 1/2026 - Present'}
+                    {lang === 'vi' ? 'Dự án HopVan • 1/2026 - 5/2026' : 'HopVan Project • 1/2026 - 5/2026'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.' : 'Handled UI/UX designs, media conceptualization, programming, and system architecture for the HopVan website.'}
@@ -1585,7 +1569,7 @@ function App() {
                       onMouseEnter={handleMouseEnterInteractive}
                       onMouseLeave={handleMouseLeaveInteractive}
                     >
-                      Admin <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                      {lang === 'vi' ? 'Quản trị viên' : 'Admin'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                     </a>
                   </h4>
                   <span className="timeline-meta">
@@ -1633,9 +1617,14 @@ function App() {
               >
                 <div className="accordion-header-left">
                   <span className="accordion-num">//01</span>
-                  <span className="accordion-title">
-                    {lang === 'vi' ? 'Trung học Cơ sở & Trung học Phổ thông' : 'Middle & High School'}
-                  </span>
+                  <div className="accordion-title-wrapper">
+                    <span className="accordion-title">
+                      {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
+                    </span>
+                    <span className="accordion-subtitle">
+                      {lang === 'vi' ? 'Thành tích học thuật, Giải thưởng & Danh hiệu bậc THPT' : 'High School Academic Achievements, Awards & Honors'}
+                    </span>
+                  </div>
                 </div>
                 <div className="accordion-header-right">
                   <div className="status-indicator">
@@ -1763,9 +1752,14 @@ function App() {
               >
                 <div className="accordion-header-left">
                   <span className="accordion-num">//02</span>
-                  <span className="accordion-title">
-                    {lang === 'vi' ? 'Đại học' : 'University'}
-                  </span>
+                  <div className="accordion-title-wrapper">
+                    <span className="accordion-title">
+                      {lang === 'vi' ? 'Đại học' : 'University'}
+                    </span>
+                    <span className="accordion-subtitle">
+                      {lang === 'vi' ? 'Thành tích học thuật, Giải thưởng & Danh hiệu bậc Đại học' : 'Undergraduate Academic Achievements, Awards & Honors'}
+                    </span>
+                  </div>
                 </div>
                 <div className="accordion-header-right">
                   <div className="status-indicator">
@@ -1844,9 +1838,14 @@ function App() {
               >
                 <div className="accordion-header-left">
                   <span className="accordion-num">//01</span>
-                  <span className="accordion-title">
-                    {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
-                  </span>
+                  <div className="accordion-title-wrapper">
+                    <span className="accordion-title">
+                      {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
+                    </span>
+                    <span className="accordion-subtitle">
+                      {lang === 'vi' ? 'Nghiên cứu khoa học, Các dự án truyền thông & Tổ chức sự kiện' : 'Scientific Research, Media Projects & Event Organization'}
+                    </span>
+                  </div>
                 </div>
                 <div className="accordion-header-right">
                   <div className="status-indicator">
@@ -2213,9 +2212,14 @@ function App() {
               >
                 <div className="accordion-header-left">
                   <span className="accordion-num">//02</span>
-                  <span className="accordion-title">
-                    {lang === 'vi' ? 'Đại học' : 'University'}
-                  </span>
+                  <div className="accordion-title-wrapper">
+                    <span className="accordion-title">
+                      {lang === 'vi' ? 'Đại học' : 'University'}
+                    </span>
+                    <span className="accordion-subtitle">
+                      {lang === 'vi' ? 'Nghiên cứu, Ứng dụng thực tiễn & Các dự án chuyên ngành' : 'Research, Practical Application & Specialized Projects'}
+                    </span>
+                  </div>
                 </div>
                 <div className="accordion-header-right">
                   <div className="status-indicator">
