@@ -963,7 +963,7 @@ function App() {
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'FPC NEWS - Trang thông tin điện tử CLB F-Photography' : 'FPC NEWS - Information Portal of F-Photography Club',
       desc: lang === 'vi' ? 'Trang thông tin điện tử của CLB F-Photography' : 'Official information portal of the F-Photography Club.',
-      link: 'https://fphotography.club/fpcnews',
+      link: 'https://fphoto.netlify.app/fpcnews',
       logo: 'images/logo-fn.webp',
       mainImg: '/images/dev-2/1.png',
       images: [
@@ -978,7 +978,7 @@ function App() {
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'FPC ADMIN - Trang quản trị trực tuyến CLB F-Photography' : 'FPC ADMIN - Online administration page of F-Photography Club',
       desc: lang === 'vi' ? 'Trang quản trị trực tuyến của CLB F-Photography' : 'Online administration page of the F-Photography Club.',
-      link: 'https://fphotography.club',
+      link: 'https://fphoto.netlify.app',
       logo: 'images/logo-fpc.webp',
       mainImg: '/images/dev-1/1.png',
       images: [
@@ -1426,7 +1426,7 @@ function App() {
                 <div className="timeline-content">
                   <h4>
                     <a 
-                      href="https://fphotography.club" 
+                      href="https://fphoto.netlify.app" 
                       target="_blank" 
                       rel="noreferrer" 
                       style={{ color: 'inherit', textDecoration: 'none' }} 
