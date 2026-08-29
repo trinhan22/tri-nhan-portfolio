@@ -1461,7 +1461,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Dự án HopVan • 1/2026 - 5/2026' : 'HopVan Project • 1/2026 - 5/2026'}
+                    {lang === 'vi' ? 'Dự án HopVan • 10/2025 - 5/2026' : 'HopVan Project • 10/2025 - 5/2026'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, lập trình và phát triển hệ thống cho website HopVan.' : 'Handled UI/UX designs, media conceptualization, programming, and system architecture for the HopVan website.'}
