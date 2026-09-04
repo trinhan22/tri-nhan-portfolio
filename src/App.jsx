@@ -1401,7 +1401,7 @@ function App() {
                 <div className="timeline-content">
                   <h4>
                     <a 
-                      href="https://www.facebook.com/KNProduction1" 
+                      href="https://knproduction.netlify.app" 
                       target="_blank" 
                       rel="noreferrer" 
                       style={{ color: 'inherit', textDecoration: 'none' }} 
