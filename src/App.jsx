@@ -778,43 +778,13 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "Giới thiệu AIGEO Team"' : 'Social Media Post - "Introducing the AIGEO Team"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của AIGEO.' : 'Media publication for AIGEO Project.',
-      link: 'https://www.facebook.com/share/p/18yonBX57N/',
-      logo: '/images/dev-4/6.png',
-      mainImg: '/images/design-8/1.png',
-      images: [
-        '/images/design-8/2.png',
-        '/images/design-8/3.png',
-        '/images/design-8/4.png',
-        '/images/design-8/5.png',
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
       title: lang === 'vi' ? 'ID Card Design - "ID Card CLB F-Photo"' : 'ID Card Design - "F-Photo Club ID Card"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.behance.net/gallery/240268505/ID-CARD-F-PHOTO',
-      logo: '/images/design-7/1.png',
-      mainImg: '/images/design-7/1.png',
-      images: [
-        '/images/design-7/2.png',
-        '/images/design-7/3.png',
-        '/images/design-7/4.png',
-        '/images/design-7/5.png'
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"' : 'Key Visual - "Dia Dao Movie Screening Event"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.behance.net/gallery/239999329/KEY-VISUAL-CHIU-PHIM-MIN-PHI-DA-DO',
       logo: '/images/design-6/1.png',
-      mainImg: '/images/design-6/2.png',
+      mainImg: '/images/design-6/1.png',
       images: [
-        '/images/design-6/1.png',
+        '/images/design-6/2.png',
         '/images/design-6/3.png',
         '/images/design-6/4.png',
         '/images/design-6/5.png'
@@ -823,16 +793,31 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "Tứ Trụ F-Photography"' : 'Social Media Post - "The Four Pillars of F-Photography"',
+      title: lang === 'vi' ? 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"' : 'Key Visual - "Dia Dao Movie Screening Event"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.facebook.com/share/p/1Da7hQkz8E/',
+      link: 'https://www.behance.net/gallery/239999329/KEY-VISUAL-CHIU-PHIM-MIN-PHI-DA-DO',
       logo: '/images/design-5/1.png',
       mainImg: '/images/design-5/2.png',
       images: [
+        '/images/design-5/1.png',
         '/images/design-5/3.png',
         '/images/design-5/4.png',
-        '/images/design-5/5.png',
-        '/images/design-5/6.png'
+        '/images/design-5/5.png'
+      ]
+    },
+    {
+      category: 'THIẾT KẾ',
+      role: '/ GRAPHIC DESIGNER / CONTENT',
+      title: lang === 'vi' ? 'Social Media Post - "Tứ Trụ F-Photography"' : 'Social Media Post - "The Four Pillars of F-Photography"',
+      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
+      link: 'https://www.facebook.com/share/p/1Da7hQkz8E/',
+      logo: '/images/design-4/1.png',
+      mainImg: '/images/design-4/2.png',
+      images: [
+        '/images/design-4/3.png',
+        '/images/design-4/4.png',
+        '/images/design-4/5.png',
+        '/images/design-4/6.png'
       ]
     },
     {
@@ -841,25 +826,10 @@ function App() {
       title: lang === 'vi' ? 'Key Visual - "Club Day 2025-2026"' : 'Key Visual - "Club Day 2025-2026"',
       desc: lang === 'vi' ? 'Ấn phẩm được thực hiện trong khuôn khổ Ngày hội CLB - Club Day tại Trường THPT Cần Thơ.' : 'This publication was produced as part of the Club Day event at Can Tho High School.',
       link: 'https://www.behance.net/gallery/236223807/KEY-VISUAL-CLUB-DAY-2025',
-      logo: '/images/design-4/1.png',
-      mainImg: '/images/design-4/1.png',
-      images: [
-        '/images/design-4/2.png',
-        '/images/design-4/3.png',
-        '/images/design-4/4.png',
-        '/images/design-4/5.png'
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Social Media Post - "F-Photo Thay Áo Mới"' : 'Social Media Post - "F-Photo New Look"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.behance.net/gallery/236223287/SOCIAL-MEDIA-POST-F-PHOTO-THAY-AO-MI',
       logo: '/images/design-3/1.png',
-      mainImg: '/images/design-3/2.png',
+      mainImg: '/images/design-3/1.png',
       images: [
-        '/images/design-3/1.png',
+        '/images/design-3/2.png',
         '/images/design-3/3.png',
         '/images/design-3/4.png',
         '/images/design-3/5.png'
@@ -1267,36 +1237,6 @@ function App() {
               >
                 <img src="/images/hero.jpg" alt="Profile Hero" />
               </motion.div>
-
-              <motion.div 
-                className="floating-badge badge-1"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.5 }}
-              >
-                <div className="badge-icon"><i className="fas fa-bolt"></i></div>
-                <div className="badge-text">
-                  <span className="badge-num">20+</span>
-                  <span className="badge-label">
-                    {lang === 'vi' ? 'DỰ ÁN & SỰ KIỆN' : 'PROJECTS & EVENTS'}
-                  </span>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="floating-badge badge-2"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.7 }}
-              >
-                <div className="badge-icon"><i className="fas fa-award"></i></div>
-                <div className="badge-text">
-                  <span className="badge-num">30+</span>
-                  <span className="badge-label">
-                    {lang === 'vi' ? 'THÀNH TÍCH' : 'ACHIEVEMENTS'}
-                  </span>
-                </div>
-              </motion.div>
             </div>
           </div>
         </section>
@@ -1484,7 +1424,7 @@ function App() {
                     </a>
                   </h4>
                   <span className="timeline-meta">
-                    {lang === 'vi' ? 'Dự án AIGEO • 6/2026 - Nay' : 'AIGEO Project • 6/2026 - Present'}
+                    {lang === 'vi' ? 'Dự án AIGEO • 6/2026 - 9/2026' : 'AIGEO Project • 6/2026 - 9/2026'}
                   </span>
                   <p className="text-desc">
                     {lang === 'vi' ? 'Phụ trách thiết kế, lên ý tưởng truyền thông, phát triển giao diện và tối ưu kỹ thuật cho hệ thống.' : 'Managed UI design, marketing direction, front-end development, and technical optimizations for the platform.'}
@@ -1568,7 +1508,7 @@ function App() {
                   </div>
                   <div className="accordion-badge">
                     <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
-                    <span className="badge-text">2019 - 2026</span>
+                    <span className="badge-text">2023 - 2026</span>
                   </div>
                   <span className="accordion-status">
                     {isSchoolExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
