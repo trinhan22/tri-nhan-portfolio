@@ -1504,7 +1504,7 @@ function App() {
                       onMouseEnter={handleMouseEnterInteractive}
                       onMouseLeave={handleMouseLeaveInteractive}
                     >
-                      {lang === 'vi' ? 'Quản trị viên' : 'Admin'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
+                      {lang === 'vi' ? 'Quản trị viên & Designer' : 'Admin & Designer'} <i className="fas fa-link" style={{ fontSize: '0.9rem', marginLeft: '5px', opacity: 0.7 }}></i>
                     </a>
                   </h4>
                   <span className="timeline-meta">
