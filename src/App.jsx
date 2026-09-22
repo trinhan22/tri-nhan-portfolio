@@ -164,7 +164,7 @@ const ParticleCanvas = () => {
       draw() {
         ctx.save();
         ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = '#E53935'; 
+        ctx.fillStyle = '#f36f27'; 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -209,7 +209,7 @@ const ParticleCanvas = () => {
           
           if (distance < 100) {
             ctx.save();
-            ctx.strokeStyle = 'rgba(229, 57, 53, 0.08)';
+            ctx.strokeStyle = 'rgba(248, 93, 14, 0.08)';
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -349,10 +349,6 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   const [activeAchieveFilter, setActiveAchieveFilter] = useState('ALL');
-  const [isSchoolExpanded, setIsSchoolExpanded] = useState(false);
-  const [isUniversityExpanded, setIsUniversityExpanded] = useState(false);
-  const [isProjSchoolExpanded, setIsProjSchoolExpanded] = useState(false);
-  const [isProjUniversityExpanded, setIsProjUniversityExpanded] = useState(false);
   const [popupData, setPopupData] = useState({ isOpen: false, gallery: [], currentIndex: 0 });
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -718,31 +714,11 @@ function App() {
     {
       category: 'VIDEO',
       role: '/ VIDEO EDITOR / CONTENT',
-      title: lang === 'vi' ? 'Phim Ngắn - "Hố Sâu Ảo Vọng"' : 'Short Film - "The Abyss of Delusion"',
-      desc: lang === 'vi' ? 'Bộ phim được thực hiện trong khuôn khổ Cuộc thi Phiên toà giả định 2025-2026.' : 'The film was produced within the framework of the 2025–2026 Moot Court Competition..',
-      logo: 'images/logo-kn.webp',
-      mainVideo: 'https://www.youtube.com/embed/2x40K6FstAU?si=czshFspivRjlkkst',
-      mainImg: '/images/design-1/1.png',
-      images: []
-    },
-    {
-      category: 'VIDEO',
-      role: '/ VIDEO EDITOR / CONTENT',
       title: lang === 'vi' ? 'Phim Ngắn - "Áp Lực Học Đường"' : 'Short Film - "School Pressure"',
       desc: lang === 'vi' ? 'Bộ phim được thực hiện trong khuôn khổ Cuộc thi phim ngắn Việt Nam - Vietnamese 2025.' : 'The film was produced as part of the Vietnamese Short Film Competition – Vietnamese 2025.',
       logo: 'images/logo-kn.webp',
       mainVideo: 'https://www.youtube.com/embed/i4RDEnNLbmw?si=EJ3iOby896wRgZja',
       mainImg: '/images/thumb/3.png',
-      images: []
-    },
-    {
-      category: 'VIDEO',
-      role: '/ VIDEO EDITOR / CONTENT',
-      title: lang === 'vi' ? 'Recap Video - "Sự Kiện Chiếu Phim Tết 2026"' : 'Recap Video - "Lunar New Year Film Screening Event 2026."',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      logo: 'images/logo-fpc.webp',
-      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1387063549363314%2F&show_text=false&width=560&t=0',
-      mainImg: '/images/project-2/1.png',
       images: []
     },
     {
@@ -781,28 +757,13 @@ function App() {
       title: lang === 'vi' ? 'ID Card Design - "ID Card CLB F-Photo"' : 'ID Card Design - "F-Photo Club ID Card"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.behance.net/gallery/240268505/ID-CARD-F-PHOTO',
-      logo: '/images/design-6/1.png',
-      mainImg: '/images/design-6/1.png',
+      logo: '/images/design-4/1.png',
+      mainImg: '/images/design-4/1.png',
       images: [
-        '/images/design-6/2.png',
-        '/images/design-6/3.png',
-        '/images/design-6/4.png',
-        '/images/design-6/5.png'
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Key Visual - "Sự Kiện Chiếu Phim Địa Đạo"' : 'Key Visual - "Dia Dao Movie Screening Event"',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
-      link: 'https://www.behance.net/gallery/239999329/KEY-VISUAL-CHIU-PHIM-MIN-PHI-DA-DO',
-      logo: '/images/design-5/1.png',
-      mainImg: '/images/design-5/2.png',
-      images: [
-        '/images/design-5/1.png',
-        '/images/design-5/3.png',
-        '/images/design-5/4.png',
-        '/images/design-5/5.png'
+        '/images/design-4/2.png',
+        '/images/design-4/3.png',
+        '/images/design-4/4.png',
+        '/images/design-4/5.png'
       ]
     },
     {
@@ -811,13 +772,13 @@ function App() {
       title: lang === 'vi' ? 'Social Media Post - "Tứ Trụ F-Photography"' : 'Social Media Post - "The Four Pillars of F-Photography"',
       desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của CLB F-Photo.' : 'Media publication for F-Photography Club.',
       link: 'https://www.facebook.com/share/p/1Da7hQkz8E/',
-      logo: '/images/design-4/1.png',
-      mainImg: '/images/design-4/2.png',
+      logo: '/images/design-3/1.png',
+      mainImg: '/images/design-3/2.png',
       images: [
-        '/images/design-4/3.png',
-        '/images/design-4/4.png',
-        '/images/design-4/5.png',
-        '/images/design-4/6.png'
+        '/images/design-3/3.png',
+        '/images/design-3/4.png',
+        '/images/design-3/5.png',
+        '/images/design-3/6.png'
       ]
     },
     {
@@ -826,21 +787,6 @@ function App() {
       title: lang === 'vi' ? 'Key Visual - "Club Day 2025-2026"' : 'Key Visual - "Club Day 2025-2026"',
       desc: lang === 'vi' ? 'Ấn phẩm được thực hiện trong khuôn khổ Ngày hội CLB - Club Day tại Trường THPT Cần Thơ.' : 'This publication was produced as part of the Club Day event at Can Tho High School.',
       link: 'https://www.behance.net/gallery/236223807/KEY-VISUAL-CLUB-DAY-2025',
-      logo: '/images/design-3/1.png',
-      mainImg: '/images/design-3/1.png',
-      images: [
-        '/images/design-3/2.png',
-        '/images/design-3/3.png',
-        '/images/design-3/4.png',
-        '/images/design-3/5.png'
-      ]
-    },
-    {
-      category: 'THIẾT KẾ',
-      role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Magazine - "Tạp chí F-Star Phương Nghi"' : 'Magazine - "F-Star Phuong Nghi Magazine"',
-      desc: lang === 'vi' ? 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc - Trường THPT FPT Cần Thơ.' : 'This publication was selected for inclusion in the *Kiến Đọc* journal – FPT Can Tho High School.',
-      link: 'https://www.behance.net/gallery/236216401/MAGAZINE-F-STAR-PHUONG-NGHI',
       logo: '/images/design-2/1.png',
       mainImg: '/images/design-2/1.png',
       images: [
@@ -853,15 +799,15 @@ function App() {
     {
       category: 'THIẾT KẾ',
       role: '/ GRAPHIC DESIGNER / CONTENT',
-      title: lang === 'vi' ? 'Một số dự án design khác' : 'Other design projects',
-      desc: lang === 'vi' ? 'Ấn phẩm phục vụ mục đích truyền thông của F-Photo & KN Production.' : 'Media publication for F-Photography Club & KN Production.',
-      link: 'https://www.behance.net/gallery/244426789/SOCIAL-MEDIA-POST-KIEU-KN-PRODUCTION',
-      logo: '/images/design-1/4.png',
+      title: lang === 'vi' ? 'Magazine - "Tạp chí F-Star Phương Nghi"' : 'Magazine - "F-Star Phuong Nghi Magazine"',
+      desc: lang === 'vi' ? 'Ấn phẩm được lựa chọn đăng tải trên Tập san kiến đọc - Trường THPT FPT Cần Thơ.' : 'This publication was selected for inclusion in the *Kiến Đọc* journal – FPT Can Tho High School.',
+      link: 'https://www.behance.net/gallery/236216401/MAGAZINE-F-STAR-PHUONG-NGHI',
+      logo: '/images/design-1/1.png',
       mainImg: '/images/design-1/1.png',
       images: [
-        '/images/design-1/4.png',
         '/images/design-1/2.png',
         '/images/design-1/3.png',
+        '/images/design-1/4.png',
         '/images/design-1/5.png'
       ]
     },
@@ -971,11 +917,9 @@ function App() {
     { level: 'Cấp trường', titleVi: 'Giải Nhất kỳ thi chọn HSG Cấp trường', titleEn: 'First Prize in School-level Excellent Student Exam', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Nhất kỳ thi chọn HSG môn Địa lý Cấp trường.', descEn: 'Won First Prize in the School-level Geography Excellent Student Competition.', link:'https://www.facebook.com/share/18wBod3h2M/'   },
     { level: 'Cấp Quốc gia', titleVi: 'Tham gia Olympic Truyền thống 30/04', titleEn: 'Participated in Traditional 30/04 Olympic', metaVi: 'Khu vực Miền Nam • 2025', metaEn: 'Southern Region • 2025', descVi: 'Tham gia kỳ thi Olympic Truyền thống 30/04 tại TP HCM.', descEn: 'Competed in the Traditional 30/04 Olympic Competition in Ho Chi Minh City.', link:'https://www.facebook.com/share/p/1R8jvFcg6R/'   },
     { level: 'Cấp trường', titleVi: 'Top 1 Địa lý - Tiếp sức mùa thi 2025', titleEn: 'Top 1 in Geography - Exam Season Relay 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt Top 1 môn Địa lý tại Tiếp sức mùa thi 2025.', descEn: 'Achieved Top 1 in Geography at the Exam Season Relay 2025.', link:'https://www.facebook.com/share/1HB41kAzXK/'   },
-    { level: 'Cấp trường', titleVi: 'Cá nhân hoạt động CLB nổi bật HK2', titleEn: 'Outstanding Club Member of Semester 2', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Cá nhân hoạt động nổi bật HK2 (CLB F-Photography).', descEn: 'Recognized as an Outstanding Member in Semester 2 (F-Photography Club).', link:'https://www.facebook.com/photo.php?fbid=696463473030289&set=a.165200976156544&type=3'   },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường', titleEn: 'Achieved "Student of 3 Merits" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Học sinh 3 tốt Cấp trường 2025.', descEn: 'Awarded the School-level "Student of 3 Merits" Title in 2025.', link:'https://www.facebook.com/share/1E6CPkRYHT/'  },
     { level: 'Cấp trường', titleVi: 'Đạt danh hiệu Talented Student Cấp trường', titleEn: 'Achieved "Talented Student" Title', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Talented Student Cấp trường 2025.', descEn: 'Awarded the School-level "Talented Student" Title in 2025.', link:'https://www.facebook.com/share/1CpppKyDrZ/'  },
     { level: 'Cấp trường', titleVi: 'Giải Ba Cuộc thi ảnh CTM 2025', titleEn: 'Third Prize in CTM Photo Contest 2025', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đoạt giải Ba Cuộc thi ảnh Catch The Moment 2025.', descEn: 'Won Third Prize in the Catch The Moment 2025 Photo Contest.', link:'https://fphoto.netlify.app/cuoc-thi-anh-online-catch-the-moment-summer-2025-khep-lai-thanh-cong-tot-dep.html'  },
-    { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc Tháng 7', titleEn: 'Outstanding Club of July', metaVi: 'THPT FPT Cần Thơ • 2025', metaEn: 'FPT High School Can Tho • 2025', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Tháng 7.', descEn: 'Awarded the Outstanding Club Title for July.', link:'https://www.facebook.com/share/p/1CXb2FbGyF/' },
     { level: 'Cấp Quốc gia', titleVi: 'Dự án được đăng tải trên báo Thanh Niên', titleEn: 'Top Projects featured on Thanh Nien Newspaper', metaVi: 'Cấp Quốc gia • 2025', metaEn: 'National Level • 2025', descVi: 'Top 63 Dự án tại Cuộc thi phim ngắn Vietnamese 2025.', descEn: 'Placed in Top 63 Projects at the Vietnamese Short Film Competition 2025.', link:'https://thanhnien.vn/ap-luc-hoc-duong-phim-ngan-vietnamese-2025-185250704101123674.htm'  },
     { level: 'Cấp trường', titleVi: 'Câu lạc bộ hoạt động Xuất sắc HK 1', titleEn: 'Outstanding Club of Semester 1', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đạt danh hiệu Câu lạc bộ Xuất sắc Học kỳ 1.', descEn: 'Awarded the Outstanding Club Title for Semester 1.', link:'https://fphoto.netlify.app/f-photography-dat-danh-hieu-cau-lac-bo-xuat-sac-hoc-ky-1-nam-hoc-2025-2026.html'  },
     { level: 'Cấp trường', titleVi: 'Giải Nhì Phiên toà giả định 2025-2026', titleEn: 'Second Prize in Mock Trial 2025-2026', metaVi: 'THPT FPT Cần Thơ • 2026', metaEn: 'FPT High School Can Tho • 2026', descVi: 'Đoạt Giải Nhì Phiên toà giả định 2025-2026.', descEn: 'Won Second Prize in the Mock Trial 2025-2026.', link:'https://mientay.giadinhonline.vn/phien-toa-gia-dinh-mua-4-hoc-tro-thpt-fpt-can-tho-lon-len-cung-phap-luat-d16979.html'  },
@@ -1057,10 +1001,10 @@ function App() {
                 opacity: [0, 1, 1, 1],
                 scale: [1.4, 1, 1.05, 1],
                 textShadow: [
-                  "0 0 100px rgba(229, 57, 53, 0)",
-                  "0 0 15px rgba(229, 57, 53, 0.6)",
-                  "4px 1px 0px rgba(229, 57, 53, 0.85), -4px -1px 0px rgba(0, 255, 255, 0.85)", // Glitch slam
-                  "0 0 20px rgba(229, 57, 53, 0.6)"
+                  "0 0 100px rgba(248, 93, 14, 0)",
+                  "0 0 15px rgba(248, 93, 14, 0.6)",
+                  "4px 1px 0px rgba(248, 93, 14, 0.85), -4px -1px 0px rgba(0, 255, 255, 0.85)", // Glitch slam
+                  "0 0 20px rgba(248, 93, 14, 0.6)"
                 ]
               }}
               transition={{ duration: 2.2, ease: [0.19, 1, 0.22, 1] }}
@@ -1465,215 +1409,83 @@ function App() {
                  <CharReveal key={`ach-title-${lang}`} text={t.achieveTitle1} /> <span className="italic-red">{t.achieveTitle2}</span>
                </h2>
              </div>
+             
+             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
+               <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
+               <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
+             </div>
           </div>
 
-          <div className="achieve-accordion-container">
-            {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
-            <div className={`accordion-item ${isSchoolExpanded ? 'expanded' : ''}`}>
-              <div className="accordion-tab">
-                <i className="far fa-folder-open" style={{ fontSize: '0.7rem' }}></i>
-                <span className="tab-meta">SYS.ACHV_01</span>
-              </div>
-              <div className="accordion-corner tl"></div>
-              <div className="accordion-corner tr"></div>
-              <div className="accordion-corner bl"></div>
-              <div className="accordion-corner br"></div>
-              <div className="achieve-top-accent"></div>
+          {/* Scroll-reveal animation container */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+          >
+            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
+            <motion.div 
+              key={`${activeAchieveFilter}-${lang}`}
+              className="grid-2"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {filteredAchievements.map((achieve) => {
+                const hasLink = !!achieve.link;
+                const levelBadges = {
+                  'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
+                  'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
+                  'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
+                  'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
+                };
+                const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
 
-              <button 
-                className={`accordion-header ${isSchoolExpanded ? 'expanded' : ''}`}
-                onClick={() => setIsSchoolExpanded(!isSchoolExpanded)}
-                onMouseEnter={handleMouseEnterInteractive}
-                onMouseLeave={handleMouseLeaveInteractive}
-              >
-                <div className="accordion-header-left">
-                  <span className="accordion-num">//01</span>
-                  <div className="accordion-title-wrapper">
-                    <span className="accordion-title">
-                      {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
-                    </span>
-                    <span className="accordion-subtitle">
-                      {lang === 'vi' ? 'Thành tích học thuật, Giải thưởng & Danh hiệu bậc THPT' : 'High School Academic Achievements, Awards & Honors'}
-                    </span>
-                  </div>
-                </div>
-                <div className="accordion-header-right">
-                  <div className="status-indicator">
-                    <span className={`status-dot ${isSchoolExpanded ? 'online' : 'offline'}`}></span>
-                    <span>{isSchoolExpanded ? 'ACTIVE' : 'STANDBY'}</span>
-                  </div>
-                  <div className="accordion-badge">
-                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
-                    <span className="badge-text">2023 - 2026</span>
-                  </div>
-                  <span className="accordion-status">
-                    {isSchoolExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
-                  </span>
-                  <i className={`fas fa-chevron-down accordion-arrow ${isSchoolExpanded ? 'rotated' : ''}`}></i>
-                </div>
-              </button>
-              
-              <AnimatePresence initial={false}>
-                {isSchoolExpanded && (
-                  <motion.div
-                    key="school-content"
-                    className="accordion-content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ overflow: 'hidden' }}
+                return (
+                  <motion.div 
+                    key={achieve.titleVi} 
+                    className="glow-card achieve-card"
+                    onClick={() => hasLink && window.open(achieve.link, '_blank')}
+                    onMouseEnter={(e) => {
+                      handleCardMouseMove(e);
+                      if (hasLink) handleMouseEnterInteractive(e);
+                    }} 
+                    onMouseLeave={(e) => {
+                      handleCardMouseLeave(e);
+                      if (hasLink) handleMouseLeaveInteractive();
+                    }}
+                    onMouseMove={handleCardMouseMove}
+                    variants={cardVariants}
+                    style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
                   >
-                    <div className="accordion-content-inner">
-                      {/* Filter category buttons inside the school panel */}
-                      <div 
-                        className="filter-container" 
-                        onMouseEnter={handleMouseEnterInteractive} 
-                        onMouseLeave={handleMouseLeaveInteractive} 
-                        style={{ margin: '0 0 30px 0' }}
-                      >
-                        <button className={`filter-btn ${activeAchieveFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('ALL')}>{t.filterAll}</button>
-                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp trường' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp trường')}>{t.filterSchool}</button>
-                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quận' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quận')}>{t.filterDistrict}</button>
-                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Thành phố' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Thành phố')}>{t.filterCity}</button>
-                        <button className={`filter-btn ${activeAchieveFilter === 'Cấp Quốc gia' ? 'active' : ''}`} onClick={() => setActiveAchieveFilter('Cấp Quốc gia')}>{t.filterNational}</button>
-                      </div>
-
-                      <motion.div 
-                        key={`${activeAchieveFilter}-${lang}`}
-                        className="grid-2"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {filteredAchievements.map((achieve) => {
-                          const hasLink = !!achieve.link;
-                          const levelBadges = {
-                            'Cấp Quốc gia': { text: lang === 'vi' ? 'CẤP QUỐC GIA' : 'NATIONAL' },
-                            'Cấp Thành phố': { text: lang === 'vi' ? 'CẤP THÀNH PHỐ' : 'CITY' },
-                            'Cấp Quận': { text: lang === 'vi' ? 'CẤP QUẬN' : 'DISTRICT' },
-                            'Cấp trường': { text: lang === 'vi' ? 'CẤP TRƯỜNG' : 'SCHOOL' }
-                          };
-                          const levelBadge = levelBadges[achieve.level] || { text: achieve.level };
-
-                          return (
-                            <motion.div 
-                              key={achieve.titleVi} 
-                              className="glow-card achieve-card"
-                              onClick={() => hasLink && window.open(achieve.link, '_blank')}
-                              onMouseEnter={(e) => {
-                                handleCardMouseMove(e);
-                                if (hasLink) handleMouseEnterInteractive(e);
-                              }} 
-                              onMouseLeave={(e) => {
-                                handleCardMouseLeave(e);
-                                if (hasLink) handleMouseLeaveInteractive();
-                              }}
-                              onMouseMove={handleCardMouseMove}
-                              variants={cardVariants}
-                              style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-                            >
-                              <div className="achieve-top-accent"></div>
-                              <div className="achieve-bg-watermark">{levelBadge.text}</div>
-                              
-                              <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
-                                <i className={{
-                                  'Cấp Quốc gia': 'fas fa-trophy',
-                                  'Cấp Thành phố': 'fas fa-medal',
-                                  'Cấp Quận': 'fas fa-ribbon',
-                                  'Cấp trường': 'fas fa-award'
-                                }[achieve.level] || 'fas fa-award'}></i>
-                              </div>
-                              
-                              <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
-                                <h4>
-                                  {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
-                                  {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
-                                </h4>
-                                <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
-                                <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-                      </motion.div>
+                    <div className="achieve-top-accent"></div>
+                    <div className="achieve-bg-watermark">{levelBadge.text}</div>
+                    
+                    <div className="achieve-icon" style={{ transform: "translateZ(30px)" }}>
+                      <i className={{
+                        'Cấp Quốc gia': 'fas fa-trophy',
+                        'Cấp Thành phố': 'fas fa-medal',
+                        'Cấp Quận': 'fas fa-ribbon',
+                        'Cấp trường': 'fas fa-award'
+                      }[achieve.level] || 'fas fa-award'}></i>
+                    </div>
+                    
+                    <div className="achieve-info" style={{ transform: "translateZ(20px)" }}>
+                      <h4>
+                        {lang === 'vi' ? achieve.titleVi : achieve.titleEn}
+                        {hasLink && <i className="fas fa-external-link-alt" style={{ marginLeft: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}></i>}
+                      </h4>
+                      <span className="achieve-meta">{lang === 'vi' ? achieve.metaVi : achieve.metaEn}</span>
+                      <p className="text-desc">{lang === 'vi' ? achieve.descVi : achieve.descEn}</p>
                     </div>
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* 02. UNIVERSITY SECTION */}
-            <div className={`accordion-item ${isUniversityExpanded ? 'expanded' : ''}`}>
-              <div className="accordion-tab">
-                <i className="far fa-folder" style={{ fontSize: '0.7rem' }}></i>
-                <span className="tab-meta">SYS.ACHV_02</span>
-              </div>
-              <div className="accordion-corner tl"></div>
-              <div className="accordion-corner tr"></div>
-              <div className="accordion-corner bl"></div>
-              <div className="accordion-corner br"></div>
-              <div className="achieve-top-accent"></div>
-
-              <button 
-                className={`accordion-header ${isUniversityExpanded ? 'expanded' : ''}`}
-                onClick={() => setIsUniversityExpanded(!isUniversityExpanded)}
-                onMouseEnter={handleMouseEnterInteractive}
-                onMouseLeave={handleMouseLeaveInteractive}
-              >
-                <div className="accordion-header-left">
-                  <span className="accordion-num">//02</span>
-                  <div className="accordion-title-wrapper">
-                    <span className="accordion-title">
-                      {lang === 'vi' ? 'Đại học' : 'University'}
-                    </span>
-                    <span className="accordion-subtitle">
-                      {lang === 'vi' ? 'Thành tích học thuật, Giải thưởng & Danh hiệu bậc Đại học' : 'Undergraduate Academic Achievements, Awards & Honors'}
-                    </span>
-                  </div>
-                </div>
-                <div className="accordion-header-right">
-                  <div className="status-indicator">
-                    <span className={`status-dot ${isUniversityExpanded ? 'online' : 'offline'}`}></span>
-                    <span>{isUniversityExpanded ? 'ACTIVE' : 'STANDBY'}</span>
-                  </div>
-                  <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
-                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
-                    <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
-                  </div>
-                  <span className="accordion-status">
-                    {isUniversityExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
-                  </span>
-                  <i className={`fas fa-chevron-down accordion-arrow ${isUniversityExpanded ? 'rotated' : ''}`}></i>
-                </div>
-              </button>
-              
-              <AnimatePresence initial={false}>
-                {isUniversityExpanded && (
-                  <motion.div
-                    key="university-content"
-                    className="accordion-content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div className="accordion-content-inner">
-                      <div className="empty-state-container">
-                        <i className="fas fa-graduation-cap" style={{ fontSize: '2.2rem', color: 'rgba(229, 57, 53, 0.35)', marginBottom: '15px' }}></i>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: "'Courier New', Courier, monospace", margin: 0 }}>
-                          {lang === 'vi' 
-                            ? '[//SYSTEM.INFO: CHƯA CÓ DỮ LIỆU THÀNH TÍCH BẬC ĐẠI HỌC]' 
-                            : '[//SYSTEM.INFO: NO UNIVERSITY ACHIEVEMENTS RECORDED YET]'}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+                );
+              })}
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* 4. PROJECTS SECTION */}
@@ -1686,89 +1498,33 @@ function App() {
                  <CharReveal key={`proj-title-${lang}`} text={t.projTitle1} /><span className="italic-red">{t.projTitle2}</span>
                </h2>
              </div>
+             
+             <div className="filter-container" onMouseEnter={handleMouseEnterInteractive} onMouseLeave={handleMouseLeaveInteractive} style={{ marginBottom: 0 }}>
+               <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
+               <button className={`filter-btn ${activeFilter === 'VIDEO' ? 'active' : ''}`} onClick={() => setActiveFilter('VIDEO')}>{t.filterVideo}</button>
+               <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
+               <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
+               <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
+             </div>
           </div>
 
-          <div className="achieve-accordion-container">
-            {/* 01. MIDDLE & HIGH SCHOOL SECTION */}
-            <div className={`accordion-item ${isProjSchoolExpanded ? 'expanded' : ''}`}>
-              <div className="accordion-tab">
-                <i className="far fa-folder-open" style={{ fontSize: '0.7rem' }}></i>
-                <span className="tab-meta">SYS.PROJ_01</span>
-              </div>
-              <div className="accordion-corner tl"></div>
-              <div className="accordion-corner tr"></div>
-              <div className="accordion-corner bl"></div>
-              <div className="accordion-corner br"></div>
-              <div className="achieve-top-accent"></div>
-
-              <button 
-                className={`accordion-header ${isProjSchoolExpanded ? 'expanded' : ''}`}
-                onClick={() => setIsProjSchoolExpanded(!isProjSchoolExpanded)}
-                onMouseEnter={handleMouseEnterInteractive}
-                onMouseLeave={handleMouseLeaveInteractive}
-              >
-                <div className="accordion-header-left">
-                  <span className="accordion-num">//01</span>
-                  <div className="accordion-title-wrapper">
-                    <span className="accordion-title">
-                      {lang === 'vi' ? 'Trung học Phổ thông' : 'High School'}
-                    </span>
-                    <span className="accordion-subtitle">
-                      {lang === 'vi' ? 'Nghiên cứu khoa học, Các dự án truyền thông & Tổ chức sự kiện' : 'Scientific Research, Media Projects & Event Organization'}
-                    </span>
-                  </div>
-                </div>
-                <div className="accordion-header-right">
-                  <div className="status-indicator">
-                    <span className={`status-dot ${isProjSchoolExpanded ? 'online' : 'offline'}`}></span>
-                    <span>{isProjSchoolExpanded ? 'ACTIVE' : 'STANDBY'}</span>
-                  </div>
-                  <div className="accordion-badge">
-                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
-                    <span className="badge-text">2023 - 2026</span>
-                  </div>
-                  <span className="accordion-status">
-                    {isProjSchoolExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
-                  </span>
-                  <i className={`fas fa-chevron-down accordion-arrow ${isProjSchoolExpanded ? 'rotated' : ''}`}></i>
-                </div>
-              </button>
-              
-              <AnimatePresence initial={false}>
-                {isProjSchoolExpanded && (
-                  <motion.div
-                    key="proj-school-content"
-                    className="accordion-content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div className="accordion-content-inner">
-                      {/* Filter category buttons inside the school panel */}
-                      <div 
-                        className="filter-container" 
-                        onMouseEnter={handleMouseEnterInteractive} 
-                        onMouseLeave={handleMouseLeaveInteractive} 
-                        style={{ margin: '0 0 30px 0' }}
-                      >
-                        <button className={`filter-btn ${activeFilter === 'ALL' ? 'active' : ''}`} onClick={() => setActiveFilter('ALL')}>{t.filterAll}</button>
-                        <button className={`filter-btn ${activeFilter === 'VIDEO' ? 'active' : ''}`} onClick={() => setActiveFilter('VIDEO')}>{t.filterVideo}</button>
-                        <button className={`filter-btn ${activeFilter === 'THIẾT KẾ' ? 'active' : ''}`} onClick={() => setActiveFilter('THIẾT KẾ')}>{t.filterDesign}</button>
-                        <button className={`filter-btn ${activeFilter === 'SỰ KIỆN' ? 'active' : ''}`} onClick={() => setActiveFilter('SỰ KIỆN')}>{t.filterEvent}</button>
-                        <button className={`filter-btn ${activeFilter === 'DỰ ÁN' ? 'active' : ''}`} onClick={() => setActiveFilter('DỰ ÁN')}>{t.navProj}</button>
-                      </div>
-
-                      <motion.div 
-                        key={`${activeFilter}-${lang}`}
-                        className="project-grid"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {filteredProjects.map((proj) => {
-              const categoryBadges = {
+          {/* Scroll-reveal animation container */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+          >
+            {/* Dynamic filter container - inherits visible state and animates instantly on filtering */}
+            <motion.div 
+              key={`${activeFilter}-${lang}`}
+              className="project-grid"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {filteredProjects.map((proj) => {
+                const categoryBadges = {
                 'VIDEO': { icon: 'fas fa-video', text: 'VIDEO' },
                 'THIẾT KẾ': { icon: 'fas fa-palette', text: lang === 'vi' ? 'THIẾT KẾ' : 'DESIGN' },
                 'SỰ KIỆN': { icon: 'fas fa-calendar-alt', text: lang === 'vi' ? 'SỰ KIỆN' : 'EVENT' },
@@ -2056,84 +1812,8 @@ function App() {
                 </motion.div>
               );
             })}
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* 02. UNIVERSITY SECTION */}
-            <div className={`accordion-item ${isProjUniversityExpanded ? 'expanded' : ''}`}>
-              <div className="accordion-tab">
-                <i className="far fa-folder" style={{ fontSize: '0.7rem' }}></i>
-                <span className="tab-meta">SYS.PROJ_02</span>
-              </div>
-              <div className="accordion-corner tl"></div>
-              <div className="accordion-corner tr"></div>
-              <div className="accordion-corner bl"></div>
-              <div className="accordion-corner br"></div>
-              <div className="achieve-top-accent"></div>
-
-              <button 
-                className={`accordion-header ${isProjUniversityExpanded ? 'expanded' : ''}`}
-                onClick={() => setIsProjUniversityExpanded(!isProjUniversityExpanded)}
-                onMouseEnter={handleMouseEnterInteractive}
-                onMouseLeave={handleMouseLeaveInteractive}
-              >
-                <div className="accordion-header-left">
-                  <span className="accordion-num">//02</span>
-                  <div className="accordion-title-wrapper">
-                    <span className="accordion-title">
-                      {lang === 'vi' ? 'Đại học' : 'University'}
-                    </span>
-                    <span className="accordion-subtitle">
-                      {lang === 'vi' ? 'Nghiên cứu, Ứng dụng thực tiễn & Các dự án chuyên ngành' : 'Research, Practical Application & Specialized Projects'}
-                    </span>
-                  </div>
-                </div>
-                <div className="accordion-header-right">
-                  <div className="status-indicator">
-                    <span className={`status-dot ${isProjUniversityExpanded ? 'online' : 'offline'}`}></span>
-                    <span>{isProjUniversityExpanded ? 'ACTIVE' : 'STANDBY'}</span>
-                  </div>
-                  <div className="accordion-badge" style={{ borderColor: 'rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.03)', color: 'var(--text-muted)' }}>
-                    <i className="far fa-calendar-alt" style={{ marginRight: '6px', fontSize: '0.75rem' }}></i>
-                    <span className="badge-text">{lang === 'vi' ? '2026 - NAY' : '2026 - PRESENT'}</span>
-                  </div>
-                  <span className="accordion-status">
-                    {isProjUniversityExpanded ? '[-] COLLAPSE' : '[+] EXPAND'}
-                  </span>
-                  <i className={`fas fa-chevron-down accordion-arrow ${isProjUniversityExpanded ? 'rotated' : ''}`}></i>
-                </div>
-              </button>
-              
-              <AnimatePresence initial={false}>
-                {isProjUniversityExpanded && (
-                  <motion.div
-                    key="proj-university-content"
-                    className="accordion-content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div className="accordion-content-inner">
-                      <div className="empty-state-container">
-                        <i className="fas fa-graduation-cap" style={{ fontSize: '2.2rem', color: 'rgba(229, 57, 53, 0.35)', marginBottom: '15px' }}></i>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontFamily: "'Courier New', Courier, monospace", margin: 0 }}>
-                          {lang === 'vi' 
-                            ? '[//SYSTEM.INFO: CHƯA CÓ DỮ LIỆU DỰ ÁN BẬC ĐẠI HỌC]' 
-                            : '[//SYSTEM.INFO: NO UNIVERSITY PROJECTS RECORDED YET]'}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* 5. CONTACT SECTION */}
