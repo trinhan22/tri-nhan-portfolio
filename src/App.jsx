@@ -209,7 +209,7 @@ const ParticleCanvas = () => {
           
           if (distance < 100) {
             ctx.save();
-            ctx.strokeStyle = 'rgba(248, 93, 14, 0.08)';
+            ctx.strokeStyle = 'rgba(243, 111, 39, 0.08)';
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -848,6 +848,7 @@ function App() {
       role: lang === 'vi' ? '/ QUẢN LÝ DỰ ÁN / DEVELOPER' : '/ PROJECT MANAGER / DEVELOPER',
       title: lang === 'vi' ? 'Dự Án AIGEO - Nền tảng học tập Địa Lý thông minh' : 'AIGEO Project - A Smart Geography Learning Platform',
       desc: lang === 'vi' ? 'Nền tảng học tập Địa Lý thông minh.' : 'A Smart Geography Learning Platform.',
+      mainVideo: 'https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1037381809064568%2F&show_text=false&width=560&t=0',
       link: 'https://aigeo.info.vn',
       logo: '/images/dev-4/6.png',
       mainImg: '/images/dev-4/1.png',
@@ -1533,23 +1534,9 @@ function App() {
               const badge = categoryBadges[proj.category] || { icon: 'fas fa-folder', text: proj.category };
 
               return (
-                <motion.div 
-                  key={proj.title} 
+                <motion.div
+                  key={proj.title}
                   className="glow-card project-showcase-card"
-                  onMouseEnter={(e) => {
-                    handleCardMouseMove(e);
-                    if (proj.category === 'DỰ ÁN' || proj.category === 'SỰ KIỆN') {
-                      setHoveredProject(proj.title);
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    handleCardMouseLeave(e);
-                    if (proj.category === 'DỰ ÁN' || proj.category === 'SỰ KIỆN') {
-                      setHoveredProject(null);
-                    }
-                  }}
-                  onMouseMove={handleCardMouseMove}
-                  variants={cardVariants}
                   style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
                 >
                   {/* Category Top Accent */}
