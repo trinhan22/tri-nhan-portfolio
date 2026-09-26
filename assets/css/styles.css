@@ -700,27 +700,31 @@ iframe.fb-video-iframe {
 
 
 /*=============== WORK ===============*/
-.work__tabs{
-  background-color: var(--container-color);
-  padding: 1.25rem 2rem;
-  border-radius: 4rem;
+.work__tabs {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--container-color); /* Phục hồi lại màu nền đen cho khung */
+  border-radius: 4rem; /* Phục hồi độ bo tròn 2 đầu của khung */
+  padding: 0.75rem 2rem; /* Khoảng không gian bên trong khung */
+  column-gap: 2.5rem; /* Khoảng cách rộng rãi giữa 3 chữ */
+  width: max-content; 
+  margin: 0 auto; 
 }
 
-.work__button{
+.work__button {
   background: none;
   color: var(--text-color);
   display: flex;
   align-items: center;
-  column-gap: .25rem;
+  column-gap: 0.5rem; /* Khoảng cách giữa chữ và icon */
   font-size: var(--small-font-size);
   font-family: var(--second-font);
   cursor: pointer;
   transition: color .4s;
 }
 
-.work__button i{
+.work__button i {
   font-size: 1rem;
 }
 
@@ -1209,10 +1213,10 @@ transition: rotate  .4s ;
  }
 
 
-.work__tabs{
-  width: 330px;
-  justify-self: center;
-}
+.work__tabs {
+    width: max-content;
+    justify-self: center;
+  }
 }
 
 
@@ -1685,5 +1689,39 @@ body.is-loaded .header, body.is-loaded .main {
 }
 /* For 2K resolutions (2048 x 1152, 2048 x 1536) */
 
+/*=============== TỐI ƯU RIÊNG CHO MOBILE (Dưới 540px) ===============*/
+@media screen and (max-width: 539px) {
+  /* 1. Xử lý khung 3 Tab để không bị tràn viền ngang */
+  .work__tabs {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem 1rem; /* Thu gọn khoảng trống 2 bên */
+    column-gap: 1rem; /* Ép khoảng cách giữa 3 nút gần lại */
+    row-gap: 1rem; /* Tạo khoảng thở nếu có nút bị rớt dòng */
+    flex-wrap: wrap; /* Tự động đẩy nút xuống dòng nếu màn hình quá hẹp */
+    border-radius: 1.5rem;
+  }
 
+  /* Làm chữ và icon trong nút nhỏ lại một chút cho vừa vặn */
+  .work__button {
+    font-size: var(--smaller-font-size);
+    column-gap: 0.25rem;
+  }
+
+  /* 2. Ép các thẻ Dự án và Dịch vụ (Cards) không bị quá sát mép màn hình */
+  .projects__card {
+    padding: 1.5rem 1rem;
+  }
+
+  .services__card {
+    padding: 2rem 1.25rem;
+  }
+
+  /* 3. Thu nhỏ nút bấm link dự án để không lấn chiếm tỷ lệ ảnh */
+  .projects__button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+}
 /* Custom cursor is hidden for mobile devices */
