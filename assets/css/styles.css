@@ -817,7 +817,7 @@ font-size: var(--h1-font-size);
 }
 
 .services__card {
-  position: relative;z
+  position: relative;
   background-color: var(--container-color);
   padding: 2rem 1.5rem;
   border-radius: 3rem;
