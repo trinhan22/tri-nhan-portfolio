@@ -1533,7 +1533,156 @@ transition: rotate  .4s ;
 
 }
 
+/* Loading */
+/*=============== PERFECT CINEMATIC PRELOADER ===============*/
+/* Khóa cuộn trang khi đang loading */
+body.is-loading {
+  overflow: hidden;
+}
 
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+}
+
+/* Lớp nền thu nhỏ mượt mà */
+.preloader__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top;
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.preloader__bg--orange {
+  background-color: var(--first-color); 
+  z-index: 1;
+}
+
+.preloader__bg--dark {
+  background-color: #0b0b0b;
+  z-index: 2;
+}
+
+.preloader__wrapper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Kỹ thuật giấu chữ và đẩy lên */
+.preloader__text-mask {
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.preloader__subtitle {
+  display: block;
+  font-family: var(--body-font);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  /* Đổi 0.2s thành 0s để xuất hiện ngay lập tức */
+  animation: revealText 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0s forwards; 
+}
+
+.preloader__title {
+  font-family: var(--second-font);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  /* Đổi 0.4s thành 0.1s để trượt lên gần như cùng lúc với dòng trên */
+  animation: revealText 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.1s forwards; 
+}
+
+.preloader__title .dot {
+  color: var(--first-color);
+}
+
+/* Thanh Progress */
+.preloader__progress {
+  width: 200px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader__progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: var(--first-color);
+  transition: width 0.1s linear;
+}
+
+.preloader__percentage {
+  margin-top: 1rem;
+  font-family: var(--second-font);
+  font-size: 0.85rem;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+@keyframes revealText {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+/* --- TRẠNG THÁI KẾT THÚC (MƯỢT MÀ, KHÔNG BỊ KHỰNG) --- */
+.preloader.loaded {
+  pointer-events: none;
+}
+
+.preloader.loaded .preloader__wrapper {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.preloader.loaded .preloader__bg--dark {
+  transform: scaleY(0);
+  transition-delay: 0.2s;
+}
+
+.preloader.loaded .preloader__bg--orange {
+  transform: scaleY(0);
+  transition-delay: 0.35s; /* Độ trễ tạo ra vạch cam lướt qua màn hình */
+}
+
+/* --- HIỆU ỨNG NỘI DUNG WEB XUẤT HIỆN ĂN KHỚP VỚI PRELOADER --- */
+/* Áp dụng cho thẻ Header và Main để website mờ dần và trượt lên hòa nhịp với lúc màn che mở ra */
+.header, .main {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease 0.6s, transform 1s cubic-bezier(0.77, 0, 0.175, 1) 0.6s;
+}
+
+body.is-loaded .header, body.is-loaded .main {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* For 2K resolutions (2048 x 1152, 2048 x 1536) */
 
 

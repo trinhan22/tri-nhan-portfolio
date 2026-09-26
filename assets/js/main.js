@@ -191,6 +191,49 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+/*=============== LOADING ===============*/
+document.addEventListener("DOMContentLoaded", function() {
+  const preloader = document.getElementById('preloader');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  
+  if (preloader && progressBar && progressText) {
+    let currentProgress = 0;
+    
+    let loadingInterval = setInterval(function() {
+      // Nhảy số ngẫu nhiên cho cảm giác chân thực
+      currentProgress += Math.floor(Math.random() * 12) + 2; 
+      
+      if (currentProgress >= 100) {
+        currentProgress = 100;
+        clearInterval(loadingInterval);
+        
+        progressBar.style.width = '100%';
+        progressText.textContent = '100%';
+        
+        setTimeout(function() {
+          // 1. Kích hoạt hiệu ứng "Out" của màn hình Loading
+          preloader.classList.add('loaded');
+          
+          // 2. Mở khóa cuộn trang và kích hoạt hiệu ứng "In" cho nội dung Website
+          document.body.classList.remove('is-loading');
+          document.body.classList.add('is-loaded');
+          
+          // 3. Dọn dẹp hoàn toàn preloader khỏi DOM sau 1.2 giây để trả lại không gian tương tác
+          setTimeout(function() {
+            preloader.style.display = 'none';
+          }, 1200);
+          
+        }, 300); // Ngừng lại 1 tích tắc ở 100% rồi mới chạy
+        
+      } else {
+        progressBar.style.width = currentProgress + '%';
+        progressText.textContent = currentProgress + '%';
+      }
+    }, 35);
+  }
+});
+
 
     // 1. Chặn Chuột phải (Để ẩn menu "Inspect/Kiểm tra" và "View Source/Xem nguồn")
     document.addEventListener('contextmenu', function(e) {
