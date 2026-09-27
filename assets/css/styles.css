@@ -796,9 +796,21 @@ font-size: var(--h1-font-size);
   display: none;
 }
 
-
 .work-active[data-content]{
   display: grid;
+  animation: tabFadeIn 0.5s ease-out forwards; /* Gọi hiệu ứng khi tab được bấm */
+}
+
+/* Hiệu ứng Fade In kết hợp trượt nhẹ từ dưới lên */
+@keyframes tabFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
