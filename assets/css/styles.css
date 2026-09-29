@@ -144,8 +144,6 @@ img {
 
 /*=============== BLOB ===============*/
 /* Blob animate */
-
-
 .blob-animate {
   width: 100px;
   height: 100px;
@@ -215,15 +213,14 @@ img {
 
 .nav__logo {
     font-family: var(--second-font);
-    font-weight: 800; /* Tăng độ đậm lên 800 hoặc 900 để chữ dày và cứng cáp giống hình */
-    color: var(--title-color); /* Màu chữ trắng/sáng */
+    font-weight: 800;
+    color: var(--title-color);
     align-self: flex-start;
     transition: color .4s;
-    text-transform: uppercase; /* Tự động ép tất cả thành chữ in hoa */
-    letter-spacing: 1px; /* Kéo giãn khoảng cách giữa các chữ một chút cho thoáng */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Ép màu cam chủ đạo cho riêng dấu chấm */
 .nav__logo span {
     color: var(--first-color);
 }
@@ -232,7 +229,6 @@ img {
     color: var(--first-color);
 }
 
-/* Đổi luôn màu dấu chấm thành màu trắng khi hover nếu bạn thích hiệu ứng đảo màu */
 .nav__logo:hover span {
     color: var(--title-color); 
 }
@@ -393,14 +389,6 @@ left: 0;
 }
 
 
-
-
-
-
-
-
-
-
 /*=============== BUTTON ===============*/
 
 .button{
@@ -428,8 +416,6 @@ left: 0;
   box-shadow: 0 8px 48px hsla(var(--hue), 90%, 55%, .7),
                           inset 8px -8px 30px var(--first-color-alt-2);
 }
-
-
 
 .button:hover{
   box-shadow: 0 8px 48px hsla(var(--hue), 60%, 64%, .7),
@@ -555,23 +541,21 @@ left: 0;
   font-size: var(--small-font-size);
 }
 
-/* Ép toàn bộ khung chứa (cả ảnh tĩnh và video) về cùng 1 khuôn */
 .projects__image {
   position: relative;
   z-index: 1;
   width: 100%;
-  aspect-ratio: 16 / 10; /* Tỷ lệ 16:10 rất hợp với giao diện hiện tại của bạn. Nếu muốn dẹt hơn thì dùng 16/9, vuông hơn thì 4/3 */
-  border-radius: 1.5rem; /* Bo góc ngay tại khung cha */
-  overflow: hidden; /* Phần ảnh/video nào lòi ra ngoài khuôn sẽ bị cắt đi */
+  aspect-ratio: 16 / 10;
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
 
-/* Ép ảnh tĩnh lấp đầy khuôn mà không bị méo hình */
 .projects__img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Zoom và cắt xén tự động để vừa khít khuôn */
+  object-fit: cover;
   display: block;
-  border-radius: 0; /* Khung cha đã bo góc rồi nên xóa dòng này ở thẻ con */
+  border-radius: 0;
 }
 
 .projects__button{
@@ -602,8 +586,7 @@ left: 0;
 }
 
 .video-container {
-  /* XÓA dòng aspect-ratio ở đây đi vì đã dùng chung ở .projects__image */
-  background-color: #000; /* Chỉ giữ lại màu nền đen */
+  background-color: #000;
 }
 
 iframe.fb-video-iframe {
@@ -613,7 +596,6 @@ iframe.fb-video-iframe {
   border: none;
 }
 
-/* Lớp phủ ảnh bìa */
 .video-overlay {
   position: absolute;
   top: 0;
@@ -628,7 +610,6 @@ iframe.fb-video-iframe {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-/* Ảnh Thumbnail */
 .video-thumbnail {
   position: absolute;
   top: 0;
@@ -639,7 +620,6 @@ iframe.fb-video-iframe {
   z-index: 11;
 }
 
-/* Lớp màu tối phủ lên ảnh giúp nút Play nổi bật hơn (tùy chọn) */
 .video-overlay::before {
   content: '';
   position: absolute;
@@ -651,13 +631,12 @@ iframe.fb-video-iframe {
   z-index: 12;
 }
 
-/* Nút Play Custom */
 .custom-play-btn {
   position: relative;
   z-index: 13;
   width: 60px;
   height: 60px;
-  background-color: var(--first-color); /* Sử dụng màu cam của bạn */
+  background-color: var(--first-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -668,22 +647,18 @@ iframe.fb-video-iframe {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Hiệu ứng khi rê chuột vào lớp vỏ */
 .video-overlay:hover .custom-play-btn {
   transform: scale(1.1);
   background-color: var(--first-color-alt);
 }
 
-/* Class ẩn đi khi được click */
 .video-overlay.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
 
-
 /* Swiper class */
-
 .projects__swiper{
   margin-inline: initial;
   padding-bottom: 2rem;
@@ -704,10 +679,10 @@ iframe.fb-video-iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--container-color); /* Phục hồi lại màu nền đen cho khung */
-  border-radius: 4rem; /* Phục hồi độ bo tròn 2 đầu của khung */
-  padding: 0.75rem 2rem; /* Khoảng không gian bên trong khung */
-  column-gap: 2.5rem; /* Khoảng cách rộng rãi giữa 3 chữ */
+  background-color: var(--container-color);
+  border-radius: 4rem;
+  padding: 0.75rem 2rem;
+  column-gap: 2.5rem;
   width: max-content; 
   margin: 0 auto; 
 }
@@ -717,7 +692,7 @@ iframe.fb-video-iframe {
   color: var(--text-color);
   display: flex;
   align-items: center;
-  column-gap: 0.5rem; /* Khoảng cách giữa chữ và icon */
+  column-gap: 0.5rem;
   font-size: var(--small-font-size);
   font-family: var(--second-font);
   cursor: pointer;
@@ -790,7 +765,6 @@ font-size: var(--h1-font-size);
 }
 
 
-
 /* Show & hide sections */
 .work__area [data-content]{
   display: none;
@@ -798,7 +772,7 @@ font-size: var(--h1-font-size);
 
 .work-active[data-content]{
   display: grid;
-  animation: tabFadeIn 0.5s ease-out forwards; /* Gọi hiệu ứng khi tab được bấm */
+  animation: tabFadeIn 0.5s ease-out forwards;
 }
 
 /* Hiệu ứng Fade In kết hợp trượt nhẹ từ dưới lên */
@@ -814,16 +788,11 @@ font-size: var(--h1-font-size);
 }
 
 
-
-
-
 /* Active tab */
-
 .work__button.work-active{
   color: var(--first-color);
 
 }
-
 
 
 /*=============== SERVICES ===============*/
@@ -926,9 +895,7 @@ transition: rotate  .4s ;
 }
 
 
-
 /*=============== TESTIMONIALS ===============*/
-
 .testimonials .section__title {
   text-align: initial;
   margin-left: 1.5rem;

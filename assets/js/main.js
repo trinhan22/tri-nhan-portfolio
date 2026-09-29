@@ -26,6 +26,7 @@ animate(chars2, {
   loop: true,
 })
 
+
 /*=============== SWIPER PROJECTS ===============*/
 const swiperProjects = new Swiper('.projects__swiper', {
  
@@ -48,7 +49,6 @@ const swiperProjects = new Swiper('.projects__swiper', {
 })
 
 
-
 /*=============== WORK TABS ===============*/
 const tabs = document.querySelectorAll('[data-target]'),
           tabContents = document.querySelectorAll('[data-content]')
@@ -69,8 +69,8 @@ const tabs = document.querySelectorAll('[data-target]'),
             })
           })
 
-/*=============== SERVICES ACCORDION ===============*/
 
+/*=============== SERVICES ACCORDION ===============*/
 const servicesButtons = document.querySelectorAll('.services__button')
 
 servicesButtons.forEach(button => {
@@ -103,7 +103,6 @@ servicesButtons.forEach(button => {
 
 
 /*=============== TESTIMONIALS OF DUPLICATE CARDS ===============*/
-
 // Duplicate images to make the animation work
 const tracks = document.querySelectorAll('.testimonials__content')
 
@@ -135,12 +134,12 @@ copyBtn.addEventListener('click', () => {
 
 
 /*=============== CURRENT YEAR OF THE FOOTER ===============*/ 
-
 const textYear = document.getElementById('footer-year'),
       currentYear = new Date().getFullYear()
 
 // Each year it is updated to the current year
 textYear.textContent = currentYear
+
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
@@ -162,8 +161,8 @@ const scrollActive = () => {
 
 window.addEventListener('scroll', scrollActive)
 
-/*=============== PLAYER VIDEO ===============*/
 
+/*=============== PLAYER VIDEO ===============*/
 document.addEventListener("DOMContentLoaded", function() {
   // Tìm TẤT CẢ các lớp phủ video có trên trang (Project 8, 9, 10...)
   const videoOverlays = document.querySelectorAll('.video-overlay');
@@ -190,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
 
 /*=============== LOADING ===============*/
 document.addEventListener("DOMContentLoaded", function() {
@@ -235,46 +235,46 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-    // 1. Chặn Chuột phải (Để ẩn menu "Inspect/Kiểm tra" và "View Source/Xem nguồn")
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        // Không hiện thông báo gì cả để trải nghiệm mượt mà hơn
-    });
+/*=============== CHẶN XEM SOURCE ===============*/
+// 1. Chặn Chuột phải (Để ẩn menu "Inspect/Kiểm tra" và "View Source/Xem nguồn")
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    // Không hiện thông báo gì cả để trải nghiệm mượt mà hơn
+});
 
-    // 2. Chặn các phím tắt Developer Tools
-    document.addEventListener('keydown', function(e) {
-        // Chặn F12
-        if (e.key === 'F12' || e.keyCode === 123) {
-            e.preventDefault();
-            return false;
+// 2. Chặn các phím tắt Developer Tools
+document.addEventListener('keydown', function(e) {
+    // Chặn F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+
+    // Chặn các tổ hợp phím Ctrl + ...
+    if (e.ctrlKey) {
+        switch (e.key.toLowerCase()) {
+            case 'u': // Chặn Ctrl + U (Xem source code)
+            case 's': // Chặn Ctrl + S (Lưu trang web)
+            case 'p': // Chặn Ctrl + P (In trang web - thường hiện code)
+            // Lưu ý: KHÔNG chặn 'c' (Copy) và 'a' (Select All)
+                e.preventDefault();
+                return false;
         }
 
-        // Chặn các tổ hợp phím Ctrl + ...
-        if (e.ctrlKey) {
+        // Chặn Ctrl + Shift + ... (Các phím mở DevTools)
+        if (e.shiftKey) {
             switch (e.key.toLowerCase()) {
-                case 'u': // Chặn Ctrl + U (Xem source code)
-                case 's': // Chặn Ctrl + S (Lưu trang web)
-                case 'p': // Chặn Ctrl + P (In trang web - thường hiện code)
-                // Lưu ý: KHÔNG chặn 'c' (Copy) và 'a' (Select All)
+                case 'i': // Inspect Element
+                case 'j': // Console
+                case 'c': // Element Inspector
                     e.preventDefault();
                     return false;
             }
-
-            // Chặn Ctrl + Shift + ... (Các phím mở DevTools)
-            if (e.shiftKey) {
-                switch (e.key.toLowerCase()) {
-                    case 'i': // Inspect Element
-                    case 'j': // Console
-                    case 'c': // Element Inspector
-                        e.preventDefault();
-                        return false;
-                }
-            }
         }
-    });
+    }
+});
 
 
 /* Hide custom cursor on links */
-
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
